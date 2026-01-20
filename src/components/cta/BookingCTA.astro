@@ -12,30 +12,32 @@ const bookingUrl = business.contact.booking?.url;
 if (!bookingUrl) throw new Error('Booking URL not configured');
 
 interface Props {
-  variant?: 'header' | 'hero' | 'inline' | 'footer';
+  variant?: 'header' | 'hero' | 'inline' | 'footer' | 'primary';
   class?: string;
 }
 
 const { variant = 'inline', class: className } = Astro.props;
 
+// Map variants to button configuration
 const buttonConfig = {
-  header: { size: 'sm' },
-  hero: { size: 'lg' },
-  inline: { size: 'default' },
-  footer: { size: 'default' }
+  header: { buttonVariant: 'outline', size: 'sm' },
+  hero: { buttonVariant: 'gradient', size: 'lg' },
+  inline: { buttonVariant: 'outline', size: 'default' },
+  footer: { buttonVariant: 'outline', size: 'default' },
+  primary: { buttonVariant: 'gradient', size: 'default' }
 } as const;
 
 const config = buttonConfig[variant];
 ---
 
 <Button
-  variant="outline"
+  variant={config.buttonVariant as any}
   size={config.size}
   asChild
-  className={cn("gap-2", className)}
+  className={cn("gap-2 group", className)}
 >
   <a href={bookingUrl} target="_blank" rel="noopener noreferrer">
-    <Calendar className="h-4 w-4" />
-    Book Online
+    <Calendar className="h-4 w-4 transition-transform duration-200 group-hover:scale-110" />
+    <span class="font-body">Book Online</span>
   </a>
 </Button>

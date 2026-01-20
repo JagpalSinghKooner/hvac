@@ -1,7 +1,7 @@
-import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetClose } from '@/components/ui/sheet';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
-import { Menu, Phone } from 'lucide-react';
+import { Menu, Phone, ChevronRight, Mail, Calendar } from 'lucide-react';
 
 interface Service {
   title: string;
@@ -34,12 +34,27 @@ interface BusinessData {
   contact: {
     phone_display: string;
     phone_e164: string;
+    email: string;
   };
 }
 
 interface MobileNavProps {
   business: BusinessData;
 }
+
+// Define service category groups matching desktop navigation
+const serviceCategoryGroups = [
+  { name: "Heating", key: "heating" },
+  { name: "Cooling", key: "cooling" },
+  { name: "Water Heating", key: "water_heating" },
+  { name: "Indoor Air Quality", key: "iaq" },
+  { name: "Other Services", key: "other" }
+];
+
+// Animation delay helper for staggered effects
+const getAnimationDelay = (index: number) => ({
+  animationDelay: `${index * 50}ms`,
+});
 
 export function MobileNav({ business }: MobileNavProps) {
   return (
@@ -57,89 +72,174 @@ export function MobileNav({ business }: MobileNavProps) {
 
         <div className="mt-6">
           <Accordion type="single" collapsible className="w-full">
-            {/* Services Accordion */}
-            <AccordionItem value="services" className="border-b-0">
-              <AccordionTrigger>Services</AccordionTrigger>
-              <AccordionContent>
-                {business.services?.navbar_categories
-                  ?.filter((cat: any) => cat.key !== 'locations' && cat.key !== 'contact')
-                  .map((category: any) => (
-                  <div key={category.key} className="mb-4">
-                    <h3 className="font-semibold text-sm uppercase tracking-wide text-muted-foreground mb-2">
-                      {category.name}
-                    </h3>
-                    <ul className="space-y-1 pl-4">
-                      {business.services?.list?.[category.key]?.map((service: any) => (
-                        <li key={service.slug}>
-                          <a
-                            href={`/services/${service.slug}/`}
-                            className="text-sm hover:text-primary transition-colors block py-1"
-                          >
-                            {service.title}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </AccordionContent>
-            </AccordionItem>
+            {/* Individual Service Category Accordions */}
+            {serviceCategoryGroups.map((category, index) => (
+              <AccordionItem
+                key={category.key}
+                value={category.key}
+                className="border-b-0 animate-fade-in-left opacity-0"
+                style={getAnimationDelay(index)}
+              >
+                <AccordionTrigger className="text-sm font-heading font-semibold hover:text-primary transition-colors">
+                  {category.name}
+                </AccordionTrigger>
+                <AccordionContent>
+                  <ul className="space-y-2 pl-4">
+                    {category.key === 'other'
+                      ? [
+                          ...(business.services?.list?.commercial || []),
+                          ...(business.services?.list?.plans || [])
+                        ].map((service) => (
+                          <li key={service.slug}>
+                            <SheetClose asChild>
+                              <a
+                                href={`/services/${service.slug}/`}
+                                className="flex items-center justify-between py-1.5 text-sm font-body hover:text-primary transition-all duration-200 group"
+                              >
+                                <span className="group-hover:translate-x-1 transition-transform duration-200">
+                                  {service.title}
+                                </span>
+                                <ChevronRight className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                              </a>
+                            </SheetClose>
+                          </li>
+                        ))
+                      : business.services?.list?.[category.key]?.map((service) => (
+                          <li key={service.slug}>
+                            <SheetClose asChild>
+                              <a
+                                href={`/services/${service.slug}/`}
+                                className="flex items-center justify-between py-1.5 text-sm font-body hover:text-primary transition-all duration-200 group"
+                              >
+                                <span className="group-hover:translate-x-1 transition-transform duration-200">
+                                  {service.title}
+                                </span>
+                                <ChevronRight className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                              </a>
+                            </SheetClose>
+                          </li>
+                        ))
+                    }
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
 
-            {/* Locations Accordion */}
-            <AccordionItem value="locations" className="border-b-0">
-              <AccordionTrigger>Locations</AccordionTrigger>
-              <AccordionContent>
-                {business.coverage?.regions?.map((region: any) => (
-                  <div key={region.name} className="mb-4">
-                    <h3 className="font-semibold text-sm uppercase tracking-wide text-muted-foreground mb-2">
-                      {region.name}
-                    </h3>
-                    <ul className="space-y-1 pl-4">
-                      {region.locations?.map((location: any) => (
-                        <li key={location.slug}>
-                          <a
-                            href={`/locations/${location.slug}/`}
-                            className="text-sm hover:text-primary transition-colors block py-1"
-                          >
-                            {location.name}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </AccordionContent>
-            </AccordionItem>
           </Accordion>
 
-          {/* About & Contact Links */}
-          <div className="mt-6 space-y-1">
+          {/* Locations Link (outside accordion) */}
+          <div
+            className="mt-4 px-2 border-t pt-4 animate-fade-in-left opacity-0"
+            style={getAnimationDelay(serviceCategoryGroups.length)}
+          >
+            <SheetClose asChild>
+              <a
+                href="/locations/"
+                className="flex items-center justify-between py-2 text-sm font-heading font-semibold hover:text-primary transition-all duration-200 group"
+              >
+                <span className="group-hover:translate-x-1 transition-transform duration-200">
+                  Locations
+                </span>
+                <ChevronRight className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+              </a>
+            </SheetClose>
+          </div>
+
+          {/* Contact Information Section */}
+          <div
+            className="mt-6 px-2 space-y-3 border-t pt-6 animate-fade-in-left opacity-0"
+            style={getAnimationDelay(serviceCategoryGroups.length + 1)}
+          >
+            <h3 className="text-xs font-heading font-semibold uppercase tracking-wide text-muted-foreground mb-3">
+              Contact Us
+            </h3>
+
+            {/* Phone */}
             <a
-              href="/about/"
-              className="block px-4 py-2 text-sm font-medium hover:bg-accent rounded-md transition-colors"
+              href={`tel:${business.contact.phone_e164}`}
+              className="flex items-center gap-3 text-sm font-body hover:text-primary transition-colors group"
             >
-              About Us
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                <Phone className="h-4 w-4 text-primary" />
+              </div>
+              <span>{business.contact.phone_display}</span>
             </a>
+
+            {/* Email */}
             <a
-              href="/contact/"
-              className="block px-4 py-2 text-sm font-medium hover:bg-accent rounded-md transition-colors"
+              href={`mailto:${business.contact.email}`}
+              className="flex items-center gap-3 text-sm font-body hover:text-primary transition-colors group"
             >
-              Contact
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                <Mail className="h-4 w-4 text-primary" />
+              </div>
+              <span className="truncate">{business.contact.email}</span>
             </a>
           </div>
 
-          {/* Phone CTA */}
-          <div className="mt-6">
+          {/* CTA Buttons */}
+          <div
+            className="mt-6 space-y-3 px-2 border-t pt-6 animate-fade-in-left opacity-0"
+            style={getAnimationDelay(serviceCategoryGroups.length + 2)}
+          >
+            {/* Call CTA with gradient */}
             <a
               href={`tel:${business.contact.phone_e164}`}
-              className="flex items-center justify-center gap-2 w-full rounded-md bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 text-base font-medium transition-colors"
+              className="flex items-center justify-center gap-2 w-full rounded-md gradient-brand text-white hover:scale-105 hover:shadow-glow-primary h-11 px-8 text-base font-heading font-semibold transition-all duration-300"
             >
               <Phone className="h-4 w-4" />
-              {business.contact.phone_display}
+              <span>Call {business.contact.phone_display}</span>
+            </a>
+
+            {/* Booking CTA */}
+            <a
+              href="/contact/"
+              className="flex items-center justify-center gap-2 w-full rounded-md border-2 border-primary bg-background text-primary hover:bg-primary hover:text-white h-11 px-8 text-base font-heading font-semibold transition-all duration-300"
+            >
+              <Calendar className="h-4 w-4" />
+              <span>Book Online</span>
             </a>
           </div>
         </div>
       </SheetContent>
     </Sheet>
   );
+}
+
+// Inject animation styles
+if (typeof document !== 'undefined' && !document.getElementById('mobile-nav-styles')) {
+  const styles = `
+    @keyframes fade-in-left {
+      from {
+        opacity: 0;
+        transform: translateX(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .animate-fade-in-left {
+      animation: fade-in-left 0.5s ease forwards;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .animate-fade-in-left {
+        animation: none;
+        opacity: 1;
+      }
+
+      .transition-transform,
+      .transition-all,
+      .group:hover .transition-transform {
+        transition: none;
+      }
+    }
+  `;
+
+  const styleSheet = document.createElement('style');
+  styleSheet.id = 'mobile-nav-styles';
+  styleSheet.textContent = styles;
+  document.head.appendChild(styleSheet);
 }

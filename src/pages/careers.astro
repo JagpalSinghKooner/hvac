@@ -1,0 +1,190 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Section from '@/components/layout/Section.astro';
+import Container from '@/components/layout/Container.astro';
+import TrustBadges from '@/components/TrustBadges.astro';
+import BenefitsSection from '@/components/sections/BenefitsSection.astro';
+import JobListingsSection from '@/components/sections/JobListingsSection.astro';
+import PhoneCTA from '@/components/cta/PhoneCTA.astro';
+import QuickQuoteConversionSection from '@/components/sections/QuickQuoteConversionSection.astro';
+
+// Data imports
+import { getAllJobs, careersBenefits } from '@/data/jobs';
+import type { ServiceBenefit } from '@/data/serviceContent';
+
+// Fetch business profile for schema
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
+
+// Get all jobs
+const jobs = getAllJobs();
+
+// Company values (defined inline - page-specific content)
+const companyValues: ServiceBenefit[] = [
+  {
+    title: 'Quality Workmanship',
+    description: 'We take pride in every installation and repair, treating every home and business like it\'s our own.',
+    icon: 'Award',
+  },
+  {
+    title: 'Honest Service',
+    description: 'Transparent pricing, no upselling, and recommendations based on what\'s truly best for the customer.',
+    icon: 'ShieldCheck',
+  },
+  {
+    title: 'Continuous Learning',
+    description: 'We invest in our team\'s growth through training, certifications, and staying current with industry advances.',
+    icon: 'BookOpen',
+  },
+  {
+    title: 'Community Commitment',
+    description: 'Serving Southern Ontario since 1994, we\'re part of the community we serve and give back whenever we can.',
+    icon: 'Heart',
+  },
+];
+
+// SEO metadata
+const seoTitle = 'Careers at B.A.P Heating | Join Our HVAC Team in Guelph';
+const seoDescription = 'Join B.A.P Heating & Cooling Services - Southern Ontario\'s trusted HVAC company since 1994. Competitive pay, training, and career growth for technicians and support staff.';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Careers', href: '/careers' },
+];
+
+const siteURL = Astro.site?.toString() || 'https://bapheating.ca';
+
+// JobPosting schema for each job
+const jobPostingSchema = jobs.map(job => ({
+  "@context": "https://schema.org",
+  "@type": "JobPosting",
+  "title": job.title,
+  "description": job.description,
+  "datePosted": job.postedDate,
+  "employmentType": job.type.toUpperCase().replace('-', '_'),
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": business.business.legal_name,
+    "sameAs": siteURL,
+    "logo": `${siteURL}/logo.png`,
+  },
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": business.locations?.primary.city || 'Guelph',
+      "addressRegion": "ON",
+      "addressCountry": "CA",
+    }
+  },
+  ...(job.salary && {
+    "baseSalary": {
+      "@type": "MonetaryAmount",
+      "currency": "CAD",
+      "value": {
+        "@type": "QuantitativeValue",
+        "value": job.salary,
+        "unitText": "YEAR"
+      }
+    }
+  }),
+  "applicantLocationRequirements": {
+    "@type": "Country",
+    "name": "CA"
+  },
+  "directApply": true,
+}));
+---
+
+<BaseLayout title={seoTitle} description={seoDescription} breadcrumbs={breadcrumbs}>
+  {/* JobPosting Schema for each job */}
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jobPostingSchema)} />
+
+  <!-- 1. Hero - gradient-cool -->
+  <Section background="gradient-cool" padding="lg">
+    <Container size="narrow" class="text-center">
+      <h1 class="font-display text-display-md lg:text-display-lg tracking-tight">
+        Join Our Team at B.A.P Heating
+      </h1>
+      <p class="mt-6 font-body text-body-lg text-gray-600 max-w-2xl mx-auto">
+        Build a rewarding career with Southern Ontario's trusted HVAC company.
+        We're looking for passionate, skilled individuals to grow with us.
+      </p>
+      <div class="mt-8">
+        <a
+          href="#open-positions"
+          class="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 text-base font-medium transition-colors"
+        >
+          View Open Positions
+        </a>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- 2. Trust Badges - white background -->
+  <TrustBadges />
+
+  <!-- 3. Why Work Here - muted (gray-50) -->
+  <Section background="muted" fullWidth>
+    <BenefitsSection
+      benefits={careersBenefits}
+      heading="Why Work at B.A.P Heating"
+      subheading="Competitive compensation, career growth, and a supportive family-owned culture"
+      columns={3}
+    />
+  </Section>
+
+  <!-- 4. Our Values - white background -->
+  <BenefitsSection
+    benefits={companyValues}
+    heading="Our Core Values"
+    subheading="The principles that guide everything we do"
+    columns={2}
+  />
+
+  <!-- 5. Open Positions - primary-light (bg-primary-50/30) -->
+  <Section background="primary-light" fullWidth>
+    <JobListingsSection
+      jobs={jobs}
+      heading="Open Positions"
+      subheading={`Join our team of HVAC professionals serving Southern Ontario`}
+    />
+  </Section>
+
+  <!-- 6. Benefits/perks - white background -->
+  <!-- (Already covered in section 3) -->
+
+  <!-- 7. Final CTA - muted (gray-50) -->
+  <Section background="muted" fullWidth padding="lg">
+    <Container size="narrow" class="text-center">
+      <h2 class="font-heading text-h2 mb-4">
+        Don't See the Right Position?
+      </h2>
+      <p class="font-body text-body-lg text-gray-600 mb-6 max-w-2xl mx-auto">
+        We're always interested in hearing from talented individuals.
+        Send your resume and we'll keep it on file for future opportunities.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
+        <a
+          href="mailto:careers@bapheating.ca"
+          class="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 text-base font-medium transition-colors"
+        >
+          Email Your Resume
+        </a>
+        <span class="font-body">or</span>
+        <PhoneCTA variant="inline" />
+      </div>
+      <p class="text-sm font-body text-gray-600">
+        B.A.P Heating & Cooling Services is an equal opportunity employer committed to diversity and inclusion.
+      </p>
+    </Container>
+  </Section>
+
+  <!-- 8. QuickQuote Conversion Section - primary-light (conversion focus) -->
+  <QuickQuoteConversionSection />
+</BaseLayout>

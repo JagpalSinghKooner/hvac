@@ -49,12 +49,12 @@ const benefitsWithIcons = benefits.map(benefit => ({
     {(heading || subheading) && (
       <div class="text-center mb-12">
         {heading && (
-          <h2 class="text-3xl font-semibold mb-4">
+          <h2 class="font-heading text-h2 text-center mb-4">
             {heading}
           </h2>
         )}
         {subheading && (
-          <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p class="font-body text-body-lg text-gray-600 text-center max-w-3xl mx-auto">
             {subheading}
           </p>
         )}
@@ -64,15 +64,18 @@ const benefitsWithIcons = benefits.map(benefit => ({
     <!-- Benefits Grid -->
     <div class={cn('grid gap-6', gridClass)}>
       {benefitsWithIcons.map(benefit => (
-        <Card className="text-center h-full flex flex-col">
+        <Card className="text-center h-full flex flex-col group transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1">
           <CardHeader>
-            <div class="w-12 h-12 rounded-full flex items-center justify-center bg-primary/10 mx-auto mb-4">
-              <benefit.IconComponent className="h-6 w-6 text-primary" aria-hidden="true" />
+            {/* Gradient icon circle (brand gradient) */}
+            <div class="relative w-12 h-12 rounded-full p-0.5 gradient-brand mx-auto mb-4 transition-transform duration-300 group-hover:scale-110">
+              <div class="w-full h-full bg-white rounded-full flex items-center justify-center">
+                <benefit.IconComponent className="h-6 w-6 text-primary transition-transform duration-300 group-hover:rotate-6" aria-hidden="true" />
+              </div>
             </div>
-            <CardTitle className="text-lg">{benefit.title}</CardTitle>
+            <CardTitle className="text-lg font-heading">{benefit.title}</CardTitle>
           </CardHeader>
           <CardContent className="flex-1">
-            <p class="text-sm text-muted-foreground">{benefit.description}</p>
+            <p class="text-sm text-gray-600">{benefit.description}</p>
           </CardContent>
         </Card>
       ))}

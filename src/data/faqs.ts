@@ -50,6 +50,76 @@ export const generalFAQs: FAQ[] = [
   }
 ];
 
+export const financingFAQs: FAQ[] = [
+  {
+    question: 'What financing options are available for HVAC installations?',
+    answer: 'We partner with multiple financing providers to offer flexible payment plans for furnace, air conditioner, heat pump, and boiler installations. Options include no-payment periods, low-interest plans, and extended terms up to 10 years. During your free estimate, we will present financing options tailored to your project and budget.'
+  },
+  {
+    question: 'What credit score do I need to qualify for financing?',
+    answer: 'Financing approval depends on multiple factors beyond credit score. While good credit (660+) typically qualifies for our best rates, we work with multiple lenders who offer programs for a range of credit situations. We encourage all homeowners to apply—many customers are surprised to find they qualify for affordable financing.'
+  },
+  {
+    question: 'How quickly can I get financing approval?',
+    answer: 'Most financing applications are approved within minutes during your in-home consultation. Our technicians can process applications on-site using a tablet or smartphone. Once approved, we can often schedule your installation within 2-3 business days, or at a time convenient for you.'
+  },
+  {
+    question: 'Are there hidden fees or charges with HVAC financing?',
+    answer: 'No hidden fees—ever. Our financing terms are transparent and fully disclosed before you sign. You will know your exact monthly payment, interest rate (if applicable), term length, and total cost. There are no application fees, and many of our promotional plans include no interest if paid within the promotional period.'
+  },
+  {
+    question: 'Can I pay off my HVAC financing early without penalty?',
+    answer: 'Yes, all our financing programs allow early payoff without penalty fees. You can make extra payments or pay the full balance at any time to reduce or eliminate interest charges. This flexibility helps you save money if your financial situation improves.'
+  },
+  {
+    question: 'What interest rates are available for HVAC financing?',
+    answer: 'Interest rates vary based on your credit profile, chosen term length, and current promotions. Rates typically range from 0% (promotional periods) to 9.99% APR for qualified applicants. Our financing specialists will present your personalized rate options during the consultation, and you can choose the plan that best fits your budget.'
+  },
+  {
+    question: 'Do you offer 0% interest financing on HVAC installations?',
+    answer: 'Yes! We frequently offer promotional 0% financing for qualified applicants, typically for 6-24 months depending on the promotion and purchase amount. These no-interest periods allow you to spread payments without added cost. Ask about current promotions during your free estimate.'
+  },
+  {
+    question: 'How do I apply for HVAC financing?',
+    answer: 'Applying is simple and takes just minutes. Our technicians can process applications during your free in-home estimate using a secure tablet. You will need basic information like your ID, employment details, and income. There is no obligation—getting approved does not commit you to the installation. You can also call us to discuss financing options before scheduling your estimate.'
+  }
+];
+
+export const emergencyFAQs: FAQ[] = [
+  {
+    question: 'What qualifies as an HVAC emergency?',
+    answer: 'An HVAC emergency includes any situation that threatens your safety or comfort, such as no heat in winter, no cooling during extreme heat, gas odors, carbon monoxide detector alarms, complete system failure, unusual noises indicating imminent failure, or water leaks from your equipment. If you are uncomfortable or concerned, call us immediately—we are here to help 24/7.'
+  },
+  {
+    question: 'How fast is your emergency response time?',
+    answer: 'We provide 24/7 emergency HVAC service with response times typically within 60 minutes across all our service areas in Southern Ontario. Our technicians are always on call and ready to respond quickly to your heating and cooling emergencies, day or night.'
+  },
+  {
+    question: 'Do you charge extra for emergency calls?',
+    answer: 'No, we do not charge surcharges or premiums for emergency service calls. Our pricing remains the same whether you call at 2 PM or 2 AM. We believe in transparent, upfront pricing with no hidden fees, so you can call us without hesitation when you need help.'
+  },
+  {
+    question: 'Are you available on holidays and weekends?',
+    answer: 'Yes, we are truly available 24/7/365—including all holidays, weekends, and overnight hours. HVAC emergencies do not wait for business hours, and neither do we. You can count on us to be there whenever you need us, no matter the day or time.'
+  },
+  {
+    question: 'What areas do you cover for emergency service?',
+    answer: 'Our emergency service covers the same areas as our regular service: Guelph, Cambridge, Kitchener-Waterloo, Milton, Oakville-Burlington, Hamilton, Brantford, and surrounding areas throughout Southern Ontario. If you are unsure whether we serve your location, call us—we will do our best to help.'
+  },
+  {
+    question: 'Can you provide temporary heating or cooling while repairs are completed?',
+    answer: 'Yes, when possible we can provide temporary heating or cooling solutions to keep you comfortable while we complete repairs or arrange for replacement equipment. Your safety and comfort are our top priorities, and we will work with you to find solutions during emergency situations.'
+  },
+  {
+    question: 'Do I need to diagnose the problem before calling for emergency service?',
+    answer: 'No, you do not need to diagnose anything. Simply describe what you are experiencing—no heat, strange noises, unusual smells, or any other concerns—and our trained technicians will handle the diagnosis when they arrive. It is always better to call than to attempt troubleshooting yourself, especially in emergency situations.'
+  },
+  {
+    question: 'What should I do while waiting for emergency service?',
+    answer: 'If you smell gas, evacuate immediately and call your gas company and 911. Otherwise, check your thermostat settings, ensure your circuit breaker has not tripped, and replace your air filter if accessible. In cold weather, stay warm in one room and use blankets. In hot weather, stay hydrated and seek the coolest area of your home. Our technicians will arrive as quickly as possible to resolve the issue.'
+  }
+];
+
 export const faqsByService: ServiceFAQs = {
   'furnace-installation': [
     {
@@ -220,4 +290,14 @@ export function getAllFAQs(serviceSlug?: string): FAQ[] {
     return [...generalFAQs, ...faqsByService[serviceSlug]];
   }
   return generalFAQs;
+}
+
+// Helper function to get financing FAQs
+export function getFinancingFAQs(): FAQ[] {
+  return financingFAQs;
+}
+
+// Helper function to get emergency FAQs
+export function getEmergencyFAQs(): FAQ[] {
+  return emergencyFAQs;
 }

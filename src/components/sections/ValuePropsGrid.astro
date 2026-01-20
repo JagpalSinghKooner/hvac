@@ -24,22 +24,54 @@ const propsWithIcons = valueProps.map(prop => ({
 
 <Section padding="lg">
   <Container>
-    <h2 class="text-3xl font-semibold text-center mb-12">{heading}</h2>
+    <h2 class="font-heading text-h2 text-center mb-12">{heading}</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {propsWithIcons.map(prop => (
-        <Card className="text-center">
+        <Card className="text-center h-full flex flex-col group transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 value-prop-card">
           <CardHeader>
-            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <prop.IconComponent className="h-6 w-6 text-primary" />
+            {/* Gradient icon circle (brand gradient) */}
+            <div class="relative w-12 h-12 rounded-full p-0.5 gradient-brand mx-auto mb-4 transition-transform duration-300 group-hover:scale-110">
+              <div class="w-full h-full bg-white rounded-full flex items-center justify-center">
+                <prop.IconComponent className="h-6 w-6 text-primary transition-transform duration-300 group-hover:rotate-6" aria-hidden="true" />
+              </div>
             </div>
-            <CardTitle className="text-lg">{prop.title}</CardTitle>
+            <CardTitle className="text-lg font-heading">{prop.title}</CardTitle>
           </CardHeader>
-          <CardContent>
-            <p class="text-sm text-muted-foreground">{prop.description}</p>
+          <CardContent className="flex-1">
+            <p class="text-sm text-gray-600">{prop.description}</p>
           </CardContent>
         </Card>
       ))}
     </div>
   </Container>
 </Section>
+
+<style>
+  .value-prop-card {
+    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .value-prop-card:nth-child(1) { animation-delay: 0ms; }
+  .value-prop-card:nth-child(2) { animation-delay: 100ms; }
+  .value-prop-card:nth-child(3) { animation-delay: 200ms; }
+  .value-prop-card:nth-child(4) { animation-delay: 300ms; }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .value-prop-card {
+      animation: none;
+      opacity: 1;
+    }
+  }
+</style>

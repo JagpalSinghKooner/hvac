@@ -78,22 +78,38 @@ const planFeatures = plan.features && plan.features.length > 0 ? plan.features :
 const isRecommended = plan.recommended === true;
 ---
 
-<Card
-  className={cn(
-    'h-full flex flex-col relative group transition-all duration-300 hover:scale-105 hover:shadow-lg',
-    isRecommended && 'border-2 border-primary shadow-lg',
-    className
-  )}
->
-  {isRecommended && (
-    <Badge
-      variant="secondary"
-      className="absolute top-4 right-4 shadow-md z-10"
-      aria-label="Most popular plan"
-    >
-      Most Popular
-    </Badge>
-  )}
+<div class={cn(
+  isRecommended && 'p-[2px] rounded-lg gradient-brand',
+  !isRecommended && 'p-0'
+)}>
+  <Card
+    className={cn(
+      'h-full flex flex-col relative group transition-all duration-300 hover:shadow-card-hover hover:-translate-y-2',
+      isRecommended && 'border-0',
+      className
+    )}
+  >
+    {isRecommended && (
+      <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
+        <Badge
+          className="gradient-brand text-white shadow-glow-primary animate-pulse-slow border-0 px-4 py-1.5 text-sm font-bold"
+          aria-label="Most popular plan"
+        >
+          <span class="flex items-center gap-1.5">
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            </svg>
+            Most Popular
+          </span>
+        </Badge>
+      </div>
+    )}
 
   <CardContent className="p-6 flex flex-col gap-6 flex-1">
     <!-- Plan Name -->
@@ -115,15 +131,17 @@ const isRecommended = plan.recommended === true;
       </p>
     )}
 
-    <!-- Features List -->
+    <!-- Features List with staggered animation -->
     <ul class="flex flex-col gap-3 flex-1">
-      {planFeatures.map((feature) => (
-        <li class="flex items-start gap-3">
-          <Check
-            className="h-5 w-5 text-primary mt-0.5 flex-shrink-0"
-            aria-hidden="true"
-          />
-          <span class="text-sm text-foreground">
+      {planFeatures.map((feature, index) => (
+        <li
+          class="flex items-start gap-3 feature-item opacity-0"
+          style={`animation-delay: ${index * 80}ms;`}
+        >
+          <div class="w-5 h-5 mt-0.5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <Check className="h-3.5 w-3.5 text-primary font-bold" aria-hidden="true" />
+          </div>
+          <span class="text-sm text-foreground leading-relaxed">
             {feature}
           </span>
         </li>
@@ -135,4 +153,29 @@ const isRecommended = plan.recommended === true;
       <PhoneCTA variant="inline" class="w-full justify-center" />
     </div>
   </CardContent>
-</Card>
+  </Card>
+</div>
+
+<style>
+  .feature-item {
+    animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .feature-item {
+      opacity: 1;
+      animation: none;
+    }
+  }
+</style>

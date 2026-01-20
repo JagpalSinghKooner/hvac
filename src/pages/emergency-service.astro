@@ -1,0 +1,188 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import EmergencyHero from '@/components/sections/EmergencyHero.astro';
+import EmergencyCTABanner from '@/components/cta/EmergencyCTABanner.astro';
+import CommonProblemsSection from '@/components/sections/CommonProblemsSection.astro';
+import ProcessSteps from '@/components/sections/ProcessSteps.astro';
+import BenefitsSection from '@/components/sections/BenefitsSection.astro';
+import EmergencySafetyTips from '@/components/sections/EmergencySafetyTips.astro';
+import ServiceAreaGrid from '@/components/sections/ServiceAreaGrid.astro';
+import FAQAccordion from '@/components/sections/FAQAccordion.astro';
+import Section from '@/components/layout/Section.astro';
+import Container from '@/components/layout/Container.astro';
+import PhoneCTA from '@/components/cta/PhoneCTA.astro';
+import QuickQuoteConversionSection from '@/components/sections/QuickQuoteConversionSection.astro';
+import ServiceSchema from '@/components/schema/ServiceSchema.astro';
+
+// Data imports
+import { getEmergencyFAQs } from '@/data/faqs';
+import {
+  emergencyScenarios,
+  emergencyProcessSteps,
+  emergencyBenefits,
+  safetyTips,
+} from '@/data/emergencyContent';
+
+// Fetch business profile
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
+
+// Convert emergency scenarios to ServiceProblem format for CommonProblemsSection
+const emergencyProblems = emergencyScenarios.map(scenario => ({
+  problem: scenario.title,
+  solution: scenario.safetyTip,
+  icon: scenario.icon,
+}));
+
+// Get emergency FAQs
+const faqs = getEmergencyFAQs();
+
+// SEO metadata
+const seoTitle = '24/7 Emergency HVAC Service | Guelph & Southern Ontario | B.A.P Heating';
+const seoDescription = 'Emergency HVAC repair service available 24/7 in Guelph, Cambridge, Kitchener-Waterloo. Rapid response within 60 minutes. Call +1 519-835-4858 for furnace, AC, and heating emergencies.';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Emergency Service', href: '/emergency-service' },
+];
+---
+
+<BaseLayout title={seoTitle} description={seoDescription} breadcrumbs={breadcrumbs}>
+  <!-- Enhanced Service Schema for Emergency Service -->
+  <ServiceSchema
+    slot="head"
+    serviceTitle="24/7 Emergency HVAC Service"
+    serviceDescription={seoDescription}
+    serviceType="Emergency HVAC Repair"
+  />
+
+  <!-- Additional Emergency-specific Schema -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "EmergencyService",
+    "name": "B.A.P Heating & Cooling Emergency HVAC Service",
+    "description": seoDescription,
+    "provider": {
+      "@type": "HVACBusiness",
+      "name": business.business.legal_name,
+      "telephone": business.contact.phone_e164,
+    },
+    "areaServed": business.coverage.regions.map((r: any) => ({
+      "@type": "Place",
+      "name": r.name,
+    })),
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "servicePhone": {
+        "@type": "ContactPoint",
+        "telephone": business.contact.phone_e164,
+        "contactType": "emergency",
+        "hoursAvailable": "24/7/365",
+      }
+    },
+    "hoursAvailable": "24/7/365"
+  })} />
+
+  <!-- 1. Emergency Hero - gradient-warm (warm orange for urgency) -->
+  <Section background="gradient-warm" padding="lg">
+    <EmergencyHero
+      heading="24/7 Emergency HVAC Service in Guelph & Southern Ontario"
+      subheading="Furnace breakdowns, AC failures, and heating emergencies—we respond fast when you need us most"
+    />
+  </Section>
+
+  <!-- 2. Emergency CTA Banner (sticky on mobile) - already enhanced with pulse -->
+  <EmergencyCTABanner variant="service" sticky={true} />
+
+  <!-- 3. Common Emergency Scenarios - white background -->
+  <CommonProblemsSection
+    problems={emergencyProblems}
+    heading="Common HVAC Emergencies We Handle"
+    subheading="From furnace failures to gas leaks, we are equipped to handle any HVAC emergency 24/7"
+    variant="grid"
+    showCTA={true}
+    ctaText="Experiencing an emergency? Call us now."
+  />
+
+  <!-- 4. Emergency Safety Tips - warm tint (bg-secondary-50/30) -->
+  <Section background="none" fullWidth class="bg-secondary-50/30">
+    <EmergencySafetyTips
+      tips={safetyTips}
+      heading="Safety Tips While Waiting"
+      subheading="Important guidance to keep you safe until our technician arrives"
+    />
+  </Section>
+
+  <!-- 5. Why Choose Us for Emergencies - white background -->
+  <BenefitsSection
+    benefits={emergencyBenefits}
+    heading="Why Choose B.A.P Heating for Emergency Service"
+    subheading="Trusted emergency HVAC service across Southern Ontario since 1994"
+    columns={2}
+  />
+
+  <!-- 6. Emergency Response Process - muted (gray-50) -->
+  <Section background="muted" fullWidth>
+    <ProcessSteps steps={emergencyProcessSteps} />
+  </Section>
+
+  <!-- 7. Service Area Coverage - white background -->
+  <ServiceAreaGrid
+    heading="Emergency Service Coverage Area"
+    subheading="24/7 emergency HVAC service across Wellington County, Waterloo Region, Halton, and beyond"
+    highlightEmergency={true}
+  />
+
+  <!-- 8. FAQ Section - muted (gray-50) -->
+  {faqs && faqs.length > 0 && (
+    <Section background="muted" fullWidth>
+      <FAQAccordion faqs={faqs} />
+    </Section>
+  )}
+
+  <!-- 9. Final CTA - gradient from warm orange -->
+  <Section padding="lg" class="bg-gradient-to-b from-secondary-50 to-white">
+    <Container size="narrow" class="text-center">
+      <h2 class="font-heading text-h2 mb-4">
+        Don't Wait—Call Now for Emergency Service
+      </h2>
+      <p class="font-body text-body-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+        Our certified technicians are standing by 24/7/365 to help with your HVAC emergency.
+        We typically respond within {business.hours.target_response_time_minutes} minutes across our service area.
+      </p>
+
+      <!-- Large, prominent phone CTA -->
+      <div class="mb-6">
+        <PhoneCTA variant="emergency" showBadge={true} class="text-xl h-16 px-12" />
+      </div>
+
+      <!-- Trust reassurance -->
+      <div class="flex flex-wrap justify-center gap-6 text-sm font-body">
+        <div class="flex items-center gap-2">
+          <span>✓</span>
+          <span>No After-Hours Fees</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span>✓</span>
+          <span>Transparent Pricing</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span>✓</span>
+          <span>TSSA Licensed</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span>✓</span>
+          <span>Fully Insured</span>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- 10. QuickQuote Conversion Section - warm tint for urgency (bg-secondary-50/30) -->
+  <QuickQuoteConversionSection variant="emergency" />
+</BaseLayout>

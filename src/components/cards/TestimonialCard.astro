@@ -28,18 +28,38 @@ const emptyStars = 5 - rating;
 {variant === 'card' ? (
   <Card className={cn("h-full flex flex-col", className)}>
     <CardContent className="p-6 flex flex-col gap-4 flex-1">
-      <!-- Star Rating with ARIA -->
-      <div
-        class="flex gap-0.5"
-        role="img"
-        aria-label={`${rating} out of 5 stars`}
-      >
-        {[...Array(filledStars)].map(() => (
-          <Star className="h-4 w-4 fill-secondary text-secondary" />
-        ))}
-        {[...Array(emptyStars)].map(() => (
-          <Star className="h-4 w-4 text-muted-foreground/30" />
-        ))}
+      <!-- Gradient quote icon and star rating -->
+      <div class="flex items-start justify-between gap-4 mb-4">
+        <!-- Gradient quote icon -->
+        <div class="w-10 h-10 rounded-full gradient-brand p-0.5 flex-shrink-0">
+          <div class="w-full h-full bg-white rounded-full flex items-center justify-center">
+            <svg
+              class="h-5 w-5 text-primary"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Star Rating with ARIA -->
+        <div
+          class="flex gap-0.5"
+          role="img"
+          aria-label={`${rating} out of 5 stars`}
+        >
+          {[...Array(filledStars)].map((_, index) => (
+            <Star
+              className="h-4 w-4 text-secondary star-filled"
+              style={{ animationDelay: `${index * 100}ms` }}
+            />
+          ))}
+          {[...Array(emptyStars)].map(() => (
+            <Star className="h-4 w-4 text-muted-foreground/30" />
+          ))}
+        </div>
       </div>
 
       <!-- Quote Text -->
@@ -75,10 +95,24 @@ const emptyStars = 5 - rating;
     </CardContent>
   </Card>
 ) : (
-  <!-- Quote Variant -->
-  <blockquote class={cn("border-l-4 border-primary pl-6 py-4", className)}>
+  <!-- Quote Variant with gradient icon -->
+  <blockquote class={cn("relative border-l-4 border-primary pl-6 py-4 bg-gradient-to-r from-primary-50/30 to-transparent rounded-r-lg", className)}>
+    <!-- Gradient quote icon overlapping border -->
+    <div class="absolute -left-6 top-4 w-12 h-12 rounded-full gradient-brand p-0.5">
+      <div class="w-full h-full bg-white rounded-full flex items-center justify-center">
+        <svg
+          class="h-5 w-5 text-primary"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+        </svg>
+      </div>
+    </div>
+
     {hasText ? (
-      <p class="text-lg italic text-foreground mb-4">
+      <p class="text-lg italic text-foreground mb-4 relative z-10">
         "{testimonial.text}"
       </p>
     ) : (
@@ -92,8 +126,11 @@ const emptyStars = 5 - rating;
         role="img"
         aria-label={`${rating} out of 5 stars`}
       >
-        {[...Array(filledStars)].map(() => (
-          <Star className="h-4 w-4 fill-secondary text-secondary" />
+        {[...Array(filledStars)].map((_, index) => (
+          <Star
+            className="h-4 w-4 text-secondary star-filled"
+            style={{ animationDelay: `${index * 100}ms` }}
+          />
         ))}
         {[...Array(emptyStars)].map(() => (
           <Star className="h-4 w-4 text-muted-foreground/30" />
@@ -104,3 +141,27 @@ const emptyStars = 5 - rating;
     </footer>
   </blockquote>
 )}
+
+<style>
+  .star-filled {
+    fill: hsl(var(--secondary-500));
+    animation: starPop 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    transform: scale(0);
+  }
+
+  @keyframes starPop {
+    0% {
+      transform: scale(0) rotate(-180deg);
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .star-filled {
+      animation: none;
+      transform: scale(1);
+    }
+  }
+</style>

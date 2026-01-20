@@ -1,7 +1,8 @@
 ---
 import { getEntry } from 'astro:content';
-import { Phone } from 'lucide-react';
+import { Flame } from 'lucide-react';
 import PhoneCTA from '@/components/cta/PhoneCTA.astro';
+import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 
 interface Props {
@@ -54,40 +55,47 @@ const stickyClasses = sticky
 
 <section
   class={cn(
-    'w-full bg-destructive py-6 md:py-8',
+    'w-full overflow-hidden py-8 md:py-12 bg-secondary-50',
     stickyClasses,
     className
   )}
   aria-label="Emergency service call-to-action"
 >
+  <!-- Gradient mesh warm background for urgency -->
+  <div class="absolute inset-0 gradient-mesh-warm -z-10 opacity-60"></div>
+
   <div class="container mx-auto px-4">
-    <div class="flex flex-col items-center justify-center gap-4 text-center md:gap-6">
-      <!-- Heading with animated phone icons -->
-      <div class="flex items-center gap-3">
-        <Phone
-          className="h-6 w-6 text-white animate-pulse md:h-8 md:w-8"
-          aria-hidden="true"
-        />
-        <h2 class="text-xl font-bold text-white md:text-2xl lg:text-3xl">
-          {text.heading}
-        </h2>
-        <Phone
-          className="h-6 w-6 text-white animate-pulse md:h-8 md:w-8"
-          aria-hidden="true"
-        />
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+      <!-- Left: Emergency badge + message -->
+      <div class="flex flex-col md:flex-row items-center gap-4">
+        <Badge variant="featured" className="animate-pulse-slow shadow-glow-secondary gap-1.5">
+          <Flame className="h-3.5 w-3.5" aria-hidden="true" />
+          24/7 Emergency
+        </Badge>
+        <div>
+          <h2 class="font-heading text-h2 text-gray-900 mb-1">
+            {text.heading}
+          </h2>
+          <p class="font-body text-body text-gray-700">
+            {text.subheading}
+          </p>
+        </div>
       </div>
 
-      <!-- Subheading -->
-      <p class="max-w-2xl text-sm text-white/90 md:text-base lg:text-lg">
-        {text.subheading}
-      </p>
-
-      <!-- Emergency CTA button -->
+      <!-- Right: Phone CTA -->
       <PhoneCTA
         variant="emergency"
         showBadge={false}
-        class="mt-2"
+        class="flex-shrink-0"
       />
     </div>
   </div>
 </section>
+
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    .animate-pulse-slow {
+      animation: none;
+    }
+  }
+</style>

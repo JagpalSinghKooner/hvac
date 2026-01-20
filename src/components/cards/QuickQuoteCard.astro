@@ -7,12 +7,10 @@ import BookingCTA from '@/components/cta/BookingCTA.astro';
 
 // Props interface
 interface Props {
-  service?: string;
-  variant?: 'sidebar' | 'inline';
   class?: string;
 }
 
-const { variant = 'inline', class: className } = Astro.props;
+const { class: className } = Astro.props;
 
 // Trust bullets - curated 4 items from roadmap
 const trustBullets = [
@@ -22,35 +20,38 @@ const trustBullets = [
   'Same-day service available'
 ];
 
-// Variant-specific classes
-const variantClasses = variant === 'sidebar'
-  ? 'sticky top-20 z-40 hidden lg:block'
-  : 'w-full';
+// Always full-width (sticky variant removed)
+const variantClasses = 'w-full';
 ---
 
-<!-- Gradient border wrapper -->
+<!-- Animated gradient border wrapper -->
 <div class={cn(
-  "p-[2px] bg-gradient-to-br from-primary to-secondary rounded-xl",
+  "p-[2px] rounded-xl gradient-border-animated",
   variantClasses,
   className
 )}>
-  <Card className="h-full bg-card">
+  <Card className="h-full bg-card shadow-glow-primary/50">
     <CardContent className="p-6 flex flex-col gap-6">
 
-      <!-- Heading -->
-      <h3 class="text-2xl font-bold text-center">
+      <!-- Gradient text heading -->
+      <h3 class="text-2xl font-heading font-bold text-center gradient-text mb-2">
         Get Your Free Estimate
       </h3>
+      <p class="text-xs text-center text-muted-foreground mb-4">
+        No obligation, same-day response
+      </p>
 
-      <!-- Trust bullets -->
+      <!-- Staggered trust bullets -->
       <ul class="flex flex-col gap-3">
-        {trustBullets.map(bullet => (
-          <li class="flex items-start gap-3">
-            <CheckCircle
-              className="h-5 w-5 text-primary mt-0.5 flex-shrink-0"
-              aria-hidden="true"
-            />
-            <span class="text-sm text-muted-foreground">
+        {trustBullets.map((bullet, index) => (
+          <li
+            class="flex items-start gap-3 trust-bullet opacity-0"
+            style={`animation-delay: ${index * 150}ms;`}
+          >
+            <div class="w-5 h-5 mt-0.5 flex-shrink-0 rounded-full bg-primary/10 flex items-center justify-center">
+              <CheckCircle className="h-4 w-4 text-primary" aria-hidden="true" />
+            </div>
+            <span class="text-sm text-foreground font-medium">
               {bullet}
             </span>
           </li>
@@ -66,3 +67,27 @@ const variantClasses = variant === 'sidebar'
     </CardContent>
   </Card>
 </div>
+
+<style>
+  .trust-bullet {
+    animation: fadeInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trust-bullet {
+      opacity: 1;
+      animation: none;
+    }
+  }
+</style>

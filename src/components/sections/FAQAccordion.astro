@@ -1,5 +1,5 @@
 ---
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
+import { FAQAccordionReact } from './FAQAccordionReact';
 import Section from '@/components/layout/Section.astro';
 import Container from '@/components/layout/Container.astro';
 
@@ -15,19 +15,10 @@ const { faqs } = Astro.props;
 
 <Section padding="lg">
   <Container size="narrow">
-    <h2 class="text-3xl font-semibold mb-8">Frequently Asked Questions</h2>
+    <div class="text-center mb-12">
+      <h2 class="font-heading text-h2 mb-4">Frequently Asked Questions</h2>
+    </div>
 
-    <Accordion type="single" collapsible className="w-full">
-      {faqs.map((faq, index) => (
-        <AccordionItem value={`item-${index}`}>
-          <AccordionTrigger className="text-left font-semibold">
-            {faq.question}
-          </AccordionTrigger>
-          <AccordionContent className="text-muted-foreground">
-            {faq.answer}
-          </AccordionContent>
-        </AccordionItem>
-      ))}
-    </Accordion>
+    <FAQAccordionReact faqs={faqs} client:load />
   </Container>
 </Section>

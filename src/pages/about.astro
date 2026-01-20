@@ -1,0 +1,97 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Section from '@/components/layout/Section.astro';
+import Container from '@/components/layout/Container.astro';
+import BenefitsSection from '@/components/sections/BenefitsSection.astro';
+import CertificationsBadges from '@/components/sections/CertificationsBadges.astro';
+import PhoneCTA from '@/components/cta/PhoneCTA.astro';
+import BookingCTA from '@/components/cta/BookingCTA.astro';
+import QuickQuoteConversionSection from '@/components/sections/QuickQuoteConversionSection.astro';
+import { companyStory, coreValues, competitiveAdvantages } from '@/data/aboutContent';
+
+// SEO Configuration
+const seoTitle = 'About B.A.P Heating & Cooling | Southern Ontario HVAC Company Since 1994';
+const seoDescription = 'Learn about B.A.P Heating & Cooling Services Ltd - a family-owned HVAC company serving Southern Ontario since 1994. TSSA licensed, 24/7 service, 10-year warranty.';
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+];
+---
+
+<BaseLayout title={seoTitle} description={seoDescription} breadcrumbs={breadcrumbs}>
+  <!-- 1. Hero/intro - gradient-cool -->
+  <Section background="gradient-cool" padding="lg">
+    <Container size="narrow" class="text-center">
+      <h1 class="font-display text-display-md lg:text-display-lg tracking-tight">
+        About B.A.P Heating & Cooling
+      </h1>
+      <p class="mt-6 font-body text-body-lg text-gray-600 max-w-2xl mx-auto">
+        Serving Southern Ontario with honest, reliable HVAC service since 1994. Family-owned, locally trusted, available 24/7.
+      </p>
+    </Container>
+  </Section>
+
+  <!-- 2. Company Story - white background -->
+  <Section padding="lg">
+    <Container size="narrow">
+      <div class="prose prose-lg mx-auto max-w-3xl">
+        <h2 class="font-heading text-h2 mb-6">Our Story</h2>
+        <div class="font-body text-body-lg text-gray-700 whitespace-pre-line leading-relaxed">
+          {companyStory.founding}
+        </div>
+
+        <h3 class="font-heading text-h3 mt-8 mb-4">Our Mission</h3>
+        <p class="font-body text-body-lg text-gray-700 leading-relaxed">{companyStory.mission}</p>
+
+        <p class="font-body text-body-lg text-gray-700 mt-6 leading-relaxed">{companyStory.commitment}</p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- 3. Core Values - muted (gray-50) -->
+  <Section background="muted" fullWidth>
+    <BenefitsSection
+      benefits={coreValues}
+      heading="Our Core Values"
+      subheading="The principles that guide every installation, repair, and customer interaction"
+      columns={2}
+    />
+  </Section>
+
+  <!-- 4. Competitive Advantages - white background -->
+  <BenefitsSection
+    benefits={competitiveAdvantages}
+    heading="Why Choose B.A.P Heating & Cooling"
+    subheading="What sets us apart from other HVAC companies in Southern Ontario"
+    columns={3}
+  />
+
+  <!-- 5. Certifications - primary-light (bg-primary-50/30) -->
+  <Section background="primary-light" fullWidth>
+    <CertificationsBadges
+      heading="Certifications & Licenses"
+      showHeading={true}
+      variant="full"
+      columns={3}
+    />
+  </Section>
+
+  <!-- 6. Final CTA - white background -->
+  <Section padding="lg">
+    <Container size="narrow" class="text-center">
+      <h2 class="font-heading text-h2 mb-4">
+        Ready to Work With a Company You Can Trust?
+      </h2>
+      <p class="font-body text-body-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+        Experience the difference of working with Southern Ontario's most trusted HVAC company. Call now or book online for service that puts you first.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <PhoneCTA variant="hero" showBadge={true} />
+        <BookingCTA variant="hero" />
+      </div>
+    </Container>
+  </Section>
+
+  <!-- 7. QuickQuote Conversion Section - primary-light (conversion focus) -->
+  <QuickQuoteConversionSection />
+</BaseLayout>

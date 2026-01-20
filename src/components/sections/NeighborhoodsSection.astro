@@ -94,12 +94,12 @@ const gridClass = gridClasses[columns];
     {(finalHeading || subheading) && (
       <div class="text-center mb-12">
         {finalHeading && (
-          <h2 class="text-3xl font-semibold mb-4">
+          <h2 class="font-heading text-h2 mb-4">
             {finalHeading}
           </h2>
         )}
         {subheading && (
-          <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p class="text-body-lg text-gray-600 max-w-3xl mx-auto">
             {subheading}
           </p>
         )}
@@ -109,12 +109,12 @@ const gridClass = gridClasses[columns];
     <!-- Neighborhoods Grid -->
     <ul class={cn('grid gap-4', gridClass)}>
       {displayNeighborhoods.map((neighborhood) => (
-        <li class="flex items-center gap-3">
+        <li class="flex items-center gap-3 group">
           <CheckCircle
-            className="h-5 w-5 text-primary flex-shrink-0"
+            className="h-5 w-5 text-primary flex-shrink-0 transition-transform duration-200 group-hover:scale-110"
             aria-hidden="true"
           />
-          <span class="text-base">{neighborhood}</span>
+          <span class="text-base font-body group-hover:text-primary transition-colors duration-200">{neighborhood}</span>
         </li>
       ))}
     </ul>

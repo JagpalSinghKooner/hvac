@@ -1,0 +1,157 @@
+---
+import Section from '@/components/layout/Section.astro';
+import Container from '@/components/layout/Container.astro';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { getEntry } from 'astro:content';
+
+interface Props {
+  heading?: string;
+  subheading?: string;
+  class?: string;
+}
+
+const {
+  heading = 'Get in Touch',
+  subheading = 'Multiple ways to reach us—choose what works best for you',
+  class: className,
+} = Astro.props;
+
+// Fetch business profile
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
+---
+
+<Section padding="lg" class={className}>
+  <Container size="default">
+    <!-- Heading Section -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-semibold mb-4">{heading}</h2>
+      {subheading && (
+        <p class="text-lg text-muted-foreground max-w-3xl mx-auto">{subheading}</p>
+      )}
+    </div>
+
+    <!-- Contact Methods Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      <!-- Phone Card -->
+      <Card className="hover:shadow-lg transition-shadow">
+        <CardHeader>
+          <div class="flex items-center gap-3 mb-2">
+            <Phone className="h-6 w-6 text-primary" aria-hidden="true" />
+            <CardTitle className="text-xl">Call Us 24/7</CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <a
+            href={`tel:${business.contact.phone_e164}`}
+            class="text-2xl font-bold text-primary hover:underline block mb-2"
+          >
+            {business.contact.phone_display}
+          </a>
+          <p class="text-sm text-muted-foreground">
+            Speak to a real person any time, day or night
+          </p>
+        </CardContent>
+      </Card>
+
+      <!-- Email Card -->
+      <Card className="hover:shadow-lg transition-shadow">
+        <CardHeader>
+          <div class="flex items-center gap-3 mb-2">
+            <Mail className="h-6 w-6 text-primary" aria-hidden="true" />
+            <CardTitle className="text-xl">Email Us</CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <a
+            href={`mailto:${business.contact.email}`}
+            class="text-lg font-semibold text-primary hover:underline block mb-2"
+          >
+            {business.contact.email}
+          </a>
+          <p class="text-sm text-muted-foreground">
+            We respond within 24 hours
+          </p>
+        </CardContent>
+      </Card>
+
+      <!-- Address Card (both locations) -->
+      <Card className="hover:shadow-lg transition-shadow">
+        <CardHeader>
+          <div class="flex items-center gap-3 mb-2">
+            <MapPin className="h-6 w-6 text-primary" aria-hidden="true" />
+            <CardTitle className="text-xl">Visit Our Offices</CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <!-- Primary Location -->
+          {business.locations?.primary && (
+            <div class={business.locations.secondary ? "mb-4" : ""}>
+              <p class="font-medium mb-1">{business.locations.primary.name}</p>
+              <p class="text-sm text-muted-foreground mb-2">
+                {business.locations.primary.address_full}
+              </p>
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(business.locations.primary.address_full)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-primary hover:underline"
+              >
+                Get Directions →
+              </a>
+            </div>
+          )}
+
+          {/* Divider - only show if both locations exist */}
+          {business.locations?.primary && business.locations?.secondary && (
+            <div class="border-t border-border my-3"></div>
+          )}
+
+          {/* Secondary Location - conditionally rendered */}
+          {business.locations?.secondary && (
+            <div>
+              <p class="font-medium mb-1">{business.locations.secondary.name}</p>
+              <p class="text-sm text-muted-foreground mb-2">
+                {business.locations.secondary.address_full}
+              </p>
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(business.locations.secondary.address_full)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-primary hover:underline"
+              >
+                Get Directions →
+              </a>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      <!-- Hours Card -->
+      <Card className="hover:shadow-lg transition-shadow">
+        <CardHeader>
+          <div class="flex items-center gap-3 mb-2">
+            <Clock className="h-6 w-6 text-primary" aria-hidden="true" />
+            <CardTitle className="text-xl">Business Hours</CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <p class="text-2xl font-bold text-primary mb-2">
+            {business.hours.business_hours}
+          </p>
+          <p class="text-sm text-muted-foreground mb-3">
+            Emergency service available around the clock
+          </p>
+          <Badge variant="destructive" className="text-xs">
+            24/7 Service
+          </Badge>
+        </CardContent>
+      </Card>
+    </div>
+  </Container>
+</Section>

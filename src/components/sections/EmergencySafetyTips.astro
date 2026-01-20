@@ -1,0 +1,72 @@
+---
+import Section from '@/components/layout/Section.astro';
+import Container from '@/components/layout/Container.astro';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import * as Icons from 'lucide-react';
+import type { SafetyTip } from '@/data/emergencyContent';
+
+interface Props {
+  tips: SafetyTip[];
+  heading?: string;
+  subheading?: string;
+  class?: string;
+}
+
+const {
+  tips,
+  heading = 'Emergency Safety Tips',
+  subheading = 'Important guidance while waiting for our technician to arrive',
+  class: className,
+} = Astro.props;
+
+// Map severity to badge variants and colors
+const severityConfig = {
+  danger: { variant: 'destructive' as const, bgClass: 'bg-destructive/10', iconColor: 'text-destructive' },
+  warning: { variant: 'secondary' as const, bgClass: 'bg-secondary/10', iconColor: 'text-secondary' },
+  info: { variant: 'default' as const, bgClass: 'bg-primary/10', iconColor: 'text-primary' },
+};
+
+// Pre-process tips to resolve icon components
+const tipsWithIcons = tips.map(tip => ({
+  ...tip,
+  IconComponent: (Icons as any)[tip.icon] || Icons.AlertTriangle,
+  config: severityConfig[tip.severity]
+}));
+---
+
+<Section padding="lg" class={`bg-muted/50 ${className || ''}`}>
+  <Container size="default">
+    <!-- Heading Section -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-semibold mb-4">{heading}</h2>
+      {subheading && (
+        <p class="text-lg text-muted-foreground max-w-3xl mx-auto">{subheading}</p>
+      )}
+    </div>
+
+    <!-- Tips Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {tipsWithIcons.map((tip, index) => (
+        <Card className="relative overflow-hidden" key={`safety-tip-${index}`}>
+          <CardHeader>
+            <div class="flex items-start gap-4 mb-2">
+              <div class={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${tip.config.bgClass}`}>
+                <tip.IconComponent className={`h-6 w-6 ${tip.config.iconColor}`} aria-hidden="true" />
+              </div>
+              <div class="flex-1">
+                <Badge variant={tip.config.variant} className="mb-2 text-xs">
+                  {tip.severity.toUpperCase()}
+                </Badge>
+                <CardTitle className="text-lg">{tip.title}</CardTitle>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <p class="text-sm text-muted-foreground">{tip.description}</p>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  </Container>
+</Section>

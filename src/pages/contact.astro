@@ -1,0 +1,113 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Section from '@/components/layout/Section.astro';
+import Container from '@/components/layout/Container.astro';
+import ContactMethodsGrid from '@/components/sections/ContactMethodsGrid.astro';
+import ServiceAreaGrid from '@/components/sections/ServiceAreaGrid.astro';
+import ContactFormPlaceholder from '@/components/sections/ContactFormPlaceholder.astro';
+import FAQAccordion from '@/components/sections/FAQAccordion.astro';
+import PhoneCTA from '@/components/cta/PhoneCTA.astro';
+import BookingCTA from '@/components/cta/BookingCTA.astro';
+import QuickQuoteConversionSection from '@/components/sections/QuickQuoteConversionSection.astro';
+
+// Data imports
+import { generalFAQs } from '@/data/faqs';
+
+// Fetch business profile
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
+
+// SEO metadata
+const seoTitle = 'Contact B.A.P Heating | Get in Touch | Guelph HVAC Services';
+const seoDescription = 'Contact B.A.P Heating & Cooling for all your HVAC needs in Guelph and Southern Ontario. Call 24/7 at +1 519-835-4858 or book online. Emergency service available.';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Contact', href: '/contact' },
+];
+
+// ContactPage Schema with LocalBusiness
+const contactPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contact B.A.P Heating & Cooling",
+  "description": seoDescription,
+  "mainEntity": {
+    "@type": "LocalBusiness",
+    "name": business.business.legal_name,
+    "telephone": business.contact.phone_e164,
+    "email": business.contact.email,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": business.locations?.primary.address_full?.split(',')[0] || '',
+      "addressLocality": business.locations?.primary.city || 'Guelph',
+      "addressRegion": business.locations?.primary.province || 'ON',
+      "postalCode": business.locations?.primary.postal_code || '',
+      "addressCountry": "CA"
+    },
+    "openingHours": "Mo-Su 00:00-23:59",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": business.contact.phone_e164,
+      "contactType": "customer service",
+      "areaServed": "Southern Ontario",
+      "availableLanguage": "English",
+      "hoursAvailable": {
+        "@type": "OpeningHoursSpecification",
+        "opens": "00:00",
+        "closes": "23:59"
+      }
+    }
+  }
+};
+---
+
+<BaseLayout title={seoTitle} description={seoDescription} breadcrumbs={breadcrumbs}>
+  <!-- ContactPage Schema -->
+  <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(contactPageSchema)} />
+
+  <!-- 1. Hero - gradient-cool -->
+  <Section background="gradient-cool" padding="lg">
+    <Container size="narrow" class="text-center">
+      <h1 class="font-display text-display-md lg:text-display-lg tracking-tight mb-6">
+        Get in Touch with B.A.P Heating
+      </h1>
+      <p class="font-body text-body-lg text-gray-600 max-w-2xl mx-auto mb-8">
+        Available 24/7 for all your heating and cooling needs.
+        Call us now or book online—we typically respond within {business.hours.target_response_time_minutes} minutes.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <PhoneCTA variant="hero" />
+        <BookingCTA variant="hero" />
+      </div>
+    </Container>
+  </Section>
+
+  <!-- 2. ContactMethodsGrid - white background -->
+  <ContactMethodsGrid />
+
+  <!-- 3. Contact Form Placeholder - muted (gray-50) -->
+  <Section background="muted" fullWidth>
+    <ContactFormPlaceholder />
+  </Section>
+
+  <!-- 4. Service Area Grid - primary-light (bg-primary-50/30) -->
+  <Section background="primary-light" fullWidth>
+    <ServiceAreaGrid
+      heading="Our Service Area"
+      subheading="Serving Southern Ontario with 24/7 HVAC service"
+      highlightEmergency={false}
+    />
+  </Section>
+
+  <!-- 5. FAQ Section - white background -->
+  <FAQAccordion faqs={generalFAQs} />
+
+  <!-- 6. QuickQuote Conversion Section - primary-light (conversion focus) -->
+  <QuickQuoteConversionSection />
+</BaseLayout>

@@ -1,9 +1,9 @@
 ---
 import Section from '@/components/layout/Section.astro';
 import Container from '@/components/layout/Container.astro';
-import PhoneCTA from '@/components/cta/PhoneCTA.astro';
-import BookingCTA from '@/components/cta/BookingCTA.astro';
+import { Button } from '@/components/ui/button';
 import TrustBadges from '@/components/TrustBadges.astro';
+import { Phone, Calendar } from 'lucide-react';
 import { getEntry } from 'astro:content';
 
 interface Props {
@@ -17,26 +17,94 @@ const { location } = Astro.props;
 const businessEntry = await getEntry('business', 'profile');
 const business = businessEntry!.data;
 
-// Build heading with location context
-const heading = `HVAC Services in ${location.name}${location.region ? `, ${location.region}` : ''}`;
+// Build subheading with location context
+const locationText = location.region ? `${location.name}, ${location.region}` : location.name;
 const subheading = `Expert heating and cooling services for ${location.name} residents since ${business.business.established_year}`;
+const phone = business.contact.phone_display;
 ---
 
-<Section padding="lg" class="bg-gradient-to-b from-muted/50 to-background">
-  <Container size="narrow" class="text-center">
-    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-      {heading}
+<Section padding="lg" class="relative overflow-hidden">
+  <!-- Atmospheric mesh gradient background -->
+  <div class="absolute inset-0 gradient-mesh-cool -z-10" aria-hidden="true"></div>
+
+  <!-- Animated floating shapes for atmospheric depth -->
+  <div
+    class="absolute top-20 left-[10%] w-64 h-64 bg-primary-200/30 rounded-full blur-3xl animate-float pointer-events-none"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="absolute bottom-20 right-[10%] w-96 h-96 bg-secondary-100/30 rounded-full blur-3xl animate-float-delayed pointer-events-none"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Content with higher z-index for layering -->
+  <Container size="narrow" class="relative z-10 text-center">
+    <!-- Enhanced typography with gradient text for location name -->
+    <h1 class="font-display text-display-md lg:text-display-lg text-shadow-soft mb-6">
+      HVAC Services in{' '}
+      <span class="gradient-text">{locationText}</span>
     </h1>
 
-    <p class="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+    <p class="font-body text-body-lg text-gray-600 max-w-2xl mx-auto mb-8">
       {subheading}
     </p>
 
-    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-      <PhoneCTA variant="hero" showBadge={true} />
-      <BookingCTA variant="hero" />
+    <!-- Gradient CTA buttons with enhanced spacing -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+      <Button variant="gradient" size="lg" className="gap-2" client:load>
+        <Phone className="h-5 w-5" />
+        {phone}
+      </Button>
+      <Button variant="outline" size="lg" className="gap-2" client:load>
+        <Calendar className="h-5 w-5" />
+        Book Online
+      </Button>
     </div>
 
-    <TrustBadges />
+    <!-- Enhanced TrustBadges with glassmorphism -->
+    <div class="trust-badges-enhanced">
+      <TrustBadges />
+    </div>
   </Container>
 </Section>
+
+<style>
+  /* Text shadow for heading depth */
+  .text-shadow-soft {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Floating animation for atmospheric shapes */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  .animate-float {
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float 8s ease-in-out 2s infinite;
+  }
+
+  /* Glassmorphism enhancement for trust badges */
+  .trust-badges-enhanced :global(.trust-badge),
+  .trust-badges-enhanced :global(> div > div) {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* Ensure animations respect user preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-float,
+    .animate-float-delayed {
+      animation: none;
+    }
+  }
+</style>

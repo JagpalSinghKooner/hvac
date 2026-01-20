@@ -146,16 +146,20 @@ const categoryLabel = service.category === 'iaq'
 
 {variant === 'compact' ? (
   <Card className={cn(
-    "h-full flex flex-col group transition-all duration-300 hover:scale-105 hover:shadow-lg",
+    "h-full flex flex-col group transition-all duration-300 hover:shadow-card-hover service-card",
     className
   )}>
     <CardContent className="p-6 flex flex-col gap-4 flex-1">
-      <!-- Icon in colored circle -->
+      <!-- Icon in gradient ring -->
       <div class={cn(
-        "w-12 h-12 rounded-full flex items-center justify-center",
-        colors.bgColor
+        "relative w-12 h-12 rounded-full p-0.5 transition-transform duration-300 group-hover:scale-110",
+        service.category === 'heating' ? 'gradient-heating' :
+        service.category === 'cooling' ? 'gradient-cooling' :
+        'gradient-brand'
       )}>
-        <ServiceIcon className={cn("h-6 w-6", colors.textColor)} aria-hidden="true" />
+        <div class="w-full h-full bg-white rounded-full flex items-center justify-center">
+          <ServiceIcon className={cn("h-6 w-6 transition-transform duration-300 group-hover:rotate-6", colors.textColor)} aria-hidden="true" />
+        </div>
       </div>
 
       <!-- Title (h3 for semantic hierarchy) -->
@@ -168,36 +172,43 @@ const categoryLabel = service.category === 'iaq'
         {displayDescription}
       </p>
 
-      <!-- Learn More link with arrow -->
+      <!-- Learn More link with arrow trail -->
       <a
         href={serviceUrl}
         class={cn(
-          "inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3 transition-all",
+          "inline-flex items-center gap-2 text-sm font-medium arrow-link transition-all duration-300",
           colors.textColor
         )}
         aria-label={`Learn more about ${service.title}`}
       >
         Learn More
-        <ArrowRight className="h-4 w-4" aria-hidden="true" />
+        <ArrowRight className="h-4 w-4 arrow-icon" aria-hidden="true" />
       </a>
     </CardContent>
   </Card>
 ) : (
   <Card className={cn(
-    "h-full flex flex-col overflow-hidden group transition-all duration-300 hover:scale-105 hover:shadow-lg",
+    "h-full flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-card-hover service-card",
     className
   )}>
-    <!-- Featured image (no padding, fills width) -->
+    <!-- Featured image with gradient overlay -->
     <div class="relative w-full h-48 overflow-hidden">
       <img
         src={featuredImage!.src}
         alt={featuredImage!.alt}
-        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
         loading="lazy"
       />
+      <!-- Gradient overlay on hover -->
+      <div class={cn(
+        "absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-500",
+        service.category === 'heating' ? 'bg-gradient-to-br from-secondary-400/50 to-secondary-600/50' :
+        service.category === 'cooling' ? 'bg-gradient-to-br from-primary-400/50 to-primary-600/50' :
+        'bg-gradient-to-br from-primary-500/50 to-secondary-500/50'
+      )}></div>
       <!-- Category badge overlay -->
-      <div class="absolute top-4 right-4">
-        <Badge variant={colors.badgeVariant} className="shadow-md">
+      <div class="absolute top-4 right-4 z-10">
+        <Badge variant={colors.badgeVariant} className="shadow-md backdrop-blur-sm bg-white/90">
           {categoryLabel}
         </Badge>
       </div>
@@ -205,12 +216,16 @@ const categoryLabel = service.category === 'iaq'
 
     <!-- Content below image (same structure as compact) -->
     <CardContent className="p-6 flex flex-col gap-4 flex-1">
-      <!-- Icon in colored circle -->
+      <!-- Icon in gradient ring -->
       <div class={cn(
-        "w-12 h-12 rounded-full flex items-center justify-center",
-        colors.bgColor
+        "relative w-12 h-12 rounded-full p-0.5 transition-transform duration-300 group-hover:scale-110",
+        service.category === 'heating' ? 'gradient-heating' :
+        service.category === 'cooling' ? 'gradient-cooling' :
+        'gradient-brand'
       )}>
-        <ServiceIcon className={cn("h-6 w-6", colors.textColor)} aria-hidden="true" />
+        <div class="w-full h-full bg-white rounded-full flex items-center justify-center">
+          <ServiceIcon className={cn("h-6 w-6 transition-transform duration-300 group-hover:rotate-6", colors.textColor)} aria-hidden="true" />
+        </div>
       </div>
 
       <!-- Title (h3) -->
@@ -223,18 +238,69 @@ const categoryLabel = service.category === 'iaq'
         {service.description}
       </p>
 
-      <!-- Learn More link -->
+      <!-- Learn More link with arrow trail -->
       <a
         href={serviceUrl}
         class={cn(
-          "inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3 transition-all",
+          "inline-flex items-center gap-2 text-sm font-medium arrow-link transition-all duration-300",
           colors.textColor
         )}
         aria-label={`Learn more about ${service.title}`}
       >
         Learn More
-        <ArrowRight className="h-4 w-4" aria-hidden="true" />
+        <ArrowRight className="h-4 w-4 arrow-icon" aria-hidden="true" />
       </a>
     </CardContent>
   </Card>
 )}
+
+<style>
+  .service-card {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .service-card:hover {
+    transform: translateY(-8px) rotate(-1deg);
+  }
+
+  .arrow-link {
+    position: relative;
+  }
+
+  .arrow-icon {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .arrow-link:hover .arrow-icon {
+    transform: translateX(6px);
+  }
+
+  /* Trail effect */
+  .arrow-link::after {
+    content: '→';
+    position: absolute;
+    right: 0;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: currentColor;
+    font-size: 1rem;
+    pointer-events: none;
+  }
+
+  .arrow-link:hover::after {
+    right: 12px;
+    opacity: 0.25;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-card:hover {
+      transform: translateY(-4px);
+      /* No rotation for reduced motion */
+    }
+
+    .arrow-link::after {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,80 @@
+---
+import Section from '@/components/layout/Section.astro';
+import Container from '@/components/layout/Container.astro';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { MapPin, ChevronRight } from 'lucide-react';
+import { getEntry } from 'astro:content';
+
+interface Props {
+  heading?: string;
+  subheading?: string;
+  highlightEmergency?: boolean;  // Optional: emphasize emergency coverage
+  class?: string;
+}
+
+const {
+  heading = 'Our Service Area',
+  subheading = 'Emergency service available across all locations shown below',
+  highlightEmergency = false,
+  class: className,
+} = Astro.props;
+
+// Fetch business profile for coverage data
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
+
+// Extract regions from profile
+const regions = business.coverage.regions;
+---
+
+<Section padding="lg" class={`${highlightEmergency ? 'bg-destructive/5' : 'bg-muted/30'} ${className || ''}`}>
+  <Container size="default">
+    <!-- Heading Section -->
+    <div class="text-center mb-12">
+      <h2 class="font-heading text-h2 mb-4">{heading}</h2>
+      {subheading && (
+        <p class="text-body-lg text-gray-600 max-w-3xl mx-auto">{subheading}</p>
+      )}
+    </div>
+
+    <!-- Regions Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {regions.map((region: any) => (
+        <Card className="relative overflow-hidden hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 group">
+          <CardHeader>
+            <div class="flex items-center gap-3">
+              <MapPin className="h-6 w-6 text-primary transition-transform duration-300 group-hover:scale-110" aria-hidden="true" />
+              <CardTitle className="font-heading text-xl">{region.name}</CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <ul class="space-y-2">
+              {region.locations.map((location: any) => (
+                <li>
+                  <a
+                    href={`/locations/${location.slug}/`}
+                    class="flex items-center gap-2 text-sm text-gray-600 hover:text-primary transition-all duration-200 group/link"
+                  >
+                    <ChevronRight className="h-4 w-4 text-primary/60 group-hover/link:text-primary group-hover/link:translate-x-0.5 transition-all duration-200" aria-hidden="true" />
+                    <span class="font-body group-hover/link:underline underline-offset-2">{location.name}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+
+    {highlightEmergency && (
+      <div class="mt-8 text-center">
+        <p class="text-sm text-gray-700 font-body">
+          <strong class="font-semibold">60-Minute Response Time:</strong> We aim to reach you within 60 minutes across all our service areas for emergency calls.
+        </p>
+      </div>
+    )}
+  </Container>
+</Section>
