@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+
+// Filter and sort published posts
+const publishedPosts = allPosts
+  .filter((post) => post.data.workflowStatus === 'published')
+  .sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HVAC Tips & Guides | B.A.P Heating & Cooling Blog</title>
+    <meta
+      name="description"
+      content="Expert HVAC tips, guides, and advice from B.A.P Heating & Cooling. Learn about furnaces, air conditioners, heat pumps, and more."
+    />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>HVAC Blog & Resources</h1>
+        <p>Expert tips, guides, and advice for Ontario homeowners</p>
+      </header>
+
+      <section>
+        {
+          publishedPosts.map((post) => (
+            <article>
+              <h2>
+                <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+              </h2>
+              <p>{post.data.description}</p>
+              <p>
+                By {post.data.author} •{' '}
+                {new Date(post.data.publishDate).toLocaleDateString('en-CA', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}{' '}
+                • {post.data.category}
+              </p>
+              {post.data.featured && <span>Featured</span>}
+            </article>
+          ))
+        }
+      </section>
+    </main>
+  </body>
+</html>

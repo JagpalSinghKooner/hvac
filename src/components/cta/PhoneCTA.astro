@@ -1,0 +1,47 @@
+---
+import { getEntry } from 'astro:content';
+import { cn } from '@/lib/utils';
+import { Phone } from 'lucide-react';
+
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
+
+interface Props {
+  variant?: 'header' | 'hero' | 'inline' | 'sticky' | 'footer' | 'emergency';
+  showBadge?: boolean;
+  class?: string;
+}
+
+const { variant = 'inline', showBadge = false, class: className } = Astro.props;
+
+// Map variant to button styling classes (following shadcn button variants)
+const variantClasses: Record<NonNullable<Props['variant']>, string> = {
+  header: 'inline-flex items-center justify-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3 text-sm',
+  hero: 'inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 text-base',
+  inline: 'inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2',
+  sticky: 'inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 text-base',
+  footer: 'inline-flex items-center justify-center underline-offset-4 hover:underline text-primary h-10 px-0 text-sm',
+  emergency: 'inline-flex items-center justify-center rounded-md bg-white text-destructive hover:bg-white/90 h-12 px-8 text-lg font-semibold shadow-lg border-2 border-white'
+};
+---
+
+<a
+  href={`tel:${business.contact.phone_e164}`}
+  class={cn(
+    variantClasses[variant],
+    'gap-2 font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+    className
+  )}
+>
+  <Phone className="h-4 w-4" />
+  {variant === 'hero' && <span class="text-sm font-normal">Call 24/7</span>}
+  <span>{business.contact.phone_display}</span>
+  {showBadge && (
+    <span class="ml-2 inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-red-700 text-white hover:bg-red-800">
+      Emergency
+    </span>
+  )}
+</a>

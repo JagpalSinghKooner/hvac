@@ -1,0 +1,63 @@
+---
+import { getEntry } from 'astro:content';
+
+interface Props {
+  serviceTitle: string;
+  serviceDescription?: string;
+  serviceType?: string;
+}
+
+const { serviceTitle, serviceDescription, serviceType } = Astro.props;
+
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
+
+const siteURL = Astro.site?.toString() || 'https://bapheating.ca';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  'serviceType': serviceType || serviceTitle,
+  'name': serviceTitle,
+  'description': serviceDescription || `Professional ${serviceTitle} services in Southern Ontario`,
+  'provider': {
+    '@type': 'HVACBusiness',
+    '@id': siteURL,
+    'name': business.business.legal_name,
+    'telephone': business.contact.phone_e164,
+    'address': {
+      '@type': 'PostalAddress',
+      'streetAddress': business.locations?.primary.address_full.split(',')[0].trim() || '',
+      'addressLocality': business.locations?.primary.city || '',
+      'addressRegion': business.locations?.primary.province || '',
+      'postalCode': business.locations?.primary.postal_code || '',
+      'addressCountry': 'CA'
+    }
+  },
+  'areaServed': [
+    {
+      '@type': 'State',
+      'name': 'Ontario',
+      'additionalProperty': business.coverage.regions.map((region: any) => ({
+        '@type': 'PropertyValue',
+        'name': 'region',
+        'value': region.name
+      }))
+    }
+  ],
+  'availableChannel': {
+    '@type': 'ServiceChannel',
+    'servicePhone': {
+      '@type': 'ContactPoint',
+      'telephone': business.contact.phone_e164,
+      'contactType': 'customer service',
+      'hoursAvailable': '24/7'
+    }
+  }
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

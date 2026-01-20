@@ -1,0 +1,82 @@
+---
+import { getEntry } from 'astro:content';
+
+interface Props {
+  locationName: string;
+  city: string;
+  latitude?: number;
+  longitude?: number;
+}
+
+const { locationName, city, latitude, longitude } = Astro.props;
+
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
+
+const siteURL = Astro.site?.toString() || 'https://bapheating.ca';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  'name': `${business.business.legal_name} - ${locationName}`,
+  'image': `${siteURL}og-${city.toLowerCase().replace(/\s+/g, '-')}.jpg`,
+  'priceRange': '$$',
+  'address': {
+    '@type': 'PostalAddress',
+    'addressLocality': city,
+    'addressRegion': 'ON',
+    'addressCountry': 'CA'
+  },
+  ...(latitude && longitude && {
+    'geo': {
+      '@type': 'GeoCoordinates',
+      'latitude': latitude,
+      'longitude': longitude
+    }
+  }),
+  'areaServed': {
+    '@type': 'City',
+    'name': city
+  },
+  'telephone': business.contact.phone_e164,
+  'email': business.contact.email,
+  'openingHoursSpecification': {
+    '@type': 'OpeningHoursSpecification',
+    'dayOfWeek': [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday'
+    ],
+    'opens': '00:00',
+    'closes': '23:59'
+  },
+  'aggregateRating': {
+    '@type': 'AggregateRating',
+    'ratingValue': business.reputation.google_rating.toString(),
+    'reviewCount': business.reputation.google_review_count.toString()
+  },
+  ...(business.services?.list && {
+    'hasOfferCatalog': {
+      '@type': 'OfferCatalog',
+      'name': 'HVAC Services',
+      'itemListElement': Object.values(business.services.list).flat().slice(0, 10).map((service: any, index: number) => ({
+        '@type': 'Offer',
+        'position': index + 1,
+        'itemOffered': {
+          '@type': 'Service',
+          'name': service.title
+        }
+      }))
+    }
+  })
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

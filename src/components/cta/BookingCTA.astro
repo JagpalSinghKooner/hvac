@@ -1,0 +1,41 @@
+---
+import { Button } from '@/components/ui/button';
+import { Calendar } from 'lucide-react';
+import { getEntry } from 'astro:content';
+import { cn } from '@/lib/utils';
+
+const businessEntry = await getEntry('business', 'profile');
+const business = businessEntry!.data;
+
+// Type assertion for optional booking field
+const bookingUrl = business.contact.booking?.url;
+if (!bookingUrl) throw new Error('Booking URL not configured');
+
+interface Props {
+  variant?: 'header' | 'hero' | 'inline' | 'footer';
+  class?: string;
+}
+
+const { variant = 'inline', class: className } = Astro.props;
+
+const buttonConfig = {
+  header: { size: 'sm' },
+  hero: { size: 'lg' },
+  inline: { size: 'default' },
+  footer: { size: 'default' }
+} as const;
+
+const config = buttonConfig[variant];
+---
+
+<Button
+  variant="outline"
+  size={config.size}
+  asChild
+  className={cn("gap-2", className)}
+>
+  <a href={bookingUrl} target="_blank" rel="noopener noreferrer">
+    <Calendar className="h-4 w-4" />
+    Book Online
+  </a>
+</Button>

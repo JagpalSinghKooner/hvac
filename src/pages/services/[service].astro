@@ -1,0 +1,76 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ServiceHero from '@/components/hero/ServiceHero.astro';
+import ValuePropsGrid from '@/components/sections/ValuePropsGrid.astro';
+import ProcessSteps from '@/components/sections/ProcessSteps.astro';
+import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel.astro';
+import Section from '@/components/layout/Section.astro';
+import Container from '@/components/layout/Container.astro';
+import PhoneCTA from '@/components/cta/PhoneCTA.astro';
+import BookingCTA from '@/components/cta/BookingCTA.astro';
+
+export async function getStaticPaths() {
+  // Get all services
+  const allServices = await getCollection('services');
+
+  // Filter for live and published services only
+  const publishedServices = allServices.filter(
+    (service) => service.data.status === 'live' && service.data.workflowStatus === 'published'
+  );
+
+  // Generate paths
+  return publishedServices.map((service) => ({
+    params: { service: service.slug },
+    props: { service },
+  }));
+}
+
+type Props = {
+  service: CollectionEntry<'services'>;
+};
+
+const { service } = Astro.props;
+const { Content } = await service.render();
+---
+
+<BaseLayout title={service.data.seoTitle} description={service.data.seoDescription}>
+  <ServiceHero service={service.data} />
+
+  {service.data.valueProps && service.data.valueProps.length > 0 && (
+    <ValuePropsGrid valueProps={service.data.valueProps} heading="Why Choose Us for This Service" />
+  )}
+
+  <Section padding="lg">
+    <Container size="narrow">
+      <article class="prose prose-lg max-w-none">
+        <Content />
+      </article>
+    </Container>
+  </Section>
+
+  {service.data.processSteps && service.data.processSteps.length > 0 && (
+    <ProcessSteps steps={service.data.processSteps} />
+  )}
+
+  <TestimonialsCarousel
+    service={service.data.title}
+    heading={`${service.data.title} Reviews`}
+    limit={6}
+    variant="card"
+    autoplay={true}
+  />
+
+  <Section padding="lg" class="bg-muted/30">
+    <Container size="narrow" class="text-center">
+      <h2 class="text-3xl font-semibold mb-4">Ready to Get Started?</h2>
+      <p class="text-lg text-muted-foreground mb-6">
+        Contact us today for expert {service.data.title.toLowerCase()} service.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <PhoneCTA variant="hero" showBadge={true} />
+        <BookingCTA variant="hero" />
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>

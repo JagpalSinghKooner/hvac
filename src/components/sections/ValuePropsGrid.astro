@@ -1,0 +1,45 @@
+---
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import Section from '@/components/layout/Section.astro';
+import Container from '@/components/layout/Container.astro';
+import * as Icons from 'lucide-react';
+
+interface Props {
+  valueProps: Array<{
+    title: string;
+    description: string;
+    icon?: string;
+  }>;
+  heading?: string;
+}
+
+const { valueProps, heading = 'Why Choose Us' } = Astro.props;
+
+// Pre-process valueProps to get icon components in frontmatter
+const propsWithIcons = valueProps.map(prop => ({
+  ...prop,
+  IconComponent: prop.icon ? (Icons as any)[prop.icon] || Icons.CheckCircle : Icons.CheckCircle
+}));
+---
+
+<Section padding="lg">
+  <Container>
+    <h2 class="text-3xl font-semibold text-center mb-12">{heading}</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {propsWithIcons.map(prop => (
+        <Card className="text-center">
+          <CardHeader>
+            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <prop.IconComponent className="h-6 w-6 text-primary" />
+            </div>
+            <CardTitle className="text-lg">{prop.title}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-sm text-muted-foreground">{prop.description}</p>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  </Container>
+</Section>

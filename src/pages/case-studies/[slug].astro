@@ -1,0 +1,96 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allCaseStudies = await getCollection('case-studies');
+  const publishedCaseStudies = allCaseStudies.filter((cs) => cs.data.workflowStatus === 'published');
+
+  return publishedCaseStudies.map((caseStudy) => ({
+    params: { slug: caseStudy.slug },
+    props: { caseStudy },
+  }));
+}
+
+type Props = {
+  caseStudy: CollectionEntry<'case-studies'>;
+};
+
+const { caseStudy } = Astro.props;
+const { Content } = await caseStudy.render();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{caseStudy.data.title} | Case Study | B.A.P Heating & Cooling</title>
+    <meta name="description" content={caseStudy.data.problem.description} />
+  </head>
+  <body>
+    <main>
+      <article>
+        <header>
+          <h1>{caseStudy.data.title}</h1>
+          {caseStudy.data.featured && <span>Featured Case Study</span>}
+        </header>
+
+        <!-- Problem Section -->
+        <section>
+          <h2>The Challenge</h2>
+          <h3>{caseStudy.data.problem.headline}</h3>
+          <p>{caseStudy.data.problem.description}</p>
+          {
+            caseStudy.data.problem.details && caseStudy.data.problem.details.length > 0 && (
+              <ul>
+                {caseStudy.data.problem.details.map((detail) => (
+                  <li>{detail}</li>
+                ))}
+              </ul>
+            )
+          }
+        </section>
+
+        <!-- Solution Section -->
+        <section>
+          <h2>Our Solution</h2>
+          <h3>{caseStudy.data.solution.headline}</h3>
+          <p>{caseStudy.data.solution.description}</p>
+          {caseStudy.data.solution.equipment && <p><strong>Equipment:</strong> {caseStudy.data.solution.equipment}</p>}
+        </section>
+
+        <!-- Results Section -->
+        <section>
+          <h2>{caseStudy.data.results.headline}</h2>
+          {
+            caseStudy.data.results.stats && caseStudy.data.results.stats.length > 0 && (
+              <ul>
+                {caseStudy.data.results.stats.map((stat) => (
+                  <li>
+                    <strong>{stat.value}</strong> {stat.label}
+                  </li>
+                ))}
+              </ul>
+            )
+          }
+        </section>
+
+        <!-- Testimonial -->
+        <section>
+          <h2>What Our Customer Said</h2>
+          <blockquote>
+            <p>{caseStudy.data.testimonial.text}</p>
+            <cite>
+              — {caseStudy.data.testimonial.authorName}, {caseStudy.data.testimonial.location}
+            </cite>
+          </blockquote>
+        </section>
+
+        <!-- Main Content -->
+        <section>
+          <Content />
+        </section>
+      </article>
+    </main>
+  </body>
+</html>

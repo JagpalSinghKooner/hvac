@@ -1,0 +1,55 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import HomeHero from '@/components/hero/HomeHero.astro';
+import ValuePropsGrid from '@/components/sections/ValuePropsGrid.astro';
+import ServiceAreaMap from '@/components/sections/ServiceAreaMap.astro';
+import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel.astro';
+
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
+
+// Home page value propositions
+const homeValueProps = [
+  {
+    title: '24/7 Emergency Service',
+    description: 'Available around the clock for all your heating and cooling emergencies. We\'re here when you need us most.',
+    icon: 'Clock'
+  },
+  {
+    title: 'TSSA Licensed',
+    description: 'Certified technicians with full TSSA licensing. Professional, qualified service you can trust.',
+    icon: 'Shield'
+  },
+  {
+    title: '10-Year Warranty',
+    description: 'Comprehensive parts and labour coverage on new installations. Your investment is protected.',
+    icon: 'Award'
+  },
+  {
+    title: 'Upfront Pricing',
+    description: 'No hidden fees or surprises. Clear, honest pricing before we start any work.',
+    icon: 'DollarSign'
+  },
+];
+---
+
+<BaseLayout
+  title={`${business.business.legal_name} | HVAC Services Guelph & Southern Ontario`}
+  description={(business as any).copy_blocks.short_description}
+>
+  <HomeHero />
+  <ValuePropsGrid valueProps={homeValueProps} />
+  <ServiceAreaMap />
+  <TestimonialsCarousel
+    heading="What Our Customers Say"
+    subheading="Join hundreds of satisfied homeowners across Southern Ontario"
+    limit={9}
+    showVerifiedOnly={true}
+    autoplay={true}
+    autoplayInterval={5000}
+  />
+</BaseLayout>

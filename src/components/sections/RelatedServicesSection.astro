@@ -1,0 +1,172 @@
+---
+import { getCollection } from 'astro:content';
+import Section from '@/components/layout/Section.astro';
+import Container from '@/components/layout/Container.astro';
+import ServiceCard from '@/components/cards/ServiceCard.astro';
+import { cn } from '@/lib/utils';
+
+// ============================================================================
+// TYPE DEFINITIONS
+// ============================================================================
+
+interface Service {
+  title: string;
+  slug: string;
+  description: string;
+  icon?: string;
+  category: 'heating' | 'cooling' | 'iaq' | 'water-heating' | 'commercial' | 'plans';
+}
+
+interface Props {
+  currentService: Service | { slug: string; category: string };  // Current service to exclude
+  relatedServices?: Service[];          // Optional - if not provided, auto-fetch by category
+  heading?: string;                     // Default: "Related Services"
+  subheading?: string;                  // Optional contextual text
+  limit?: number;                       // Default: 3
+  columns?: 2 | 3 | 4;                 // Default: 3
+  variant?: 'compact' | 'featured';    // Default: 'compact'
+  linkType?: 'standard' | 'location-specific';  // Default: 'standard'
+  locationSlug?: string;               // Required when linkType='location-specific'
+  class?: string;                      // Custom classes for Section wrapper
+}
+
+// ============================================================================
+// PROPS DESTRUCTURING WITH DEFAULTS
+// ============================================================================
+
+const {
+  currentService,
+  relatedServices: providedRelatedServices,
+  heading = 'Related Services',
+  subheading,
+  limit = 3,
+  columns = 3,
+  variant = 'compact',
+  linkType = 'standard',
+  locationSlug,
+  class: className
+} = Astro.props;
+
+// ============================================================================
+// DATA FETCHING LOGIC
+// ============================================================================
+
+let displayServices: Service[] = [];
+
+if (providedRelatedServices) {
+  // Use provided services (assume pre-filtered and sorted)
+  displayServices = providedRelatedServices;
+} else {
+  // Auto-fetch from content collection and filter by category
+  const allServices = await getCollection('services');
+
+  // Filter for live and published services only
+  const publishedServices = allServices.filter(
+    (service) => service.data.status === 'live' && service.data.workflowStatus === 'published'
+  );
+
+  // Map to simplified Service interface
+  let mappedServices = publishedServices.map((service) => ({
+    title: service.data.title,
+    slug: service.slug,
+    description: service.data.description,
+    icon: service.data.icon,
+    category: service.data.category
+  }));
+
+  // Filter by same category as current service
+  if (currentService.category) {
+    mappedServices = mappedServices.filter(
+      service => service.category === currentService.category
+    );
+  }
+
+  // Exclude current service by slug
+  mappedServices = mappedServices.filter(
+    service => service.slug !== currentService.slug
+  );
+
+  // Sort by priority (priority services first), then by order field (ascending)
+  mappedServices.sort((a, b) => {
+    const aData = publishedServices.find(s => s.slug === a.slug)?.data;
+    const bData = publishedServices.find(s => s.slug === b.slug)?.data;
+
+    // Priority services first
+    if (aData?.priority && !bData?.priority) return -1;
+    if (!aData?.priority && bData?.priority) return 1;
+
+    // Then by order number (undefined treated as 999)
+    const aOrder = aData?.order ?? 999;
+    const bOrder = bData?.order ?? 999;
+    return aOrder - bOrder;
+  });
+
+  displayServices = mappedServices;
+}
+
+// ============================================================================
+// APPLY LIMIT
+// ============================================================================
+
+// Apply limit if specified and positive
+if (limit && limit > 0) {
+  displayServices = displayServices.slice(0, limit);
+}
+
+// ============================================================================
+// EARLY RETURN IF NO RELATED SERVICES
+// ============================================================================
+
+// If no related services to display, return null (component renders nothing)
+if (!displayServices || displayServices.length === 0) {
+  return null;
+}
+
+// ============================================================================
+// COMPUTE GRID CLASSES
+// ============================================================================
+
+const gridClasses: Record<2 | 3 | 4, string> = {
+  2: 'grid-cols-1 md:grid-cols-2',
+  3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
+  4: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4'
+};
+
+const gridClass = gridClasses[columns];
+---
+
+<!-- ========================================================================== -->
+<!-- TEMPLATE -->
+<!-- ========================================================================== -->
+
+<Section padding="lg" class={className}>
+  <Container>
+    <!-- Heading Section (conditional) -->
+    {(heading || subheading) && (
+      <div class="text-center mb-12">
+        {heading && (
+          <h2 class="text-3xl font-semibold mb-4">
+            {heading}
+          </h2>
+        )}
+        {subheading && (
+          <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+            {subheading}
+          </p>
+        )}
+      </div>
+    )}
+
+    <!-- Services Grid -->
+    <div class={cn('grid gap-6', gridClass)}>
+      {displayServices.map((service) => (
+        <ServiceCard
+          service={service}
+          variant={variant}
+          linkType={linkType}
+          locationSlug={locationSlug}
+        />
+      ))}
+    </div>
+  </Container>
+</Section>

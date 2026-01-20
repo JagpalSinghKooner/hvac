@@ -1,0 +1,108 @@
+---
+import { Shield, Clock, Award, CheckCircle } from 'lucide-react';
+import { getEntry } from 'astro:content';
+import { cn } from '@/lib/utils';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const businessEntry = await getEntry('business', 'profile');
+const business = businessEntry!.data;
+
+// Type assertion for passthrough fields
+const reputation = business.reputation as { google_rating: number; google_review_count: number };
+const rating = reputation.google_rating;
+const reviewCount = reputation.google_review_count;
+
+const badges = [
+  {
+    icon: Clock,
+    label: '24/7 Emergency',
+    color: 'text-secondary', // Orange for urgency/heat
+    tooltip: '24/7 emergency service available across our service area'
+  },
+  {
+    icon: Shield,
+    label: 'TSSA Licensed',
+    color: 'text-primary', // Blue for trust/professional
+    tooltip: 'TSSA Licensed #000076639116 - Technical Standards & Safety Authority certified'
+  },
+  {
+    icon: Award,
+    label: `${rating}★ Rated`,
+    color: 'text-primary', // Blue for trust
+    tooltip: `Rated ${rating} stars from ${reviewCount} verified Google reviews`
+  },
+  {
+    icon: CheckCircle,
+    label: '10-Year Warranty',
+    color: 'text-secondary', // Orange for emphasis
+    tooltip: '10-year warranty on parts and labour for all new installations'
+  }
+] as const;
+---
+
+<div
+  class={cn(
+    'mt-8 flex flex-wrap gap-4 md:gap-6 justify-center items-center text-sm trust-badges',
+    className
+  )}
+>
+  {badges.map((badge, index) => (
+    <div
+      class="flex items-center gap-2 trust-badge-item transition-all duration-300 hover:scale-110"
+      title={badge.tooltip}
+      style={`animation-delay: ${index * 100}ms;`}
+    >
+      <badge.icon className={cn('h-5 w-5 md:h-5 md:w-5', badge.color)} aria-hidden="true" />
+      <span class="text-foreground font-medium">{badge.label}</span>
+    </div>
+  ))}
+</div>
+
+<style>
+  /* Fade-up animation on load */
+  .trust-badge-item {
+    opacity: 0;
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Subtle pulse on hover for icons */
+  .trust-badge-item:hover :global(svg) {
+    animation: subtlePulse 1s ease-in-out infinite;
+  }
+
+  @keyframes subtlePulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+
+  /* Ensure animations respect prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .trust-badge-item {
+      animation: none;
+      opacity: 1;
+    }
+    .trust-badge-item:hover :global(svg) {
+      animation: none;
+    }
+  }
+</style>

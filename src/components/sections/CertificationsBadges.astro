@@ -1,0 +1,151 @@
+---
+/**
+ * CertificationsBadges Component
+ *
+ * Displays professional certifications, licenses, and memberships.
+ * Supports two variants: full (card-based grid) and compact (horizontal badges).
+ *
+ * @component
+ */
+
+import { getEntry } from 'astro:content';
+import Section from '@/components/layout/Section.astro';
+import Container from '@/components/layout/Container.astro';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
+import * as Icons from 'lucide-react';
+
+interface Props {
+  heading?: string;
+  showHeading?: boolean;
+  variant?: 'full' | 'compact';
+  columns?: 2 | 3 | 4;
+  class?: string;
+}
+
+const {
+  heading = "Our Certifications & Licenses",
+  showHeading = true,
+  variant = 'full',
+  columns = 3,
+  class: className,
+} = Astro.props;
+
+// Fetch business profile data
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  console.warn('Business profile not found for CertificationsBadges');
+  return null;
+}
+
+const business = businessProfile.data as any;
+
+// Extract certification data with optional chaining
+const tssaLicense = business.trust_and_compliance?.licenses?.tssa?.numbers?.[0];
+const otherLicenses = business.trust_and_compliance?.licenses?.other || [];
+const wsib = business.trust_and_compliance?.wsib;
+const insuredStatement = business.trust_and_compliance?.insured_statement;
+
+// Build certifications data array
+const certificationsData = [
+  {
+    icon: 'Shield',
+    title: 'TSSA Licensed',
+    description: tssaLicense ? `License #${tssaLicense}` : 'Technical Standards & Safety Authority',
+    show: !!tssaLicense,
+  },
+  {
+    icon: 'Award',
+    title: 'HRAI Certified',
+    description: 'Heating, Refrigeration & Air Conditioning Institute',
+    show: otherLicenses.some((license: string) => license?.includes('HRAI')),
+  },
+  {
+    icon: 'Award',
+    title: 'Heatpump Champion',
+    description: 'HRAI Heatpump Champion certified',
+    show: otherLicenses.some((license: string) => license?.includes('Heatpump Champion')),
+  },
+  {
+    icon: 'CheckCircle',
+    title: 'BBB Member',
+    description: 'Better Business Bureau accredited',
+    show: otherLicenses.some((license: string) => license?.includes('Better Business Bureau')),
+  },
+  {
+    icon: 'Shield',
+    title: 'WSIB Covered',
+    description: 'Workplace Safety & Insurance Board',
+    show: !!wsib,
+  },
+  {
+    icon: 'ShieldCheck',
+    title: 'Fully Insured',
+    description: insuredStatement || 'Maximum coverage for your protection',
+    show: !!insuredStatement,
+  },
+];
+
+// Filter out certifications with missing data and pre-process icons
+const certificationsWithIcons = certificationsData
+  .filter(cert => cert.show)
+  .map(cert => ({
+    ...cert,
+    IconComponent: (Icons as any)[cert.icon] || Icons.CheckCircle,
+  }));
+
+// Early return if no certifications
+if (certificationsWithIcons.length === 0) {
+  console.warn('No certifications found in business profile');
+  return null;
+}
+
+// Grid classes for responsive layout
+const gridClasses: Record<2 | 3 | 4, string> = {
+  2: 'grid-cols-1 md:grid-cols-2',
+  3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
+  4: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4',
+};
+---
+
+<Section padding="lg" class={cn("bg-muted/30", className)}>
+  <Container size="default">
+    {/* Optional Heading Section */}
+    {showHeading && heading && (
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-semibold mb-4">{heading}</h2>
+      </div>
+    )}
+
+    {/* Full Variant: Card-based Grid */}
+    {variant === 'full' && (
+      <div class={cn('grid gap-6', gridClasses[columns])}>
+        {certificationsWithIcons.map(({ IconComponent, title, description }) => (
+          <Card className="text-center h-full flex flex-col">
+            <CardHeader>
+              <div class="w-12 h-12 rounded-full flex items-center justify-center bg-primary/10 mx-auto mb-4">
+                <IconComponent className="h-6 w-6 text-primary" aria-hidden="true" />
+              </div>
+              <CardTitle className="text-lg">{title}</CardTitle>
+            </CardHeader>
+            <CardContent className="flex-1">
+              <p class="text-sm text-muted-foreground">{description}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    )}
+
+    {/* Compact Variant: Horizontal Badges */}
+    {variant === 'compact' && (
+      <div class="flex flex-wrap gap-6 justify-center items-center">
+        {certificationsWithIcons.map(({ IconComponent, title }) => (
+          <div class="flex items-center gap-2">
+            <IconComponent className="h-5 w-5 text-primary" aria-hidden="true" />
+            <span class="text-sm font-medium">{title}</span>
+          </div>
+        ))}
+      </div>
+    )}
+  </Container>
+</Section>

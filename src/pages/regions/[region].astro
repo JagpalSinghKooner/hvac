@@ -1,0 +1,55 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allRegions = await getCollection('regions');
+  const publishedRegions = allRegions.filter((region) => region.data.workflowStatus === 'published');
+
+  return publishedRegions.map((region) => ({
+    params: { region: region.slug },
+    props: { region },
+  }));
+}
+
+type Props = {
+  region: CollectionEntry<'regions'>;
+};
+
+const { region } = Astro.props;
+const { Content } = await region.render();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{region.data.seoTitle}</title>
+    <meta name="description" content={region.data.seoDescription} />
+    {region.data.robots && <meta name="robots" content={region.data.robots} />}
+  </head>
+  <body>
+    <main>
+      <article>
+        <header>
+          <h1>{region.data.title}</h1>
+          <p>{region.data.description}</p>
+          <p>Primary City: {region.data.primaryCity}</p>
+        </header>
+
+        <!-- Main Content -->
+        <section>
+          <Content />
+        </section>
+
+        <!-- Cities List -->
+        <section>
+          <h2>Cities We Serve in {region.data.title}</h2>
+          <ul>
+            {region.data.cities.map((city) => <li>{city}</li>)}
+          </ul>
+        </section>
+      </article>
+    </main>
+  </body>
+</html>

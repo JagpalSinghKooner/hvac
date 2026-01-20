@@ -1,0 +1,68 @@
+---
+import { Card, CardContent } from '@/components/ui/card';
+import { CheckCircle } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import PhoneCTA from '@/components/cta/PhoneCTA.astro';
+import BookingCTA from '@/components/cta/BookingCTA.astro';
+
+// Props interface
+interface Props {
+  service?: string;
+  variant?: 'sidebar' | 'inline';
+  class?: string;
+}
+
+const { variant = 'inline', class: className } = Astro.props;
+
+// Trust bullets - curated 4 items from roadmap
+const trustBullets = [
+  'Free estimates & diagnostics',
+  '10-year warranty on parts & labour',
+  'Upfront, no-surprise pricing',
+  'Same-day service available'
+];
+
+// Variant-specific classes
+const variantClasses = variant === 'sidebar'
+  ? 'sticky top-20 z-40 hidden lg:block'
+  : 'w-full';
+---
+
+<!-- Gradient border wrapper -->
+<div class={cn(
+  "p-[2px] bg-gradient-to-br from-primary to-secondary rounded-xl",
+  variantClasses,
+  className
+)}>
+  <Card className="h-full bg-card">
+    <CardContent className="p-6 flex flex-col gap-6">
+
+      <!-- Heading -->
+      <h3 class="text-2xl font-bold text-center">
+        Get Your Free Estimate
+      </h3>
+
+      <!-- Trust bullets -->
+      <ul class="flex flex-col gap-3">
+        {trustBullets.map(bullet => (
+          <li class="flex items-start gap-3">
+            <CheckCircle
+              className="h-5 w-5 text-primary mt-0.5 flex-shrink-0"
+              aria-hidden="true"
+            />
+            <span class="text-sm text-muted-foreground">
+              {bullet}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      <!-- CTA buttons -->
+      <div class="flex flex-col gap-3 pt-2">
+        <PhoneCTA variant="hero" class="w-full" />
+        <BookingCTA variant="hero" class="w-full" />
+      </div>
+
+    </CardContent>
+  </Card>
+</div>

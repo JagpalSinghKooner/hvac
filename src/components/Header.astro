@@ -1,0 +1,43 @@
+---
+import { getEntry } from 'astro:content';
+import Section from '@/components/layout/Section.astro';
+import Container from '@/components/layout/Container.astro';
+import DesktopNav from '@/components/nav/DesktopNav.astro';
+import { MobileNav } from '@/components/nav/MobileNav';
+import PhoneCTA from '@/components/cta/PhoneCTA.astro';
+
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
+---
+
+<Section as="header" padding="none" class="sticky top-0 z-50 bg-background/95 backdrop-blur border-b">
+  <Container>
+    <nav class="flex items-center justify-between h-16 md:h-20" aria-label="Main navigation">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2 font-bold text-lg md:text-xl hover:text-primary transition-colors">
+        {business.business.legal_name}
+      </a>
+
+      <!-- Desktop Nav (hidden on mobile) -->
+      <div class="hidden lg:flex">
+        <DesktopNav />
+      </div>
+
+      <!-- Actions (Phone CTA + Mobile Menu) -->
+      <div class="flex items-center gap-4">
+        <!-- Phone CTA (always visible) -->
+        <div class="hidden sm:block">
+          <PhoneCTA variant="header" />
+        </div>
+
+        <!-- Mobile Menu (visible on mobile/tablet only) -->
+        <div class="lg:hidden">
+          <MobileNav business={business as any} client:load />
+        </div>
+      </div>
+    </nav>
+  </Container>
+</Section>

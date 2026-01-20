@@ -1,0 +1,120 @@
+---
+import { getEntry } from 'astro:content';
+
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
+
+const serviceCategories = (business as any).services?.navbar_categories?.filter(
+  (cat: any) => cat.key !== 'locations' && cat.key !== 'contact'
+) || [];
+const regions = (business as any).coverage?.regions || [];
+---
+
+<nav class="flex items-center gap-6" aria-label="Primary navigation">
+  <!-- Services Mega Menu -->
+  <div class="group/services relative">
+    <button
+      class="px-3 py-2 text-sm font-medium hover:text-primary transition-colors"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      Services
+    </button>
+
+    <div class="mega-menu absolute top-full left-0 opacity-0 invisible group-hover/services:opacity-100 group-hover/services:visible bg-background border rounded-lg shadow-lg p-6 mt-2 min-w-[600px] z-50 transition-all duration-200">
+      <div class="grid grid-cols-3 gap-8">
+        {serviceCategories.map((category: any) => (
+          <div>
+            <h3 class="font-semibold text-sm uppercase tracking-wide text-muted-foreground mb-3">
+              {category.name}
+            </h3>
+            <ul class="space-y-2">
+              {business.services?.list?.[category.key]?.map((service: any) => (
+                <li>
+                  <a
+                    href={`/services/${service.slug}/`}
+                    class="text-sm hover:text-primary transition-colors block"
+                  >
+                    {service.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Locations Mega Menu -->
+  <div class="group/locations relative">
+    <button
+      class="px-3 py-2 text-sm font-medium hover:text-primary transition-colors"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      Locations
+    </button>
+
+    <div class="mega-menu absolute top-full left-0 opacity-0 invisible group-hover/locations:opacity-100 group-hover/locations:visible bg-background border rounded-lg shadow-lg p-6 mt-2 min-w-[600px] z-50 transition-all duration-200">
+      <div class="grid grid-cols-3 gap-8">
+        {regions.map((region: any) => (
+          <div>
+            <h3 class="font-semibold text-sm uppercase tracking-wide text-muted-foreground mb-3">
+              {region.name}
+            </h3>
+            <ul class="space-y-2">
+              {region.locations.map((location: any) => (
+                <li>
+                  <a
+                    href={`/locations/${location.slug}/`}
+                    class="text-sm hover:text-primary transition-colors block"
+                  >
+                    {location.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- About Link -->
+  <a
+    href="/about/"
+    class="px-3 py-2 text-sm font-medium hover:text-primary transition-colors"
+  >
+    About
+  </a>
+
+  <!-- Contact Link -->
+  <a
+    href="/contact/"
+    class="px-3 py-2 text-sm font-medium hover:text-primary transition-colors"
+  >
+    Contact
+  </a>
+</nav>
+
+<style>
+  /* Keep mega menu open for 300ms after hover ends for easier navigation */
+  .mega-menu {
+    transition-delay: 0ms;
+  }
+
+  .group\/services:not(:hover) .mega-menu,
+  .group\/locations:not(:hover) .mega-menu {
+    transition-delay: 300ms;
+  }
+
+  /* Instant show on hover */
+  .group\/services:hover .mega-menu,
+  .group\/locations:hover .mega-menu {
+    transition-delay: 0ms;
+  }
+</style>

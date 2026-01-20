@@ -1,0 +1,49 @@
+---
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import Section from '@/components/layout/Section.astro';
+import Container from '@/components/layout/Container.astro';
+
+interface Props {
+  steps: Array<{
+    step: number;
+    title: string;
+    description: string;
+  }>;
+}
+
+const { steps } = Astro.props;
+---
+
+<Section padding="lg" class="bg-muted/30">
+  <Container size="narrow">
+    <h2 class="text-3xl font-semibold text-center mb-12">Our Process</h2>
+
+    <div class="relative space-y-6">
+      {/* Vertical line */}
+      <div class="absolute left-6 top-0 bottom-0 w-0.5 bg-border" />
+
+      {steps.map((step) => (
+        <div class="relative flex gap-6">
+          {/* Step number badge */}
+          <Badge
+            variant="default"
+            className="z-10 w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold shrink-0"
+          >
+            {step.step}
+          </Badge>
+
+          {/* Step content card */}
+          <Card className="flex-1">
+            <CardHeader>
+              <CardTitle>{step.title}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p class="text-muted-foreground">{step.description}</p>
+            </CardContent>
+          </Card>
+        </div>
+      ))}
+    </div>
+  </Container>
+</Section>

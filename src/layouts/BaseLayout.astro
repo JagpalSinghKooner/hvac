@@ -1,0 +1,143 @@
+---
+import { getEntry } from 'astro:content';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  noindex?: boolean;
+  breadcrumbs?: Array<{
+    label: string;
+    href: string;
+  }>;
+}
+
+const { title, description, ogImage, noindex = false, breadcrumbs } = Astro.props;
+
+// Load business profile once (single source of truth)
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
+
+// Construct full URL for canonical and og:url
+const siteURL = Astro.site || new URL('http://localhost:4321');
+const canonicalURL = new URL(Astro.url.pathname, siteURL);
+
+// Construct Open Graph image URL
+const ogImageURL = ogImage
+  ? new URL(ogImage, siteURL).toString()
+  : new URL('/og-default.jpg', siteURL).toString();
+
+// JSON-LD structured data for LocalBusiness
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "HVACBusiness",
+  "name": business.business.legal_name,
+  "image": ogImageURL,
+  "@id": siteURL.toString(),
+  "url": siteURL.toString(),
+  "telephone": business.contact.phone_e164,
+  "email": business.contact.email,
+  ...(business.locations?.primary && {
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": business.locations.primary.address_full?.split(',')[0],
+      "addressLocality": business.locations.primary.city,
+      "addressRegion": business.locations.primary.province,
+      "postalCode": business.locations.primary.postal_code,
+      "addressCountry": business.locations.primary.country
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 43.558281471106866,
+      "longitude": -80.22174742382819
+    }
+  }),
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "opens": "00:00",
+    "closes": "23:59"
+  },
+  "priceRange": "$$",
+  ...((business as any).reputation && {
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": (business as any).reputation.google_rating,
+      "reviewCount": (business as any).reputation.google_review_count
+    }
+  }),
+  "foundingDate": business.business.established_year.toString()
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:locale" content="en_CA" />
+    <meta property="og:site_name" content={business.business.legal_name} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImageURL} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="min-h-screen flex flex-col antialiased">
+    <!-- Header -->
+    <Header />
+
+    <!-- Breadcrumbs -->
+    <Breadcrumbs items={breadcrumbs} />
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/globals.css';
+</style>

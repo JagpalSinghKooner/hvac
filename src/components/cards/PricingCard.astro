@@ -1,0 +1,138 @@
+---
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Check } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import PhoneCTA from '@/components/cta/PhoneCTA.astro';
+
+/**
+ * Maintenance Plan Interface
+ * Defines the structure for HVAC maintenance plan pricing tiers
+ */
+interface MaintenancePlan {
+  name: string;           // Plan name (e.g., "Basic", "Premium", "Commercial")
+  price: string;          // Price display (e.g., "$99/year" or "Custom")
+  description: string;    // 1-2 sentence plan summary
+  features: string[];     // List of included features
+  recommended?: boolean;  // If true, displays "Most Popular" badge
+}
+
+/**
+ * Component Props
+ */
+interface Props {
+  plan: MaintenancePlan;
+  class?: string;
+}
+
+/**
+ * Placeholder Maintenance Plans Data
+ * These are realistic HVAC maintenance plan tiers for Southern Ontario
+ * Replace with actual pricing and features from business owner
+ */
+export const maintenancePlans: MaintenancePlan[] = [
+  {
+    name: 'Basic',
+    price: '$99/year',
+    description: 'Essential maintenance for reliable home comfort.',
+    features: [
+      'Annual furnace inspection & tune-up',
+      'Annual AC inspection & tune-up',
+      'Priority service scheduling',
+      '10% discount on repairs'
+    ]
+  },
+  {
+    name: 'Premium',
+    price: '$199/year',
+    description: 'Comprehensive protection with priority emergency service.',
+    features: [
+      'Everything in Basic plan',
+      'Bi-annual system inspections',
+      'Air filter replacements included',
+      '15% discount on repairs',
+      'Priority emergency response (2-hour window)'
+    ],
+    recommended: true
+  },
+  {
+    name: 'Commercial',
+    price: 'Custom',
+    description: 'Tailored maintenance for businesses and multi-unit properties.',
+    features: [
+      'Customized maintenance schedule',
+      'Dedicated service technician',
+      'Quarterly system inspections',
+      'Emergency 24/7 support'
+    ]
+  }
+];
+
+// Props destructuring with defensive defaults
+const { plan, class: className } = Astro.props;
+
+const planName = plan.name || 'Unnamed Plan';
+const planPrice = plan.price || 'Contact Us';
+const planDescription = plan.description || '';
+const planFeatures = plan.features && plan.features.length > 0 ? plan.features : ['Contact us for details'];
+const isRecommended = plan.recommended === true;
+---
+
+<Card
+  className={cn(
+    'h-full flex flex-col relative group transition-all duration-300 hover:scale-105 hover:shadow-lg',
+    isRecommended && 'border-2 border-primary shadow-lg',
+    className
+  )}
+>
+  {isRecommended && (
+    <Badge
+      variant="secondary"
+      className="absolute top-4 right-4 shadow-md z-10"
+      aria-label="Most popular plan"
+    >
+      Most Popular
+    </Badge>
+  )}
+
+  <CardContent className="p-6 flex flex-col gap-6 flex-1">
+    <!-- Plan Name -->
+    <h3 class="text-2xl lg:text-3xl font-bold text-center">
+      {planName}
+    </h3>
+
+    <!-- Price -->
+    <div class="text-center">
+      <div class="text-4xl font-bold text-primary">
+        {planPrice}
+      </div>
+    </div>
+
+    <!-- Description -->
+    {planDescription && (
+      <p class="text-sm text-muted-foreground text-center">
+        {planDescription}
+      </p>
+    )}
+
+    <!-- Features List -->
+    <ul class="flex flex-col gap-3 flex-1">
+      {planFeatures.map((feature) => (
+        <li class="flex items-start gap-3">
+          <Check
+            className="h-5 w-5 text-primary mt-0.5 flex-shrink-0"
+            aria-hidden="true"
+          />
+          <span class="text-sm text-foreground">
+            {feature}
+          </span>
+        </li>
+      ))}
+    </ul>
+
+    <!-- CTA Section -->
+    <div class="pt-4 border-t">
+      <PhoneCTA variant="inline" class="w-full justify-center" />
+    </div>
+  </CardContent>
+</Card>

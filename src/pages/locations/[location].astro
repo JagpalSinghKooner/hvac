@@ -1,0 +1,106 @@
+---
+import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import LocationHero from '@/components/hero/LocationHero.astro';
+import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel.astro';
+import Section from '@/components/layout/Section.astro';
+import Container from '@/components/layout/Container.astro';
+import PhoneCTA from '@/components/cta/PhoneCTA.astro';
+import BookingCTA from '@/components/cta/BookingCTA.astro';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+
+export async function getStaticPaths() {
+  // Get all locations
+  const allLocations = await getCollection('locations');
+
+  // Filter for published locations only
+  const publishedLocations = allLocations.filter((location) => location.data.workflowStatus === 'published');
+
+  // Generate paths
+  return publishedLocations.map((location) => ({
+    params: { location: location.slug },
+    props: { location },
+  }));
+}
+
+type Props = {
+  location: CollectionEntry<'locations'>;
+};
+
+const { location } = Astro.props;
+const { Content } = await location.render();
+
+// Get business data for services
+const businessProfile = await getEntry('business', 'profile');
+const business = businessProfile!.data;
+
+// Get all services for display
+const allServices = business.services?.list
+  ? (Object.values(business.services.list).flat() as Array<{
+      title: string;
+      description: string;
+      slug: string;
+    }>)
+  : [];
+---
+
+<BaseLayout title={location.data.seoTitle} description={location.data.seoDescription}>
+  <LocationHero location={{ name: location.data.title, region: location.data.region }} />
+
+  <Section padding="lg">
+    <Container size="narrow">
+      <article class="prose prose-lg max-w-none">
+        <Content />
+      </article>
+    </Container>
+  </Section>
+
+  <Section padding="lg" class="bg-muted/30">
+    <Container>
+      <h2 class="text-3xl font-semibold text-center mb-12">
+        Our Services in {location.data.title}
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {allServices.slice(0, 9).map((service) => (
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">{service.title}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p class="text-sm text-muted-foreground mb-4">{service.description}</p>
+              <Button variant="link" asChild className="p-0 h-auto">
+                <a href={`/services/${service.slug}/`}>
+                  Learn More →
+                </a>
+              </Button>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <TestimonialsCarousel
+    location={location.data.title}
+    heading={`Trusted by ${location.data.title} Homeowners`}
+    limit={6}
+    showGoogleRating={true}
+    autoplay={true}
+  />
+
+  <Section padding="lg">
+    <Container size="narrow" class="text-center">
+      <h2 class="text-3xl font-semibold mb-4">
+        Need HVAC Service in {location.data.title}?
+      </h2>
+      <p class="text-lg text-muted-foreground mb-6">
+        Contact us today for reliable heating and cooling services in your area.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <PhoneCTA variant="hero" showBadge={true} />
+        <BookingCTA variant="hero" />
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>

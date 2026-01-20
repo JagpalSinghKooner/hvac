@@ -1,0 +1,93 @@
+---
+import { getEntry } from 'astro:content';
+import { Phone } from 'lucide-react';
+import PhoneCTA from '@/components/cta/PhoneCTA.astro';
+import { cn } from '@/lib/utils';
+
+interface Props {
+  variant?: 'homepage' | 'service' | 'location';
+  sticky?: boolean;
+  class?: string;
+}
+
+const { variant = 'homepage', sticky = false, class: className } = Astro.props;
+
+// Fetch business profile for response time
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
+
+// Get response time data
+const responseTime = business.hours?.target_response_time_minutes || 60;
+const emergencyAvailable = business.hours?.emergency_service || true;
+
+// Early return if emergency service not available
+if (!emergencyAvailable) {
+  return null;
+}
+
+// Variant-specific text configuration
+const textConfig = {
+  homepage: {
+    heading: '24/7 Emergency Service Available',
+    subheading: `Response typically within ${responseTime} minutes across our service area`
+  },
+  service: {
+    heading: 'Emergency HVAC Repair Available 24/7',
+    subheading: `Fast emergency repairs for all makes and models — typically within ${responseTime} minutes`
+  },
+  location: {
+    heading: 'Emergency Service in Your Area',
+    subheading: `Local emergency HVAC technicians available 24/7 — typically within ${responseTime} minutes`
+  }
+};
+
+const text = textConfig[variant];
+
+// Sticky classes (mobile only)
+const stickyClasses = sticky
+  ? 'fixed bottom-0 left-0 right-0 z-50 md:relative'
+  : 'relative';
+---
+
+<section
+  class={cn(
+    'w-full bg-destructive py-6 md:py-8',
+    stickyClasses,
+    className
+  )}
+  aria-label="Emergency service call-to-action"
+>
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col items-center justify-center gap-4 text-center md:gap-6">
+      <!-- Heading with animated phone icons -->
+      <div class="flex items-center gap-3">
+        <Phone
+          className="h-6 w-6 text-white animate-pulse md:h-8 md:w-8"
+          aria-hidden="true"
+        />
+        <h2 class="text-xl font-bold text-white md:text-2xl lg:text-3xl">
+          {text.heading}
+        </h2>
+        <Phone
+          className="h-6 w-6 text-white animate-pulse md:h-8 md:w-8"
+          aria-hidden="true"
+        />
+      </div>
+
+      <!-- Subheading -->
+      <p class="max-w-2xl text-sm text-white/90 md:text-base lg:text-lg">
+        {text.subheading}
+      </p>
+
+      <!-- Emergency CTA button -->
+      <PhoneCTA
+        variant="emergency"
+        showBadge={false}
+        class="mt-2"
+      />
+    </div>
+  </div>
+</section>

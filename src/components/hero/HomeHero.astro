@@ -1,0 +1,33 @@
+---
+import Section from '@/components/layout/Section.astro';
+import Container from '@/components/layout/Container.astro';
+import PhoneCTA from '@/components/cta/PhoneCTA.astro';
+import BookingCTA from '@/components/cta/BookingCTA.astro';
+import TrustBadges from '@/components/TrustBadges.astro';
+import { getEntry } from 'astro:content';
+
+const businessEntry = await getEntry('business', 'profile');
+const business = businessEntry!.data;
+
+// Type assertion for passthrough fields
+const copyBlocks = business.copy_blocks as { short_description: string };
+---
+
+<Section padding="lg" class="bg-gradient-to-b from-muted/50 to-background">
+  <Container size="narrow" class="text-center">
+    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+      {copyBlocks.short_description}
+    </h1>
+
+    <p class="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+      Serving Southern Ontario since {business.business.established_year}
+    </p>
+
+    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+      <PhoneCTA variant="hero" showBadge={true} />
+      <BookingCTA variant="hero" />
+    </div>
+
+    <TrustBadges />
+  </Container>
+</Section>

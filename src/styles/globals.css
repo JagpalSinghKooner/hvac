@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    /* Primary (Blue) - Trust, professionalism, cooling */
+    --primary: 206 100% 40%;
+    --primary-foreground: 0 0% 100%;
+    /* Secondary (Orange) - Urgency, heat, emergency */
+    --secondary: 14 100% 50%;
+    --secondary-foreground: 0 0% 100%;
+    /* Muted (Light Blue) - Backgrounds, subtle elements */
+    --muted: 206 80% 95%;
+    --muted-foreground: 206 20% 40%;
+    /* Accent (Sky Blue) - Highlights, interactive elements */
+    --accent: 199 89% 48%;
+    --accent-foreground: 0 0% 100%;
+    /* Keep existing destructive (red for emergency) */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 206 100% 40%;
+    /* Update chart colors for brand consistency */
+    --chart-1: 14 90% 55%;
+    --chart-2: 206 85% 45%;
+    --chart-3: 199 80% 50%;
+    --chart-4: 24 85% 60%;
+    --chart-5: 188 75% 45%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    /* Primary (Blue) - Adjusted for dark mode */
+    --primary: 206 85% 55%;
+    --primary-foreground: 0 0% 9%;
+    /* Secondary (Orange) - Adjusted for dark mode */
+    --secondary: 14 90% 60%;
+    --secondary-foreground: 0 0% 9%;
+    /* Muted (Dark Blue) - Backgrounds in dark mode */
+    --muted: 206 15% 15%;
+    --muted-foreground: 206 15% 65%;
+    /* Accent (Sky Blue) - Adjusted for dark mode */
+    --accent: 199 75% 55%;
+    --accent-foreground: 0 0% 9%;
+    /* Destructive for dark mode */
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 206 85% 55%;
+    /* Chart colors for dark mode */
+    --chart-1: 14 80% 60%;
+    --chart-2: 206 70% 55%;
+    --chart-3: 199 70% 55%;
+    --chart-4: 24 80% 65%;
+    --chart-5: 188 65% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

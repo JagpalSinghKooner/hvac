@@ -1,0 +1,173 @@
+---
+import { getEntry } from 'astro:content';
+import { Separator } from '@/components/ui/separator';
+import Section from '@/components/layout/Section.astro';
+import Container from '@/components/layout/Container.astro';
+import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
+
+const currentYear = new Date().getFullYear();
+
+// Get top services from each category (first 5 across all categories)
+const allServices = business.services?.list ? Object.values(business.services.list).flat() : [];
+const topServices = allServices.slice(0, 8);
+
+// Get all locations (flatten regions)
+const allLocations = business.coverage?.regions?.flatMap((region: any) => region.locations) || [];
+---
+
+<Section as="footer" padding="lg" class="bg-muted/30 border-t">
+  <Container>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Company Info Column -->
+      <div>
+        <h3 class="font-semibold text-lg mb-4">{business.business.legal_name}</h3>
+        <div class="space-y-3 text-sm text-muted-foreground">
+          <div class="flex items-start gap-2">
+            <MapPin className="h-4 w-4 mt-0.5 shrink-0" />
+            <span>{business.locations?.primary?.address_full}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <Phone className="h-4 w-4 shrink-0" />
+            <a href={`tel:${business.contact.phone_e164}`} class="hover:text-primary transition-colors">
+              {business.contact.phone_display}
+            </a>
+          </div>
+          <div class="flex items-center gap-2">
+            <Mail className="h-4 w-4 shrink-0" />
+            <a href={`mailto:${business.contact.email}`} class="hover:text-primary transition-colors">
+              {business.contact.email}
+            </a>
+          </div>
+          <div class="flex items-start gap-2">
+            <Clock className="h-4 w-4 mt-0.5 shrink-0" />
+            <span>{business.hours.business_hours} Emergency Service</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Services Column -->
+      <div>
+        <h3 class="font-semibold text-lg mb-4">Our Services</h3>
+        <ul class="space-y-2">
+          {topServices.map(service => (
+            <li>
+              <a
+                href={`/services/${service.slug}/`}
+                class="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center hover:underline underline-offset-4"
+              >
+                {service.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Locations Column -->
+      <div>
+        <h3 class="font-semibold text-lg mb-4">Service Areas</h3>
+        <ul class="space-y-2">
+          {allLocations.slice(0, 8).map(location => (
+            <li>
+              <a
+                href={`/locations/${location.slug}/`}
+                class="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center hover:underline underline-offset-4"
+              >
+                {location.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+        {allLocations.length > 8 && (
+          <a
+            href="/locations/"
+            class="text-sm text-primary hover:underline underline-offset-4 mt-2 inline-block"
+          >
+            View all locations →
+          </a>
+        )}
+      </div>
+
+      <!-- About & Contact Column -->
+      <div>
+        <h3 class="font-semibold text-lg mb-4">Company</h3>
+        <ul class="space-y-2 mb-6">
+          <li>
+            <a
+              href="/about/"
+              class="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center hover:underline underline-offset-4"
+            >
+              About Us
+            </a>
+          </li>
+          <li>
+            <a
+              href="/contact/"
+              class="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center hover:underline underline-offset-4"
+            >
+              Contact
+            </a>
+          </li>
+          <li>
+            <a
+              href="/blog/"
+              class="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center hover:underline underline-offset-4"
+            >
+              Blog
+            </a>
+          </li>
+        </ul>
+
+        <!-- Social Media -->
+        {(business as any).social && (
+          <div>
+            <h4 class="font-semibold text-sm mb-3">Follow Us</h4>
+            <div class="flex gap-4">
+              {(business as any).social.facebook && (
+                <a
+                  href={(business as any).social.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-sm text-muted-foreground hover:text-primary transition-colors hover:underline underline-offset-4"
+                  aria-label="Facebook"
+                >
+                  Facebook
+                </a>
+              )}
+              {(business as any).social.instagram && (
+                <a
+                  href={(business as any).social.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-sm text-muted-foreground hover:text-primary transition-colors hover:underline underline-offset-4"
+                  aria-label="Instagram"
+                >
+                  Instagram
+                </a>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+
+    <Separator className="my-8" />
+
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
+      <p>© {currentYear} {business.business.legal_name}. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="/privacy/" class="hover:text-primary transition-colors hover:underline underline-offset-4">
+          Privacy Policy
+        </a>
+        <a href="/terms/" class="hover:text-primary transition-colors hover:underline underline-offset-4">
+          Terms of Service
+        </a>
+      </div>
+    </div>
+  </Container>
+</Section>
