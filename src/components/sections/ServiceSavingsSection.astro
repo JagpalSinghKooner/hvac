@@ -1,0 +1,79 @@
+---
+import { Card, CardContent } from '@/components/ui/card';
+import { Check } from 'lucide-react';
+
+interface Props {
+  headline: string;
+  description?: string;
+  bullets?: string[];
+  rebateInfo?: string;
+  financingNote?: string;
+}
+
+const { headline, description, bullets, rebateInfo, financingNote } = Astro.props;
+
+// Render nothing if no content provided
+if (!headline && !description && !bullets?.length && !rebateInfo && !financingNote) {
+  return null;
+}
+---
+
+<section class="py-16 md:py-24 bg-background">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto">
+      <!-- Headline -->
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">
+        {headline}
+      </h2>
+
+      <!-- Description -->
+      {description && (
+        <p class="text-lg text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
+          {description}
+        </p>
+      )}
+
+      <div class="space-y-8">
+        <!-- Bullets (Checkmark List) -->
+        {bullets && bullets.length > 0 && (
+          <div class="space-y-4">
+            {bullets.map((bullet) => (
+              <div class="flex gap-3">
+                <Check className="h-6 w-6 text-green-600 flex-shrink-0 mt-0.5" />
+                <p class="text-base text-foreground">{bullet}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <!-- Rebate Info (Highlighted Card) -->
+        {rebateInfo && (
+          <Card className="bg-primary/10 border-primary">
+            <CardContent className="p-6">
+              <div class="flex items-start gap-3">
+                <div class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+                <div>
+                  <p class="font-semibold text-lg mb-2">Available Rebates & Incentives</p>
+                  <p class="text-foreground/90">{rebateInfo}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        <!-- Financing Note -->
+        {financingNote && (
+          <div class="text-center pt-4">
+            <p class="text-base text-muted-foreground">
+              {financingNote}
+              {' '}
+              <a href="/financing" class="text-primary font-semibold hover:underline">
+                Learn about financing options
+              </a>
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
