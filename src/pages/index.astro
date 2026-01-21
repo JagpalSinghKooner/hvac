@@ -5,6 +5,7 @@ import HeroSection from '@/components/sections/HeroSection.astro';
 import ValuePropsGrid from '@/components/sections/ValuePropsGrid.astro';
 import BrandLogoTicker from '@/components/ui/BrandLogoTicker.astro';
 import ServiceCategoriesGrid from '@/components/sections/ServiceCategoriesGrid.astro';
+import ExpertConsultationSection from '@/components/sections/ExpertConsultationSection.astro';
 
 const businessProfile = await getEntry('business', 'profile');
 if (!businessProfile) {
@@ -21,4 +22,5 @@ const business = businessProfile.data;
   <ValuePropsGrid />
   <BrandLogoTicker />
   <ServiceCategoriesGrid />
+  <ExpertConsultationSection />
 </BaseLayout>

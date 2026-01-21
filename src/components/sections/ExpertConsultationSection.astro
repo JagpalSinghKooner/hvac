@@ -1,0 +1,48 @@
+---
+import { getEntry } from "astro:content";
+import { Button } from "@/components/ui/button";
+import { Check } from "lucide-react";
+
+const businessProfile = await getEntry("business", "profile");
+const phone = businessProfile?.data.contact?.phone_display || "+1 519-835-4858";
+const phoneE164 = businessProfile?.data.contact?.phone_e164 || "tel:+15198354858";
+
+const trustBullets = [
+  "30+ Years Experience",
+  "Free Phone Estimates",
+  "No Obligation — No Pressure",
+  "Licensed & Certified Technicians"
+];
+---
+
+<section class="py-16 md:py-24 bg-primary/5">
+  <div class="container mx-auto px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl font-bold tracking-tight md:text-4xl mb-4">
+        Not Sure What You Need?
+      </h2>
+      <p class="text-xl text-muted-foreground mb-8">
+        Talk to Our HVAC Experts — Free Consultation
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 max-w-2xl mx-auto">
+        {trustBullets.map((bullet) => (
+          <div class="flex items-center gap-3 text-left">
+            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
+              <Check className="h-4 w-4 text-primary" />
+            </div>
+            <span class="text-base font-medium">{bullet}</span>
+          </div>
+        ))}
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href={phoneE164}>
+          <Button size="lg" className="text-lg px-8 py-6 min-h-[56px]">
+            Call {phone}
+          </Button>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
