@@ -88,14 +88,25 @@ for ((i=1; i<=MAX_ITERATIONS; i++)); do
 
 EXECUTE THE RALPH LOOP NOW:
 
-1. Read prd.json to find stories
-2. Read docs/project/ralph/progress.txt for context
-3. Find the FIRST story where passes: false
-4. If no stories remain with passes: false, output <promise>COMPLETE</promise> and stop
-5. Implement that story completely (create files, run pnpm build, verify)
-6. Update prd.json to set passes: true for the completed story
-7. Commit with: git add -A && git commit -m 'feat: [Story Title]'
-8. Append notes to docs/project/ralph/progress.txt
+STEP 1: Read prd.json and COUNT all stories where \"passes\": false
+- Use the Read tool to read prd.json NOW
+- List each story ID that has passes: false (e.g., US-024, US-025, etc.)
+- State the count: \"X stories remaining\"
+
+STEP 2: CRITICAL CHECK
+- If count is 0 (zero stories with passes: false), output <promise>COMPLETE</promise> and STOP
+- If count > 0, proceed to STEP 3
+- NEVER output COMPLETE if any story has passes: false
+
+STEP 3: Implement the FIRST story with passes: false
+- Read docs/project/ralph/progress.txt for context
+- Implement completely (create files, run pnpm build, verify)
+- Update prd.json to set passes: true
+- Commit: git add -A && git commit -m 'feat: [Story Title]'
+- Append notes to docs/project/ralph/progress.txt
+
+STEP 4: After completing ONE story, output <promise>CONTINUE</promise>
+- Do NOT output COMPLETE unless you verified count is 0 in STEP 1
 
 DO NOT ask questions. DO NOT wait for input. EXECUTE NOW.
 

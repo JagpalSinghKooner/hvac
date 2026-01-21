@@ -1,17 +1,206 @@
 ---
 import { getEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Card, CardHeader, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Mail, Award, Users, Heart, TrendingUp, Shield } from 'lucide-react';
 
 const businessProfile = await getEntry('business', 'profile');
 if (!businessProfile) {
   throw new Error('Business profile not found');
 }
 const business = businessProfile.data;
+
+const yearsInBusiness = new Date().getFullYear() - business.business.established_year;
+
+// Benefits of working at B.A.P
+const benefits = [
+  {
+    icon: Award,
+    title: 'Professional Development',
+    description: 'Ongoing training on the latest HVAC technology, certifications, and industry best practices.'
+  },
+  {
+    icon: Users,
+    title: 'Team Environment',
+    description: 'Work with experienced professionals in a supportive, family-owned company culture.'
+  },
+  {
+    icon: TrendingUp,
+    title: 'Career Growth',
+    description: 'Opportunities to advance your career as we continue growing across Southern Ontario.'
+  },
+  {
+    icon: Shield,
+    title: 'Stability & Benefits',
+    description: 'Competitive compensation, WSIB coverage, and the security of working with an established company.'
+  }
+];
+
+// Company values
+const values = [
+  {
+    title: 'Accountability',
+    description: 'We stand behind our work with a 10-year warranty. Every team member takes pride in delivering quality service.'
+  },
+  {
+    title: 'Transparency',
+    description: 'We believe in honest communication with customers and within our team. No surprises, no hidden agendas.'
+  },
+  {
+    title: 'Respect',
+    description: 'We respect our customers, our team members, and the work we do. Every person and every job matters.'
+  },
+  {
+    title: 'Expertise',
+    description: `With ${yearsInBusiness}+ years of experience, we value knowledge and continuous learning to stay ahead in our field.`
+  }
+];
 ---
 
 <BaseLayout
   title={`Careers | ${business.business.legal_name}`}
-  description="Join our team"
+  description={`Join the team at ${business.business.legal_name}. We're hiring experienced HVAC professionals to serve Southern Ontario. Competitive pay, training opportunities, and a supportive work environment.`}
 >
-  <h1>Careers</h1>
+  <!-- Hero Section -->
+  <section class="py-16 md:py-24 bg-gradient-to-b from-muted/50 to-background">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center space-y-6">
+        <Badge variant="outline" className="text-base px-4 py-2">
+          <Award className="h-4 w-4 mr-2 inline" />
+          We're Growing
+        </Badge>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+          Join Our Team
+        </h1>
+        <p class="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
+          Build a career with a family-owned HVAC company that's been serving Southern Ontario since {business.business.established_year}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Work With Us Section -->
+  <section class="py-16 md:py-24 bg-background">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Why Work With Us</h2>
+          <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Join a team that values quality workmanship, professional growth, and treating people right.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {benefits.map((benefit) => (
+            <Card>
+              <CardContent className="p-6">
+                <div class="flex items-start gap-4">
+                  <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                    <benefit.icon className="h-6 w-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-lg mb-2">{benefit.title}</h3>
+                    <p class="text-muted-foreground">{benefit.description}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Culture Section -->
+  <section class="py-16 md:py-24 bg-muted/50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Culture & Values</h2>
+          <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+            These are the principles that guide our work every day.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {values.map((value) => (
+            <Card>
+              <CardHeader>
+                <h3 class="font-semibold text-xl">{value.title}</h3>
+              </CardHeader>
+              <CardContent>
+                <p class="text-muted-foreground">{value.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Current Openings Section -->
+  <section class="py-16 md:py-24 bg-background">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Current Opportunities</h2>
+          <p class="text-lg text-muted-foreground">
+            We're always looking for talented HVAC professionals to join our team.
+          </p>
+        </div>
+
+        <Card className="border-primary/20">
+          <CardContent className="p-8 text-center space-y-6">
+            <div class="w-16 h-16 rounded-full bg-primary/10 mx-auto flex items-center justify-center">
+              <Heart className="h-8 w-8 text-primary" />
+            </div>
+
+            <div class="space-y-2">
+              <h3 class="text-2xl font-semibold">Interested in Joining Us?</h3>
+              <p class="text-muted-foreground max-w-2xl mx-auto">
+                We're looking for experienced HVAC technicians, installers, and apprentices who are committed to quality work and excellent customer service.
+              </p>
+            </div>
+
+            <div class="space-y-4 pt-4">
+              <p class="text-lg font-medium">
+                Send your resume to:
+              </p>
+              <a href={`mailto:${business.contact.email}?subject=Career Opportunity - HVAC Technician`}>
+                <Button size="lg" className="gap-2">
+                  <Mail className="h-5 w-5" />
+                  {business.contact.email}
+                </Button>
+              </a>
+              <p class="text-sm text-muted-foreground">
+                Include your experience, certifications, and availability
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <!-- About B.A.P Section -->
+  <section class="py-16 md:py-24 bg-muted/30">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center space-y-6">
+        <h2 class="text-3xl md:text-4xl font-bold">About B.A.P Heating & Cooling</h2>
+        <div class="prose prose-neutral dark:prose-invert max-w-none prose-lg mx-auto">
+          <p>
+            Founded in {business.business.established_year} by {business.business.owner_public.name}, B.A.P Heating & Cooling Services Ltd has grown to serve 25 cities across Wellington County, Waterloo Region, Halton Region, Peel Region, Hamilton & Brant, and Dufferin County.
+          </p>
+          <p>
+            We're a family-owned business that believes in doing quality work, treating customers fairly, and building long-term relationships. Our team takes pride in every installation, every repair, and every customer interaction.
+          </p>
+          <p>
+            If you're looking for a company where your work matters and where you can grow your career, we'd like to hear from you.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
