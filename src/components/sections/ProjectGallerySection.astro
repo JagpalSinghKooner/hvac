@@ -1,0 +1,57 @@
+---
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+// Placeholder project data
+const projects = [
+  { type: "Furnace Install", location: "Guelph" },
+  { type: "AC Install", location: "Cambridge" },
+  { type: "Heat Pump Install", location: "Kitchener" },
+  { type: "Boiler Install", location: "Milton" },
+  { type: "Mini-Split Install", location: "Waterloo" },
+  { type: "Commercial HVAC", location: "Hamilton" }
+];
+---
+
+<section class="py-16 md:py-24 bg-background">
+  <div class="container mx-auto px-4">
+    <div class="mb-12 text-center">
+      <h2 class="text-3xl font-bold tracking-tight md:text-4xl mb-4">
+        Real Projects Across Southern Ontario
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        See the quality we deliver to homes like yours
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      {projects.map((project) => (
+        <Card className="overflow-hidden group cursor-pointer hover:shadow-lg transition-shadow duration-200">
+          <div class="relative aspect-[4/3] bg-muted">
+            <div class="absolute inset-0 flex items-center justify-center text-muted-foreground">
+              <span class="text-sm font-medium">
+                {project.type} — {project.location}
+              </span>
+            </div>
+
+            {/* Hover overlay */}
+            <div class="absolute inset-0 bg-primary/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+              <div class="text-center text-primary-foreground p-4">
+                <p class="text-xl font-bold mb-1">{project.type}</p>
+                <p class="text-sm">{project.location}, ON</p>
+              </div>
+            </div>
+          </div>
+        </Card>
+      ))}
+    </div>
+
+    <div class="text-center">
+      <a href="/case-studies">
+        <Button variant="outline" size="lg">
+          View All Projects
+        </Button>
+      </a>
+    </div>
+  </div>
+</section>
