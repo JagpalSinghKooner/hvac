@@ -1,0 +1,96 @@
+---
+import { getEntry } from 'astro:content';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { CreditCard, Calendar, Award } from 'lucide-react';
+
+const businessProfile = await getEntry('business', 'profile');
+const phoneDisplay = businessProfile?.data.contact?.phone_display || '+1 519-835-4858';
+const phoneE164 = businessProfile?.data.contact?.phone_e164 || '+15198354858';
+const financingStatement = businessProfile?.data.pricing_and_offers?.financing?.statement || 'Flexible financing options available.';
+---
+
+<section class="py-16 md:py-24 bg-background">
+  <div class="container mx-auto px-4 md:px-6 max-w-7xl">
+    {/* Header */}
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+        Flexible Financing — Make Comfort Affordable
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        Multiple options to fit your budget
+      </p>
+    </div>
+
+    {/* Financing Cards */}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      {/* 0% Financing Available */}
+      <Card className="h-full">
+        <CardHeader>
+          <div class="mb-4 flex justify-center">
+            <div class="p-3 rounded-full bg-primary/10">
+              <CreditCard className="w-8 h-8 text-primary" />
+            </div>
+          </div>
+          <CardTitle className="text-center">0% Financing Available</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p class="text-muted-foreground text-center">
+            Qualified customers can enjoy 0% interest financing on premium HVAC installations.
+          </p>
+        </CardContent>
+      </Card>
+
+      {/* Flexible Payment Plans */}
+      <Card className="h-full">
+        <CardHeader>
+          <div class="mb-4 flex justify-center">
+            <div class="p-3 rounded-full bg-primary/10">
+              <Calendar className="w-8 h-8 text-primary" />
+            </div>
+          </div>
+          <CardTitle className="text-center">Flexible Payment Plans</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p class="text-muted-foreground text-center">
+            {financingStatement}
+          </p>
+        </CardContent>
+      </Card>
+
+      {/* Government Rebates */}
+      <Card className="h-full">
+        <CardHeader>
+          <div class="mb-4 flex justify-center">
+            <div class="p-3 rounded-full bg-primary/10">
+              <Award className="w-8 h-8 text-primary" />
+            </div>
+          </div>
+          <CardTitle className="text-center">Government Rebates</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p class="text-muted-foreground text-center mb-2">
+            <strong class="text-foreground">Up to $10,000</strong> in government rebates available
+          </p>
+          <p class="text-sm text-muted-foreground text-center">
+            We handle rebate paperwork from start to finish.
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+
+    {/* CTA Row */}
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <Button size="lg" className="min-h-[56px] px-8" asChild>
+        <a href={`tel:${phoneE164}`}>
+          Call {phoneDisplay}
+        </a>
+      </Button>
+      <Button variant="outline" size="lg" className="min-h-[56px] px-8" asChild>
+        <a href="/financing">
+          View Full Details
+        </a>
+      </Button>
+    </div>
+  </div>
+</section>

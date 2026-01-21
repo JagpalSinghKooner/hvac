@@ -10,6 +10,7 @@ import ProjectGallerySection from '@/components/sections/ProjectGallerySection.a
 import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel';
 import FamilyStorySection from '@/components/sections/FamilyStorySection.astro';
 import ServiceAreaSection from '@/components/sections/ServiceAreaSection.astro';
+import FinancingPreviewSection from '@/components/sections/FinancingPreviewSection.astro';
 
 const businessProfile = await getEntry('business', 'profile');
 if (!businessProfile) {
@@ -49,4 +50,5 @@ const installationReviews = allReviews
   />
   <FamilyStorySection />
   <ServiceAreaSection />
+  <FinancingPreviewSection />
 </BaseLayout>
