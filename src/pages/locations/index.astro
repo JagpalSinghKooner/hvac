@@ -1,17 +1,91 @@
 ---
 import { getEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Card, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { MapPin } from 'lucide-react';
+import FinalCTASection from '@/components/sections/FinalCTASection.astro';
 
 const businessProfile = await getEntry('business', 'profile');
 if (!businessProfile) {
   throw new Error('Business profile not found');
 }
-const business = businessProfile.data;
+const business = businessProfile.data.business;
+const regions = businessProfile.data.coverage.regions;
+const locationCount = regions.reduce((count, region) => count + region.locations.length, 0);
 ---
 
 <BaseLayout
-  title={`Service Areas | ${business.business.legal_name}`}
-  description="HVAC services across Southern Ontario"
+  title={`Service Areas | ${business.legal_name}`}
+  description={`Professional HVAC services across ${locationCount} cities in Southern Ontario. Serving Wellington County, Waterloo Region, Halton Region, Peel Region, Hamilton & Brant, and Dufferin County.`}
 >
-  <h1>Service Areas</h1>
+  <!-- Hero Section -->
+  <section class="relative w-full py-16 md:py-24 bg-gradient-to-b from-muted/50 to-background">
+    <div class="container mx-auto px-4 md:px-6 max-w-7xl">
+      <div class="max-w-3xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+          Service Areas
+        </h1>
+        <p class="text-lg md:text-xl text-muted-foreground mb-4">
+          We proudly serve <strong>{locationCount} cities across 6 regions</strong> in Southern Ontario
+        </p>
+        <p class="text-base text-muted-foreground">
+          Premium heating, cooling, and indoor air quality services for residential and commercial properties
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Locations by Region -->
+  <section class="py-16 md:py-24">
+    <div class="container mx-auto px-4 md:px-6 max-w-7xl space-y-16">
+      {regions.map((region) => (
+        <div>
+          <div class="flex items-center gap-3 mb-8">
+            <MapPin className="h-6 w-6 text-primary" />
+            <h2 class="text-2xl md:text-3xl font-semibold">{region.name}</h2>
+            <Badge variant="secondary" className="ml-2">
+              {region.locations.length} {region.locations.length === 1 ? 'City' : 'Cities'}
+            </Badge>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {region.locations.map((location) => (
+              <a href={`/locations/${location.slug}`} class="block">
+                <Card className="h-full hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="text-lg hover:underline">
+                      {location.name}
+                    </CardTitle>
+                  </CardHeader>
+                </Card>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Service Area Map Placeholder -->
+  <section class="py-16 md:py-24 bg-muted/50">
+    <div class="container mx-auto px-4 md:px-6 max-w-7xl">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">
+        Our Service Area
+      </h2>
+      <div class="max-w-4xl mx-auto aspect-video bg-muted rounded-lg shadow-lg flex items-center justify-center">
+        <div class="text-center space-y-2">
+          <MapPin className="h-12 w-12 text-muted-foreground mx-auto" />
+          <p class="text-muted-foreground text-sm font-medium">
+            Service Area Map — Southern Ontario
+          </p>
+        </div>
+      </div>
+      <p class="text-center text-muted-foreground mt-6 max-w-2xl mx-auto">
+        From Guelph to Oakville, from Waterloo to Hamilton — we bring professional HVAC services to homes and businesses across Southern Ontario.
+      </p>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <FinalCTASection />
 </BaseLayout>
