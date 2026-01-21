@@ -12,11 +12,11 @@ const business = businessProfile.data;
 const regions = business.coverage?.regions || [];
 ---
 
-<section class="py-16 md:py-24 bg-muted">
-  <div class="container mx-auto px-4">
+<section class="py-16 md:py-20 lg:py-24 bg-muted">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
     {/* Header */}
-    <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold mb-3">
+    <div class="text-center mb-8 md:mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4 md:mb-6">
         Proudly Serving Southern Ontario Since {business.business.established_year}
       </h2>
       <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -25,7 +25,7 @@ const regions = business.coverage?.regions || [];
     </div>
 
     {/* Map Placeholder */}
-    <div class="max-w-4xl mx-auto mb-12">
+    <div class="max-w-4xl mx-auto mb-8 md:mb-12">
       <div
         class="bg-background aspect-video rounded-lg flex items-center justify-center text-muted-foreground shadow-sm"
       >
@@ -35,7 +35,7 @@ const regions = business.coverage?.regions || [];
 
     {/* Regions & Cities */}
     <div class="max-w-6xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         {
           regions.map((region) => (
             <div class="space-y-3">

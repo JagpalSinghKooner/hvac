@@ -10,11 +10,11 @@ const phoneE164 = businessProfile?.data.contact?.phone_e164 || '+15198354858';
 const financingStatement = businessProfile?.data.pricing_and_offers?.financing?.statement || 'Flexible financing options available.';
 ---
 
-<section class="py-16 md:py-24 bg-background">
-  <div class="container mx-auto px-4 md:px-6 max-w-7xl">
+<section class="py-16 md:py-20 lg:py-24 bg-background">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
     {/* Header */}
-    <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+    <div class="text-center mb-8 md:mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4 md:mb-6">
         Flexible Financing — Make Comfort Affordable
       </h2>
       <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -23,7 +23,7 @@ const financingStatement = businessProfile?.data.pricing_and_offers?.financing?.
     </div>
 
     {/* Financing Cards */}
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-12">
       {/* 0% Financing Available */}
       <Card className="h-full">
         <CardHeader>
@@ -81,12 +81,12 @@ const financingStatement = businessProfile?.data.pricing_and_offers?.financing?.
 
     {/* CTA Row */}
     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-      <Button size="lg" className="min-h-[56px] px-8" asChild>
+      <Button size="lg" className="h-14 px-8" asChild>
         <a href={`tel:${phoneE164}`}>
           Call {phoneDisplay}
         </a>
       </Button>
-      <Button variant="outline" size="lg" className="min-h-[56px] px-8" asChild>
+      <Button variant="outline" size="lg" className="h-14 px-8" asChild>
         <a href="/financing">
           View Full Details
         </a>

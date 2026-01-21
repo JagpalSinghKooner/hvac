@@ -13,10 +13,10 @@ const projects = [
 ];
 ---
 
-<section class="py-16 md:py-24 bg-background">
-  <div class="container mx-auto px-4">
-    <div class="mb-12 text-center">
-      <h2 class="text-3xl font-bold tracking-tight md:text-4xl mb-4">
+<section class="py-16 md:py-20 lg:py-24 bg-background">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+    <div class="mb-8 md:mb-12 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4 md:mb-6">
         Real Projects Across Southern Ontario
       </h2>
       <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -24,7 +24,7 @@ const projects = [
       </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-12">
       {projects.map((project) => (
         <Card className="overflow-hidden group cursor-pointer hover:shadow-lg transition-shadow duration-200">
           <div class="relative aspect-[4/3] bg-muted">
