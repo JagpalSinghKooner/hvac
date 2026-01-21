@@ -12,6 +12,7 @@ import FamilyStorySection from '@/components/sections/FamilyStorySection.astro';
 import ServiceAreaSection from '@/components/sections/ServiceAreaSection.astro';
 import FinancingPreviewSection from '@/components/sections/FinancingPreviewSection.astro';
 import BlogPreviewSection from '@/components/sections/BlogPreviewSection.astro';
+import CertificationsSection from '@/components/sections/CertificationsSection.astro';
 
 const businessProfile = await getEntry('business', 'profile');
 if (!businessProfile) {
@@ -53,4 +54,5 @@ const installationReviews = allReviews
   <ServiceAreaSection />
   <FinancingPreviewSection />
   <BlogPreviewSection />
+  <CertificationsSection />
 </BaseLayout>

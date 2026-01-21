@@ -1,0 +1,77 @@
+---
+import { getEntry } from 'astro:content';
+
+const businessProfile = await getEntry('business', 'profile');
+const tssaLicenseNumber = businessProfile?.data.trust_and_compliance?.licenses?.tssa?.numbers?.[0] || '000076639116';
+const googleRating = businessProfile?.data.reputation?.google_rating || 4.8;
+
+// Define certifications in desired order
+const certifications = [
+  {
+    id: 'tssa',
+    name: 'TSSA Licensed',
+    detail: `License #${tssaLicenseNumber}`,
+  },
+  {
+    id: 'hrai',
+    name: 'HRAI Member',
+    detail: 'Industry Association',
+  },
+  {
+    id: 'hrai-heat-pump',
+    name: 'HRAI Heat Pump Champion',
+    detail: 'Certified Expert',
+  },
+  {
+    id: 'bbb',
+    name: 'BBB A+ Rated',
+    detail: 'Better Business Bureau',
+  },
+  {
+    id: 'wsib',
+    name: 'WSIB Covered',
+    detail: 'Fully Insured',
+  },
+  {
+    id: 'google',
+    name: `Google ${googleRating}★`,
+    detail: '407+ Reviews',
+  },
+];
+---
+
+<section class="py-16 md:py-24 bg-background">
+  <div class="container mx-auto px-4 md:px-6 max-w-7xl">
+    {/* Header */}
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+        Licensed, Certified & Protected
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        Your peace of mind is backed by official certifications and industry recognition
+      </p>
+    </div>
+
+    {/* Certifications Grid */}
+    <div class="grid grid-cols-3 md:grid-cols-6 gap-6">
+      {certifications.map((cert) => (
+        <div class="flex flex-col items-center gap-3">
+          {/* Badge Placeholder */}
+          <div class="bg-muted w-24 h-16 rounded-md flex items-center justify-center text-xs font-medium text-muted-foreground text-center p-2">
+            {cert.name}
+          </div>
+
+          {/* Certification Name & Detail */}
+          <div class="text-center">
+            <div class="text-sm font-semibold text-foreground mb-0.5">
+              {cert.name}
+            </div>
+            <div class="text-xs text-muted-foreground">
+              {cert.detail}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
