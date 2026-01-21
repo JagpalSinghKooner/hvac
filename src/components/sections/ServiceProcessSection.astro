@@ -1,0 +1,102 @@
+---
+/**
+ * ServiceProcessSection Component
+ *
+ * Displays a numbered process timeline showing the steps for completing a service.
+ * Used on service pages to help customers understand what to expect.
+ *
+ * @param steps - Array of process steps with step number, title, and description
+ * @param headline - Section headline (default: "Our Process")
+ * @param subheadline - Optional subtitle for additional context
+ */
+
+export interface ProcessStep {
+  step: number;
+  title: string;
+  description: string;
+}
+
+export interface Props {
+  steps: ProcessStep[];
+  headline?: string;
+  subheadline?: string;
+}
+
+const {
+  steps = [],
+  headline = "Our Process",
+  subheadline,
+} = Astro.props;
+
+// Return nothing if no steps provided
+if (!steps || steps.length === 0) {
+  return null;
+}
+---
+
+<section class="py-16 md:py-24">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">{headline}</h2>
+      {subheadline && (
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+          {subheadline}
+        </p>
+      )}
+    </div>
+
+    <!-- Process Steps -->
+    <div class="max-w-5xl mx-auto">
+      <!-- Mobile: Vertical Timeline -->
+      <div class="lg:hidden space-y-8">
+        {steps.map((step, index) => (
+          <div class="flex gap-4">
+            <!-- Step Number Circle -->
+            <div class="flex-shrink-0">
+              <div class="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">
+                {step.step}
+              </div>
+              {/* Connecting Line (not shown on last step) */}
+              {index < steps.length - 1 && (
+                <div class="w-0.5 h-16 bg-border mx-auto mt-2"></div>
+              )}
+            </div>
+            <!-- Step Content -->
+            <div class="flex-1 pt-1">
+              <h3 class="font-semibold text-lg mb-2">{step.title}</h3>
+              <p class="text-muted-foreground">{step.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Desktop: Horizontal Timeline -->
+      <div class="hidden lg:block">
+        <div class="flex items-start justify-between gap-4">
+          {steps.map((step, index) => (
+            <div class="flex-1">
+              <div class="flex flex-col items-center text-center">
+                <!-- Step Number Circle -->
+                <div class="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-lg mb-4">
+                  {step.step}
+                </div>
+
+                {/* Connecting Line (not shown on last step) */}
+                {index < steps.length - 1 && (
+                  <div class="absolute left-[calc(50%+1.5rem)] right-[calc(-50%+1.5rem)] h-0.5 bg-border top-6 -z-10"></div>
+                )}
+
+                <!-- Step Content -->
+                <div>
+                  <h3 class="font-semibold text-lg mb-2">{step.title}</h3>
+                  <p class="text-muted-foreground text-sm">{step.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
