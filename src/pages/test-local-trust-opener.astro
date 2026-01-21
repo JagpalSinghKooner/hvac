@@ -1,0 +1,35 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import LocalTrustOpener from '@/components/sections/LocalTrustOpener.astro';
+---
+
+<BaseLayout
+  title="Test LocalTrustOpener Component"
+  description="Testing LocalTrustOpener banner component across viewports"
+>
+  <!-- Full example with all props -->
+  <LocalTrustOpener
+    cityName="Guelph"
+    neighborhoods={[
+      "The Ward",
+      "St. Patrick's Ward",
+      "Kortright Hills",
+      "Exhibition Park"
+    ]}
+    rating={4.9}
+    localStats="500+ local installations"
+  />
+
+  <!-- Example with minimal props -->
+  <LocalTrustOpener
+    cityName="Kitchener"
+    rating={4.8}
+  />
+
+  <!-- Example with neighborhoods only -->
+  <LocalTrustOpener
+    cityName="Cambridge"
+    neighborhoods={["Galt", "Preston", "Hespeler"]}
+    localStats="300+ projects completed"
+  />
+</BaseLayout>
