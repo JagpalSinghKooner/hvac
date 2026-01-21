@@ -1,6 +1,11 @@
 ---
 import { getCollection, type CollectionEntry, getEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardHeader, CardTitle } from '@/components/ui/card';
+import { MapPin } from 'lucide-react';
+import ServiceCategoriesGrid from '@/components/sections/ServiceCategoriesGrid.astro';
+import FinalCTASection from '@/components/sections/FinalCTASection.astro';
 
 export async function getStaticPaths() {
   const allRegions = await getCollection('regions');
@@ -23,11 +28,87 @@ if (!businessProfile) {
   throw new Error('Business profile not found');
 }
 const business = businessProfile.data;
+
+// Get all locations for this region
+const allLocations = await getCollection('locations');
+const regionLocations = allLocations.filter(
+  (loc) => loc.data.workflowStatus === 'published' && region.data.cities.includes(loc.slug)
+);
+
+// Render markdown body content
+const { Content } = await region.render();
 ---
 
 <BaseLayout
   title={region.data.seoTitle || `${region.data.title} | ${business.business.legal_name}`}
   description={region.data.seoDescription || region.data.description}
 >
-  <h1>{region.data.title}</h1>
+  <!-- Hero Section -->
+  <section class="relative w-full py-16 md:py-24 bg-gradient-to-b from-muted/50 to-background">
+    <div class="container mx-auto px-4 md:px-6 max-w-7xl">
+      <div class="max-w-4xl mx-auto text-center space-y-6">
+        <!-- Region Badge -->
+        <div class="flex justify-center">
+          <Badge variant="secondary" className="text-base px-4 py-1.5">
+            <MapPin className="h-4 w-4 mr-1.5" />
+            {regionLocations.length} {regionLocations.length === 1 ? 'Location' : 'Locations'}
+          </Badge>
+        </div>
+
+        <!-- Title -->
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+          {region.data.title}
+        </h1>
+
+        <!-- Description -->
+        <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+          {region.data.description}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Region Body Content -->
+  <section class="py-16 md:py-24 bg-background">
+    <div class="container mx-auto px-4 md:px-6 max-w-4xl">
+      <div class="prose prose-neutral dark:prose-invert max-w-none prose-lg">
+        <Content />
+      </div>
+    </div>
+  </section>
+
+  <!-- Cities in Region -->
+  <section class="py-16 md:py-24 bg-muted/50">
+    <div class="container mx-auto px-4 md:px-6 max-w-7xl">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+          Cities We Serve in {region.data.title}
+        </h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Professional HVAC services available in all {regionLocations.length} communities across the region.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {regionLocations.map((location) => (
+          <a href={`/locations/${location.slug}`} class="group">
+            <Card className="h-full hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 group-hover:underline">
+                  <MapPin className="h-5 w-5 text-primary" />
+                  {location.data.title}
+                </CardTitle>
+              </CardHeader>
+            </Card>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Categories Grid -->
+  <ServiceCategoriesGrid />
+
+  <!-- Final CTA Section -->
+  <FinalCTASection />
 </BaseLayout>
