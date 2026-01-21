@@ -1,0 +1,95 @@
+---
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { ArrowRight } from "lucide-react";
+
+interface Service {
+  title: string;
+  slug: string;
+  category: string;
+}
+
+interface Props {
+  locationSlug: string;
+  locationName: string;
+  services: Service[];
+}
+
+const { locationSlug, locationName, services = [] } = Astro.props;
+
+// Group services by category
+const servicesByCategory = services.reduce((acc, service) => {
+  const category = service.category || 'other';
+  if (!acc[category]) {
+    acc[category] = [];
+  }
+  acc[category].push(service);
+  return acc;
+}, {} as Record<string, Service[]>);
+
+// Category display names
+const categoryNames: Record<string, string> = {
+  'heating': 'Heating Services',
+  'cooling': 'Cooling Services',
+  'iaq': 'Indoor Air Quality',
+  'water-heating': 'Water Heating',
+  'commercial': 'Commercial HVAC',
+  'other': 'Other Services'
+};
+
+// Category order
+const categoryOrder = ['heating', 'cooling', 'iaq', 'water-heating', 'commercial', 'other'];
+
+// Sort categories
+const sortedCategories = categoryOrder.filter(cat => servicesByCategory[cat]);
+---
+
+<section class="py-16 md:py-24">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+      Our Services in {locationName}
+    </h2>
+
+    <div class="space-y-12">
+      {sortedCategories.map((category, categoryIndex) => (
+        <div>
+          {/* Category Heading */}
+          <h3 class="text-2xl font-semibold mb-6">
+            {categoryNames[category]}
+          </h3>
+
+          {/* Services Grid */}
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {servicesByCategory[category].map((service) => {
+              const serviceUrl = `/services/${service.slug}-${locationSlug}-on`;
+
+              return (
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="text-lg">
+                      {service.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <a
+                      href={serviceUrl}
+                      class="inline-flex items-center text-primary hover:underline font-medium"
+                    >
+                      Get a Quote
+                      <ArrowRight className="ml-1 w-4 h-4" />
+                    </a>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+
+          {/* Separator between categories (not after last one) */}
+          {categoryIndex < sortedCategories.length - 1 && (
+            <Separator className="mt-12" />
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
