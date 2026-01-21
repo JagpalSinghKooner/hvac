@@ -37,7 +37,7 @@ const formatDate = (date: Date) => {
     {latestPosts.length > 0 ? (
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-12">
         {latestPosts.map((post) => (
-          <Card className="h-full flex flex-col hover:shadow-lg transition-shadow duration-200">
+          <Card className="h-full flex flex-col shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer">
             {/* Placeholder Image */}
             <div class="bg-muted aspect-[16/9] flex items-center justify-center text-muted-foreground text-sm border-b">
               Blog Thumbnail — 800×450

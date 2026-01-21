@@ -64,7 +64,7 @@ const sortedCategories = categoryOrder.filter(cat => servicesByCategory[cat]);
               const serviceUrl = `/services/${service.slug}-${locationSlug}-on`;
 
               return (
-                <Card className="hover:shadow-lg transition-shadow">
+                <Card className="shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer">
                   <CardHeader>
                     <CardTitle className="text-lg">
                       {service.title}
