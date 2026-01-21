@@ -1,0 +1,47 @@
+---
+import { Card, CardContent } from '@/components/ui/card';
+
+interface Benefit {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface Props {
+  benefits: Benefit[];
+  headline?: string;
+}
+
+const { benefits, headline = "Why Choose Us" } = Astro.props;
+
+// Handle empty benefits array
+if (!benefits || benefits.length === 0) {
+  return null;
+}
+---
+
+<section class="py-16 bg-background">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight">
+        {headline}
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {benefits.map((benefit) => (
+        <Card className="border-border hover:shadow-md transition-shadow">
+          <CardContent className="p-6 flex flex-col gap-4">
+            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary">
+              <div class="text-sm font-medium">{benefit.icon}</div>
+            </div>
+            <div class="space-y-2">
+              <h3 class="font-semibold text-lg leading-tight">{benefit.title}</h3>
+              <p class="text-sm text-muted-foreground">{benefit.description}</p>
+            </div>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  </div>
+</section>
