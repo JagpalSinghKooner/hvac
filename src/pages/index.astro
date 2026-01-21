@@ -1,5 +1,5 @@
 ---
-import { getEntry } from 'astro:content';
+import { getEntry, getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeroSection from '@/components/sections/HeroSection.astro';
 import ValuePropsGrid from '@/components/sections/ValuePropsGrid.astro';
@@ -7,12 +7,26 @@ import BrandLogoTicker from '@/components/ui/BrandLogoTicker.astro';
 import ServiceCategoriesGrid from '@/components/sections/ServiceCategoriesGrid.astro';
 import ExpertConsultationSection from '@/components/sections/ExpertConsultationSection.astro';
 import ProjectGallerySection from '@/components/sections/ProjectGallerySection.astro';
+import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel';
 
 const businessProfile = await getEntry('business', 'profile');
 if (!businessProfile) {
   throw new Error('Business profile not found');
 }
 const business = businessProfile.data;
+
+// Fetch installation-related reviews
+const allReviews = await getCollection('reviews');
+const installationReviews = allReviews
+  .filter(
+    (review) =>
+      review.data.workflowStatus === 'published' &&
+      review.data.status === 'live' &&
+      (review.data.text.toLowerCase().includes('install') ||
+        review.data.serviceSlug.includes('installation'))
+  )
+  .sort((a, b) => b.data.priority - a.data.priority)
+  .slice(0, 9); // Show up to 9 reviews (3 visible at a time on desktop)
 ---
 
 <BaseLayout
@@ -25,4 +39,10 @@ const business = businessProfile.data;
   <ServiceCategoriesGrid />
   <ExpertConsultationSection />
   <ProjectGallerySection />
+  <TestimonialsCarousel
+    client:load
+    reviews={installationReviews}
+    googleRating={business.reputation.google_rating}
+    googleReviewCount={business.reputation.google_review_count}
+  />
 </BaseLayout>
