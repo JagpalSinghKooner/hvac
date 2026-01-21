@@ -1,6 +1,7 @@
 ---
 import { getEntry } from 'astro:content';
 import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
@@ -126,6 +127,9 @@ const jsonLd = {
     <main>
       <slot />
     </main>
+
+    <!-- Site Footer -->
+    <Footer />
   </body>
 </html>
 

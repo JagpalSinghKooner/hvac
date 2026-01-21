@@ -1,0 +1,225 @@
+---
+import { getEntry } from 'astro:content';
+import { Separator } from './ui/separator';
+import { Button } from './ui/button';
+import { Phone, Mail, MapPin } from 'lucide-react';
+
+// Load business profile
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
+
+// Get current year for copyright
+const currentYear = new Date().getFullYear();
+
+// Top 6 services for footer
+const topServices = [
+  { title: 'Furnace Installation', slug: 'furnace-installation' },
+  { title: 'AC Installation', slug: 'air-conditioner-installation' },
+  { title: 'Heat Pump Installation', slug: 'heat-pump-installation' },
+  { title: 'Boiler Installation', slug: 'boiler-installation' },
+  { title: 'Furnace Repair', slug: 'furnace-repair' },
+  { title: 'AC Repair', slug: 'air-conditioner-repair' },
+];
+
+// Top 6 regional location pages (one from each region)
+const topLocations = [
+  { name: 'Guelph', slug: 'guelph' },
+  { name: 'Kitchener', slug: 'kitchener' },
+  { name: 'Milton', slug: 'milton' },
+  { name: 'Hamilton', slug: 'hamilton' },
+  { name: 'Cambridge', slug: 'cambridge' },
+  { name: 'Waterloo', slug: 'waterloo' },
+];
+
+// Company links
+const companyLinks = [
+  { title: 'About Us', href: '/about' },
+  { title: 'Careers', href: '/careers' },
+  { title: 'Reviews', href: '/reviews' },
+  { title: 'Contact', href: '/contact' },
+];
+
+// Resource links
+const resourceLinks = [
+  { title: 'Blog', href: '/blog' },
+  { title: 'FAQs', href: '/faqs' },
+  { title: 'Financing', href: '/financing' },
+  { title: 'Rebates', href: '/rebates' },
+];
+---
+
+<footer class="bg-gray-900 text-gray-300">
+  <div class="container mx-auto px-4 py-12 md:py-16">
+    <!-- Main Footer Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
+      <!-- Services Column -->
+      <div>
+        <h3 class="text-white font-semibold text-lg mb-4">Services</h3>
+        <ul class="space-y-2">
+          {topServices.map((service) => (
+            <li>
+              <a
+                href={`/services/${service.slug}`}
+                class="text-gray-300 hover:text-white transition-colors text-sm"
+              >
+                {service.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Locations Column -->
+      <div>
+        <h3 class="text-white font-semibold text-lg mb-4">Locations</h3>
+        <ul class="space-y-2">
+          {topLocations.map((location) => (
+            <li>
+              <a
+                href={`/locations/${location.slug}`}
+                class="text-gray-300 hover:text-white transition-colors text-sm"
+              >
+                {location.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Company Column -->
+      <div>
+        <h3 class="text-white font-semibold text-lg mb-4">Company</h3>
+        <ul class="space-y-2">
+          {companyLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-gray-300 hover:text-white transition-colors text-sm"
+              >
+                {link.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Resources Column -->
+      <div>
+        <h3 class="text-white font-semibold text-lg mb-4">Resources</h3>
+        <ul class="space-y-2">
+          {resourceLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-gray-300 hover:text-white transition-colors text-sm"
+              >
+                {link.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Contact Column -->
+      <div>
+        <h3 class="text-white font-semibold text-lg mb-4">Contact</h3>
+        <div class="space-y-4">
+          <!-- Phone -->
+          <div class="flex items-start gap-2">
+            <Phone className="h-4 w-4 text-gray-400 mt-0.5 flex-shrink-0" />
+            <div>
+              <a
+                href={`tel:${business.contact.phone_e164}`}
+                class="text-gray-300 hover:text-white transition-colors text-sm block"
+              >
+                {business.contact.phone_display}
+              </a>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="flex items-start gap-2">
+            <Mail className="h-4 w-4 text-gray-400 mt-0.5 flex-shrink-0" />
+            <div>
+              <a
+                href={`mailto:${business.contact.email}`}
+                class="text-gray-300 hover:text-white transition-colors text-sm block"
+              >
+                {business.contact.email}
+              </a>
+            </div>
+          </div>
+
+          <!-- Address -->
+          {business.locations?.primary && (
+            <div class="flex items-start gap-2">
+              <MapPin className="h-4 w-4 text-gray-400 mt-0.5 flex-shrink-0" />
+              <div>
+                <p class="text-gray-300 text-sm">
+                  {business.locations.primary.address_full}
+                </p>
+              </div>
+            </div>
+          )}
+
+          <!-- Phone CTA Button (smaller footer variant) -->
+          <div class="pt-2">
+            <Button
+              asChild
+              size="sm"
+              className="w-full"
+            >
+              <a href={`tel:${business.contact.phone_e164}`}>
+                <Phone className="h-4 w-4 mr-2" />
+                Call Now
+              </a>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <Separator className="my-8 bg-gray-800" />
+
+    <!-- Bottom Section: Social + Copyright -->
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+      <!-- Social Links -->
+      <div class="flex items-center gap-4">
+        {business.social?.instagram && (
+          <a
+            href={business.social.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-400 hover:text-white transition-colors"
+            aria-label="Instagram"
+          >
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+        )}
+        {business.social?.facebook && (
+          <a
+            href={business.social.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-400 hover:text-white transition-colors"
+            aria-label="Facebook"
+          >
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+        )}
+      </div>
+
+      <!-- Copyright -->
+      <div class="text-gray-400 text-sm text-center md:text-right">
+        <p>© {currentYear} {business.business.legal_name}. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
