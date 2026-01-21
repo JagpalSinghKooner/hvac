@@ -1,0 +1,109 @@
+---
+import { getEntry } from 'astro:content';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
+
+// Team members (placeholders)
+const teamMembers = [
+  {
+    name: business.business.owner_public.name,
+    role: 'Owner & Founder',
+  },
+  {
+    name: 'Sarah Palmer',
+    role: 'Operations Manager',
+  },
+  {
+    name: 'Mike Thompson',
+    role: 'Lead Technician',
+  },
+  {
+    name: 'Jennifer Lee',
+    role: 'Customer Success',
+  },
+];
+
+// Calculate years in business
+const yearsInBusiness = new Date().getFullYear() - business.business.established_year;
+---
+
+<section class="py-16 md:py-24 bg-background">
+  <div class="container mx-auto px-4">
+    {/* Header */}
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-3">
+        A Family Business Serving Families Since {business.business.established_year}
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        Three decades of trust, quality, and accountability
+      </p>
+    </div>
+
+    {/* Split Layout */}
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12">
+      {/* Image Placeholder */}
+      <div
+        class="bg-muted aspect-[4/3] rounded-lg flex items-center justify-center text-muted-foreground"
+      >
+        Palmer Family Photo — 1200×900
+      </div>
+
+      {/* Story Content */}
+      <div class="flex flex-col justify-center">
+        <div class="space-y-4 text-foreground/90">
+          <p>
+            Founded in {business.business.established_year} by {business.business.owner_public.name},
+            B.A.P Heating & Cooling Services Ltd began with a simple mission: deliver honest,
+            reliable HVAC service that homeowners can trust. Over {yearsInBusiness}+ years, we've
+            built our reputation one installation at a time.
+          </p>
+          <p>
+            As a family-owned business, we understand that your home is more than just a
+            building—it's where your family lives, works, and creates memories. That's why we treat
+            every project with the same care and accountability we'd expect for our own homes.
+          </p>
+          <p>
+            Our team isn't just technically skilled—they're people you can trust in your home. From
+            heat load calculations to system commissioning, we do the work properly because our name
+            is on every installation. And with our 10-year warranty, we're committed for the long
+            haul.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Team Grid */}
+    <div class="max-w-4xl mx-auto">
+      <h3 class="text-2xl font-bold text-center mb-8">Meet the Team</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {
+          teamMembers.map((member) => (
+            <Card>
+              <CardContent className="p-4 text-center">
+                {/* Placeholder Headshot */}
+                <div class="bg-muted aspect-square rounded-full mb-3 mx-auto max-w-[120px] flex items-center justify-center text-xs text-muted-foreground">
+                  Photo
+                </div>
+                <h4 class="font-semibold text-sm mb-1">{member.name}</h4>
+                <p class="text-xs text-muted-foreground">{member.role}</p>
+              </CardContent>
+            </Card>
+          ))
+        }
+      </div>
+    </div>
+
+    {/* CTA */}
+    <div class="text-center mt-12">
+      <Button asChild variant="outline" size="lg">
+        <a href="/about">Meet the Team</a>
+      </Button>
+    </div>
+  </div>
+</section>
