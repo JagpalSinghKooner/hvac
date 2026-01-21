@@ -1,6 +1,7 @@
 ---
 import { getEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import HeroSection from '@/components/sections/HeroSection.astro';
 
 const businessProfile = await getEntry('business', 'profile');
 if (!businessProfile) {
@@ -13,5 +14,5 @@ const business = businessProfile.data;
   title={`${business.business.legal_name} | HVAC Services Guelph & Southern Ontario`}
   description={(business as any).copy_blocks.short_description}
 >
-  <h1>Homepage</h1>
+  <HeroSection />
 </BaseLayout>
