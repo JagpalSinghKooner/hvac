@@ -1,0 +1,50 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SolutionSection from '@/components/sections/SolutionSection.astro';
+import ProblemSection from '@/components/sections/ProblemSection.astro';
+---
+
+<BaseLayout
+  title="Test SolutionSection Component"
+  description="Testing SolutionSection component across viewports and alternating pattern"
+>
+  <!-- Show ProblemSection first to verify alternating pattern -->
+  <ProblemSection
+    headline="The Problem: Unreliable Heating"
+    description="When your furnace fails, it's more than an inconvenience—it disrupts your entire household and creates stress you shouldn't have to manage."
+    painPoints={[
+      "Inconsistent temperatures leaving rooms uncomfortably cold",
+      "Rising energy costs with diminishing performance",
+      "Frequent breakdowns requiring expensive emergency repairs"
+    ]}
+    imageAlt="Furnace Problem Illustration"
+  />
+
+  <!-- SolutionSection with default layout (image left, text right) -->
+  <SolutionSection
+    headline="The B.A.P Approach: Premium Installation Done Right"
+    description="We don't just install equipment—we engineer complete heating solutions designed for your home's specific needs, backed by 30 years of expertise and accountability."
+    differentiators={[
+      "TSSA Licensed",
+      "30-Year Track Record",
+      "10-Year Warranty",
+      "Premium Equipment Only",
+      "Full System Design",
+      "Local Accountability"
+    ]}
+    imageAlt="Professional HVAC Installation"
+  />
+
+  <!-- Test reversed prop -->
+  <SolutionSection
+    headline="Reversed Layout Test"
+    description="This section tests the reversed prop to ensure the image can appear on the right when needed for layout variety."
+    differentiators={[
+      "Test Badge One",
+      "Test Badge Two",
+      "Test Badge Three"
+    ]}
+    imageAlt="Reversed Layout Test"
+    reversed={true}
+  />
+</BaseLayout>
