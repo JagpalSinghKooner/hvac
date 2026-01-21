@@ -572,6 +572,57 @@ const serviceCity = defineCollection({
       })
       .optional(),
 
+    // OPTIONAL local trust opener (100-150 words about why city trusts B.A.P)
+    localTrustOpener: z.string().optional(),
+
+    // OPTIONAL local problem (city-specific heating/cooling challenges)
+    localProblem: z
+      .object({
+        headline: z.string(),
+        description: z.string(),
+        citySpecificIssues: z.array(z.string()),
+      })
+      .optional(),
+
+    // OPTIONAL local solution (B.A.P's approach in this city)
+    localSolution: z
+      .object({
+        headline: z.string(),
+        description: z.string(),
+      })
+      .optional(),
+
+    // OPTIONAL local benefits (city-specific advantages)
+    localBenefits: z
+      .array(
+        z.object({
+          title: z.string(),
+          description: z.string(),
+          icon: z.string().optional(),
+        })
+      )
+      .optional(),
+
+    // OPTIONAL local savings (rebates and financing specific to city)
+    localSavings: z
+      .object({
+        headline: z.string(),
+        description: z.string(),
+        localRebates: z.string().optional(),
+      })
+      .optional(),
+
+    // OPTIONAL local gallery images (completed projects in this city)
+    localGalleryImages: z
+      .array(
+        z.object({
+          src: z.string(), // Image path (e.g., /images/projects/guelph-furnace-1.jpg)
+          alt: z.string(), // Accessibility description
+          caption: z.string().optional(), // Optional caption below image
+        })
+      )
+      .optional(),
+
     // Workflow fields
     workflowStatus: z.enum(['published', 'draft', 'review']),
     reviewedBy: z.string().optional(),
