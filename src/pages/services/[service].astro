@@ -1,6 +1,15 @@
 ---
 import { getCollection, type CollectionEntry, getEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import ServiceHeroSection from '@/components/sections/ServiceHeroSection.astro';
+import ServiceBenefitsSection from '@/components/sections/ServiceBenefitsSection.astro';
+import ServiceProcessSection from '@/components/sections/ServiceProcessSection.astro';
+import ServiceSavingsSection from '@/components/sections/ServiceSavingsSection.astro';
+import ServiceFAQSection from '@/components/sections/ServiceFAQSection';
+import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel';
+import RelatedServicesSection from '@/components/sections/RelatedServicesSection.astro';
+import FinalCTASection from '@/components/sections/FinalCTASection.astro';
+import { getRelatedServices } from '@/utils/getInternalLinks';
 
 export async function getStaticPaths() {
   const allServices = await getCollection('services');
@@ -25,11 +34,147 @@ if (!businessProfile) {
   throw new Error('Business profile not found');
 }
 const business = businessProfile.data;
+
+// Get service content
+const { Content } = await service.render();
+
+// Get FAQs filtered by this service
+const allFaqs = await getCollection('faqs');
+const serviceFaqs = allFaqs
+  .filter(
+    (faq) =>
+      faq.data.status === 'live' &&
+      faq.data.workflowStatus === 'published' &&
+      faq.data.scopes.some((scope) => scope === `service:${service.slug}` || scope === 'general')
+  )
+  .sort((a, b) => a.data.priority - b.data.priority)
+  .slice(0, 6)
+  .map((faq) => ({
+    question: faq.data.question,
+    answer: faq.data.answer,
+  }));
+
+// Get reviews filtered by this service
+const allReviews = await getCollection('reviews');
+const serviceReviews = allReviews
+  .filter(
+    (review) =>
+      review.data.status === 'live' &&
+      review.data.workflowStatus === 'published' &&
+      review.data.serviceSlug === service.slug
+  )
+  .sort((a, b) => {
+    if (a.data.priority !== b.data.priority) {
+      return a.data.priority - b.data.priority;
+    }
+    return new Date(b.data.reviewDate).getTime() - new Date(a.data.reviewDate).getTime();
+  })
+  .slice(0, 9);
+
+// If not enough service-specific reviews, get general reviews
+const reviewsToShow =
+  serviceReviews.length >= 3
+    ? serviceReviews
+    : allReviews
+        .filter(
+          (review) =>
+            review.data.status === 'live' && review.data.workflowStatus === 'published'
+        )
+        .sort((a, b) => {
+          if (a.data.priority !== b.data.priority) {
+            return a.data.priority - b.data.priority;
+          }
+          return new Date(b.data.reviewDate).getTime() - new Date(a.data.reviewDate).getTime();
+        })
+        .slice(0, 9);
+
+// Get related services
+const relatedServices = await getRelatedServices(
+  service.slug,
+  service.data.category,
+  3
+);
 ---
 
 <BaseLayout
   title={service.data.seoTitle || `${service.data.title} | ${business.business.legal_name}`}
   description={service.data.seoDescription || service.data.description}
 >
-  <h1>{service.data.title}</h1>
+  <!-- Service Hero Section -->
+  <ServiceHeroSection
+    title={service.data.title}
+    description={service.data.description}
+    category={service.data.category}
+    serviceType={service.data.serviceType}
+    phoneNumber={business.contact.phone_e164}
+    phoneDisplay={business.contact.phone_display}
+  />
+
+  <!-- Service Content (Markdown) -->
+  {Content && (
+    <section class="py-12 md:py-16 bg-background">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto prose prose-neutral dark:prose-invert prose-headings:font-bold prose-a:text-primary">
+          <Content />
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Service Benefits Section (valueProps) -->
+  {service.data.valueProps && service.data.valueProps.length > 0 && (
+    <ServiceBenefitsSection
+      benefits={service.data.valueProps}
+      headline="Why Choose Us"
+    />
+  )}
+
+  <!-- Service Process Section (processSteps) -->
+  {service.data.processSteps && service.data.processSteps.length > 0 && (
+    <ServiceProcessSection
+      steps={service.data.processSteps}
+      headline="Our Process"
+    />
+  )}
+
+  <!-- Service Savings Section -->
+  {service.data.savings && (
+    <ServiceSavingsSection
+      headline={service.data.savings.headline}
+      description={service.data.savings.description}
+      bullets={service.data.savings.bullets}
+      rebateInfo={service.data.savings.rebateInfo}
+      financingNote={service.data.savings.financingNote}
+    />
+  )}
+
+  <!-- Service FAQ Section -->
+  {serviceFaqs.length > 0 && (
+    <ServiceFAQSection
+      client:load
+      faqs={serviceFaqs}
+      headline="Frequently Asked Questions"
+    />
+  )}
+
+  <!-- Testimonials -->
+  {reviewsToShow.length > 0 && (
+    <TestimonialsCarousel
+      client:load
+      reviews={reviewsToShow}
+      googleRating={business.reputation.google_rating}
+      googleReviewCount={business.reputation.google_review_count}
+    />
+  )}
+
+  <!-- Related Services -->
+  {relatedServices.length > 0 && (
+    <RelatedServicesSection
+      services={relatedServices}
+      headline="Related Services"
+    />
+  )}
+
+  <!-- Final CTA -->
+  <FinalCTASection />
 </BaseLayout>

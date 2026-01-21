@@ -10,6 +10,13 @@ export interface InternalLink {
 }
 
 /**
+ * Extended InternalLink with description (for services)
+ */
+export interface ServiceLink extends InternalLink {
+  description: string;
+}
+
+/**
  * Get related services in the same category
  * @param currentServiceSlug - The current service slug to exclude
  * @param category - The category to filter by
@@ -20,7 +27,7 @@ export async function getRelatedServices(
   currentServiceSlug: string,
   category: string,
   limit: number = 3
-): Promise<InternalLink[]> {
+): Promise<ServiceLink[]> {
   try {
     const services = await getCollection('services');
 
@@ -35,6 +42,7 @@ export async function getRelatedServices(
         title: service.data.title,
         href: `/services/${service.slug}`,
         slug: service.slug,
+        description: service.data.description,
       }));
   } catch (error) {
     console.error('Error fetching related services:', error);
