@@ -1,0 +1,33 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ProblemSection from '@/components/sections/ProblemSection.astro';
+---
+
+<BaseLayout
+  title="Test ProblemSection Component"
+  description="Testing ProblemSection component across viewports"
+>
+  <ProblemSection
+    headline="When Your Furnace Fails, Everything Stops"
+    description="A broken furnace isn't just uncomfortable—it's disruptive. Cold nights, frozen pipes, and the worry of when the next breakdown will happen all take a toll on your peace of mind."
+    painPoints={[
+      "Uneven heating leaving rooms cold while others overheat",
+      "Rising energy bills with no improvement in comfort",
+      "Strange noises signaling imminent system failure",
+      "Constant repairs that never quite fix the problem"
+    ]}
+    imageAlt="Furnace Problem Illustration"
+  />
+
+  <ProblemSection
+    headline="Reversed Layout Test"
+    description="This section tests the reversed prop to ensure alternating layouts work correctly."
+    painPoints={[
+      "Test point one",
+      "Test point two",
+      "Test point three"
+    ]}
+    imageAlt="Reversed Layout Test"
+    reversed={true}
+  />
+</BaseLayout>

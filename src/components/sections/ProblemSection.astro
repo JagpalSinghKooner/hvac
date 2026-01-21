@@ -1,0 +1,68 @@
+---
+interface Props {
+  headline: string;
+  description: string;
+  painPoints: string[];
+  imageAlt?: string;
+  reversed?: boolean;
+}
+
+const { headline, description, painPoints, imageAlt, reversed = false } = Astro.props;
+---
+
+<section class="py-16 md:py-20 lg:py-24 bg-muted/30">
+  <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+      <!-- Text Content (Left by default, right if reversed) -->
+      <div class={`space-y-6 ${reversed ? 'md:order-2' : ''}`}>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
+          {headline}
+        </h2>
+
+        <p class="text-lg md:text-xl text-muted-foreground leading-relaxed">
+          {description}
+        </p>
+
+        {painPoints && painPoints.length > 0 && (
+          <ul class="space-y-4 mt-8" role="list">
+            {painPoints.map((point) => (
+              <li class="flex items-start gap-4 group">
+                <span class="flex-shrink-0 w-1.5 h-1.5 bg-destructive rounded-full mt-2.5 transition-transform group-hover:scale-150" aria-hidden="true"></span>
+                <span class="text-base md:text-lg text-foreground/90 leading-relaxed">
+                  {point}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      <!-- Image Placeholder (Right by default, left if reversed) -->
+      <div class={reversed ? 'md:order-1' : ''}>
+        <div class="bg-muted aspect-video rounded-xl flex items-center justify-center text-muted-foreground text-sm shadow-sm border border-border/50 transition-shadow hover:shadow-md">
+          {imageAlt || "Furnace Problem Image — 800×600"}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Import refined serif for headlines */
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap');
+
+  h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  /* Subtle animation for pain points on hover */
+  li {
+    transition: transform 0.2s ease;
+  }
+
+  li:hover {
+    transform: translateX(4px);
+  }
+</style>
