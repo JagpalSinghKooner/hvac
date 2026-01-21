@@ -1,6 +1,12 @@
 ---
-import { getCollection, type CollectionEntry, getEntry } from 'astro:content';
+import { getCollection, type CollectionEntry, getEntry, render } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import LocationHeroSection from '@/components/sections/LocationHeroSection.astro';
+import LocationServicesGrid from '@/components/sections/LocationServicesGrid.astro';
+import SiblingLocationsSection from '@/components/sections/SiblingLocationsSection.astro';
+import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel';
+import FinalCTASection from '@/components/sections/FinalCTASection.astro';
+import { getSiblingLocations } from '@/utils/getInternalLinks';
 
 export async function getStaticPaths() {
   const allLocations = await getCollection('locations');
@@ -18,16 +24,102 @@ type Props = {
 
 const { location } = Astro.props;
 
+// Get business profile
 const businessProfile = await getEntry('business', 'profile');
 if (!businessProfile) {
   throw new Error('Business profile not found');
 }
 const business = businessProfile.data;
+
+// Get all services
+const allServices = await getCollection('services');
+const liveServices = allServices.filter((service) => service.data.status === 'live');
+
+// Transform services for LocationServicesGrid
+const services = liveServices.map((service) => ({
+  title: service.data.title,
+  slug: service.slug,
+  category: service.data.category,
+}));
+
+// Get sibling locations in the same region
+const siblingLocationsRaw = await getSiblingLocations(location.data.region, location.slug);
+const siblingLocations = siblingLocationsRaw.map((loc) => ({
+  name: loc.title,
+  slug: loc.slug,
+}));
+
+// Get reviews (try to filter by location if reviews have citySlug field)
+const allReviews = await getCollection('reviews');
+const locationReviews = allReviews.filter(
+  (review) => review.data.status === 'live' && review.data.citySlug === location.slug
+);
+
+// If fewer than 3 location-specific reviews, use all live reviews
+const reviews = locationReviews.length >= 3
+  ? locationReviews.slice(0, 9)
+  : allReviews
+      .filter((review) => review.data.status === 'live')
+      .sort((a, b) => {
+        // Sort by priority first, then date
+        if (a.data.priority !== b.data.priority) {
+          return (b.data.priority || 0) - (a.data.priority || 0);
+        }
+        return new Date(b.data.reviewDate).getTime() - new Date(a.data.reviewDate).getTime();
+      })
+      .slice(0, 9);
+
+// Render markdown content
+const { Content } = await render(location);
 ---
 
 <BaseLayout
   title={location.data.seoTitle}
   description={location.data.seoDescription}
 >
-  <h1>HVAC Services in {location.data.title}</h1>
+  {/* Location Hero */}
+  <LocationHeroSection
+    cityName={location.data.title}
+    region={location.data.region}
+    businessName={business.business.legal_name}
+    phoneNumber={business.contact.phone_e164}
+    phoneDisplay={business.contact.phone_display}
+    yearsInBusiness={`Since ${business.business.established_year}`}
+    googleReviewCount={business.reputation.google_review_count}
+    googleRating={business.reputation.google_rating}
+  />
+
+  {/* Location Content (markdown body) */}
+  <section class="py-16 md:py-24">
+    <div class="container mx-auto px-4 md:px-6 max-w-4xl">
+      <div class="prose prose-neutral prose-lg max-w-none dark:prose-invert">
+        <Content />
+      </div>
+    </div>
+  </section>
+
+  {/* Location Services Grid */}
+  <LocationServicesGrid
+    locationSlug={location.slug}
+    locationName={location.data.title}
+    services={services}
+  />
+
+  {/* Sibling Locations */}
+  <SiblingLocationsSection
+    currentLocation={location.data.title}
+    region={location.data.region}
+    siblingLocations={siblingLocations}
+  />
+
+  {/* Testimonials Carousel */}
+  <TestimonialsCarousel
+    client:load
+    reviews={reviews}
+    googleRating={business.reputation.google_rating}
+    googleReviewCount={business.reputation.google_review_count}
+  />
+
+  {/* Final CTA */}
+  <FinalCTASection />
 </BaseLayout>
