@@ -584,6 +584,24 @@ const seasonalMessages = defineCollection({
 });
 
 // ============================================================================
+// 11. SERVICE CATEGORIES COLLECTION (Content)
+// ============================================================================
+const serviceCategories = defineCollection({
+  type: 'content',
+  schema: z.object({
+    // REQUIRED fields
+    title: z.string(),
+    description: z.string(),
+    seoTitle: z.string(),
+    seoDescription: z.string(),
+    order: z.number(),
+
+    // OPTIONAL fields
+    icon: z.string().optional(), // Lucide icon name
+  }),
+});
+
+// ============================================================================
 // EXPORT ALL COLLECTIONS
 // ============================================================================
 export const collections = {
@@ -597,4 +615,5 @@ export const collections = {
   reviews,
   'service-city': serviceCity,
   'seasonal-messages': seasonalMessages,
+  'service-categories': serviceCategories,
 };
