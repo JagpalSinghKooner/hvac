@@ -4,6 +4,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeroSection from '@/components/sections/HeroSection.astro';
 import ValuePropsGrid from '@/components/sections/ValuePropsGrid.astro';
 import BrandLogoTicker from '@/components/ui/BrandLogoTicker.astro';
+import ServiceCategoriesGrid from '@/components/sections/ServiceCategoriesGrid.astro';
 
 const businessProfile = await getEntry('business', 'profile');
 if (!businessProfile) {
@@ -19,4 +20,5 @@ const business = businessProfile.data;
   <HeroSection />
   <ValuePropsGrid />
   <BrandLogoTicker />
+  <ServiceCategoriesGrid />
 </BaseLayout>

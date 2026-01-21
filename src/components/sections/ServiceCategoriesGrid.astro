@@ -1,0 +1,28 @@
+---
+import { getEntry } from "astro:content";
+import CategoryCard from "@/components/cards/CategoryCard.astro";
+
+const businessProfile = await getEntry("business", "profile");
+
+// Get the first 5 categories for the homepage (Heating through Commercial)
+const categories = businessProfile?.data.services?.navbar_categories?.slice(0, 5) || [];
+---
+
+<section class="py-16 md:py-24 bg-muted">
+  <div class="container mx-auto px-4">
+    <div class="mb-12 text-center">
+      <h2 class="text-3xl font-bold tracking-tight md:text-4xl mb-4">
+        Complete HVAC Services
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        From installation to maintenance, we handle all your heating, cooling, and indoor air quality needs.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+      {categories.map((category) => (
+        <CategoryCard category={category} />
+      ))}
+    </div>
+  </div>
+</section>

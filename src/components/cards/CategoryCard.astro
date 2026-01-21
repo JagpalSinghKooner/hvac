@@ -1,0 +1,71 @@
+---
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Flame,
+  Snowflake,
+  Wind,
+  Droplet,
+  Building2
+} from "lucide-react";
+
+interface Props {
+  category: {
+    name: string;
+    key: string;
+  };
+}
+
+const { category } = Astro.props;
+
+// Map category keys to icons and descriptions
+const categoryConfig: Record<string, { icon: any; description: string }> = {
+  heating: {
+    icon: Flame,
+    description: "Furnaces, boilers, heat pumps, and ductless systems for reliable home heating."
+  },
+  cooling: {
+    icon: Snowflake,
+    description: "Air conditioning installation, repair, and maintenance for comfort all summer."
+  },
+  iaq: {
+    icon: Wind,
+    description: "Humidifiers, purifiers, and ventilation systems for healthier indoor air."
+  },
+  water_heating: {
+    icon: Droplet,
+    description: "Tank and tankless water heaters for efficient hot water solutions."
+  },
+  commercial: {
+    icon: Building2,
+    description: "Commercial HVAC systems and rooftop units for businesses of all sizes."
+  }
+};
+
+const config = categoryConfig[category.key] || {
+  icon: Building2,
+  description: "Professional HVAC services for your needs."
+};
+
+const Icon = config.icon;
+---
+
+<a
+  href={`/services/category/${category.key}`}
+  class="group block transition-transform duration-200 hover:scale-105"
+>
+  <Card className="h-full hover:shadow-lg transition-shadow duration-200">
+    <CardHeader>
+      <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+        <Icon className="h-6 w-6 text-primary" />
+      </div>
+      <CardTitle className="text-lg group-hover:text-primary transition-colors duration-200">
+        {category.name}
+      </CardTitle>
+    </CardHeader>
+    <CardContent>
+      <p class="text-sm text-muted-foreground leading-relaxed">
+        {config.description}
+      </p>
+    </CardContent>
+  </Card>
+</a>
