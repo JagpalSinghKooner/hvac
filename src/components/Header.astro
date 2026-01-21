@@ -1,0 +1,279 @@
+---
+import { getEntry } from 'astro:content';
+import { Badge } from './ui/badge';
+import { Button } from './ui/button';
+import MobileNav from './MobileNav';
+import { Phone, ChevronDown } from 'lucide-react';
+
+// Load business profile
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
+
+// Service categories from profile.yaml
+const serviceCategories = [
+  { name: 'Heating', href: '/services/category/heating' },
+  { name: 'Cooling', href: '/services/category/cooling' },
+  { name: 'Indoor Air Quality', href: '/services/category/iaq' },
+  { name: 'Water Heating', href: '/services/category/water-heating' },
+  { name: 'Commercial', href: '/services/category/commercial' },
+];
+
+const mainNavItems = [
+  { name: 'Locations', href: '/locations' },
+  { name: 'About', href: '/about' },
+  { name: 'Financing', href: '/financing' },
+  { name: 'Blog', href: '/blog' },
+];
+---
+
+<header class="header-sticky">
+  <div class="header-container">
+    {/* Logo and Badge */}
+    <div class="header-logo-group">
+      <a href="/" class="header-logo-link">
+        <div class="header-logo-placeholder">
+          <span class="header-logo-text">B.A.P</span>
+        </div>
+      </a>
+      <Badge variant="outline" className="header-badge">
+        Since {business.business.established_year}
+      </Badge>
+    </div>
+
+    {/* Desktop Navigation */}
+    <nav class="header-nav-desktop">
+      {/* Services Dropdown */}
+      <div class="header-dropdown-wrapper">
+        <button class="header-nav-link header-dropdown-trigger">
+          Services
+          <ChevronDown className="header-dropdown-icon" />
+        </button>
+        <div class="header-dropdown-menu">
+          <div class="header-dropdown-grid">
+            {serviceCategories.map((category) => (
+              <a href={category.href} class="header-dropdown-item">
+                {category.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Other Nav Items */}
+      {mainNavItems.map((item) => (
+        <a href={item.href} class="header-nav-link">
+          {item.name}
+        </a>
+      ))}
+    </nav>
+
+    {/* Desktop Phone CTA */}
+    <div class="header-cta-desktop">
+      <a href={`tel:${business.contact.phone_e164}`}>
+        <Button size="default" className="header-phone-button">
+          <Phone className="w-4 h-4" />
+          {business.contact.phone_display}
+        </Button>
+      </a>
+    </div>
+
+    {/* Mobile Navigation */}
+    <MobileNav
+      client:load
+      phone={business.contact.phone_display}
+      phoneE164={business.contact.phone_e164}
+      serviceCategories={serviceCategories}
+      mainNavItems={mainNavItems}
+    />
+  </div>
+</header>
+
+<style>
+  .header-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+    background: hsl(var(--background));
+    border-bottom: 1px solid hsl(var(--border));
+    backdrop-filter: blur(8px);
+    background-color: hsla(var(--background) / 0.95);
+  }
+
+  .header-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    height: 80px;
+    gap: 2rem;
+  }
+
+  /* Logo Group */
+  .header-logo-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .header-logo-link {
+    display: flex;
+    align-items: center;
+  }
+
+  .header-logo-placeholder {
+    width: 48px;
+    height: 48px;
+    background: hsl(var(--primary));
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: hsl(var(--primary-foreground));
+    letter-spacing: -0.02em;
+  }
+
+  .header-logo-text {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  .header-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.375rem 0.75rem;
+    letter-spacing: 0.01em;
+  }
+
+  /* Desktop Navigation */
+  .header-nav-desktop {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+  }
+
+  @media (min-width: 1024px) {
+    .header-nav-desktop {
+      display: flex;
+    }
+  }
+
+  .header-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: hsl(var(--foreground));
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    min-height: 44px;
+    white-space: nowrap;
+  }
+
+  .header-nav-link:hover {
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+
+  /* Services Dropdown */
+  .header-dropdown-wrapper {
+    position: relative;
+  }
+
+  .header-dropdown-trigger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .header-dropdown-icon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.2s ease;
+  }
+
+  .header-dropdown-wrapper:hover .header-dropdown-icon {
+    transform: rotate(180deg);
+  }
+
+  .header-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    min-width: 280px;
+    background: hsl(var(--background));
+    border: 1px solid hsl(var(--border));
+    border-radius: 8px;
+    padding: 0.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  }
+
+  .header-dropdown-wrapper:hover .header-dropdown-menu,
+  .header-dropdown-wrapper:focus-within .header-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .header-dropdown-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .header-dropdown-item {
+    display: block;
+    padding: 0.75rem 1rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: hsl(var(--foreground));
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.15s ease;
+    min-height: 44px;
+  }
+
+  .header-dropdown-item:hover {
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+
+  /* Desktop CTA */
+  .header-cta-desktop {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .header-cta-desktop {
+      display: block;
+    }
+  }
+
+  .header-phone-button {
+    min-height: 44px;
+    font-weight: 600;
+    font-size: 0.9375rem;
+  }
+
+  /* Mobile - Hidden on Desktop */
+  @media (min-width: 1024px) {
+    .header-nav-desktop + div + div {
+      display: none;
+    }
+  }
+</style>

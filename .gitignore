@@ -38,8 +38,8 @@ yarn-error.log*
 .temp/
 
 # Ralph autonomous loop working files
-scripts/ralph/progress.txt
-scripts/ralph/archive/
-scripts/ralph/.last-branch
+docs/project/ralph/progress.txt
+docs/project/ralph/archive/
+docs/project/ralph/.last-branch
 prd.json
 .claude/vendor/
