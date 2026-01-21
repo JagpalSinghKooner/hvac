@@ -331,6 +331,23 @@ const services = defineCollection({
       })
       .optional(),
 
+    // Phase 6B: Problem → Solution narrative flow
+    problemStatement: z
+      .object({
+        headline: z.string(),
+        description: z.string(),
+        painPoints: z.array(z.string()).optional(),
+      })
+      .optional(),
+
+    solutionApproach: z
+      .object({
+        headline: z.string(),
+        description: z.string(),
+        differentiators: z.array(z.string()).optional(),
+      })
+      .optional(),
+
     // Workflow fields
     workflowStatus: z.enum(['published', 'draft', 'review']),
     reviewedBy: z.string().optional(),

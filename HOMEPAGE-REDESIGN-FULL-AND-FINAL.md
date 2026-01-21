@@ -54,19 +54,25 @@ The original CRO audit was **fundamentally misaligned** with business goals. It 
 
 | Component | Status | Notes |
 |-----------|--------|-------|
-| **Pages** | ✅ 16 routes exist | 11 minimal (just h1), 5 functional |
-| **Content** | ✅ 9 collections populated | 725+ items (services, locations, reviews, etc.) |
-| **Layout** | ✅ BaseLayout.astro functional | SEO, schema, meta tags working |
-| **Components** | ❌ **NONE EXIST** | `src/components/` directory is **empty** |
-| **Foundation** | ✅ **COMPLETE** | shadcn MCP + CSS variables + Tailwind theme configured |
+| **Pages** | ✅ 628 pages built | Homepage, services, locations, service-city, blog, supporting |
+| **Content** | ✅ 11 collections | services (22), locations (25), service-city (550), blog (6), reviews (74+), FAQs (35) |
+| **Layout** | ✅ BaseLayout.astro | SEO, schema, meta tags, responsive |
+| **Components** | ✅ 21+ sections built | Hero, ValueProps, Categories, Testimonials, Footer, etc. |
+| **Foundation** | ✅ **COMPLETE** | shadcn MCP + CSS variables + brand colors |
 | **shadcn/ui** | ✅ **INSTALLED** | button, card, badge, separator, accordion, carousel, dialog, sheet |
-| **Build** | ✅ **PASSING** | 622 pages generate successfully |
-| **Collections Missing** | ❌ 2 collections | `homepage` and `service-categories` need creation |
-| **Routes Missing** | ❌ 2 routes | `/rebates` and `/services/category/[category]` |
+| **Build** | ✅ **PASSING** | 628 pages generate successfully |
+| **Branding** | ✅ **COMPLETE** | Colors, typography, spacing, accessibility (Phase 6 done) |
 
-**Build Scope:** Complete UI implementation from scratch using `/frontend-design` skill + shadcn/ui MCP. All 20+ components must be built, not modified.
+**Phases Complete:**
+- ✅ Phase 1: Foundation
+- ✅ Phase 2: Homepage Build (17 sections)
+- ✅ Phase 3: Page Templates (628 pages)
+- ✅ Phase 4: Integration & QA
+- ✅ Phase 5: Branding Polish (merged to main)
 
-**NEW APPROACH:** Use `/frontend-design` skill per section to generate premium UI designs, then implement using shadcn/ui components. This significantly accelerates development while maintaining quality.
+**Current Phase:** Phase 7 — Lead Conversion Page Architecture + Content
+
+**Key Gap:** Service and service-city pages have structure but lack lead conversion flow. Content exists but is thin (~200 words service-city, ~250 words locations). Need 800+ and 1000+ respectively.
 
 ---
 
@@ -92,34 +98,84 @@ The site will be built using:
 
 **Result:** Significantly faster development while maintaining quality and business requirements.
 
-### Workflow Per Section/Page
+### ⚠️ MANDATORY: NO WORK WITHOUT SKILLS
+
+**CRITICAL RULE:** Every component, every page, every piece of content MUST use skills. NO manual work. NO exceptions.
+
+### Workflow Per Component (MANDATORY SEQUENCE)
 
 ```
-1. Prepare Context
-   ├─ Section requirements (from this doc)
-   ├─ Business data (profile.yaml)
-   └─ Design constraints (NO gradients, premium, accessible)
+┌─────────────────────────────────────────────────────────────────┐
+│  STEP 1: SEARCH SHADCN (shadcn MCP) — MANDATORY                 │
+│  Tool: mcp__shadcn__search_items_in_registries                  │
+│  Action: Search for components to reuse (button, card, badge)   │
+│  Purpose: Avoid rebuilding what exists                          │
+└─────────────────────────────────────────────────────────────────┘
 
-2. Run /frontend-design
-   ├─ Section purpose & goal
-   ├─ Content requirements
-   ├─ Layout specifications
-   ├─ Available shadcn components
-   └─ Aesthetic constraints
+┌─────────────────────────────────────────────────────────────────┐
+│  STEP 2: DESIGN (/frontend-design skill) — MANDATORY            │
+│  Input:                                                          │
+│   ├─ Section requirements (from this doc)                       │
+│   ├─ Business data (profile.yaml)                               │
+│   ├─ Design constraints (NO gradients, premium, accessible)     │
+│   ├─ shadcn components to use (from Step 1)                     │
+│   ├─ Layout specifications                                      │
+│   └─ Aesthetic constraints                                      │
+│  Output: Complete implementation plan                           │
+└─────────────────────────────────────────────────────────────────┘
 
-3. Implement Design
-   ├─ Create Astro component
-   ├─ Use shadcn primitives (Button, Card, etc.)
-   ├─ Pull data from profile.yaml
-   ├─ Add placeholder images with dimensions
-   └─ Add new shadcn components via MCP if needed
+┌─────────────────────────────────────────────────────────────────┐
+│  STEP 3: IMPLEMENT — Use shadcn primitives                      │
+│  Action:                                                         │
+│   ├─ Create Astro component in src/components/sections/         │
+│   ├─ Import shadcn components (Button, Card, Badge, etc.)       │
+│   ├─ Pull data from profile.yaml                                │
+│   ├─ Add placeholder images: bg-muted aspect-video              │
+│   └─ Add new shadcn components via MCP if needed                │
+│  Quality Gate: pnpm build MUST pass                             │
+└─────────────────────────────────────────────────────────────────┘
 
-4. Verify
-   ├─ pnpm build (must pass)
-   ├─ Visual check (pnpm dev)
-   ├─ Mobile responsive
-   └─ Accessibility (touch targets ≥ 44px)
+┌─────────────────────────────────────────────────────────────────┐
+│  STEP 4: TEST (/agent-browser skill) — MANDATORY                │
+│  Test scenarios:                                                 │
+│   ├─ Mobile (375px): Stack, touch targets ≥ 44px                │
+│   ├─ Tablet (768px): Responsive layout                          │
+│   ├─ Desktop (1024px): Full layout                              │
+│   ├─ Interactions: CTAs, links, hover states                    │
+│   └─ Placeholder images render                                  │
+│  Quality Gate: All viewports pass                               │
+└─────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│  STEP 5: REVIEW (/web-design-guidelines) — MANDATORY            │
+│  Check:                                                          │
+│   ├─ WCAG AA color contrast                                     │
+│   ├─ Heading hierarchy (h1 → h2 → h3)                           │
+│   ├─ Touch targets ≥ 44px                                       │
+│   ├─ Keyboard navigation                                        │
+│   └─ Screen reader compatibility                                │
+│  Quality Gate: Fix ALL Critical/High issues                     │
+└─────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│  STEP 6: COMMIT — Only after all gates pass                     │
+│  Requirements:                                                   │
+│   ├─ pnpm build passes                                          │
+│   ├─ All quality gates passed                                   │
+│   └─ Update prd.json: passes: true                              │
+│  Action: git commit -m "feat: [Component Name]"                 │
+└─────────────────────────────────────────────────────────────────┘
 ```
+
+**Skills Summary by Work Type:**
+
+| Work Type | Required Skills (in order) |
+|-----------|----------------------------|
+| New component | shadcn MCP search → `/frontend-design` → `/agent-browser` → `/web-design-guidelines` |
+| Redesign component | Read existing → shadcn MCP search → `/frontend-design` → `/agent-browser` → `/web-design-guidelines` |
+| Content generation | `/orchestrator` → `/seo-content` (or other content skill) |
+| Marketing copy | `/orchestrator` → `/direct-response-copy` |
+| Strategy | `/orchestrator` → `/positioning-angles` or `/keyword-research` or `/brand-voice` |
 
 ### Foundation Status (COMPLETE ✓)
 
@@ -874,6 +930,25 @@ Rebates:            /rebates
 
 ## Skills Execution Workflow
 
+### ⚠️ CRITICAL: NO WORK WITHOUT SKILLS — STRICT RULE
+
+**MANDATORY**: Every task MUST use skills. NO manual work. NO exceptions. NO shortcuts.
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  STRICT RULE: NO WORK EVER HAPPENS WITHOUT USING A SKILL        │
+│                                                                 │
+│  ✓ Component design       → /frontend-design (MANDATORY)        │
+│  ✓ Visual testing         → /agent-browser (MANDATORY)          │
+│  ✓ Accessibility review   → /web-design-guidelines (MANDATORY)  │
+│  ✓ Content generation     → /seo-content (MANDATORY)            │
+│  ✓ Marketing copy         → /orchestrator first, then others    │
+│  ✓ Strategy work          → /orchestrator first                 │
+│                                                                 │
+│  This is a speed optimization, not optional.                    │
+└─────────────────────────────────────────────────────────────────┘
+```
+
 ### ⚠️ CRITICAL: All Skills Execute Within Ralph
 
 Skills do NOT run independently. They execute within Ralph stories:
@@ -1214,14 +1289,87 @@ Run content skills for pages that need unique content:
 
 ---
 
-### Phase 6: Branding Polish
+### Phase 6: Branding Polish (COMPLETE ✓)
 
-**After functional site is complete:**
-- Update CSS variables with B.A.P brand colors (primary, secondary, accent)
-- Replace placeholder images with real photos (client provides)
-- Typography refinement
-- Spacing adjustments
-- Final UX polish
+**Status:** Merged to main on Jan 21, 2026
+
+**Completed:**
+- ✅ Brand colors defined (Primary: #1976D2, Secondary: #F5A623, Accent: Teal)
+- ✅ Colors applied to all components (buttons, cards, links, sections)
+- ✅ Typography refined (system fonts, responsive headings, prose styles)
+- ✅ Spacing standardized (py-16/20/24, gap-6/8, h-14 buttons)
+- ✅ Button & card polish (hover states, shadows, transitions)
+- ✅ Accessibility fixes (WCAG AA color contrast, heading hierarchy)
+- ✅ Build verified: 628 pages
+
+---
+
+### Phase 7: Lead Conversion Page Architecture + Content
+
+**Status:** NEXT — Requires PRD creation
+
+**Full Specification:** See [PHASE-6-LEAD-CONVERSION-ARCHITECTURE.md](PHASE-6-LEAD-CONVERSION-ARCHITECTURE.md)
+
+---
+
+#### Overview
+
+Phase 7 is a comprehensive redesign of service and service-city pages to create proper lead conversion page flows, followed by content generation to fill the structure.
+
+**Key Design Philosophy:**
+- **Alternating split layouts** (TEXT-LEFT/IMAGE-RIGHT → IMAGE-LEFT/TEXT-RIGHT)
+- **NO grids of boxes** for main content
+- **Horizontal scroll ONLY** for: certifications, brands, testimonials
+- **Placeholder images** during development (client adds photos later)
+
+---
+
+#### Phase Structure (5 Sub-Phases)
+
+| Phase | Stories | Branch | Description |
+|-------|---------|--------|-------------|
+| **Phase 6A** | 2 | `feature/phase-6a-strategy` | Keyword research + brand voice |
+| **Phase 6B** | 15 | `feature/phase-6b-architecture` | Schemas + components + templates |
+| **Phase 6C** | 3 | `feature/phase-6c-services` | Service content (22 pages) |
+| **Phase 6D** | 7 | `feature/phase-6d-service-city` | Service-city content (550 pages) |
+| **Phase 6E** | 5 | `feature/phase-6e-locations-seo` | Location content + SEO |
+
+**Total:** 32 stories across 5 sub-phases
+
+**Execution Order:** 6B (architecture) → 6A (strategy) → 6C → 6D → 6E
+
+---
+
+#### New Components (Phase 6B)
+
+**To Create:**
+- `src/components/sections/ProblemSection.astro`
+- `src/components/sections/SolutionSection.astro`
+- `src/components/sections/LocalTrustOpener.astro`
+- `src/components/sections/LocalProblemSection.astro`
+- `src/components/sections/LocalSolutionSection.astro`
+- `src/components/sections/LocalGallerySection.astro`
+- `src/components/sections/LocationServicesGrid.astro`
+
+**To Redesign:**
+- `src/components/sections/ServiceBenefitsSection.astro` (4-column grid → split layout)
+- `src/components/sections/ServiceSavingsSection.astro` (centered stack → split layout)
+
+---
+
+#### Success Metrics
+
+- **Service pages:** 22 pages with full lead conversion flow
+- **Service-city pages:** 550 pages with 800+ unique words, city-specific content
+- **Location pages:** 25 pages with 1000+ words
+- **Schema:** Service, Article, BreadcrumbList implemented
+- **Build:** Still passes with 628+ pages
+- **Content uniqueness:** 80%+ unique, NO city-swapping
+
+---
+
+**For detailed specifications, component designs (with ASCII layouts), schema definitions, and full user stories, see:**
+→ [PHASE-6-LEAD-CONVERSION-ARCHITECTURE.md](PHASE-6-LEAD-CONVERSION-ARCHITECTURE.md)
 
 ---
 
