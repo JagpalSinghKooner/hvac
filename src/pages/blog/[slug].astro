@@ -1,6 +1,10 @@
 ---
 import { getCollection, type CollectionEntry, getEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import FinalCTASection from '@/components/sections/FinalCTASection.astro';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Calendar, User } from 'lucide-react';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
@@ -23,11 +27,146 @@ if (!businessProfile) {
   throw new Error('Business profile not found');
 }
 const business = businessProfile.data;
+
+// Render blog post body
+const { Content } = await post.render();
+
+// Get related posts (same category)
+const allPosts = await getCollection('blog');
+const relatedPosts = allPosts
+  .filter((p) =>
+    p.data.workflowStatus === 'published' &&
+    p.slug !== post.slug &&
+    p.data.category === post.data.category
+  )
+  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
+  .slice(0, 3);
+
+// Format date helper
+const formatDate = (date: Date): string => {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+};
 ---
 
 <BaseLayout
   title={post.data.seoTitle || `${post.data.title} | ${business.business.legal_name}`}
   description={post.data.seoDescription || post.data.description}
 >
-  <h1>{post.data.title}</h1>
+  <!-- Blog Post Container -->
+  <article class="py-16 md:py-24">
+    <div class="container mx-auto px-4">
+      <!-- Post Header -->
+      <div class="max-w-4xl mx-auto mb-12">
+        <div class="flex items-center gap-4 mb-6 flex-wrap">
+          <Badge variant="secondary" className="text-sm">
+            {post.data.category}
+          </Badge>
+          <div class="flex items-center gap-2 text-sm text-muted-foreground">
+            <Calendar className="h-4 w-4" />
+            <time datetime={post.data.publishDate.toISOString()}>
+              {formatDate(post.data.publishDate)}
+            </time>
+          </div>
+          <div class="flex items-center gap-2 text-sm text-muted-foreground">
+            <User className="h-4 w-4" />
+            <span>{post.data.author}</span>
+          </div>
+        </div>
+
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+          {post.data.title}
+        </h1>
+
+        <p class="text-xl text-muted-foreground">
+          {post.data.description}
+        </p>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      {post.data.image && (
+        <div class="max-w-4xl mx-auto mb-12">
+          <div class="bg-muted aspect-video rounded-lg shadow-lg flex items-center justify-center">
+            <span class="text-muted-foreground">Featured Image — {post.data.title}</span>
+          </div>
+        </div>
+      )}
+
+      <!-- Post Content -->
+      <div class="max-w-4xl mx-auto mb-16">
+        <div class="prose prose-neutral dark:prose-invert max-w-none prose-lg">
+          <Content />
+        </div>
+      </div>
+
+      <!-- Author Bio Section -->
+      <div class="max-w-4xl mx-auto mb-16">
+        <Card className="border-primary/20">
+          <CardContent className="p-8">
+            <div class="flex items-start gap-6">
+              <div class="w-20 h-20 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                <User className="h-10 w-10 text-muted-foreground" />
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold mb-2">About {post.data.author}</h3>
+                <p class="text-muted-foreground">
+                  Our team of HVAC experts brings decades of combined experience serving Southern Ontario homeowners. We're committed to sharing practical advice to help you make informed decisions about your heating, cooling, and indoor air quality needs.
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <!-- Related Posts Section -->
+      {relatedPosts.length > 0 && (
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-3xl font-bold mb-8">Related Articles</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {relatedPosts.map((relatedPost) => (
+              <Card className="hover:shadow-lg transition-shadow">
+                <a href={`/blog/${relatedPost.slug}`} class="block">
+                  {relatedPost.data.image && (
+                    <div class="bg-muted aspect-video rounded-t-lg flex items-center justify-center">
+                      <span class="text-sm text-muted-foreground">Article Image</span>
+                    </div>
+                  )}
+                  <CardHeader>
+                    <div class="flex items-center gap-2 mb-2">
+                      <Badge variant="secondary" className="text-xs">
+                        {relatedPost.data.category}
+                      </Badge>
+                      <span class="text-xs text-muted-foreground">
+                        {formatDate(relatedPost.data.publishDate)}
+                      </span>
+                    </div>
+                    <CardTitle className="hover:underline text-lg line-clamp-2">
+                      {relatedPost.data.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p class="text-sm text-muted-foreground line-clamp-2">
+                      {relatedPost.data.description}
+                    </p>
+                  </CardContent>
+                </a>
+              </Card>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </article>
+
+  <!-- Final CTA Section -->
+  <FinalCTASection
+    headline="Need HVAC Help?"
+    description="Our team is here to answer your questions and provide expert service."
+    ctaText={business.contact.primary_cta?.long || "Call for Free Consultation"}
+    phoneNumber={business.contact.phone_e164}
+    phoneDisplay={business.contact.phone_display}
+  />
 </BaseLayout>
