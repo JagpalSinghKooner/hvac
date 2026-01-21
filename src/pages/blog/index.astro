@@ -1,17 +1,168 @@
 ---
-import { getEntry } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import FinalCTASection from '@/components/sections/FinalCTASection.astro';
+import { Calendar } from 'lucide-react';
 
 const businessProfile = await getEntry('business', 'profile');
 if (!businessProfile) {
   throw new Error('Business profile not found');
 }
-const business = businessProfile.data;
+const business = businessProfile.data.business;
+
+// Query all published blog posts
+const allPosts = await getCollection('blog', ({ data }) => {
+  return data.workflowStatus === 'published';
+});
+
+// Sort by publishDate desc
+const sortedPosts = allPosts.sort((a, b) => {
+  return b.data.publishDate.getTime() - a.data.publishDate.getTime();
+});
+
+// Get featured post (first featured post, or first post if none featured)
+const featuredPost = sortedPosts.find(post => post.data.featured) || sortedPosts[0];
+
+// Get remaining posts (exclude featured post)
+const remainingPosts = sortedPosts.filter(post => post.slug !== featuredPost?.slug);
+
+// Format date helper
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
 ---
 
 <BaseLayout
-  title={`Blog | ${business.business.legal_name}`}
-  description="HVAC tips and guides"
+  title={`HVAC Tips & Insights | ${business.legal_name}`}
+  description="Expert HVAC tips, guides, and insights for Southern Ontario homeowners. Stay informed about heating, cooling, and indoor air quality solutions."
 >
-  <h1>Blog</h1>
+  <!-- Hero Section -->
+  <section class="py-16 md:py-24 bg-gradient-to-b from-muted/50 to-background">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center space-y-4">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+          HVAC Tips & Insights
+        </h1>
+        <p class="text-lg text-muted-foreground">
+          Expert advice and guides to help you make informed decisions about your home's heating, cooling, and indoor air quality.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Post -->
+  {featuredPost && (
+    <section class="py-16 md:py-24">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto">
+          <div class="mb-6">
+            <Badge variant="default" className="text-sm">Featured Article</Badge>
+          </div>
+          <a href={`/blog/${featuredPost.slug}`} class="group block">
+            <Card className="overflow-hidden hover:shadow-xl transition-shadow">
+              <div class="grid md:grid-cols-2 gap-6">
+                <!-- Featured Image -->
+                <div class="bg-muted aspect-video md:aspect-auto flex items-center justify-center text-muted-foreground">
+                  {featuredPost.data.image ? (
+                    <div class="text-sm font-medium">Featured Image — {featuredPost.data.title}</div>
+                  ) : (
+                    <div class="text-sm font-medium">Featured Article Image</div>
+                  )}
+                </div>
+
+                <!-- Featured Content -->
+                <div class="p-6 flex flex-col justify-center space-y-4">
+                  <div class="flex items-center gap-3 text-sm text-muted-foreground">
+                    <Badge variant="outline">{featuredPost.data.category}</Badge>
+                    <span class="flex items-center gap-1">
+                      <Calendar className="h-4 w-4" />
+                      {formatDate(featuredPost.data.publishDate)}
+                    </span>
+                  </div>
+
+                  <CardTitle className="text-2xl md:text-3xl group-hover:underline">
+                    {featuredPost.data.title}
+                  </CardTitle>
+
+                  <p class="text-muted-foreground line-clamp-3">
+                    {featuredPost.data.description}
+                  </p>
+
+                  <div class="text-sm text-muted-foreground">
+                    By {featuredPost.data.author}
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- All Blog Posts Grid -->
+  <section class="py-16 md:py-24 bg-muted/50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+          Recent Articles
+        </h2>
+
+        {remainingPosts.length > 0 ? (
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {remainingPosts.map((post) => (
+              <a href={`/blog/${post.slug}`} class="group">
+                <Card className="h-full hover:shadow-lg transition-shadow">
+                  <!-- Post Image -->
+                  <div class="bg-muted aspect-video flex items-center justify-center text-muted-foreground text-sm">
+                    {post.data.image ? (
+                      <div>Post Image — {post.data.title}</div>
+                    ) : (
+                      <div>Article Image</div>
+                    )}
+                  </div>
+
+                  <CardHeader>
+                    <div class="flex items-center gap-2 mb-2">
+                      <Badge variant="secondary" className="text-xs">
+                        {post.data.category}
+                      </Badge>
+                      <span class="text-xs text-muted-foreground">
+                        {formatDate(post.data.publishDate)}
+                      </span>
+                    </div>
+                    <CardTitle className="text-xl group-hover:underline">
+                      {post.data.title}
+                    </CardTitle>
+                  </CardHeader>
+
+                  <CardContent>
+                    <p class="text-muted-foreground line-clamp-2 mb-4">
+                      {post.data.description}
+                    </p>
+                    <div class="text-sm text-muted-foreground">
+                      By {post.data.author}
+                    </div>
+                  </CardContent>
+                </Card>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <p class="text-center text-muted-foreground">
+            No additional articles available at this time.
+          </p>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <FinalCTASection />
 </BaseLayout>
