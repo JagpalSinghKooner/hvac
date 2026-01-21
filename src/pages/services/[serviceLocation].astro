@@ -1,55 +1,218 @@
 ---
 import { getEntry, getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import ServiceHeroSection from '@/components/sections/ServiceHeroSection.astro';
+import LocalContextSection from '@/components/sections/LocalContextSection.astro';
+import ServiceBenefitsSection from '@/components/sections/ServiceBenefitsSection.astro';
+import ServiceProcessSection from '@/components/sections/ServiceProcessSection.astro';
+import LocalProofSection from '@/components/sections/LocalProofSection.astro';
+import ServiceSavingsSection from '@/components/sections/ServiceSavingsSection.astro';
+import ServiceFAQSection from '@/components/sections/ServiceFAQSection';
+import RelatedServicesSection from '@/components/sections/RelatedServicesSection.astro';
+import FinalCTASection from '@/components/sections/FinalCTASection.astro';
+import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel';
+import { getServiceCityLinks } from '@/utils/getInternalLinks';
 
 export async function getStaticPaths() {
-  const businessProfile = await getEntry('business', 'profile');
+  const serviceCityEntries = await getCollection('service-city');
 
-  if (!businessProfile || !businessProfile.data.services?.list || !businessProfile.data.coverage?.regions) {
-    throw new Error('Business profile missing required services or coverage data');
-  }
+  const paths = serviceCityEntries.map((entry) => {
+    const urlSlug = `${entry.data.serviceSlug}-${entry.data.locationSlug}-on`;
 
-  const allServices = Object.values(businessProfile.data.services.list).flat();
-  const allLocations = businessProfile.data.coverage.regions.flatMap((r) => r.locations);
-
-  const paths = [];
-  for (const service of allServices) {
-    for (const location of allLocations) {
-      const urlSlug = `${service.slug}-${location.slug}-on`;
-
-      paths.push({
-        params: { serviceLocation: urlSlug },
-        props: {
-          service,
-          location,
-        },
-      });
-    }
-  }
+    return {
+      params: { serviceLocation: urlSlug },
+      props: {
+        serviceCityEntry: entry,
+      },
+    };
+  });
 
   return paths;
 }
 
 type Props = {
-  service: { title: string; slug: string };
-  location: { name: string; slug: string };
+  serviceCityEntry: CollectionEntry<'service-city'>;
 };
 
-const { service, location } = Astro.props;
+const { serviceCityEntry } = Astro.props;
+const serviceCityData = serviceCityEntry.data;
 
+// Get business profile
 const businessProfile = await getEntry('business', 'profile');
 if (!businessProfile) {
   throw new Error('Business profile not found');
 }
 const business = businessProfile.data;
 
-const seoTitle = `${service.title} in ${location.name}, ON | ${business.business.legal_name}`;
-const seoDescription = `Professional ${service.title.toLowerCase()} services in ${location.name}, Ontario.`;
+// Get parent service data
+const parentService = await getEntry('services', serviceCityData.serviceSlug);
+if (!parentService) {
+  throw new Error(`Parent service not found: ${serviceCityData.serviceSlug}`);
+}
+const serviceData = parentService.data;
+
+// Get parent location data
+const parentLocation = await getEntry('locations', serviceCityData.locationSlug);
+if (!parentLocation) {
+  throw new Error(`Parent location not found: ${serviceCityData.locationSlug}`);
+}
+const locationData = parentLocation.data;
+
+// Render service-city body content
+const { Content } = await serviceCityEntry.render();
+
+// Get FAQs filtered by service scope
+const allFAQs = await getCollection('faqs');
+const serviceFAQs = allFAQs
+  .filter(
+    (faq) =>
+      faq.data.status === 'live' &&
+      (faq.data.scopes?.includes(`service:${serviceCityData.serviceSlug}`) ||
+        faq.data.scopes?.includes('general'))
+  )
+  .sort((a, b) => {
+    if (a.data.priority && !b.data.priority) return -1;
+    if (!a.data.priority && b.data.priority) return 1;
+    return 0;
+  })
+  .slice(0, 6)
+  .map((faq) => ({
+    question: faq.data.question,
+    answer: faq.data.answer,
+  }));
+
+// Get reviews - try to get reviews for this service
+const allReviews = await getCollection('reviews');
+let filteredReviews = allReviews.filter(
+  (review) =>
+    review.data.status === 'live' &&
+    review.data.workflowStatus === 'published' &&
+    review.data.serviceSlug === serviceCityData.serviceSlug
+);
+
+// If fewer than 3 service-specific reviews, use all live reviews
+if (filteredReviews.length < 3) {
+  filteredReviews = allReviews.filter(
+    (review) => review.data.status === 'live' && review.data.workflowStatus === 'published'
+  );
+}
+
+const reviewsToShow = filteredReviews
+  .sort((a, b) => {
+    if (a.data.priority !== b.data.priority) {
+      return a.data.priority - b.data.priority;
+    }
+    return new Date(b.data.reviewDate).getTime() - new Date(a.data.reviewDate).getTime();
+  })
+  .slice(0, 9);
+
+// Get related services (same service in other cities)
+const relatedServiceCityLinks = await getServiceCityLinks(serviceCityData.serviceSlug);
+const relatedServices = relatedServiceCityLinks
+  .filter((link) => link.slug !== serviceCityData.locationSlug) // Exclude current location
+  .slice(0, 6)
+  .map((link) => ({
+    title: `${serviceData.title} in ${link.title}`,
+    slug: `${serviceCityData.serviceSlug}-${link.slug}-on`,
+    description: `Professional ${serviceData.title.toLowerCase()} services in ${link.title}, Ontario.`,
+  }));
+
+// Prepare props for sections
+const heroTitle = serviceCityData.title;
+const heroDescription = serviceCityData.seoDescription;
+
+const benefits =
+  serviceData.valueProps?.map((vp) => ({
+    title: vp.title,
+    description: vp.description,
+    icon: vp.icon || 'check',
+  })) || [];
+
+const processSteps =
+  serviceData.processSteps?.map((ps) => ({
+    step: ps.step,
+    title: ps.title,
+    description: ps.description,
+  })) || [];
+
+const savingsData = serviceData.savings
+  ? {
+      headline: serviceData.savings.headline,
+      description: serviceData.savings.description,
+      bullets: serviceData.savings.bullets,
+      rebateInfo: serviceData.savings.rebateInfo,
+      financingNote: serviceData.savings.financingNote,
+    }
+  : null;
 ---
 
-<BaseLayout
-  title={seoTitle}
-  description={seoDescription}
->
-  <h1>{service.title} in {location.name}</h1>
+<BaseLayout title={serviceCityData.seoTitle} description={serviceCityData.seoDescription}>
+  <ServiceHeroSection
+    title={heroTitle}
+    description={heroDescription}
+    category={serviceData.category}
+    phoneNumber={business.contact.phone_e164}
+    phoneDisplay={business.contact.phone_display}
+  />
+
+  {
+    serviceCityData.localContext && (
+      <LocalContextSection
+        cityName={locationData.title}
+        serviceName={serviceData.title}
+        content={serviceCityData.localContext}
+      />
+    )
+  }
+
+  <div class="prose prose-neutral dark:prose-invert max-w-4xl mx-auto px-4 md:px-6 py-12">
+    <Content />
+  </div>
+
+  {benefits.length > 0 && <ServiceBenefitsSection benefits={benefits} />}
+
+  {processSteps.length > 0 && <ServiceProcessSection steps={processSteps} />}
+
+  {
+    serviceCityData.localProof && (
+      <LocalProofSection
+        testimonial={serviceCityData.localProof.testimonial}
+        customerName={serviceCityData.localProof.customerName}
+        customerLocation={serviceCityData.localProof.customerLocation}
+        result={serviceCityData.localProof.result}
+      />
+    )
+  }
+
+  {
+    savingsData && (
+      <ServiceSavingsSection
+        headline={savingsData.headline}
+        description={savingsData.description}
+        bullets={savingsData.bullets}
+        rebateInfo={savingsData.rebateInfo}
+        financingNote={savingsData.financingNote}
+      />
+    )
+  }
+
+  {serviceFAQs.length > 0 && <ServiceFAQSection client:load faqs={serviceFAQs} />}
+
+  {
+    reviewsToShow.length > 0 && (
+      <TestimonialsCarousel
+        client:load
+        reviews={reviewsToShow}
+        googleRating={business.reputation.google_rating}
+        googleReviewCount={business.reputation.google_review_count}
+      />
+    )
+  }
+
+  {relatedServices.length > 0 && <RelatedServicesSection services={relatedServices} />}
+
+  <FinalCTASection
+    phoneNumber={business.contact.phone_e164}
+    phoneDisplay={business.contact.phone_display}
+  />
 </BaseLayout>
