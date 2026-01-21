@@ -1,0 +1,182 @@
+---
+import { getCollection, type CollectionEntry, getEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Phone, ArrowRight } from 'lucide-react';
+import ExpertConsultationSection from '@/components/sections/ExpertConsultationSection.astro';
+import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel';
+import FinalCTASection from '@/components/sections/FinalCTASection.astro';
+
+export async function getStaticPaths() {
+  const allCategories = await getCollection('service-categories');
+
+  return allCategories.map((category) => ({
+    params: { category: category.slug },
+    props: { category },
+  }));
+}
+
+type Props = {
+  category: CollectionEntry<'service-categories'>;
+};
+
+const { category } = Astro.props;
+
+// Load business profile
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
+
+// Get all services in this category
+const allServices = await getCollection('services');
+const categoryServices = allServices.filter(
+  (service) =>
+    service.data.category === category.slug &&
+    service.data.status === 'live' &&
+    service.data.workflowStatus === 'published'
+);
+
+// Get reviews for testimonials (filter by category if possible, otherwise show all)
+const allReviews = await getCollection('reviews');
+const categoryReviews = allReviews.filter((review) => {
+  if (review.data.status !== 'live' || review.data.workflowStatus !== 'published') {
+    return false;
+  }
+
+  // Try to match review's service to this category
+  const reviewService = allServices.find((s) => s.slug === review.data.serviceSlug);
+  return reviewService?.data.category === category.slug;
+});
+
+// If not enough category-specific reviews, show all live reviews
+const reviewsToShow = categoryReviews.length >= 3 ? categoryReviews : allReviews.filter(
+  (review) => review.data.status === 'live' && review.data.workflowStatus === 'published'
+);
+
+// Sort reviews by priority and date
+const sortedReviews = reviewsToShow
+  .sort((a, b) => {
+    if (a.data.priority !== b.data.priority) {
+      return a.data.priority - b.data.priority;
+    }
+    return new Date(b.data.reviewDate).getTime() - new Date(a.data.reviewDate).getTime();
+  })
+  .slice(0, 9);
+
+const { Content } = await category.render();
+---
+
+<BaseLayout
+  title={category.data.seoTitle}
+  description={category.data.seoDescription}
+>
+  <!-- Category Hero Section -->
+  <section class="relative w-full bg-gradient-to-b from-muted/50 to-background py-16 md:py-24">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center space-y-6">
+        <!-- Category Title -->
+        <div class="space-y-4">
+          <Badge variant="secondary" className="text-sm font-medium">
+            {categoryServices.length} Service{categoryServices.length !== 1 ? 's' : ''} Available
+          </Badge>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+            {category.data.title}
+          </h1>
+        </div>
+
+        <!-- Category Description -->
+        <p class="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+          {category.data.description}
+        </p>
+
+        <!-- CTA -->
+        <div class="pt-4">
+          <a
+            href={`tel:${business.contact.phone_e164}`}
+            class="inline-flex"
+          >
+            <Button size="lg" className="h-14 px-8 text-lg font-semibold gap-2">
+              <Phone className="h-5 w-5" />
+              Call for Expert Advice
+            </Button>
+          </a>
+          <p class="mt-3 text-sm text-muted-foreground">
+            {business.contact.phone_display}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Content (Markdown) -->
+  <section class="py-12 md:py-16 bg-background">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto prose prose-neutral dark:prose-invert prose-headings:font-bold prose-a:text-primary">
+        <Content />
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="py-16 md:py-24 bg-muted/30">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+          Our {category.data.title}
+        </h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Professional solutions for your home's comfort and efficiency
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        {categoryServices.map((service) => (
+          <Card className="h-full hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="text-xl">
+                <a
+                  href={`/services/${service.slug}`}
+                  class="hover:text-primary transition-colors"
+                >
+                  {service.data.title}
+                </a>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p class="text-sm text-muted-foreground line-clamp-3">
+                {service.data.description}
+              </p>
+              <a
+                href={`/services/${service.slug}`}
+                class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+              >
+                Learn More
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Expert Consultation Section -->
+  <ExpertConsultationSection />
+
+  <!-- Testimonials -->
+  {sortedReviews.length > 0 && (
+    <TestimonialsCarousel
+      client:load
+      reviews={sortedReviews}
+      googleRating={business.reputation.google_rating}
+      googleReviewCount={business.reputation.google_review_count}
+    />
+  )}
+
+  <!-- Final CTA -->
+  <FinalCTASection />
+</BaseLayout>
