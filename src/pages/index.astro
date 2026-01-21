@@ -15,6 +15,7 @@ import BlogPreviewSection from '@/components/sections/BlogPreviewSection.astro';
 import CertificationsSection from '@/components/sections/CertificationsSection.astro';
 import FinalCTASection from '@/components/sections/FinalCTASection.astro';
 import StickyPhoneDrawer from '@/components/cta/StickyPhoneDrawer';
+import ExitIntentModal from '@/components/modals/ExitIntentModal';
 
 const businessProfile = await getEntry('business', 'profile');
 if (!businessProfile) {
@@ -61,6 +62,14 @@ const installationReviews = allReviews
 
   <!-- Sticky Phone Drawer (appears when scrolling up) -->
   <StickyPhoneDrawer
+    client:load
+    phoneDisplay={business.contact.phone_display}
+    phoneE164={business.contact.phone_e164}
+    email={business.contact.email}
+  />
+
+  <!-- Exit Intent Modal (appears on exit intent) -->
+  <ExitIntentModal
     client:load
     phoneDisplay={business.contact.phone_display}
     phoneE164={business.contact.phone_e164}
