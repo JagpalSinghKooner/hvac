@@ -1,0 +1,35 @@
+label: "Certified Dealer"
+heading: "We Install & Service Premium Brands"
+logos:
+  - src: "placeholder-logo-carrier-200x100"
+    alt: "Carrier"
+    brand: "Carrier"
+
+  - src: "placeholder-logo-daikin-200x100"
+    alt: "Daikin"
+    brand: "Daikin"
+
+  - src: "placeholder-logo-lennox-200x100"
+    alt: "Lennox"
+    brand: "Lennox"
+
+  - src: "placeholder-logo-trane-200x100"
+    alt: "Trane"
+    brand: "Trane"
+
+  - src: "placeholder-logo-york-200x100"
+    alt: "York"
+    brand: "York"
+
+  - src: "placeholder-logo-goodman-200x100"
+    alt: "Goodman"
+    brand: "Goodman"
+
+  - src: "placeholder-logo-rheem-200x100"
+    alt: "Rheem"
+    brand: "Rheem"
+
+  - src: "placeholder-logo-bryant-200x100"
+    alt: "Bryant"
+    brand: "Bryant"
+speed: "normal"

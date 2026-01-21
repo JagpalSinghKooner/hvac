@@ -1,39 +1,13 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry, getEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import ServiceHero from '@/components/hero/ServiceHero.astro';
-import ValuePropsGrid from '@/components/sections/ValuePropsGrid.astro';
-import ProcessSteps from '@/components/sections/ProcessSteps.astro';
-import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel.astro';
-import Section from '@/components/layout/Section.astro';
-import Container from '@/components/layout/Container.astro';
-import PhoneCTA from '@/components/cta/PhoneCTA.astro';
-import BookingCTA from '@/components/cta/BookingCTA.astro';
-
-// NEW: Component imports
-import TrustBadges from '@/components/TrustBadges.astro';
-import BenefitsSection from '@/components/sections/BenefitsSection.astro';
-import CommonProblemsSection from '@/components/sections/CommonProblemsSection.astro';
-import PricingTransparencySection from '@/components/sections/PricingTransparencySection.astro';
-import FAQAccordion from '@/components/sections/FAQAccordion.astro';
-import RelatedServicesSection from '@/components/sections/RelatedServicesSection.astro';
-import QuickQuoteConversionSection from '@/components/sections/QuickQuoteConversionSection.astro';
-import ServiceSchema from '@/components/schema/ServiceSchema.astro';
-
-// NEW: Data imports
-import { getServiceContent, hasServiceContent } from '@/data/serviceContent';
-import { getServiceFAQs } from '@/data/faqs';
 
 export async function getStaticPaths() {
-  // Get all services
   const allServices = await getCollection('services');
-
-  // Filter for live and published services only
   const publishedServices = allServices.filter(
     (service) => service.data.status === 'live' && service.data.workflowStatus === 'published'
   );
 
-  // Generate paths
   return publishedServices.map((service) => ({
     params: { service: service.slug },
     props: { service },
@@ -45,168 +19,17 @@ type Props = {
 };
 
 const { service } = Astro.props;
-const { Content } = await service.render();
 
-// Slug normalization function to handle slug variations
-function normalizeSlugForContent(slug: string): string | undefined {
-  // Try exact match first (handles furnace-installation, furnace-repair, etc.)
-  if (hasServiceContent(slug)) {
-    return slug;
-  }
-
-  // Try removing common suffixes for slug variations
-  const baseSuffixes = ['-installation', '-repair', '-maintenance'];
-  for (const suffix of baseSuffixes) {
-    if (slug.endsWith(suffix)) {
-      const baseSlug = slug.replace(suffix, '');
-      if (hasServiceContent(baseSlug)) {
-        return baseSlug;
-      }
-    }
-  }
-
-  return undefined;
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
 }
-
-// Normalize slug for content lookup
-const contentSlug = normalizeSlugForContent(service.slug);
-
-// Fetch service content (benefits + problems)
-const serviceContent = contentSlug ? getServiceContent(contentSlug) : undefined;
-
-// Fetch FAQs (falls back to generalFAQs if service-specific not found)
-const faqs = contentSlug ? getServiceFAQs(contentSlug) : getServiceFAQs('');
-
-// Extract individual data arrays for easier access
-const benefits = serviceContent?.benefits;
-const problems = serviceContent?.problems;
-
-// Category-based theming
-const isHeating = service.data.category === 'heating';
-const isCooling = service.data.category === 'cooling';
-
-// Background for category-specific sections
-const categoryBg = isHeating
-  ? 'bg-secondary-50/30'
-  : isCooling
-    ? 'bg-primary-50/30'
-    : 'bg-gray-50';
-
-// Hero gradient variant
-const heroGradient = isHeating ? 'gradient-warm' : 'gradient-cool';
-
-// CTA button variant for PhoneCTA (use 'emergency' for heating to get warm gradient)
-const ctaVariant = isHeating ? 'emergency' : 'hero';
+const business = businessProfile.data;
 ---
 
-<BaseLayout title={service.data.seoTitle} description={service.data.seoDescription}>
-  <ServiceSchema
-    slot="head"
-    serviceTitle={service.data.title}
-    serviceDescription={service.data.seoDescription}
-  />
-
-  <!-- 1. ServiceHero - gradient-mesh (warm/cool based on category) -->
-  <Section background={heroGradient} padding="lg">
-    <ServiceHero service={service.data} />
-  </Section>
-
-  <!-- 2. TrustBadges - white background -->
-  <TrustBadges />
-
-  <!-- 3. BenefitsSection - category background (secondary-50/30 or primary-50/30) -->
-  {benefits && benefits.length > 0 && (
-    <Section background="none" fullWidth class={categoryBg}>
-      <BenefitsSection
-        benefits={benefits}
-        heading={`${service.data.title} Benefits`}
-        columns={2}
-      />
-    </Section>
-  )}
-
-  <!-- 4. CommonProblemsSection - white background -->
-  {problems && problems.length > 0 && (
-    <CommonProblemsSection
-      problems={problems}
-      variant="accordion"
-      heading="Common Problems We Solve"
-      showCTA={true}
-    />
-  )}
-
-  <!-- 5. ValuePropsGrid - muted (gray-50) -->
-  {service.data.valueProps && service.data.valueProps.length > 0 && (
-    <Section background="muted" fullWidth>
-      <ValuePropsGrid valueProps={service.data.valueProps} heading="Why Choose Us for This Service" />
-    </Section>
-  )}
-
-  <!-- 6. Content section (prose) - white background -->
-  <Section padding="lg">
-    <Container size="narrow">
-      <article class="prose prose-lg max-w-none">
-        <Content />
-      </article>
-    </Container>
-  </Section>
-
-  <!-- 7. ProcessSteps - category background -->
-  {service.data.processSteps && service.data.processSteps.length > 0 && (
-    <Section background="none" fullWidth class={categoryBg}>
-      <ProcessSteps steps={service.data.processSteps} />
-    </Section>
-  )}
-
-  <!-- 8. TestimonialsCarousel - white background -->
-  <TestimonialsCarousel
-    service={service.data.title}
-    heading={`${service.data.title} Reviews`}
-    limit={6}
-    variant="card"
-    autoplay={true}
-  />
-
-  <!-- 9. PricingTransparencySection - primary-light (bg-primary-50/30) -->
-  <Section background="primary-light" fullWidth>
-    <PricingTransparencySection
-      heading="Transparent, No-Surprise Pricing"
-      showPricingCards={false}
-      showCTA={true}
-    />
-  </Section>
-
-  <!-- 10. FAQAccordion - white background -->
-  {faqs && faqs.length > 0 && (
-    <FAQAccordion faqs={faqs} />
-  )}
-
-  <!-- 11. RelatedServicesSection - muted (gray-50) -->
-  <Section background="muted" fullWidth>
-    <RelatedServicesSection
-      currentService={{
-        slug: service.slug,
-        category: service.data.category
-      }}
-      limit={3}
-      variant="compact"
-    />
-  </Section>
-
-  <!-- 12. Final CTA with gradient background -->
-  <Section padding="lg" class="bg-gradient-to-b from-primary-50 to-white">
-    <Container size="narrow" class="text-center">
-      <h2 class="font-heading text-h2 mb-4">Ready to Get Started?</h2>
-      <p class="font-body text-body-lg text-gray-600 mb-8">
-        Contact us today for expert {service.data.title.toLowerCase()} service.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <PhoneCTA variant={ctaVariant} showBadge={true} />
-        <BookingCTA variant="hero" />
-      </div>
-    </Container>
-  </Section>
-
-  <!-- 13. QuickQuote Conversion Section - primary-light (conversion focus) -->
-  <QuickQuoteConversionSection />
+<BaseLayout
+  title={service.data.seoTitle || `${service.data.title} | ${business.business.legal_name}`}
+  description={service.data.seoDescription || service.data.description}
+>
+  <h1>{service.data.title}</h1>
 </BaseLayout>

@@ -1,29 +1,11 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry, getEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import LocationHero from '@/components/hero/LocationHero.astro';
-import LocalTrustSignals from '@/components/sections/LocalTrustSignals.astro';
-import ServicesGrid from '@/components/sections/ServicesGrid.astro';
-import NeighborhoodsSection from '@/components/sections/NeighborhoodsSection.astro';
-import LocalBusinessSchema from '@/components/schema/LocalBusinessSchema.astro';
-import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel.astro';
-import Section from '@/components/layout/Section.astro';
-import Container from '@/components/layout/Container.astro';
-import PhoneCTA from '@/components/cta/PhoneCTA.astro';
-import BookingCTA from '@/components/cta/BookingCTA.astro';
-import FAQAccordion from '@/components/sections/FAQAccordion.astro';
-import QuickQuoteConversionSection from '@/components/sections/QuickQuoteConversionSection.astro';
-import TrustBadges from '@/components/TrustBadges.astro';
-import { getServiceFAQs } from '@/data/faqs';
 
 export async function getStaticPaths() {
-  // Get all locations
   const allLocations = await getCollection('locations');
-
-  // Filter for published locations only
   const publishedLocations = allLocations.filter((location) => location.data.workflowStatus === 'published');
 
-  // Generate paths
   return publishedLocations.map((location) => ({
     params: { location: location.slug },
     props: { location },
@@ -35,99 +17,17 @@ type Props = {
 };
 
 const { location } = Astro.props;
-const { Content } = await location.render();
 
-// Fetch general FAQs for location pages
-const faqs = getServiceFAQs(''); // General FAQs
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
 ---
 
-<BaseLayout title={location.data.seoTitle} description={location.data.seoDescription}>
-  <!-- TODO: Add real latitude/longitude coordinates for better local SEO -->
-  <LocalBusinessSchema
-    locationName={`B.A.P Heating & Cooling - ${location.data.title}`}
-    city={location.data.title}
-    latitude={0}
-    longitude={0}
-  />
-
-  <!-- 1. LocationHero - gradient-cool (already has gradient text on location name) -->
-  <LocationHero location={{ name: location.data.title, region: location.data.region }} />
-
-  <!-- 2. TrustBadges - white background -->
-  <TrustBadges />
-
-  <!-- 3. Content section (prose) - white background -->
-  <Section padding="lg">
-    <Container size="narrow">
-      <article class="prose prose-lg max-w-none">
-        <Content />
-      </article>
-    </Container>
-  </Section>
-
-  <!-- 4. ServicesGrid - muted (gray-50) -->
-  <Section background="muted" fullWidth>
-    <ServicesGrid
-      heading={`Our HVAC Services in ${location.data.title}`}
-      subheading="Professional heating and cooling solutions for your home or business"
-      variant="compact"
-      columns={3}
-      linkType="location-specific"
-      locationSlug={location.slug}
-      limit={9}
-      showViewAll={false}
-    />
-  </Section>
-
-  <!-- 5. NeighborhoodsSection - white background -->
-  <NeighborhoodsSection
-    citySlug={location.slug}
-    heading={`Neighborhoods We Serve in ${location.data.title}`}
-    columns={4}
-  />
-
-  <!-- 6. LocalTrustSignals - primary-light (bg-primary-50/30) -->
-  <Section background="primary-light" fullWidth>
-    <LocalTrustSignals
-      location={location.data.title}
-      heading={`Trusted HVAC Experts in ${location.data.title}`}
-      showHeading={true}
-      variant="grid"
-    />
-  </Section>
-
-  <!-- 7. TestimonialsCarousel - white background -->
-  <TestimonialsCarousel
-    location={location.data.title}
-    heading={`Trusted by ${location.data.title} Homeowners`}
-    limit={6}
-    showGoogleRating={true}
-    autoplay={true}
-  />
-
-  <!-- 8. FAQAccordion - muted (gray-50) -->
-  {faqs && faqs.length > 0 && (
-    <Section background="muted" fullWidth>
-      <FAQAccordion faqs={faqs} />
-    </Section>
-  )}
-
-  <!-- 9. Final CTA Section - white background -->
-  <Section padding="lg">
-    <Container size="narrow" class="text-center">
-      <h2 class="font-heading text-h2 mb-4">
-        Need HVAC Service in {location.data.title}?
-      </h2>
-      <p class="font-body text-body-lg text-gray-600 mb-8">
-        Contact us today for reliable heating and cooling services in your area.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <PhoneCTA variant="hero" showBadge={true} />
-        <BookingCTA variant="hero" />
-      </div>
-    </Container>
-  </Section>
-
-  <!-- 10. QuickQuote Conversion Section - primary-light (conversion focus) -->
-  <QuickQuoteConversionSection />
+<BaseLayout
+  title={location.data.seoTitle}
+  description={location.data.seoDescription}
+>
+  <h1>HVAC Services in {location.data.title}</h1>
 </BaseLayout>

@@ -36,3 +36,10 @@ yarn-error.log*
 # Temporary files
 *.tmp
 .temp/
+
+# Ralph autonomous loop working files
+scripts/ralph/progress.txt
+scripts/ralph/archive/
+scripts/ralph/.last-branch
+prd.json
+.claude/vendor/

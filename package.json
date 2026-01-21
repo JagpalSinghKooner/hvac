@@ -11,7 +11,10 @@
     "test": "playwright test",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed",
-    "test:report": "playwright show-report"
+    "test:report": "playwright show-report",
+    "ralph": "bash scripts/ralph/ralph.sh --tool claude",
+    "ralph:5": "bash scripts/ralph/ralph.sh 5 --tool claude",
+    "ralph:20": "bash scripts/ralph/ralph.sh 20 --tool claude"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",

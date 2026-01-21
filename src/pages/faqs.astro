@@ -1,43 +1,17 @@
 ---
-import { getCollection } from 'astro:content';
+import { getEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 
-const allFaqs = await getCollection('faqs');
-
-// Filter and sort published FAQs by priority
-const publishedFaqs = allFaqs
-  .filter((faq) => faq.data.status === 'live' && faq.data.workflowStatus === 'published')
-  .sort((a, b) => b.data.priority - a.data.priority);
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Frequently Asked Questions | B.A.P Heating & Cooling</title>
-    <meta
-      name="description"
-      content="Get answers to common HVAC questions about furnaces, air conditioners, heat pumps, installation, repair, and maintenance in Ontario."
-    />
-  </head>
-  <body>
-    <main>
-      <header>
-        <h1>Frequently Asked Questions</h1>
-        <p>Get answers to common HVAC questions from our experts</p>
-      </header>
-
-      <section>
-        {
-          publishedFaqs.map((faq) => (
-            <article>
-              <h2>{faq.data.question}</h2>
-              <div set:html={faq.data.answer} />
-              <hr />
-            </article>
-          ))
-        }
-      </section>
-    </main>
-  </body>
-</html>
+<BaseLayout
+  title={`FAQs | ${business.business.legal_name}`}
+  description="Frequently asked questions"
+>
+  <h1>FAQs</h1>
+</BaseLayout>

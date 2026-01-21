@@ -1,72 +1,27 @@
 ---
 import { getEntry, getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import ServiceHero from '@/components/hero/ServiceHero.astro';
-import ValuePropsGrid from '@/components/sections/ValuePropsGrid.astro';
-import ProcessSteps from '@/components/sections/ProcessSteps.astro';
-import Section from '@/components/layout/Section.astro';
-import Container from '@/components/layout/Container.astro';
-import PhoneCTA from '@/components/cta/PhoneCTA.astro';
-import BookingCTA from '@/components/cta/BookingCTA.astro';
 
 export async function getStaticPaths() {
-  // Get business profile (source of truth)
   const businessProfile = await getEntry('business', 'profile');
 
   if (!businessProfile || !businessProfile.data.services?.list || !businessProfile.data.coverage?.regions) {
     throw new Error('Business profile missing required services or coverage data');
   }
 
-  // Get all services and locations from business profile
   const allServices = Object.values(businessProfile.data.services.list).flat();
   const allLocations = businessProfile.data.coverage.regions.flatMap((r) => r.locations);
 
-  // Load service-city content collection
-  const serviceCityContent = await getCollection('service-city');
-
-  // Create a Map for quick lookup: "serviceSlug-locationSlug" -> entry
-  const serviceCityMap = new Map<string, CollectionEntry<'service-city'>>();
-  for (const entry of serviceCityContent) {
-    const key = `${entry.data.serviceSlug}-${entry.data.locationSlug}`;
-    serviceCityMap.set(key, entry);
-  }
-
-  // Load all service entries for content
-  const allServiceEntries = await getCollection('services');
-  const serviceEntriesMap = new Map<string, CollectionEntry<'services'>>();
-  for (const entry of allServiceEntries) {
-    serviceEntriesMap.set(entry.slug, entry);
-  }
-
-  // Load all location entries for content
-  const allLocationEntries = await getCollection('locations');
-  const locationEntriesMap = new Map<string, CollectionEntry<'locations'>>();
-  for (const entry of allLocationEntries) {
-    locationEntriesMap.set(entry.slug, entry);
-  }
-
-  // Generate all combinations
   const paths = [];
   for (const service of allServices) {
     for (const location of allLocations) {
-      // URL slug: service-slug-location-slug-on
       const urlSlug = `${service.slug}-${location.slug}-on`;
-
-      // Lookup key for service-city content
-      const lookupKey = `${service.slug}-${location.slug}`;
-
-      // Get full service and location entries
-      const serviceEntry = serviceEntriesMap.get(service.slug);
-      const locationEntry = locationEntriesMap.get(location.slug);
 
       paths.push({
         params: { serviceLocation: urlSlug },
         props: {
           service,
           location,
-          serviceEntry,
-          locationEntry,
-          serviceCityData: serviceCityMap.get(lookupKey), // May be undefined
         },
       });
     }
@@ -78,110 +33,23 @@ export async function getStaticPaths() {
 type Props = {
   service: { title: string; slug: string };
   location: { name: string; slug: string };
-  serviceEntry?: CollectionEntry<'services'>;
-  locationEntry?: CollectionEntry<'locations'>;
-  serviceCityData?: CollectionEntry<'service-city'>;
 };
 
-const { service, location, serviceEntry, locationEntry, serviceCityData } = Astro.props;
+const { service, location } = Astro.props;
 
-// Render markdown content if available
-const serviceCityContent = serviceCityData ? await serviceCityData.render() : null;
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
 
-// Build SEO title and description
-const seoTitle = serviceCityData
-  ? serviceCityData.data.seoTitle
-  : `${service.title} in ${location.name}, ON | B.A.P Heating & Cooling`;
-
-const seoDescription = serviceCityData
-  ? serviceCityData.data.seoDescription
-  : `Professional ${service.title.toLowerCase()} services in ${location.name}, Ontario. 24/7 emergency service, certified technicians, satisfaction guaranteed.`;
-
-const pageTitle = serviceCityData
-  ? serviceCityData.data.title
-  : `${service.title} in ${location.name}, ON`;
+const seoTitle = `${service.title} in ${location.name}, ON | ${business.business.legal_name}`;
+const seoDescription = `Professional ${service.title.toLowerCase()} services in ${location.name}, Ontario.`;
 ---
 
-<BaseLayout title={seoTitle} description={seoDescription}>
-  <ServiceHero
-    service={{
-      title: pageTitle,
-      description: seoDescription
-    }}
-  />
-
-  {serviceEntry?.data.valueProps && serviceEntry.data.valueProps.length > 0 && (
-    <ValuePropsGrid
-      valueProps={serviceEntry.data.valueProps}
-      heading={`Our ${service.title} Services in ${location.name}`}
-    />
-  )}
-
-  {serviceCityData?.data.localContext && (
-    <Section padding="lg" class="bg-muted/30">
-      <Container size="narrow">
-        <h2 class="text-3xl font-semibold mb-6">Why {location.name} Homeowners Choose Us</h2>
-        <div class="prose prose-lg max-w-none" set:html={serviceCityData.data.localContext} />
-      </Container>
-    </Section>
-  )}
-
-  <Section padding="lg">
-    <Container size="narrow">
-      <article class="prose prose-lg max-w-none">
-        {serviceCityContent ? (
-          <serviceCityContent.Content />
-        ) : (
-          <>
-            <h2>Serving {location.name} with Expert {service.title}</h2>
-            <p>
-              B.A.P Heating & Cooling provides professional {service.title.toLowerCase()} services throughout {location.name}, Ontario.
-              Our certified technicians are available 24/7 for emergency service, and all work is backed by our satisfaction guarantee.
-            </p>
-            <p>
-              Whether you need installation, repair, or maintenance, we're here to help. Contact us today to schedule service in {location.name}.
-            </p>
-          </>
-        )}
-      </article>
-    </Container>
-  </Section>
-
-  {serviceEntry?.data.processSteps && serviceEntry.data.processSteps.length > 0 && (
-    <ProcessSteps steps={serviceEntry.data.processSteps} />
-  )}
-
-  {serviceCityData?.data.localProof && (
-    <Section padding="lg" class="bg-muted/30">
-      <Container size="narrow">
-        <h2 class="text-3xl font-semibold mb-6">Real Results in {location.name}</h2>
-        <blockquote class="border-l-4 border-primary pl-6 italic">
-          <p class="text-lg mb-4">{serviceCityData.data.localProof.testimonial}</p>
-          <cite class="text-muted-foreground not-italic">
-            — {serviceCityData.data.localProof.customerName}, {serviceCityData.data.localProof.customerLocation}
-          </cite>
-          {serviceCityData.data.localProof.result && (
-            <p class="mt-4 font-semibold">
-              Result: {serviceCityData.data.localProof.result}
-            </p>
-          )}
-        </blockquote>
-      </Container>
-    </Section>
-  )}
-
-  <Section padding="lg">
-    <Container size="narrow" class="text-center">
-      <h2 class="text-3xl font-semibold mb-4">
-        Need {service.title} in {location.name}?
-      </h2>
-      <p class="text-lg text-muted-foreground mb-6">
-        Contact us today for professional service in your area.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <PhoneCTA variant="hero" showBadge={true} />
-        <BookingCTA variant="hero" />
-      </div>
-    </Container>
-  </Section>
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+>
+  <h1>{service.title} in {location.name}</h1>
 </BaseLayout>

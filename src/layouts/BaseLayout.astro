@@ -1,21 +1,14 @@
 ---
 import { getEntry } from 'astro:content';
-import Header from '@/components/Header.astro';
-import Footer from '@/components/Footer.astro';
-import Breadcrumbs from '@/components/Breadcrumbs.astro';
 
 interface Props {
   title: string;
   description: string;
   ogImage?: string;
   noindex?: boolean;
-  breadcrumbs?: Array<{
-    label: string;
-    href: string;
-  }>;
 }
 
-const { title, description, ogImage, noindex = false, breadcrumbs } = Astro.props;
+const { title, description, ogImage, noindex = false } = Astro.props;
 
 // Load business profile once (single source of truth)
 const businessProfile = await getEntry('business', 'profile');
@@ -90,16 +83,6 @@ const jsonLd = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Preconnect to Google Fonts for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <!-- Load font families with display=swap to prevent FOIT -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@400;600;700&family=Open+Sans:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    >
-
     <!-- Primary Meta Tags -->
     <title>{title}</title>
     <meta name="title" content={title} />
@@ -134,20 +117,11 @@ const jsonLd = {
     <!-- Additional head content (schemas, page-specific meta) -->
     <slot name="head" />
   </head>
-  <body class="min-h-screen flex flex-col antialiased font-body">
-    <!-- Header -->
-    <Header />
-
-    <!-- Breadcrumbs -->
-    <Breadcrumbs items={breadcrumbs} />
-
+  <body>
     <!-- Main Content -->
-    <main class="flex-grow">
+    <main>
       <slot />
     </main>
-
-    <!-- Footer -->
-    <Footer />
   </body>
 </html>
 

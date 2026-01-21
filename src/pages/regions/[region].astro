@@ -1,5 +1,6 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry, getEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
   const allRegions = await getCollection('regions');
@@ -16,40 +17,17 @@ type Props = {
 };
 
 const { region } = Astro.props;
-const { Content } = await region.render();
+
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{region.data.seoTitle}</title>
-    <meta name="description" content={region.data.seoDescription} />
-    {region.data.robots && <meta name="robots" content={region.data.robots} />}
-  </head>
-  <body>
-    <main>
-      <article>
-        <header>
-          <h1>{region.data.title}</h1>
-          <p>{region.data.description}</p>
-          <p>Primary City: {region.data.primaryCity}</p>
-        </header>
-
-        <!-- Main Content -->
-        <section>
-          <Content />
-        </section>
-
-        <!-- Cities List -->
-        <section>
-          <h2>Cities We Serve in {region.data.title}</h2>
-          <ul>
-            {region.data.cities.map((city) => <li>{city}</li>)}
-          </ul>
-        </section>
-      </article>
-    </main>
-  </body>
-</html>
+<BaseLayout
+  title={region.data.seoTitle || `${region.data.title} | ${business.business.legal_name}`}
+  description={region.data.seoDescription || region.data.description}
+>
+  <h1>{region.data.title}</h1>
+</BaseLayout>

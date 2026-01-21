@@ -1,0 +1,26 @@
+headline: "A Family Business Serving Families Since 1994"
+story: |
+  Founded by Paul Palmer over 30 years ago, B.A.P Heating & Cooling has been built on a simple principle: do the job right the first time, and stand behind your work for years to come.
+
+  We understand that choosing an HVAC system is a major investment. That's why we take the time to understand your needs, recommend the right solution, and install it with precision and care. When you work with B.A.P, you're not just getting a contractor — you're getting a partner who will be there for the lifetime of your system.
+
+  Our commitment to accountability and peace of mind has earned us the trust of homeowners throughout Southern Ontario. We're proud to be a family-owned business that treats every customer like family.
+familyImage: "placeholder-family-1200x800"
+teamMembers:
+  - name: "Paul Palmer"
+    role: "Owner & Founder"
+    image: "placeholder-team-paul-400x400"
+
+  - name: "Lead Technician"
+    role: "HVAC Specialist"
+    image: "placeholder-team-tech1-400x400"
+
+  - name: "Senior Installer"
+    role: "Installation Expert"
+    image: "placeholder-team-tech2-400x400"
+
+  - name: "Service Technician"
+    role: "Service & Maintenance"
+    image: "placeholder-team-tech3-400x400"
+ctaText: "Meet the Team"
+ctaLink: "/about"

@@ -1,56 +1,17 @@
 ---
-import { getCollection } from 'astro:content';
+import { getEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 
-const allReviews = await getCollection('reviews');
-
-// Filter and sort published reviews by priority
-const publishedReviews = allReviews
-  .filter((review) => review.data.status === 'live' && review.data.workflowStatus === 'published')
-  .sort((a, b) => b.data.priority - a.data.priority);
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Customer Reviews & Testimonials | B.A.P Heating & Cooling</title>
-    <meta name="description" content="Read verified customer reviews and testimonials for B.A.P Heating & Cooling Services in Ontario." />
-  </head>
-  <body>
-    <main>
-      <header>
-        <h1>Customer Reviews & Testimonials</h1>
-        <p>See what our customers say about our HVAC services</p>
-      </header>
-
-      <section>
-        {
-          publishedReviews.map((review) => (
-            <article>
-              <div>
-                <strong>{review.data.authorName}</strong>
-                {review.data.verified && <span> (Verified)</span>}
-              </div>
-              <div>
-                Rating: {'⭐'.repeat(review.data.rating)}
-              </div>
-              <p>{review.data.text}</p>
-              <p>
-                <small>
-                  Service: {review.data.serviceSlug}
-                  {review.data.citySlug && ` • Location: ${review.data.citySlug}`}
-                  {' • '}
-                  {review.data.reviewDate}
-                  {' • '}
-                  Source: {review.data.source}
-                </small>
-              </p>
-              <hr />
-            </article>
-          ))
-        }
-      </section>
-    </main>
-  </body>
-</html>
+<BaseLayout
+  title={`Reviews | ${business.business.legal_name}`}
+  description="Customer reviews and testimonials"
+>
+  <h1>Reviews</h1>
+</BaseLayout>

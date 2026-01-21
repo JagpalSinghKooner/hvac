@@ -1,0 +1,54 @@
+{
+  "project": "HVAC Homepage Redesign",
+  "branchName": "feature/homepage-sections",
+  "description": "Build premium homepage sections for B.A.P Heating & Cooling",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Create Hero Section Component",
+      "description": "As a visitor, I want to see a premium hero section with phone CTA so I can quickly contact B.A.P.",
+      "acceptanceCriteria": [
+        "HeroSection.astro created in src/components/sections/",
+        "Phone CTA uses shadcn Button component",
+        "Displays 'Since 1994 • 4.8★ from 407+ reviews' badge",
+        "Rebate mention visible: 'Up to $10,000 in rebates'",
+        "pnpm build passes",
+        "Verify in browser at localhost:4321"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": "Use /frontend-design skill first. Pull phone from profile.yaml"
+    },
+    {
+      "id": "US-002",
+      "title": "Create Value Props Grid",
+      "description": "As a visitor, I want to see trust signals so I know B.A.P is legitimate.",
+      "acceptanceCriteria": [
+        "ValuePropsGrid.astro created in src/components/sections/",
+        "4 cards: TSSA Licensed, 10-Year Warranty, 30+ Years, Certified Brand Dealer",
+        "Uses shadcn Card + Badge components",
+        "NO 24/7 emphasis (signals repair, not installation)",
+        "pnpm build passes"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": "Depends on US-001 being completed first"
+    },
+    {
+      "id": "US-003",
+      "title": "Create Brand Logo Ticker",
+      "description": "As a visitor, I want to see brand certifications so I trust the quality.",
+      "acceptanceCriteria": [
+        "BrandLogoTicker.astro created in src/components/ui/",
+        "Continuous horizontal scroll animation (CSS)",
+        "Pauses on hover (desktop)",
+        "Includes: Carrier, Daikin, Lennox logos (placeholders)",
+        "Label: 'Certified Dealer'",
+        "pnpm build passes"
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": "Use CSS animation, no JS required"
+    }
+  ]
+}

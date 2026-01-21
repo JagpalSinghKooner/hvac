@@ -1,0 +1,40 @@
+headline: "Real Projects Across Southern Ontario"
+subheadline: "See the quality and craftsmanship we deliver to homeowners like you"
+projects:
+  - image: "placeholder-project-1-800x600"
+    title: "Furnace Installation"
+    location: "Guelph, ON"
+    type: "Residential Heating"
+    caseStudySlug: null
+
+  - image: "placeholder-project-2-800x600"
+    title: "Central AC Installation"
+    location: "Kitchener, ON"
+    type: "Residential Cooling"
+    caseStudySlug: null
+
+  - image: "placeholder-project-3-800x600"
+    title: "Heat Pump System"
+    location: "Cambridge, ON"
+    type: "Residential Heating & Cooling"
+    caseStudySlug: null
+
+  - image: "placeholder-project-4-800x600"
+    title: "Commercial HVAC"
+    location: "Waterloo, ON"
+    type: "Commercial Installation"
+    caseStudySlug: null
+
+  - image: "placeholder-project-5-800x600"
+    title: "Boiler Installation"
+    location: "Elora, ON"
+    type: "Residential Heating"
+    caseStudySlug: null
+
+  - image: "placeholder-project-6-800x600"
+    title: "IAQ System"
+    location: "Fergus, ON"
+    type: "Indoor Air Quality"
+    caseStudySlug: null
+ctaText: "View All Projects"
+ctaLink: "/case-studies"

@@ -1,0 +1,32 @@
+heading: "Expert HVAC Services for Your Home"
+subheading: "From installation to maintenance, we've got you covered"
+categories:
+  - title: "Heating"
+    description: "Furnaces, boilers, heat pumps, and radiant heating systems"
+    icon: "flame"
+    href: "/services/category/heating"
+    accentColor: "heating"
+
+  - title: "Cooling"
+    description: "Air conditioning installation, repair, and maintenance"
+    icon: "snowflake"
+    href: "/services/category/cooling"
+    accentColor: "cooling"
+
+  - title: "Indoor Air Quality"
+    description: "Air purifiers, humidifiers, ventilation, and filtration systems"
+    icon: "wind"
+    href: "/services/category/indoor-air-quality"
+    accentColor: "iaq"
+
+  - title: "Water Heating"
+    description: "Tankless and traditional water heater installation and service"
+    icon: "droplet"
+    href: "/services/category/water-heating"
+    accentColor: "water"
+
+  - title: "Commercial HVAC"
+    description: "Complete HVAC solutions for commercial properties"
+    icon: "building"
+    href: "/services/category/commercial"
+    accentColor: "commercial"

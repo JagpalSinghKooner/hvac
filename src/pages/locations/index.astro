@@ -1,67 +1,17 @@
 ---
-import { getEntry, getCollection } from 'astro:content';
+import { getEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import Section from '@/components/layout/Section.astro';
-import Container from '@/components/layout/Container.astro';
-import ServiceAreaGrid from '@/components/sections/ServiceAreaGrid.astro';
-import PhoneCTA from '@/components/cta/PhoneCTA.astro';
-import BookingCTA from '@/components/cta/BookingCTA.astro';
 
 const businessProfile = await getEntry('business', 'profile');
 if (!businessProfile) {
   throw new Error('Business profile not found');
 }
 const business = businessProfile.data;
-
-const allRegions = await getCollection('regions');
-const publishedRegions = allRegions.filter(r => r.data.workflowStatus === 'published');
-
-const allLocations = await getCollection('locations');
-const publishedLocations = allLocations.filter(l => l.data.workflowStatus === 'published');
-
-const seoTitle = 'Service Areas - HVAC Services Across Southern Ontario | B.A.P Heating & Cooling';
-const seoDescription = `B.A.P Heating & Cooling serves ${publishedLocations.length}+ locations across Wellington County, Waterloo Region, Halton Region, Peel Region, Hamilton & Brant, and Dufferin County with 24/7 HVAC service.`;
 ---
 
-<BaseLayout title={seoTitle} description={seoDescription}>
-
-  <!-- Hero Section -->
-  <Section padding="lg" class="bg-gradient-to-b from-muted/30 to-background">
-    <Container size="narrow" class="text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-6">
-        Our Service Areas in Southern Ontario
-      </h1>
-      <p class="text-lg md:text-xl text-muted-foreground mb-4">
-        Professional HVAC services across {publishedLocations.length} locations
-        in {publishedRegions.length} regions
-      </p>
-      <p class="text-muted-foreground">
-        24/7 emergency service • 60-minute response time • Fully licensed & insured
-      </p>
-    </Container>
-  </Section>
-
-  <!-- Service Area Grid (Reuses existing component) -->
-  <ServiceAreaGrid
-    heading="Cities We Serve"
-    subheading="Emergency HVAC service available 24/7 across all locations below"
-    highlightEmergency={false}
-  />
-
-  <!-- CTA Section -->
-  <Section padding="lg">
-    <Container size="narrow" class="text-center">
-      <h2 class="text-3xl font-semibold mb-4">
-        Need HVAC Service in Your Area?
-      </h2>
-      <p class="text-lg text-muted-foreground mb-6">
-        Call us now for 24/7 emergency service or book online at your convenience.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <PhoneCTA variant="hero" showBadge={true} />
-        <BookingCTA variant="hero" />
-      </div>
-    </Container>
-  </Section>
-
+<BaseLayout
+  title={`Service Areas | ${business.business.legal_name}`}
+  description="HVAC services across Southern Ontario"
+>
+  <h1>Service Areas</h1>
 </BaseLayout>

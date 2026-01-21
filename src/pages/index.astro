@@ -1,138 +1,17 @@
 ---
-import { getEntry, getCollection } from 'astro:content';
+import { getEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import HomeHero from '@/components/hero/HomeHero.astro';
-import ValuePropsGrid from '@/components/sections/ValuePropsGrid.astro';
-import ServiceAreaGrid from '@/components/sections/ServiceAreaGrid.astro';
-import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel.astro';
-import EmergencyCTABanner from '@/components/cta/EmergencyCTABanner.astro';
-import ServicesGrid from '@/components/sections/ServicesGrid.astro';
-import CertificationsBadges from '@/components/sections/CertificationsBadges.astro';
-import QuickQuoteConversionSection from '@/components/sections/QuickQuoteConversionSection.astro';
-import Section from '@/components/layout/Section.astro';
-import OrganizationSchema from '@/components/schema/OrganizationSchema.astro';
 
 const businessProfile = await getEntry('business', 'profile');
 if (!businessProfile) {
   throw new Error('Business profile not found');
 }
 const business = businessProfile.data;
-
-// Home page value propositions
-const homeValueProps = [
-  {
-    title: '24/7 Emergency Service',
-    description: 'Available around the clock for all your heating and cooling emergencies. We\'re here when you need us most.',
-    icon: 'Clock'
-  },
-  {
-    title: 'TSSA Licensed',
-    description: 'Certified technicians with full TSSA licensing. Professional, qualified service you can trust.',
-    icon: 'Shield'
-  },
-  {
-    title: '10-Year Warranty',
-    description: 'Comprehensive parts and labour coverage on new installations. Your investment is protected.',
-    icon: 'Award'
-  },
-  {
-    title: 'Upfront Pricing',
-    description: 'No hidden fees or surprises. Clear, honest pricing before we start any work.',
-    icon: 'DollarSign'
-  },
-];
-
-// Fetch featured services (1 per category, 6 total)
-const allServices = await getCollection('services');
-const publishedServices = allServices.filter(
-  s => s.data.status === 'live' && s.data.workflowStatus === 'published'
-);
-
-const categories = ['heating', 'cooling', 'iaq', 'water-heating', 'commercial', 'plans'] as const;
-const featuredServices = categories
-  .map(cat => {
-    // First try to find priority service in category
-    let service = publishedServices.find(
-      s => s.data.category === cat && s.data.priority === true
-    );
-
-    // Fallback: get first service in category sorted by order
-    if (!service) {
-      service = publishedServices
-        .filter(s => s.data.category === cat)
-        .sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999))[0];
-    }
-
-    return service ? {
-      title: service.data.title,
-      slug: service.slug,
-      description: service.data.description,
-      icon: service.data.icon,
-      category: service.data.category
-    } : null;
-  })
-  .filter((service): service is NonNullable<typeof service> => service !== null); // Remove null entries with type guard
 ---
 
 <BaseLayout
   title={`${business.business.legal_name} | HVAC Services Guelph & Southern Ontario`}
   description={(business as any).copy_blocks.short_description}
 >
-  <OrganizationSchema slot="head" />
-
-  <!-- Hero Section (full-width, includes TrustBadges) -->
-  <HomeHero />
-
-  <!-- Emergency CTA Banner (full-width) -->
-  <EmergencyCTABanner variant="homepage" />
-
-  <!-- 1. Value Propositions - White background (info) -->
-  <Section padding="lg">
-    <ValuePropsGrid valueProps={homeValueProps} />
-  </Section>
-
-  <!-- 2. Featured Services - Muted background (full-width) -->
-  <Section background="muted" padding="lg">
-    <ServicesGrid
-      services={featuredServices}
-      heading="Our HVAC Services"
-      subheading="Comprehensive heating, cooling, and indoor air quality solutions for your home"
-      columns={3}
-      variant="compact"
-      showViewAll={true}
-    />
-  </Section>
-
-  <!-- 3. Service Area Grid - White background (info) -->
-  <Section padding="lg">
-    <ServiceAreaGrid
-      heading="Service Areas Across Southern Ontario"
-      subheading="Click any city below to learn more about our HVAC services in your area"
-    />
-  </Section>
-
-  <!-- 4. Customer Testimonials - Muted background (full-width) -->
-  <Section background="muted" padding="lg">
-    <TestimonialsCarousel
-      heading="What Our Customers Say"
-      subheading="Join hundreds of satisfied homeowners across Southern Ontario"
-      limit={9}
-      showVerifiedOnly={true}
-      autoplay={true}
-      autoplayInterval={5000}
-    />
-  </Section>
-
-  <!-- 5. Certifications & Licenses - White background (trust) -->
-  <Section padding="lg">
-    <CertificationsBadges
-      heading="Our Certifications & Licenses"
-      showHeading={true}
-      variant="full"
-      columns={3}
-    />
-  </Section>
-
-  <!-- 6. QuickQuote Conversion Section - Primary-light (conversion focus) -->
-  <QuickQuoteConversionSection />
+  <h1>Homepage</h1>
 </BaseLayout>

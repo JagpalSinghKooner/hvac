@@ -1,0 +1,18 @@
+headline: "Flexible Financing — Make Comfort Affordable"
+subheadline: "Multiple payment options to fit your budget"
+rebateHighlight: "Up to $10,000 in government rebates available"
+options:
+  - title: "0% Financing Available"
+    description: "Interest-free payment plans for qualified homeowners on approved credit"
+    icon: "percent"
+
+  - title: "Flexible Payment Plans"
+    description: "Monthly payment options that work with your budget"
+    icon: "calendar"
+
+  - title: "Government Rebates"
+    description: "Take advantage of federal and provincial incentive programs"
+    icon: "piggy-bank"
+ctaText: "View Full Details"
+ctaLink: "/financing"
+rebatesLink: "/rebates"

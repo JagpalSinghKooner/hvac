@@ -1,5 +1,6 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry, getEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
@@ -16,43 +17,17 @@ type Props = {
 };
 
 const { post } = Astro.props;
-const { Content } = await post.render();
 
-// Format date
-const publishDate = new Date(post.data.publishDate).toLocaleDateString('en-CA', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{post.data.seoTitle}</title>
-    <meta name="description" content={post.data.seoDescription} />
-  </head>
-  <body>
-    <main>
-      <article>
-        <header>
-          <h1>{post.data.title}</h1>
-          <p>{post.data.description}</p>
-          <p>
-            By {post.data.author} • {publishDate} • {post.data.category}
-          </p>
-          {post.data.featured && <span>Featured</span>}
-        </header>
-
-        {post.data.image && <img src={post.data.image} alt={post.data.title} />}
-
-        <!-- Main Content -->
-        <section>
-          <Content />
-        </section>
-      </article>
-    </main>
-  </body>
-</html>
+<BaseLayout
+  title={post.data.seoTitle || `${post.data.title} | ${business.business.legal_name}`}
+  description={post.data.seoDescription || post.data.description}
+>
+  <h1>{post.data.title}</h1>
+</BaseLayout>
