@@ -1,17 +1,94 @@
 ---
-import { getEntry } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import ReviewsGrid from '@/components/sections/ReviewsGrid';
+import FinalCTASection from '@/components/sections/FinalCTASection.astro';
+import { Star, ExternalLink } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
+// Get business profile
 const businessProfile = await getEntry('business', 'profile');
 if (!businessProfile) {
   throw new Error('Business profile not found');
 }
-const business = businessProfile.data;
+const business = businessProfile.data.business;
+const reputation = businessProfile.data.reputation;
+
+// Query all live reviews
+const allReviews = await getCollection('reviews', ({ data }) => {
+  return data.status === 'live';
+});
+
+// Sort reviews by priority then date
+const sortedReviews = allReviews.sort((a, b) => {
+  if (a.data.priority !== b.data.priority) {
+    return a.data.priority - b.data.priority;
+  }
+  return new Date(b.data.reviewDate).getTime() - new Date(a.data.reviewDate).getTime();
+});
+
+// Calculate average rating
+const avgRating = sortedReviews.length > 0
+  ? (sortedReviews.reduce((sum, review) => sum + review.data.rating, 0) / sortedReviews.length).toFixed(1)
+  : reputation.google_rating.toFixed(1);
+
+const totalReviews = reputation.google_review_count || sortedReviews.length;
+
+// Google Reviews URL
+const googleUrl = 'https://www.google.com/search?q=B.A.P+Heating+%26+Cooling+Services+Ltd';
 ---
 
 <BaseLayout
-  title={`Reviews | ${business.business.legal_name}`}
-  description="Customer reviews and testimonials"
+  title={`Customer Reviews | ${business.legal_name}`}
+  description={`Read ${totalReviews}+ verified customer reviews for B.A.P Heating & Cooling. See what Southern Ontario homeowners say about our HVAC services.`}
 >
-  <h1>Reviews</h1>
+  <!-- Hero Section -->
+  <section class="py-16 md:py-24 bg-gradient-to-b from-muted/50 to-background">
+    <div class="container mx-auto px-4 md:px-6 max-w-7xl">
+      <div class="max-w-3xl mx-auto text-center space-y-6">
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight">
+          Customer Reviews
+        </h1>
+        <p class="text-lg text-muted-foreground">
+          Real experiences from homeowners across Southern Ontario
+        </p>
+
+        <!-- Rating Badge -->
+        <div class="flex items-center justify-center gap-3">
+          <div class="flex items-center gap-1.5 px-6 py-3 bg-background rounded-full shadow-md border">
+            <Star className="h-6 w-6 fill-yellow-400 text-yellow-400" />
+            <span class="font-bold text-2xl">{avgRating}</span>
+            <span class="text-muted-foreground text-base">
+              from {totalReviews}+ reviews
+            </span>
+          </div>
+        </div>
+
+        <!-- Google Reviews CTA -->
+        <div class="pt-4">
+          <Button variant="outline" size="lg" asChild>
+            <a
+              href={googleUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="gap-2"
+            >
+              View All Reviews on Google
+              <ExternalLink className="h-4 w-4" />
+            </a>
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Grid with Filters -->
+  <section class="py-16 md:py-24">
+    <div class="container mx-auto px-4 md:px-6 max-w-7xl">
+      <ReviewsGrid reviews={sortedReviews} client:load />
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <FinalCTASection />
 </BaseLayout>
