@@ -1,17 +1,176 @@
 ---
-import { getEntry } from 'astro:content';
+import { getEntry, getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import FamilyStorySection from '@/components/sections/FamilyStorySection.astro';
+import ValuePropsGrid from '@/components/sections/ValuePropsGrid.astro';
+import CertificationsSection from '@/components/sections/CertificationsSection.astro';
+import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel';
+import FinalCTASection from '@/components/sections/FinalCTASection.astro';
+import { Shield, Users, Heart, Trophy } from 'lucide-react';
 
 const businessProfile = await getEntry('business', 'profile');
 if (!businessProfile) {
   throw new Error('Business profile not found');
 }
 const business = businessProfile.data;
+
+// Get reviews for testimonials
+const allReviews = await getCollection('reviews', ({ data }) => {
+  return data.workflowStatus === 'published';
+});
+
+// Sort and limit reviews
+const reviews = allReviews
+  .sort((a, b) => {
+    const priorityDiff = (b.data.priority || 0) - (a.data.priority || 0);
+    if (priorityDiff !== 0) return priorityDiff;
+    const dateA = a.data.reviewDate ? new Date(a.data.reviewDate).getTime() : 0;
+    const dateB = b.data.reviewDate ? new Date(b.data.reviewDate).getTime() : 0;
+    return dateB - dateA;
+  })
+  .slice(0, 9);
+
+// Calculate years in business
+const yearsInBusiness = new Date().getFullYear() - business.business.established_year;
+
+// Company values
+const companyValues = [
+  {
+    icon: 'Shield',
+    title: 'Accountability',
+    description: 'We stand behind every installation with a 10-year warranty on parts and labour. When we put our name on a job, we own it for the long haul.'
+  },
+  {
+    icon: 'Users',
+    title: 'Transparency',
+    description: 'No surprises, no hidden fees. We explain your options clearly, provide upfront pricing, and let you make informed decisions about your home.'
+  },
+  {
+    icon: 'Heart',
+    title: 'Respect',
+    description: 'Your home is your sanctuary. Our team treats every property with care, arrives on time, and leaves the workspace clean.'
+  },
+  {
+    icon: 'Trophy',
+    title: 'Expertise',
+    description: `${yearsInBusiness}+ years of experience means we've seen it all. We stay current with technology and training to provide the best solutions.`
+  }
+];
 ---
 
 <BaseLayout
   title={`About Us | ${business.business.legal_name}`}
-  description="Learn about our company"
+  description={`Learn about ${business.business.legal_name}, a family-owned HVAC company serving Southern Ontario since ${business.business.established_year}. ${yearsInBusiness}+ years of trusted service, expert installations, and 10-year warranty.`}
 >
-  <h1>About</h1>
+  <!-- Hero Section -->
+  <section class="py-16 md:py-24 bg-gradient-to-b from-muted/50 to-background">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center space-y-6">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+          About {business.business.legal_name}
+        </h1>
+        <p class="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
+          A family-owned HVAC company serving Southern Ontario since {business.business.established_year}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Story Section -->
+  <section class="py-16 md:py-24 bg-background">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Story</h2>
+        </div>
+
+        <div class="prose prose-neutral dark:prose-invert max-w-none prose-lg">
+          <p>
+            Founded in {business.business.established_year} by {business.business.owner_public.name},
+            B.A.P Heating & Cooling Services Ltd started with a simple commitment: provide honest,
+            reliable HVAC service that homeowners can count on. Over {yearsInBusiness}+ years,
+            we've built our reputation one installation at a time.
+          </p>
+
+          <p>
+            What began as a small operation in Guelph has grown to serve 25 cities across
+            Wellington County, Waterloo Region, Halton Region, Peel Region, Hamilton & Brant,
+            and Dufferin County. But even as we've expanded, our values haven't changed.
+          </p>
+
+          <p>
+            We're not the company that uses scare tactics or creates artificial urgency.
+            We don't believe in "3 slots left today" or midnight deadline pricing. Instead,
+            we focus on what matters: proper system sizing, quality installation, and standing
+            behind our work with a genuine 10-year warranty.
+          </p>
+
+          <p>
+            When you choose B.A.P, you're working with a team that's been in your community
+            for decades. We're the ones answering the phone at 2 AM when your furnace fails
+            in January. We're the ones who'll still be here in 10 years when you need service.
+            That's the difference a family business makes.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Values Section -->
+  <section class="py-16 md:py-24 bg-muted/30">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Values</h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+          These principles guide every decision we make and every installation we complete
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        {companyValues.map((value) => (
+          <div class="bg-background rounded-lg border border-border p-6 space-y-3 hover:shadow-lg transition-shadow">
+            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary">
+              {value.icon === 'Shield' && <Shield className="w-6 h-6" />}
+              {value.icon === 'Users' && <Users className="w-6 h-6" />}
+              {value.icon === 'Heart' && <Heart className="w-6 h-6" />}
+              {value.icon === 'Trophy' && <Trophy className="w-6 h-6" />}
+            </div>
+            <h3 class="text-xl font-semibold">{value.title}</h3>
+            <p class="text-muted-foreground">{value.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Family Story Section (Reused from Phase 2) -->
+  <FamilyStorySection />
+
+  <!-- Value Props Grid (Reused from Phase 2) -->
+  <ValuePropsGrid />
+
+  <!-- Certifications Section (Reused from Phase 2) -->
+  <CertificationsSection />
+
+  <!-- Testimonials Carousel -->
+  <section class="py-16 md:py-24 bg-background">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">What Our Customers Say</h2>
+        <p class="text-lg text-muted-foreground">
+          Rated {business.reputation.google_rating} stars from {business.reputation.google_review_count}+ Google reviews
+        </p>
+      </div>
+
+      <TestimonialsCarousel
+        reviews={reviews}
+        googleRating={business.reputation.google_rating}
+        googleReviewCount={business.reputation.google_review_count}
+        client:load
+      />
+    </div>
+  </section>
+
+  <!-- Final CTA Section (Reused from Phase 2) -->
+  <FinalCTASection />
 </BaseLayout>
