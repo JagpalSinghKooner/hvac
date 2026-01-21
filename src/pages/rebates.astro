@@ -1,0 +1,291 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import ServiceCategoriesGrid from '@/components/sections/ServiceCategoriesGrid.astro';
+import FinalCTASection from '@/components/sections/FinalCTASection.astro';
+import { DollarSign, Home, Zap, CheckCircle2 } from 'lucide-react';
+
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data.business;
+const contact = businessProfile.data.contact;
+---
+
+<BaseLayout
+  title={`Ontario HVAC Rebates & Incentives | ${business.legal_name}`}
+  description="Learn about available HVAC rebates and incentives in Ontario. Save up to $7,100 on high-efficiency furnaces, air conditioners, and heat pumps."
+>
+  <!-- Hero Section -->
+  <section class="py-16 md:py-24 bg-gradient-to-b from-muted/50 to-background">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center space-y-4">
+        <Badge variant="secondary" className="text-sm mb-4">
+          <DollarSign className="h-4 w-4 mr-1" />
+          Save Thousands
+        </Badge>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+          Ontario HVAC Rebates & Incentives
+        </h1>
+        <p class="text-lg text-muted-foreground">
+          Take advantage of government rebates and incentives to save thousands on your HVAC upgrade. We handle the paperwork for you.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rebates Overview -->
+  <section class="py-16 md:py-24">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <!-- We Handle Rebate Paperwork Callout -->
+        <div class="mb-16">
+          <Card className="bg-primary/10 border-primary">
+            <CardContent className="p-6 md:p-8">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0">
+                  <CheckCircle2 className="h-8 w-8 text-primary" />
+                </div>
+                <div>
+                  <h3 class="text-xl font-semibold mb-2">We Handle the Rebate Paperwork for You</h3>
+                  <p class="text-muted-foreground">
+                    Navigating rebate applications can be complex. When you choose B.A.P Heating & Cooling, we take care of all the paperwork and documentation required for your rebate applications. You get the savings without the hassle.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <!-- Canada Greener Homes Grant -->
+        <div class="mb-12">
+          <Card>
+            <CardHeader>
+              <div class="flex items-center gap-3 mb-2">
+                <Home className="h-6 w-6 text-primary" />
+                <CardTitle className="text-2xl md:text-3xl">Canada Greener Homes Grant</CardTitle>
+              </div>
+              <Badge variant="default" className="w-fit">Up to $7,100</Badge>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p class="text-muted-foreground">
+                The Canada Greener Homes Grant provides homeowners with rebates for energy-efficient upgrades, including high-efficiency furnaces, air source heat pumps, and air conditioning systems.
+              </p>
+
+              <div class="space-y-3">
+                <h4 class="font-semibold text-lg">Eligible Upgrades:</h4>
+                <ul class="space-y-2">
+                  <li class="flex items-start gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span><strong>Air Source Heat Pumps:</strong> Up to $5,000</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span><strong>High-Efficiency Furnaces:</strong> Up to $1,000</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span><strong>Smart Thermostats:</strong> Up to $100</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span><strong>Additional Home Efficiency Upgrades:</strong> Up to $1,000</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="space-y-3">
+                <h4 class="font-semibold text-lg">Eligibility:</h4>
+                <ul class="space-y-2 text-muted-foreground">
+                  <li class="flex items-start gap-2">
+                    <span class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></span>
+                    <span>Homeowners of primary residences built before 2007</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></span>
+                    <span>Pre-retrofit EnerGuide evaluation required</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></span>
+                    <span>Post-retrofit evaluation to confirm improvements</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></span>
+                    <span>Installation by licensed HVAC contractors (like B.A.P)</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="space-y-3">
+                <h4 class="font-semibold text-lg">How to Apply:</h4>
+                <ol class="space-y-2 text-muted-foreground">
+                  <li class="flex items-start gap-3">
+                    <span class="font-semibold text-foreground">1.</span>
+                    <span>Register online at canada.ca/greener-homes</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="font-semibold text-foreground">2.</span>
+                    <span>Schedule your pre-retrofit EnerGuide evaluation</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="font-semibold text-foreground">3.</span>
+                    <span>Complete your HVAC upgrade with B.A.P Heating & Cooling</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="font-semibold text-foreground">4.</span>
+                    <span>Schedule your post-retrofit evaluation within 5 months</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="font-semibold text-foreground">5.</span>
+                    <span>Submit documentation and receive your rebate</span>
+                  </li>
+                </ol>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <!-- Enbridge Gas Rebates -->
+        <div class="mb-12">
+          <Card>
+            <CardHeader>
+              <div class="flex items-center gap-3 mb-2">
+                <Zap className="h-6 w-6 text-primary" />
+                <CardTitle className="text-2xl md:text-3xl">Enbridge Gas Rebates</CardTitle>
+              </div>
+              <Badge variant="default" className="w-fit">Up to $1,750+</Badge>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p class="text-muted-foreground">
+                Enbridge Gas offers rebates to customers who upgrade to high-efficiency natural gas equipment. These rebates can be combined with other incentives for maximum savings.
+              </p>
+
+              <div class="space-y-3">
+                <h4 class="font-semibold text-lg">Available Rebates:</h4>
+                <ul class="space-y-2">
+                  <li class="flex items-start gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span><strong>High-Efficiency Furnace:</strong> Up to $1,000</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span><strong>Tankless Water Heater:</strong> Up to $500</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span><strong>Smart Thermostat:</strong> Up to $100</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span><strong>Insulation & Air Sealing:</strong> Additional rebates available</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="space-y-3">
+                <h4 class="font-semibold text-lg">Eligibility:</h4>
+                <ul class="space-y-2 text-muted-foreground">
+                  <li class="flex items-start gap-2">
+                    <span class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></span>
+                    <span>Enbridge Gas residential customers</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></span>
+                    <span>Equipment must meet minimum efficiency requirements</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></span>
+                    <span>Installation by licensed contractor required</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></span>
+                    <span>Pre-approval may be required for some rebates</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="space-y-3">
+                <h4 class="font-semibold text-lg">How to Apply:</h4>
+                <ol class="space-y-2 text-muted-foreground">
+                  <li class="flex items-start gap-3">
+                    <span class="font-semibold text-foreground">1.</span>
+                    <span>Visit enbridgegas.com/rebates to check eligibility</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="font-semibold text-foreground">2.</span>
+                    <span>Request a quote from B.A.P Heating & Cooling</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="font-semibold text-foreground">3.</span>
+                    <span>We complete the installation and provide documentation</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="font-semibold text-foreground">4.</span>
+                    <span>Submit your rebate application with our documentation</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="font-semibold text-foreground">5.</span>
+                    <span>Receive your rebate within 4-6 weeks</span>
+                  </li>
+                </ol>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <!-- Time-of-Use Electricity Savings -->
+        <div class="mb-12">
+          <Card>
+            <CardHeader>
+              <div class="flex items-center gap-3 mb-2">
+                <Zap className="h-6 w-6 text-primary" />
+                <CardTitle className="text-2xl md:text-3xl">Time-of-Use Electricity Savings</CardTitle>
+              </div>
+              <Badge variant="secondary" className="w-fit">Ongoing Savings</Badge>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p class="text-muted-foreground">
+                While not a direct rebate, upgrading to a high-efficiency heat pump or air conditioner can significantly reduce your electricity costs through time-of-use rate optimization.
+              </p>
+
+              <div class="space-y-3">
+                <h4 class="font-semibold text-lg">Maximize Your Savings:</h4>
+                <ul class="space-y-2">
+                  <li class="flex items-start gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span><strong>High-Efficiency Equipment:</strong> Modern systems use 30-50% less electricity</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span><strong>Smart Thermostats:</strong> Automatically adjust temperature during peak hours</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span><strong>Heat Pumps:</strong> Provide heating and cooling at a fraction of the cost</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span><strong>Variable-Speed Technology:</strong> Adapts to your needs for optimal efficiency</span>
+                  </li>
+                </ul>
+              </div>
+
+              <p class="text-muted-foreground">
+                Combined with Ontario's time-of-use electricity rates, high-efficiency HVAC equipment can save you hundreds of dollars annually on your energy bills.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rebate-Eligible Services -->
+  <ServiceCategoriesGrid />
+
+  <!-- Final CTA -->
+  <FinalCTASection />
+</BaseLayout>
