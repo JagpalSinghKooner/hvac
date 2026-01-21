@@ -9,6 +9,7 @@ import ExpertConsultationSection from '@/components/sections/ExpertConsultationS
 import ProjectGallerySection from '@/components/sections/ProjectGallerySection.astro';
 import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel';
 import FamilyStorySection from '@/components/sections/FamilyStorySection.astro';
+import ServiceAreaSection from '@/components/sections/ServiceAreaSection.astro';
 
 const businessProfile = await getEntry('business', 'profile');
 if (!businessProfile) {
@@ -47,4 +48,5 @@ const installationReviews = allReviews
     googleReviewCount={business.reputation.google_review_count}
   />
   <FamilyStorySection />
+  <ServiceAreaSection />
 </BaseLayout>

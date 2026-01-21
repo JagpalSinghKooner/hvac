@@ -1,0 +1,71 @@
+---
+import { getEntry } from 'astro:content';
+import { Badge } from '@/components/ui/badge';
+
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile) {
+  throw new Error('Business profile not found');
+}
+const business = businessProfile.data;
+
+// Get regions and cities from profile.yaml
+const regions = business.coverage?.regions || [];
+---
+
+<section class="py-16 md:py-24 bg-muted">
+  <div class="container mx-auto px-4">
+    {/* Header */}
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-3">
+        Proudly Serving Southern Ontario Since {business.business.established_year}
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        25 cities across 6 regions — from Guelph to Hamilton
+      </p>
+    </div>
+
+    {/* Map Placeholder */}
+    <div class="max-w-4xl mx-auto mb-12">
+      <div
+        class="bg-background aspect-video rounded-lg flex items-center justify-center text-muted-foreground shadow-sm"
+      >
+        Service Area Map — Guelph Radius
+      </div>
+    </div>
+
+    {/* Regions & Cities */}
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+          regions.map((region) => (
+            <div class="space-y-3">
+              {/* Region Header */}
+              <Badge variant="outline" className="text-sm font-semibold px-3 py-1">
+                {region.name}
+              </Badge>
+
+              {/* Cities */}
+              <div class="space-y-2">
+                {region.locations.map((location) => (
+                  <a
+                    href={`/locations/${location.slug}`}
+                    class="block text-sm text-foreground/80 hover:text-primary hover:underline transition-colors"
+                  >
+                    {location.name}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    {/* Additional Info */}
+    <div class="text-center mt-12">
+      <p class="text-muted-foreground text-sm">
+        Don't see your city? Give us a call — we may still be able to help.
+      </p>
+    </div>
+  </div>
+</section>
