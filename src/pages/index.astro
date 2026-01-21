@@ -2,6 +2,7 @@
 import { getEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeroSection from '@/components/sections/HeroSection.astro';
+import ValuePropsGrid from '@/components/sections/ValuePropsGrid.astro';
 
 const businessProfile = await getEntry('business', 'profile');
 if (!businessProfile) {
@@ -15,4 +16,5 @@ const business = businessProfile.data;
   description={(business as any).copy_blocks.short_description}
 >
   <HeroSection />
+  <ValuePropsGrid />
 </BaseLayout>

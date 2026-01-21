@@ -1,0 +1,74 @@
+---
+import { getEntry } from 'astro:content';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Shield, Award, CalendarCheck, CheckCircle } from 'lucide-react';
+
+const businessProfile = await getEntry('business', 'profile');
+
+// Calculate years in business
+const currentYear = new Date().getFullYear();
+const yearsInBusiness = businessProfile?.data.business.established_year
+  ? currentYear - businessProfile.data.business.established_year
+  : 30;
+
+// Get TSSA license number
+const tssaLicense = businessProfile?.data.trust_and_compliance?.licenses?.tssa?.numbers?.[0] || '';
+
+const valueProps = [
+  {
+    icon: Shield,
+    title: 'TSSA Licensed',
+    description: 'Fully licensed and regulated',
+    badge: tssaLicense,
+    badgeVariant: 'secondary' as const
+  },
+  {
+    icon: Award,
+    title: '10-Year Warranty',
+    description: 'Parts and labour coverage',
+    badge: 'Protected',
+    badgeVariant: 'secondary' as const
+  },
+  {
+    icon: CalendarCheck,
+    title: `${yearsInBusiness}+ Years`,
+    description: 'Serving Southern Ontario',
+    badge: 'Since 1994',
+    badgeVariant: 'secondary' as const
+  },
+  {
+    icon: CheckCircle,
+    title: 'Certified Brand Dealer',
+    description: 'All major HVAC brands',
+    badge: 'Trusted',
+    badgeVariant: 'secondary' as const
+  }
+];
+---
+
+<section class="py-12 bg-background">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      {valueProps.map((prop) => {
+        const Icon = prop.icon;
+        return (
+          <Card className="border-border hover:border-primary/20 transition-colors">
+            <CardContent className="p-6 flex flex-col items-center text-center gap-3">
+              <div class="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary">
+                <Icon className="w-6 h-6" />
+              </div>
+              <div class="space-y-1">
+                <h3 class="font-semibold text-base md:text-lg leading-tight">{prop.title}</h3>
+                <p class="text-sm text-muted-foreground">{prop.description}</p>
+              </div>
+              <Badge variant={prop.badgeVariant} className="mt-auto text-xs">
+                {prop.badge}
+              </Badge>
+            </CardContent>
+          </Card>
+        );
+      })}
+    </div>
+  </div>
+</section>
