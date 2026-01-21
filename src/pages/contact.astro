@@ -1,17 +1,207 @@
 ---
 import { getEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Button } from '@/components/ui/button';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 
 const businessProfile = await getEntry('business', 'profile');
 if (!businessProfile) {
   throw new Error('Business profile not found');
 }
-const business = businessProfile.data;
+const business = businessProfile.data.business;
+const contact = businessProfile.data.contact;
+const hours = businessProfile.data.hours;
+const locations = businessProfile.data.locations!; // Non-null assertion - locations required for contact page
+const coverage = businessProfile.data.coverage;
 ---
 
 <BaseLayout
-  title={`Contact Us | ${business.business.legal_name}`}
-  description="Get in touch with us"
+  title={`Contact Us | ${business.legal_name}`}
+  description={`Contact ${business.legal_name} for premium HVAC services. Call ${contact.phone_display} or email ${contact.email}. Serving 25 cities across Southern Ontario.`}
 >
-  <h1>Contact</h1>
+  <!-- Hero Section -->
+  <section class="py-16 md:py-24 bg-gradient-to-b from-muted/50 to-background">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center space-y-4">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+          Contact Us
+        </h1>
+        <p class="text-lg text-muted-foreground">
+          Get in touch with our team. We're here to answer your questions and provide expert HVAC advice.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Information -->
+  <section class="py-16 md:py-24">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+        <!-- Phone -->
+        <Card>
+          <CardHeader>
+            <div class="flex items-center gap-3">
+              <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <Phone className="h-6 w-6 text-primary" />
+              </div>
+              <CardTitle>Call Us</CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <a href={`tel:${contact.phone_e164}`}>
+                <Button size="lg" className="w-full">
+                  <Phone className="mr-2 h-5 w-5" />
+                  {contact.phone_display}
+                </Button>
+              </a>
+            </div>
+            <p class="text-sm text-muted-foreground text-center">
+              {contact.primary_cta?.long || 'Call now to speak with our team.'}
+            </p>
+          </CardContent>
+        </Card>
+
+        <!-- Email -->
+        <Card>
+          <CardHeader>
+            <div class="flex items-center gap-3">
+              <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <Mail className="h-6 w-6 text-primary" />
+              </div>
+              <CardTitle>Email Us</CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <a href={`mailto:${contact.email}`}>
+                <Button variant="outline" size="lg" className="w-full">
+                  <Mail className="mr-2 h-5 w-5" />
+                  {contact.email}
+                </Button>
+              </a>
+            </div>
+            <p class="text-sm text-muted-foreground text-center">
+              We typically respond within 24 hours.
+            </p>
+          </CardContent>
+        </Card>
+
+        <!-- Business Hours -->
+        <Card>
+          <CardHeader>
+            <div class="flex items-center gap-3">
+              <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <Clock className="h-6 w-6 text-primary" />
+              </div>
+              <CardTitle>Business Hours</CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <div class="text-lg font-semibold">
+              {hours.business_hours}
+            </div>
+            {hours.emergency_service && (
+              <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                <Badge variant="secondary">Emergency Service Available</Badge>
+              </div>
+            )}
+            {hours.response_time_statement && (
+              <p class="text-sm text-muted-foreground">
+                {hours.response_time_statement}
+              </p>
+            )}
+          </CardContent>
+        </Card>
+
+        <!-- Office Address -->
+        <Card>
+          <CardHeader>
+            <div class="flex items-center gap-3">
+              <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <MapPin className="h-6 w-6 text-primary" />
+              </div>
+              <CardTitle>Office Location</CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <div>
+              <div class="font-semibold mb-1">{locations.primary.name}</div>
+              <div class="text-sm text-muted-foreground">
+                {locations.primary.address_full}
+              </div>
+            </div>
+            {locations.secondary && (
+              <div class="pt-3 border-t">
+                <div class="font-semibold mb-1">{locations.secondary.name}</div>
+                <div class="text-sm text-muted-foreground">
+                  {locations.secondary.address_full}
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <!-- Google Maps -->
+  {locations.primary.google_maps_embed && (
+    <section class="py-16 md:py-24 bg-muted/50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">
+            Visit Our Office
+          </h2>
+          <div class="aspect-video rounded-lg overflow-hidden shadow-lg">
+            <iframe
+              src={locations.primary.google_maps_embed}
+              width="100%"
+              height="100%"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Service Area -->
+  <section class="py-16 md:py-24">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">
+          Our Service Area
+        </h2>
+        <p class="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+          We proudly serve 25 cities across 6 regions in Southern Ontario, bringing premium HVAC services to homeowners throughout the area.
+        </p>
+
+        <div class="space-y-8">
+          {coverage.regions?.map((region) => (
+            <div>
+              <h3 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                <MapPin className="h-5 w-5 text-primary" />
+                {region.name}
+              </h3>
+              <div class="flex flex-wrap gap-2">
+                {region.locations.map((location) => (
+                  <a href={`/locations/${location.slug}`} class="group">
+                    <Badge variant="outline" className="hover:bg-accent hover:border-primary transition-colors">
+                      {location.name}
+                    </Badge>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
