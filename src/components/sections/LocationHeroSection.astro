@@ -1,0 +1,98 @@
+---
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Phone, Award, MapPin, Star } from "lucide-react";
+
+interface Props {
+  cityName: string;
+  region: string;
+  businessName: string;
+  phoneNumber: string;
+  phoneDisplay: string;
+  description?: string;
+  yearsInBusiness?: string;
+  googleReviewCount?: number;
+  googleRating?: number;
+}
+
+const {
+  cityName,
+  region,
+  businessName,
+  phoneNumber,
+  phoneDisplay,
+  description,
+  yearsInBusiness = "Since 1994",
+  googleReviewCount = 74,
+  googleRating = 4.9
+} = Astro.props;
+
+const defaultDescription = `Professional heating, cooling, and indoor air quality services for ${cityName} homeowners.`;
+const displayDescription = description || defaultDescription;
+---
+
+<section class="relative py-16 md:py-24 bg-gradient-to-b from-muted/50 to-background">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Content Column -->
+      <div class="space-y-6">
+        <div class="flex items-center gap-2 flex-wrap">
+          <Badge variant="secondary" className="text-sm">
+            <MapPin className="w-3 h-3 mr-1" />
+            {region}
+          </Badge>
+        </div>
+
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+          HVAC Services in {cityName}, ON
+        </h1>
+
+        <p class="text-lg md:text-xl text-muted-foreground max-w-2xl">
+          {displayDescription}
+        </p>
+
+        <!-- Trust Signals Row -->
+        <div class="flex flex-wrap gap-4 md:gap-6 py-4">
+          <div class="flex items-center gap-2">
+            <Award className="w-5 h-5 text-primary" />
+            <span class="font-semibold text-sm md:text-base">{yearsInBusiness}</span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <Star className="w-5 h-5 text-yellow-500" />
+            <span class="font-semibold text-sm md:text-base">
+              {googleRating}/5 ({googleReviewCount}+ Google Reviews)
+            </span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <Badge variant="outline" className="text-sm">
+              TSSA Licensed
+            </Badge>
+          </div>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="pt-4">
+          <Button size="lg" asChild className="text-lg">
+            <a href={`tel:${phoneNumber}`}>
+              <Phone className="mr-2 h-5 w-5" />
+              Call {phoneDisplay}
+            </a>
+          </Button>
+        </div>
+      </div>
+
+      <!-- Image Placeholder Column -->
+      <div class="order-first lg:order-last">
+        <div class="bg-muted aspect-[4/3] rounded-lg flex items-center justify-center text-muted-foreground">
+          <div class="text-center p-6">
+            <MapPin className="w-16 h-16 mx-auto mb-4 opacity-50" />
+            <p class="text-lg font-medium">Map / Local Imagery</p>
+            <p class="text-sm mt-2">{cityName} Service Area</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
