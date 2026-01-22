@@ -22,22 +22,26 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problems:
-  - title: 'Suffering Through Summer Heat'
-    description: 'Ontario summers now regularly exceed 30°C with high humidity. Window units are noisy, inefficient, and only cool one room. Central AC provides whole-home comfort you control with one thermostat.'
-    icon: 'temperature'
-  - title: 'Old AC Driving Up Hydro Bills'
-    description: 'Air conditioners lose efficiency as they age. A 15-year-old unit may only operate at 8-10 SEER, while modern units achieve 16-21 SEER—potentially cutting your cooling costs in half.'
-    icon: 'cost'
-  - title: 'Humidity Making Your Home Uncomfortable'
-    description: 'High humidity makes 25°C feel like 32°C. Modern air conditioners remove moisture effectively, so you can set temperatures higher while feeling more comfortable—and saving energy.'
-    icon: 'humidity'
+problemStatement:
+  headline: 'When Cooling Your Home Becomes a Challenge'
+  description: 'Ontario summers now regularly exceed 30°C with high humidity, making homes uncomfortable. Window units are noisy, inefficient, and only cool one room at a time. Air conditioners lose efficiency as they age—a 15-year-old unit may only operate at 8-10 SEER, while modern units achieve 16-21 SEER, potentially cutting cooling costs in half. High humidity makes 25°C feel like 32°C, leaving your home sticky and uncomfortable even when the AC runs constantly.'
+  painPoints:
+    - 'Suffering through summer heat without whole-home comfort'
+    - 'Old AC driving up hydro bills with 8-10 SEER efficiency'
+    - 'Noisy, inefficient window units that only cool one room'
+    - 'High humidity making your home feel hotter than it actually is'
+    - 'Uncertainty about proper sizing and installation quality for major investment'
 
-approach:
+solutionApproach:
   headline: 'Properly Sized for Your Home, Installed for Maximum Efficiency'
-  description: 'We calculate your home cooling load based on square footage, insulation, windows, and sun exposure. This ensures your new AC runs efficiently without short-cycling (too big) or running constantly (too small). Our installation follows manufacturer specifications exactly, protecting your warranty and maximizing equipment life.'
-  quote: 'An oversized AC cools fast but never runs long enough to remove humidity. A properly sized unit delivers true comfort—cool and dry.'
-  quotePerson: 'Paul Palmer, Owner'
+  description: 'We calculate your home cooling load based on square footage, insulation, windows, and sun exposure. This ensures your new AC runs efficiently without short-cycling (too big) or running constantly (too small). Our installation follows manufacturer specifications exactly, protecting your warranty and maximizing equipment life. An oversized AC cools fast but never runs long enough to remove humidity—a properly sized unit delivers true comfort, cool and dry.'
+  differentiators:
+    - 'Proper cooling load calculation based on your home specifics—not guesswork'
+    - 'Installation following manufacturer specifications to protect warranty'
+    - '10-year parts and labour warranty on every installation'
+    - 'High-efficiency units (16-21 SEER) that cut cooling costs in half'
+    - 'Humidity removal for true comfort, not just cold air'
+    - 'Rebate application assistance to maximize available incentives'
 
 processSteps:
   - step: 1

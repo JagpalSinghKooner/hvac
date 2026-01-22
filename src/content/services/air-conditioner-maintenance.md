@@ -22,22 +22,26 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problems:
-  - title: 'AC Failures During Heat Waves'
-    description: 'Your AC works hardest on the hottest days—exactly when failure is most likely. A breakdown during a heat advisory means emergency rates and long waits while everyone else calls for help too.'
-    icon: 'emergency'
-  - title: 'Gradual Efficiency Loss'
-    description: 'Dirty coils, clogged filters, and low refrigerant force your AC to work harder. You may not notice until your hydro bill arrives 20-30% higher than last summer.'
-    icon: 'cost'
-  - title: 'Shortened Equipment Lifespan'
-    description: 'Neglected air conditioners fail years before their time. The average AC lasts 15-20 years with maintenance, but only 10-12 without—that is thousands of dollars in premature replacement.'
-    icon: 'warning'
+problemStatement:
+  headline: 'Preventing AC Failures Before Summer Heat'
+  description: 'Your AC works hardest on the hottest days—exactly when failure is most likely. A breakdown during a heat advisory means emergency rates and long waits while everyone else calls for help too. Dirty coils, clogged filters, and low refrigerant force your AC to work harder, raising your hydro bill 20-30% without you noticing. Neglected air conditioners fail years before their time—the average AC lasts 15-20 years with maintenance, but only 10-12 without.'
+  painPoints:
+    - 'AC failures during heat waves when you need it most'
+    - 'Emergency repair rates and long waits during peak summer'
+    - 'Gradual efficiency loss raising hydro bills 20-30%'
+    - 'Shortened equipment lifespan from lack of care'
+    - 'Premature replacement costing thousands of dollars'
 
-approach:
+solutionApproach:
   headline: 'Complete System Care, Not Just a Filter Change'
-  description: 'Our AC maintenance includes everything that affects cooling performance and reliability. We clean coils, check refrigerant charge, inspect electrical connections, and test all safety controls. You get a detailed report documenting your system condition and any concerns we identify.'
-  quote: 'Spring maintenance means summer peace of mind. We catch small problems before they become big breakdowns on the hottest day of the year.'
-  quotePerson: 'Paul Palmer, Owner'
+  description: 'Our AC maintenance includes everything that affects cooling performance and reliability. We clean coils, check refrigerant charge, inspect electrical connections, and test all safety controls. You get a detailed report documenting your system condition and any concerns we identify. Spring maintenance means summer peace of mind—we catch small problems before they become big breakdowns on the hottest day of the year.'
+  differentiators:
+    - 'Comprehensive inspection of all cooling system components'
+    - 'Coil cleaning to restore efficiency and cooling capacity'
+    - 'Refrigerant charge verification for optimal performance'
+    - 'Detailed photo report documenting system condition'
+    - 'Priority scheduling for maintenance plan members during heat waves'
+    - 'Parts and labour discounts on any needed repairs'
 
 processSteps:
   - step: 1

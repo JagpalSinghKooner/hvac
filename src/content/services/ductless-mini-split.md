@@ -22,22 +22,26 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problems:
-  - title: 'Rooms Without Ductwork'
-    description: 'Home additions, finished basements, above-garage rooms, and converted attics often lack ductwork. Portable units are noisy and inefficient. Mini splits deliver real heating and cooling without the mess of duct installation.'
-    icon: 'home'
-  - title: 'Uneven Temperatures Throughout Home'
-    description: 'That one room that is always too hot in summer or freezing in winter? Mini splits solve problem rooms with independent temperature control—without affecting the rest of your home.'
-    icon: 'temperature'
-  - title: 'High Energy Bills from Whole-Home Conditioning'
-    description: 'Why heat or cool empty rooms? Mini splits let you condition only occupied spaces. Turn off zones you are not using and watch your energy bills drop.'
-    icon: 'cost'
+problemStatement:
+  headline: 'Solving Problem Rooms and Zone Control Challenges'
+  description: 'Home additions, finished basements, above-garage rooms, and converted attics often lack ductwork—portable units are noisy and inefficient. That one room that is always too hot in summer or freezing in winter needs independent temperature control without affecting the rest of your home. Why heat or cool empty rooms when mini splits let you condition only occupied spaces, dropping your energy bills significantly?'
+  painPoints:
+    - 'Rooms without ductwork that need real heating and cooling'
+    - 'Uneven temperatures with problem rooms always too hot or too cold'
+    - 'High energy bills from conditioning empty rooms'
+    - 'Noisy, inefficient portable units that barely work'
+    - 'Expensive ductwork installation not practical for additions or renovations'
 
-approach:
+solutionApproach:
   headline: 'Right-Sized Comfort for Every Space'
-  description: 'We assess each space individually to recommend the right mini split capacity. Too small and it runs constantly. Too large and it short-cycles without removing humidity. Our installations include proper outdoor unit placement, refrigerant line routing, and electrical work—all to manufacturer specifications.'
-  quote: 'Mini splits are not just alternatives to ductwork. For problem rooms and zone control, they are often the best solution. Efficiency, quiet operation, and precise temperature control.'
-  quotePerson: 'Paul Palmer, Owner'
+  description: 'We assess each space individually to recommend the right mini split capacity. Too small and it runs constantly. Too large and it short-cycles without removing humidity. Our installations include proper outdoor unit placement, refrigerant line routing, and electrical work—all to manufacturer specifications. Mini splits are not just alternatives to ductwork—for problem rooms and zone control, they are often the best solution with efficiency, quiet operation, and precise temperature control.'
+  differentiators:
+    - 'Individual space assessment for proper capacity sizing'
+    - 'Zone control to condition only occupied spaces'
+    - 'Whisper-quiet operation (as low as 19 dB)'
+    - 'Heating and cooling in one system—no separate equipment'
+    - 'Professional refrigerant line routing and electrical work'
+    - '10-year parts and labour warranty on installations'
 
 processSteps:
   - step: 1

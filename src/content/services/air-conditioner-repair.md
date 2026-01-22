@@ -22,22 +22,26 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problems:
-  - title: 'No Cooling During Heat Waves'
-    description: 'When your AC fails during a 35°C heat wave, your home becomes unsafe—especially for children, elderly, and pets. Every hour without cooling matters when temperatures soar.'
-    icon: 'emergency'
-  - title: 'AC Running But Not Cooling'
-    description: 'Hearing your AC run but feeling warm air means something is wrong. Low refrigerant, compressor issues, or frozen coils prevent cooling while still consuming electricity.'
-    icon: 'warning'
-  - title: 'Strange Sounds or Water Leaks'
-    description: 'Grinding, squealing, or clicking sounds indicate mechanical problems. Water pooling around your indoor unit signals drainage issues that can damage floors and ceilings.'
-    icon: 'alert'
+problemStatement:
+  headline: 'When Your Air Conditioner Stops Working'
+  description: 'When your AC fails during a 35°C heat wave, your home becomes unsafe—especially for children, elderly, and pets. Hearing your AC run but feeling warm air means something is wrong—low refrigerant, compressor issues, or frozen coils prevent cooling while still consuming electricity. Grinding, squealing, or clicking sounds indicate mechanical problems, and water pooling around your indoor unit signals drainage issues that can damage floors and ceilings.'
+  painPoints:
+    - 'No cooling during heat waves when you need it most'
+    - 'AC running but blowing warm air and wasting electricity'
+    - 'Strange grinding, squealing, or clicking sounds from the unit'
+    - 'Water leaks around indoor unit threatening property damage'
+    - 'Uncertainty about repair costs and whether to repair or replace'
 
-approach:
+solutionApproach:
   headline: 'Accurate Diagnosis, Reliable Repairs'
-  description: 'Our technicians carry diagnostic equipment and common parts on every call. We identify the root cause—not just treat symptoms—and explain your options clearly. You get honest advice on whether repair makes sense or if replacement is the smarter choice.'
-  quote: 'A good AC repair restores comfort for years. We diagnose thoroughly so you are not calling us back next month for a different problem on the same unit.'
-  quotePerson: 'Paul Palmer, Owner'
+  description: 'Our technicians carry diagnostic equipment and common parts on every call. We identify the root cause—not just treat symptoms—and explain your options clearly. You get honest advice on whether repair makes sense or if replacement is the smarter choice. A good AC repair restores comfort for years. We diagnose thoroughly so you are not calling us back next month for a different problem on the same unit.'
+  differentiators:
+    - 'Fully stocked service trucks for same-day repairs when possible'
+    - 'Root cause diagnosis, not just symptom treatment'
+    - 'Honest assessment of repair versus replacement economics'
+    - '90-day guarantee on all air conditioner repairs'
+    - 'Upfront diagnostic fee applied to repair cost if you proceed'
+    - 'Experience with all major AC brands and models'
 
 processSteps:
   - step: 1
