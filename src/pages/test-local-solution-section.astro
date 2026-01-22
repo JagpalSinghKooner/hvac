@@ -1,12 +1,12 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ProblemSection from '@/components/sections/ProblemSection.astro';
-import LocalSolutionSection from '@/components/sections/LocalSolutionSection.astro';
+import SolutionSection from '@/components/sections/SolutionSection.astro';
 ---
 
 <BaseLayout
-  title="LocalSolutionSection Component Test"
-  description="Testing LocalSolutionSection component for service-city pages"
+  title="SolutionSection Component Test"
+  description="Testing SolutionSection component for service-city pages"
 >
   <main>
     <!-- Example 1: Standard (follows LocalProblemSection) -->
@@ -22,10 +22,10 @@ import LocalSolutionSection from '@/components/sections/LocalSolutionSection.ast
     />
 
 
-    <LocalSolutionSection
+    <SolutionSection
       headline="Our Proven Approach in Guelph"
       description="Over 30 years serving Guelph families, we've refined our installation process to address these exact challenges. Our team specializes in upgrading older homes with modern, energy-efficient systems that deliver reliable comfort through the harshest winters while reducing your utility bills."
-      cityName="Guelph"
+      differentiators={[]}
       imageAlt="B.A.P technician installing high-efficiency furnace in Guelph home"
     />
 
@@ -44,10 +44,10 @@ import LocalSolutionSection from '@/components/sections/LocalSolutionSection.ast
     />
 
 
-    <LocalSolutionSection
+    <SolutionSection
       headline="Custom Cooling Solutions for Kitchener Homes"
       description="We don't install one-size-fits-all systems. Every Kitchener home gets a proper load calculation to ensure your AC is perfectly sized for your space. Our installations include humidity control, proper insulation recommendations, and energy-efficient equipment designed for Ontario's climate."
-      cityName="Kitchener"
+      differentiators={[]}
       imageAlt="B.A.P team installing properly-sized AC system in Kitchener"
       reversed={true}
     />
@@ -64,10 +64,10 @@ import LocalSolutionSection from '@/components/sections/LocalSolutionSection.ast
     />
 
 
-    <LocalSolutionSection
+    <SolutionSection
       headline="Reliable Systems, Expert Installation"
       description="Our Cambridge installations focus on reliability above all else. We select proven equipment from trusted manufacturers and install it correctly the first time."
-      cityName="Cambridge"
+      differentiators={[]}
     />
 
   </main>

@@ -4,7 +4,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import ServiceHeroSection from '@/components/sections/ServiceHeroSection.astro';
 import LocalTrustOpener from '@/components/sections/LocalTrustOpener.astro';
 import ProblemSection from '@/components/sections/ProblemSection.astro';
-import LocalSolutionSection from '@/components/sections/LocalSolutionSection.astro';
+import SolutionSection from '@/components/sections/SolutionSection.astro';
 import LocalGallerySection from '@/components/sections/LocalGallerySection.astro';
 import ServiceBenefitsSection from '@/components/sections/ServiceBenefitsSection.astro';
 import ServiceProcessSection from '@/components/sections/ServiceProcessSection.astro';
@@ -181,10 +181,10 @@ const savingsData = serviceData.savings
 
   {
     serviceCityData.solution && (
-      <LocalSolutionSection
+      <SolutionSection
         headline={serviceCityData.solution.headline}
         description={serviceCityData.solution.description}
-        cityName={locationData.title}
+        differentiators={[]}
       />
     )
   }
