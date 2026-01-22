@@ -1,0 +1,51 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import LocalProblemSection from '@/components/sections/LocalProblemSection.astro';
+---
+
+<BaseLayout
+  title="LocalProblemSection Component Test"
+  description="Testing LocalProblemSection component with city-specific problem messaging"
+>
+  <!-- Example 1: Guelph Furnace Installation (Normal - Text Left, Image Right) -->
+  <LocalProblemSection
+    headline="Heating Challenges in Guelph"
+    description="Guelph's heritage homes and older neighborhoods present unique heating challenges that require specialized HVAC expertise and equipment designed for Ontario's climate."
+    citySpecificIssues={[
+      "Heritage homes with outdated heating systems and poor insulation",
+      "River proximity creates high humidity that affects furnace performance",
+      "Older neighborhoods with limited electrical capacity for modern systems",
+      "Winter temperatures regularly dropping to -20°C requiring reliable equipment"
+    ]}
+    cityName="Guelph"
+    imageAlt="Guelph Heritage Home HVAC Challenge — 800×600"
+  />
+
+  <!-- Example 2: Cambridge Air Conditioning (Reversed - Image Left, Text Right) -->
+  <LocalProblemSection
+    headline="Cooling Challenges in Cambridge"
+    description="Cambridge's industrial history and diverse housing stock create unique air conditioning challenges that demand customized cooling solutions and expert installation."
+    citySpecificIssues={[
+      "Industrial area heat islands increasing cooling demands",
+      "Mix of heritage and modern homes requiring different AC approaches",
+      "Grand River humidity creating moisture control challenges",
+      "Limited attic space in older homes complicating ductwork installation"
+    ]}
+    cityName="Cambridge"
+    imageAlt="Cambridge Residential Cooling Challenge — 800×600"
+    reversed={true}
+  />
+
+  <!-- Example 3: Kitchener Heat Pump (Normal Layout) -->
+  <LocalProblemSection
+    headline="Heat Pump Challenges in Kitchener"
+    description="Kitchener's rapid urban growth and mix of housing types create unique heat pump installation challenges that require careful planning and local expertise."
+    citySpecificIssues={[
+      "New subdivisions with limited yard space for outdoor units",
+      "Older neighborhoods with incompatible electrical infrastructure",
+      "Variable soil conditions affecting ground-source installations",
+      "Noise bylaws requiring strategic equipment placement"
+    ]}
+    cityName="Kitchener"
+  />
+</BaseLayout>
