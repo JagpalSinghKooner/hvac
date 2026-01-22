@@ -1,0 +1,522 @@
+{
+  "project": "Phase 7A Infrastructure - Design System Consolidation",
+  "branchName": "feature/phase-7a-infrastructure",
+  "description": "Consolidate typography, schema, components, and layouts for service and service-city pages",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Create Global Typography System",
+      "description": "As a developer, I want a single source of truth for fonts so that we eliminate duplicate font imports and improve page load performance.",
+      "acceptanceCriteria": [
+        "Create /src/styles/typography.css with Playfair Display + Inter imports via @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap')",
+        "Add heading styles (h1-h6) using font-family: 'Playfair Display', Georgia, serif",
+        "Add body styles using font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+        "Add utility classes .font-heading and .font-body",
+        "pnpm build passes"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "Required Skills: None (CSS file creation)"
+    },
+    {
+      "id": "US-002",
+      "title": "Import Typography in Globals",
+      "description": "As a developer, I want globals.css to import the typography system so that fonts are available globally.",
+      "acceptanceCriteria": [
+        "Add @import './typography.css'; at top of /src/styles/globals.css (before @tailwind directives)",
+        "Remove any existing body font-family declarations in globals.css",
+        "Remove any existing h1-h6 font styles in globals.css if they exist",
+        "pnpm build passes"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "Required Skills: None (CSS modification)"
+    },
+    {
+      "id": "US-003",
+      "title": "Remove Font Import from ProblemSection",
+      "description": "As a developer, I want to remove duplicate font imports from ProblemSection so that we use the global typography system.",
+      "acceptanceCriteria": [
+        "Remove @import url('https://fonts.googleapis.com/...') from ProblemSection.astro style block",
+        "Remove any font-family: 'Playfair Display' declarations",
+        "Keep only component-specific animations/transitions in style block",
+        "pnpm build passes"
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": "Required Skills: /web-design-guidelines (review .astro component)"
+    },
+    {
+      "id": "US-004",
+      "title": "Remove Font Import from SolutionSection",
+      "description": "As a developer, I want to remove duplicate font imports from SolutionSection.",
+      "acceptanceCriteria": [
+        "Remove @import url('https://fonts.googleapis.com/...') from SolutionSection.astro style block",
+        "Remove any font-family declarations for Playfair Display",
+        "pnpm build passes"
+      ],
+      "priority": 4,
+      "passes": true,
+      "notes": "Required Skills: /web-design-guidelines (review .astro component)"
+    },
+    {
+      "id": "US-005",
+      "title": "Remove Font Import from LocalTrustOpener",
+      "description": "As a developer, I want to remove duplicate font imports from LocalTrustOpener.",
+      "acceptanceCriteria": [
+        "Remove @import and font-family declarations from LocalTrustOpener.astro style block",
+        "pnpm build passes"
+      ],
+      "priority": 5,
+      "passes": true,
+      "notes": "Required Skills: /web-design-guidelines (review .astro component)"
+    },
+    {
+      "id": "US-006",
+      "title": "Remove Font Import from LocalGallerySection",
+      "description": "As a developer, I want to remove duplicate font imports from LocalGallerySection.",
+      "acceptanceCriteria": [
+        "Remove @import and .font-serif styles from LocalGallerySection.astro",
+        "pnpm build passes"
+      ],
+      "priority": 6,
+      "passes": true,
+      "notes": "Required Skills: /web-design-guidelines (review .astro component)"
+    },
+    {
+      "id": "US-007",
+      "title": "Remove Font Import from ServiceBenefitsSection",
+      "description": "As a developer, I want to remove duplicate font imports from ServiceBenefitsSection.",
+      "acceptanceCriteria": [
+        "Remove @import from ServiceBenefitsSection.astro style block",
+        "Remove any inline style='font-family:...' attributes from the template",
+        "pnpm build passes"
+      ],
+      "priority": 7,
+      "passes": true,
+      "notes": "Required Skills: /web-design-guidelines (review .astro component)"
+    },
+    {
+      "id": "US-008",
+      "title": "Remove Font Import from ServiceSavingsSection",
+      "description": "As a developer, I want to remove duplicate font imports from ServiceSavingsSection.",
+      "acceptanceCriteria": [
+        "Remove <link> tags for Google Fonts from ServiceSavingsSection.astro",
+        "Remove any @import statements in style block",
+        "pnpm build passes"
+      ],
+      "priority": 8,
+      "passes": true,
+      "notes": "Required Skills: /web-design-guidelines (review .astro component)"
+    },
+    {
+      "id": "US-009",
+      "title": "Remove Font Import from LocationServicesGrid",
+      "description": "As a developer, I want to remove duplicate font imports from LocationServicesGrid.",
+      "acceptanceCriteria": [
+        "Remove @import and .font-serif styles from LocationServicesGrid.astro",
+        "pnpm build passes"
+      ],
+      "priority": 9,
+      "passes": true,
+      "notes": "Required Skills: /web-design-guidelines (review .astro component)"
+    },
+    {
+      "id": "US-010",
+      "title": "Remove Font Styles from Header",
+      "description": "As a developer, I want to remove inline font-family from Header so it uses global typography.",
+      "acceptanceCriteria": [
+        "Remove font-family: -apple-system, BlinkMacSystemFont... from Header.astro style block",
+        "Header should inherit from global body font (Inter)",
+        "pnpm build passes"
+      ],
+      "priority": 10,
+      "passes": true,
+      "notes": "Required Skills: /web-design-guidelines (review .astro component)"
+    },
+    {
+      "id": "US-011",
+      "title": "Verify Typography Consolidation",
+      "description": "As a developer, I want to verify all font imports are removed and only 1 font request is made.",
+      "acceptanceCriteria": [
+        "Run grep -r '@import.*Playfair' src/components/ returns no results",
+        "Run grep -r 'font-family.*Playfair' src/components/ returns no results",
+        "Run grep -r '<link.*fonts.googleapis' src/components/ returns no results",
+        "pnpm build passes",
+        "Verify in browser: Network tab shows only 1 Google Fonts request"
+      ],
+      "priority": 11,
+      "passes": true,
+      "notes": "Required Skills: /agent-browser (verify font requests in browser DevTools)"
+    },
+    {
+      "id": "US-012",
+      "title": "Update Services Schema",
+      "description": "As a developer, I want to update the services schema to use unified field names.",
+      "acceptanceCriteria": [
+        "In /src/content/config.ts, rename problemStatement to problem in services schema",
+        "Rename nested painPoints to issues within problem object",
+        "Rename solutionApproach to solution",
+        "Rename valueProps to benefits",
+        "Rename images to galleryImages",
+        "Add optional trustOpener: z.string().optional() field",
+        "Add optional proof object field",
+        "Add optional context: z.string().optional() field",
+        "pnpm build passes (may require content migration first)"
+      ],
+      "priority": 12,
+      "passes": true,
+      "notes": "Required Skills: None (TypeScript schema modification). Schema and content migration should happen together to avoid build breaks."
+    },
+    {
+      "id": "US-013",
+      "title": "Update Service-City Schema",
+      "description": "As a developer, I want to update the service-city schema to use unified field names.",
+      "acceptanceCriteria": [
+        "In /src/content/config.ts, rename localContext to context in serviceCity schema",
+        "Rename localProof to proof",
+        "Rename localTrustOpener to trustOpener",
+        "Rename localProblem to problem (with nested citySpecificIssues to issues)",
+        "Rename localSolution to solution",
+        "Rename localBenefits to benefits",
+        "Rename localSavings to savings (with nested localRebates to rebateInfo)",
+        "Rename localGalleryImages to galleryImages",
+        "Add processSteps field to match services schema",
+        "pnpm build passes (may require content migration first)"
+      ],
+      "priority": 13,
+      "passes": true,
+      "notes": "Required Skills: None (TypeScript schema modification). Schema and content migration should happen together to avoid build breaks."
+    },
+    {
+      "id": "US-014",
+      "title": "Create Content Migration Script",
+      "description": "As a developer, I want a migration script to rename fields in all 573 content files.",
+      "acceptanceCriteria": [
+        "Create /scripts/migrate-content-schema.ts",
+        "Script handles top-level field renames (e.g., localContext to context)",
+        "Script handles nested property renames (e.g., painPoints to issues)",
+        "Script supports --dry-run flag to preview changes without modifying files",
+        "Script supports --execute flag to apply changes",
+        "Script supports --collection=services or --collection=service-city flag",
+        "Script outputs count of files modified",
+        "pnpm build passes"
+      ],
+      "priority": 14,
+      "passes": true,
+      "notes": "Required Skills: None (TypeScript script creation)"
+    },
+    {
+      "id": "US-015",
+      "title": "Backup Content Before Migration",
+      "description": "As a developer, I want to backup content before running migration to prevent data loss.",
+      "acceptanceCriteria": [
+        "Create /backups/content-migration-2026-01-22/ directory",
+        "Copy src/content/services/ to backup directory",
+        "Copy src/content/service-city/ to backup directory",
+        "Verify backup contains 573 files (23 services + 550 service-city)"
+      ],
+      "priority": 15,
+      "passes": true,
+      "notes": "Required Skills: None (file operations)"
+    },
+    {
+      "id": "US-016",
+      "title": "Run Content Migration",
+      "description": "As a developer, I want to migrate all 573 content files to use unified field names.",
+      "acceptanceCriteria": [
+        "Run migration script with --dry-run first to review changes",
+        "Run migration script with --execute to apply changes",
+        "Services (23 files): problemStatement to problem, solutionApproach to solution, valueProps to benefits, images to galleryImages",
+        "Service-city (550 files): localContext to context, localProof to proof",
+        "pnpm build passes with all 573 pages",
+        "Commit: chore: migrate content schema to unified fields"
+      ],
+      "priority": 16,
+      "passes": true,
+      "notes": "Required Skills: None (script execution)"
+    },
+    {
+      "id": "US-017",
+      "title": "Delete LocalProblemSection",
+      "description": "As a developer, I want to delete LocalProblemSection because it's 99% identical to ProblemSection.",
+      "acceptanceCriteria": [
+        "Delete /src/components/sections/LocalProblemSection.astro",
+        "Remove any imports of LocalProblemSection in page templates",
+        "pnpm build passes"
+      ],
+      "priority": 17,
+      "passes": true,
+      "notes": "Required Skills: None (file deletion)"
+    },
+    {
+      "id": "US-018",
+      "title": "Update ProblemSection Props",
+      "description": "As a developer, I want ProblemSection to use unified prop names and support variants.",
+      "acceptanceCriteria": [
+        "Rename prop painPoints to issues in ProblemSection.astro interface",
+        "Add variant?: 'default' | 'muted' | 'primary' prop to interface",
+        "Implement variantClasses object: { default: 'bg-background', muted: 'bg-muted/30', primary: 'bg-primary/5' }",
+        "Update section class to use variantClasses[variant]",
+        "Default variant to 'muted'",
+        "pnpm build passes"
+      ],
+      "priority": 18,
+      "passes": true,
+      "notes": "Required Skills: /web-design-guidelines (review .astro component)"
+    },
+    {
+      "id": "US-019",
+      "title": "Delete LocalSolutionSection",
+      "description": "As a developer, I want to delete LocalSolutionSection and merge its features into SolutionSection.",
+      "acceptanceCriteria": [
+        "Delete /src/components/sections/LocalSolutionSection.astro",
+        "Remove any imports of LocalSolutionSection in page templates",
+        "pnpm build passes"
+      ],
+      "priority": 19,
+      "passes": true,
+      "notes": "Required Skills: None (file deletion)"
+    },
+    {
+      "id": "US-020",
+      "title": "Update SolutionSection with City Support",
+      "description": "As a developer, I want SolutionSection to support city badge and trust indicator (features from LocalSolutionSection).",
+      "acceptanceCriteria": [
+        "Add cityName?: string prop to SolutionSection.astro interface",
+        "Add showTrustIndicator?: boolean prop to interface",
+        "When cityName provided, show city badge span: 'Solution in {cityName}'",
+        "When showTrustIndicator && cityName, show text: 'Serving {cityName} Since 1994'",
+        "Add variant?: 'default' | 'muted' | 'primary' prop",
+        "Implement variantClasses object for background colors",
+        "pnpm build passes"
+      ],
+      "priority": 20,
+      "passes": true,
+      "notes": "Required Skills: /web-design-guidelines (review .astro component), /frontend-design (UI enhancement)"
+    },
+    {
+      "id": "US-021",
+      "title": "Rename LocalTrustOpener to TrustOpenerSection",
+      "description": "As a developer, I want to rename LocalTrustOpener to TrustOpenerSection with imports updated atomically.",
+      "acceptanceCriteria": [
+        "Run git mv src/components/sections/LocalTrustOpener.astro src/components/sections/TrustOpenerSection.astro",
+        "Update import in [serviceLocation].astro to use TrustOpenerSection",
+        "Add variant prop to TrustOpenerSection with variantClasses",
+        "pnpm build passes",
+        "Commit: refactor: rename LocalTrustOpener to TrustOpenerSection"
+      ],
+      "priority": 21,
+      "passes": true,
+      "notes": "Required Skills: /web-design-guidelines (review renamed .astro component). ATOMIC: rename and import update in same commit."
+    },
+    {
+      "id": "US-022",
+      "title": "Rename LocalGallerySection to ServiceGallerySection",
+      "description": "As a developer, I want to rename LocalGallerySection to ServiceGallerySection with imports updated atomically.",
+      "acceptanceCriteria": [
+        "Run git mv src/components/sections/LocalGallerySection.astro src/components/sections/ServiceGallerySection.astro",
+        "Update import in [serviceLocation].astro to use ServiceGallerySection",
+        "Add variant prop to ServiceGallerySection with variantClasses",
+        "pnpm build passes",
+        "Commit: refactor: rename LocalGallerySection to ServiceGallerySection"
+      ],
+      "priority": 22,
+      "passes": true,
+      "notes": "Required Skills: /web-design-guidelines (review renamed .astro component). ATOMIC: rename and import update in same commit."
+    },
+    {
+      "id": "US-023",
+      "title": "Rename LocalProofSection to ProofSection",
+      "description": "As a developer, I want to rename LocalProofSection to ProofSection with imports updated atomically.",
+      "acceptanceCriteria": [
+        "Run git mv src/components/sections/LocalProofSection.astro src/components/sections/ProofSection.astro",
+        "Update import in [serviceLocation].astro to use ProofSection",
+        "Add variant prop to ProofSection with variantClasses",
+        "pnpm build passes",
+        "Commit: refactor: rename LocalProofSection to ProofSection"
+      ],
+      "priority": 23,
+      "passes": true,
+      "notes": "Required Skills: /web-design-guidelines (review renamed .astro component). ATOMIC: rename and import update in same commit."
+    },
+    {
+      "id": "US-024",
+      "title": "Rename LocalContextSection to ContextSection",
+      "description": "As a developer, I want to rename LocalContextSection to ContextSection with imports updated atomically.",
+      "acceptanceCriteria": [
+        "Run git mv src/components/sections/LocalContextSection.astro src/components/sections/ContextSection.astro",
+        "Update import in [serviceLocation].astro to use ContextSection",
+        "Add variant prop to ContextSection with variantClasses",
+        "pnpm build passes",
+        "Commit: refactor: rename LocalContextSection to ContextSection"
+      ],
+      "priority": 24,
+      "passes": true,
+      "notes": "Required Skills: /web-design-guidelines (review renamed .astro component). ATOMIC: rename and import update in same commit."
+    },
+    {
+      "id": "US-025",
+      "title": "Add Variant Props to Remaining Sections",
+      "description": "As a developer, I want all section components to support background variants for visual rhythm.",
+      "acceptanceCriteria": [
+        "Add variant prop to ServiceBenefitsSection.astro",
+        "Add variant prop to ServiceProcessSection.astro",
+        "Add variant prop to ServiceSavingsSection.astro",
+        "Add variant prop to LocationServicesGrid.astro",
+        "Each component implements variantClasses object: { default: 'bg-background', muted: 'bg-muted/30', primary: 'bg-primary/5' }",
+        "pnpm build passes"
+      ],
+      "priority": 25,
+      "passes": true,
+      "notes": "Required Skills: /web-design-guidelines (review .astro components)"
+    },
+    {
+      "id": "US-026",
+      "title": "Create ServicePageLayout",
+      "description": "As a developer, I want a shared layout component for both service and service-city pages.",
+      "acceptanceCriteria": [
+        "Create /src/layouts/ServicePageLayout.astro",
+        "Import BaseLayout from ./BaseLayout.astro",
+        "Import all 15 section components: ServiceHeroSection, TrustOpenerSection, ProblemSection, SolutionSection, ServiceGallerySection, ServiceBenefitsSection, ServiceProcessSection, ProofSection, ContextSection, LocationServicesGrid, ServiceSavingsSection, ServiceFAQSection, TestimonialsCarousel, RelatedServicesSection, FinalCTASection",
+        "Define Props interface with: pageType ('service' | 'service-city'), SEO fields, identity fields, section data objects, collections arrays, business data",
+        "Implement conditional rendering: {trustOpener && <TrustOpenerSection ... />}",
+        "Assign background variants per section as documented in Phase 7.6",
+        "pnpm build passes"
+      ],
+      "priority": 26,
+      "passes": true,
+      "notes": "Required Skills: /frontend-design (layout design), /web-design-guidelines (review .astro layout). This is a large component - focus on structure and props interface."
+    },
+    {
+      "id": "US-027",
+      "title": "Update [service].astro to Use ServicePageLayout",
+      "description": "As a developer, I want the service page template to use the new shared layout.",
+      "acceptanceCriteria": [
+        "Import ServicePageLayout in /src/pages/services/[service].astro",
+        "Remove all inline section component imports",
+        "Pass all required props to ServicePageLayout with pageType='service'",
+        "Map data fields: service.data.problem, service.data.solution, service.data.benefits, service.data.galleryImages",
+        "pnpm build passes",
+        "Verify in browser: /services/furnace-installation renders correctly at localhost:4321"
+      ],
+      "priority": 27,
+      "passes": true,
+      "notes": "Required Skills: /web-design-guidelines (review .astro page), /agent-browser (visual verification)"
+    },
+    {
+      "id": "US-028",
+      "title": "Update [serviceLocation].astro to Use ServicePageLayout",
+      "description": "As a developer, I want the service-city page template to use the new shared layout.",
+      "acceptanceCriteria": [
+        "Import ServicePageLayout in /src/pages/services/[serviceLocation].astro",
+        "Remove all inline section component imports",
+        "Pass all required props to ServicePageLayout with pageType='service-city'",
+        "Implement fallback pattern: benefits={serviceCity.data.benefits || service.data.benefits}",
+        "Implement fallback for processSteps and savings",
+        "Pass cityName={location.data.title} and locationSlug props",
+        "pnpm build passes",
+        "Verify in browser: /services/furnace-installation-guelph-on renders correctly at localhost:4321"
+      ],
+      "priority": 28,
+      "passes": true,
+      "notes": "Required Skills: /web-design-guidelines (review .astro page), /agent-browser (visual verification)"
+    },
+    {
+      "id": "US-029",
+      "title": "Visual Testing - Service Page",
+      "description": "As a developer, I want to verify no visual regressions on service pages.",
+      "acceptanceCriteria": [
+        "Start dev server with pnpm dev",
+        "Navigate to /services/furnace-installation",
+        "Verify all sections render correctly (Hero, Problem, Solution, Benefits, Process, Savings, FAQ, Testimonials, Related, CTA)",
+        "Verify headings use Playfair Display font (serif)",
+        "Verify body text uses Inter font (sans-serif)",
+        "Test at 375px mobile viewport",
+        "Test at 768px tablet viewport",
+        "Test at 1024px desktop viewport",
+        "Verify in browser using /agent-browser skill"
+      ],
+      "priority": 29,
+      "passes": true,
+      "notes": "Required Skills: /agent-browser (comprehensive visual testing)"
+    },
+    {
+      "id": "US-030",
+      "title": "Visual Testing - Service-City Page",
+      "description": "As a developer, I want to verify no visual regressions on service-city pages.",
+      "acceptanceCriteria": [
+        "Navigate to /services/furnace-installation-guelph-on",
+        "Verify all 16 sections render correctly",
+        "Verify city badge shows on Solution section when cityName provided",
+        "Verify trust indicator shows 'Serving Guelph Since 1994'",
+        "Verify conditional sections hide gracefully when data missing",
+        "Test at 375px, 768px, 1024px viewports",
+        "Verify in browser using /agent-browser skill"
+      ],
+      "priority": 30,
+      "passes": true,
+      "notes": "Required Skills: /agent-browser (comprehensive visual testing)"
+    },
+    {
+      "id": "US-031",
+      "title": "Performance Verification",
+      "description": "As a developer, I want to verify font performance improvements.",
+      "acceptanceCriteria": [
+        "Open browser DevTools Network tab",
+        "Navigate to any service page",
+        "Verify only 1 Google Fonts request (fonts.googleapis.com)",
+        "Verify font payload is under 150KB",
+        "pnpm build completes successfully for all 573 pages"
+      ],
+      "priority": 31,
+      "passes": false,
+      "notes": "Required Skills: /agent-browser (performance verification via DevTools)"
+    },
+    {
+      "id": "US-032",
+      "title": "Cleanup - Delete Migration Script",
+      "description": "As a developer, I want to delete the migration script after successful migration.",
+      "acceptanceCriteria": [
+        "Verify all content files are migrated (no old field names remain)",
+        "Delete /scripts/migrate-content-schema.ts",
+        "pnpm build passes",
+        "Commit: chore: remove migration script after successful migration"
+      ],
+      "priority": 32,
+      "passes": false,
+      "notes": "Required Skills: None (file deletion)"
+    },
+    {
+      "id": "US-033",
+      "title": "Cleanup - Verify Deleted Components",
+      "description": "As a developer, I want to ensure deleted components are fully removed.",
+      "acceptanceCriteria": [
+        "Verify LocalProblemSection.astro is deleted",
+        "Verify LocalSolutionSection.astro is deleted",
+        "Run grep -r 'LocalProblemSection' src/ returns no results",
+        "Run grep -r 'LocalSolutionSection' src/ returns no results",
+        "pnpm build passes"
+      ],
+      "priority": 33,
+      "passes": false,
+      "notes": "Required Skills: None (verification)"
+    },
+    {
+      "id": "US-034",
+      "title": "Final Build Verification",
+      "description": "As a developer, I want to verify the complete build passes with all changes.",
+      "acceptanceCriteria": [
+        "Run pnpm build",
+        "Build completes successfully with no errors",
+        "All 573 pages generated (23 services + 550 service-city)",
+        "No TypeScript errors",
+        "No Zod validation errors",
+        "Commit: feat: complete Phase 7A infrastructure consolidation"
+      ],
+      "priority": 34,
+      "passes": false,
+      "notes": "Required Skills: /agent-browser (final visual spot-check)"
+    }
+  ]
+}
