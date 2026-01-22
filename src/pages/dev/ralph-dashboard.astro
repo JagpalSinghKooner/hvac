@@ -1,9 +1,10 @@
 ---
 /**
- * Ralph Dashboard - Live Progress Visualization
+ * Ralph Dashboard - Kanban Board Style Progress Visualization
  *
  * Dev-only page to monitor Ralph execution progress.
  * Auto-refreshes every 5 seconds to show real-time status.
+ * Click any story card to see full details.
  *
  * URL: http://localhost:4321/dev/ralph-dashboard
  */
@@ -36,15 +37,19 @@ try {
   error = `Could not read prd.json: ${e instanceof Error ? e.message : 'Unknown error'}`;
 }
 
-// Calculate stats
+// Calculate stats and organize stories
 const stories = prdData?.userStories || [];
-const completed = stories.filter(s => s.passes).length;
-const pending = stories.filter(s => !s.passes).length;
+const completedStories = stories.filter(s => s.passes);
+const pendingStories = stories.filter(s => !s.passes);
+const currentStory = pendingStories[0];
+const todoStories = pendingStories.slice(1);
+
 const total = stories.length;
+const completed = completedStories.length;
 const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
 
-// Find current story (first pending story)
-const currentStory = stories.find(s => !s.passes);
+// Serialize stories for JavaScript
+const storiesJson = JSON.stringify(stories);
 ---
 
 <!DOCTYPE html>
@@ -59,386 +64,875 @@ const currentStory = stories.find(s => !s.passes);
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      background: #0f172a;
       color: #e2e8f0;
       min-height: 100vh;
-      padding: 2rem;
     }
 
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
+    /* Layout */
+    .app {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      padding: 24px;
+      gap: 24px;
     }
 
     /* Header */
     .header {
-      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
     .header h1 {
       font-size: 1.5rem;
       font-weight: 600;
       color: #f8fafc;
-      margin-bottom: 0.5rem;
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 12px;
     }
 
-    .header h1::before {
-      content: '';
-      display: inline-block;
-      width: 12px;
-      height: 12px;
+    .live-dot {
+      width: 10px;
+      height: 10px;
       background: #22c55e;
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+      50% { opacity: 0.8; box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+    }
+
+    .header-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .branch-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      background: #1e40af20;
-      border: 1px solid #3b82f640;
+      gap: 6px;
+      background: #1e3a5f;
+      border: 1px solid #3b82f650;
       color: #60a5fa;
-      padding: 0.25rem 0.75rem;
-      border-radius: 9999px;
+      padding: 6px 12px;
+      border-radius: 6px;
       font-size: 0.75rem;
-      font-family: monospace;
+      font-family: 'SF Mono', Monaco, monospace;
     }
 
-    .description {
-      color: #94a3b8;
+    .project-name {
+      color: #64748b;
       font-size: 0.875rem;
-      margin-top: 0.5rem;
     }
 
-    /* Progress Section */
-    .progress-section {
+    /* Progress Bar */
+    .progress-container {
+      display: flex;
+      align-items: center;
+      gap: 16px;
       background: #1e293b;
       border: 1px solid #334155;
-      border-radius: 1rem;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .progress-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
+      border-radius: 12px;
+      padding: 16px 20px;
     }
 
     .progress-stats {
       display: flex;
-      gap: 2rem;
+      gap: 24px;
     }
 
     .stat {
       text-align: center;
+      min-width: 60px;
     }
 
     .stat-value {
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 700;
-      color: #f8fafc;
+      line-height: 1;
     }
 
-    .stat-value.completed { color: #22c55e; }
-    .stat-value.pending { color: #f59e0b; }
+    .stat-value.done { color: #22c55e; }
+    .stat-value.progress { color: #a78bfa; }
+    .stat-value.todo { color: #64748b; }
 
     .stat-label {
-      font-size: 0.75rem;
+      font-size: 0.625rem;
       color: #64748b;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.1em;
+      margin-top: 4px;
     }
 
-    .progress-bar-container {
+    .progress-bar-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .progress-bar-track {
       background: #0f172a;
-      border-radius: 9999px;
-      height: 12px;
+      border-radius: 999px;
+      height: 8px;
       overflow: hidden;
     }
 
-    .progress-bar {
+    .progress-bar-fill {
       height: 100%;
-      background: linear-gradient(90deg, #22c55e 0%, #4ade80 100%);
-      border-radius: 9999px;
+      background: linear-gradient(90deg, #22c55e, #4ade80);
+      border-radius: 999px;
       transition: width 0.5s ease;
     }
 
-    .percentage {
-      text-align: right;
-      margin-top: 0.5rem;
-      font-size: 0.875rem;
-      color: #94a3b8;
-    }
-
-    /* Current Story */
-    .current-story {
-      background: linear-gradient(135deg, #1e40af20 0%, #7c3aed20 100%);
-      border: 1px solid #6366f140;
-      border-radius: 1rem;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .current-label {
+    .progress-text {
       font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #a78bfa;
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .current-label::before {
-      content: '';
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      background: #a78bfa;
-      border-radius: 50%;
-      animation: pulse 1.5s infinite;
-    }
-
-    .current-story h2 {
-      font-size: 1.25rem;
-      color: #f8fafc;
-      margin-bottom: 0.5rem;
-    }
-
-    .current-story-id {
-      font-family: monospace;
-      color: #818cf8;
-      font-weight: 600;
-    }
-
-    .current-description {
       color: #94a3b8;
-      font-size: 0.875rem;
+      text-align: right;
     }
 
-    /* Stories Grid */
-    .stories-section h3 {
-      font-size: 1rem;
-      color: #94a3b8;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .stories-grid {
+    /* Kanban Board */
+    .kanban {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1rem;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      flex: 1;
+      min-height: 0;
     }
 
-    .story-card {
+    .kanban-column {
+      display: flex;
+      flex-direction: column;
       background: #1e293b;
       border: 1px solid #334155;
-      border-radius: 0.75rem;
-      padding: 1rem;
-      transition: transform 0.2s, border-color 0.2s;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .column-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid #334155;
+      background: #1e293b;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .column-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #f1f5f9;
+    }
+
+    .column-icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+    }
+
+    .column-icon.done { background: #22c55e20; color: #4ade80; }
+    .column-icon.progress { background: #a78bfa20; color: #a78bfa; }
+    .column-icon.todo { background: #64748b20; color: #94a3b8; }
+
+    .column-count {
+      background: #0f172a;
+      color: #94a3b8;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .column-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* Story Cards */
+    .story-card {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 16px;
+      transition: all 0.2s ease;
+      cursor: pointer;
     }
 
     .story-card:hover {
-      transform: translateY(-2px);
       border-color: #475569;
-    }
-
-    .story-card.passed {
-      border-left: 3px solid #22c55e;
-    }
-
-    .story-card.pending {
-      border-left: 3px solid #f59e0b;
+      transform: translateY(-1px);
+      background: #131c2e;
     }
 
     .story-card.current {
       border-color: #818cf8;
-      background: linear-gradient(135deg, #1e293b 0%, #312e81 100%);
+      background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+      box-shadow: 0 0 0 1px #818cf850;
     }
 
-    .story-header {
+    .card-header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 0.5rem;
+      align-items: center;
+      margin-bottom: 10px;
     }
 
     .story-id {
-      font-family: monospace;
-      font-size: 0.75rem;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 0.6875rem;
       color: #64748b;
-    }
-
-    .status-badge {
-      font-size: 0.625rem;
-      padding: 0.125rem 0.5rem;
-      border-radius: 9999px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 600;
-    }
-
-    .status-badge.passed {
-      background: #22c55e20;
-      color: #4ade80;
-    }
-
-    .status-badge.pending {
-      background: #f59e0b20;
-      color: #fbbf24;
-    }
-
-    .story-title {
-      font-size: 0.875rem;
-      color: #f1f5f9;
-      font-weight: 500;
-      line-height: 1.4;
+      background: #1e293b;
+      padding: 3px 8px;
+      border-radius: 4px;
     }
 
     .story-priority {
       font-size: 0.625rem;
       color: #475569;
-      margin-top: 0.5rem;
     }
 
-    /* Error state */
-    .error {
-      background: #7f1d1d40;
-      border: 1px solid #ef444480;
-      color: #fca5a5;
-      padding: 1.5rem;
-      border-radius: 0.75rem;
+    .story-title {
+      font-size: 0.8125rem;
+      color: #e2e8f0;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    /* Current Story Highlight */
+    .current-indicator {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.625rem;
+      color: #a78bfa;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #334155;
+    }
+
+    .current-indicator::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: #a78bfa;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    /* Empty State */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      color: #475569;
       text-align: center;
+      gap: 8px;
+    }
+
+    .empty-icon {
+      font-size: 2rem;
+      opacity: 0.5;
+    }
+
+    .empty-text {
+      font-size: 0.8125rem;
     }
 
     /* Footer */
     .footer {
-      margin-top: 3rem;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
       color: #475569;
       font-size: 0.75rem;
+      padding-top: 8px;
     }
 
-    .refresh-indicator {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .refresh-indicator svg {
-      animation: spin 2s linear infinite;
+    .footer svg {
+      animation: spin 3s linear infinite;
     }
 
     @keyframes spin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
+
+    /* Error state */
+    .error {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      background: #7f1d1d20;
+      border: 1px solid #ef444450;
+      color: #fca5a5;
+      padding: 40px;
+      border-radius: 12px;
+      text-align: center;
+      gap: 12px;
+    }
+
+    /* Scrollbar */
+    .column-content::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .column-content::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .column-content::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 999px;
+    }
+
+    .column-content::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    /* Modal */
+    .modal {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 720px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: modalIn 0.2s ease;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 28px 32px;
+      border-bottom: 1px solid #334155;
+      gap: 20px;
+    }
+
+    .modal-header-content {
+      flex: 1;
+    }
+
+    .modal-id-status {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .modal-id {
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 0.875rem;
+      color: #94a3b8;
+      background: #0f172a;
+      padding: 6px 12px;
+      border-radius: 6px;
+    }
+
+    .modal-status {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .modal-status.passed {
+      background: #22c55e20;
+      color: #4ade80;
+    }
+
+    .modal-status.pending {
+      background: #f59e0b20;
+      color: #fbbf24;
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #f8fafc;
+      line-height: 1.4;
+      margin-top: 4px;
+    }
+
+    .modal-close {
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .modal-close:hover {
+      background: #334155;
+      color: #f8fafc;
+    }
+
+    .modal-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 28px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .modal-section {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .modal-section-title {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .modal-description {
+      font-size: 1.0625rem;
+      color: #e2e8f0;
+      line-height: 1.7;
+    }
+
+    /* Acceptance Criteria */
+    .criteria-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .criteria-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 16px 18px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: #f1f5f9;
+    }
+
+    .criteria-item.completed {
+      border-color: #22c55e30;
+      background: linear-gradient(135deg, #0f172a 0%, #052e16 100%);
+    }
+
+    .criteria-icon {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .criteria-icon.check {
+      background: #22c55e;
+      color: #052e16;
+    }
+
+    .criteria-icon.pending {
+      background: #334155;
+      color: #64748b;
+    }
+
+    .criteria-text {
+      flex: 1;
+    }
+
+    /* Notes */
+    .modal-notes {
+      font-size: 0.9375rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+      padding: 16px 18px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      border-left: 3px solid #3b82f6;
+    }
+
+    /* Modal scrollbar */
+    .modal-body::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .modal-body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .modal-body::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 999px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .kanban {
+        grid-template-columns: 1fr;
+      }
+
+      .kanban-column {
+        max-height: 400px;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="app">
     {error ? (
       <div class="error">
+        <div style="font-size: 2rem;">!</div>
         <h2>Error Loading PRD</h2>
         <p>{error}</p>
-        <p style="margin-top: 1rem;">Make sure prd.json exists in the project root.</p>
+        <p style="opacity: 0.7;">Make sure prd.json exists in the project root.</p>
       </div>
     ) : (
       <>
         <!-- Header -->
         <header class="header">
-          <h1>Ralph Dashboard</h1>
-          <div class="branch-badge">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="6" y1="3" x2="6" y2="15"></line>
-              <circle cx="18" cy="6" r="3"></circle>
-              <circle cx="6" cy="18" r="3"></circle>
-              <path d="M18 9a9 9 0 0 1-9 9"></path>
-            </svg>
-            {prdData?.branchName}
-          </div>
-          <p class="description">{prdData?.project}</p>
-        </header>
-
-        <!-- Progress Overview -->
-        <section class="progress-section">
-          <div class="progress-header">
-            <div class="progress-stats">
-              <div class="stat">
-                <div class="stat-value completed">{completed}</div>
-                <div class="stat-label">Completed</div>
+          <div class="header-left">
+            <h1>
+              <span class="live-dot"></span>
+              Ralph Dashboard
+            </h1>
+            <div class="header-meta">
+              <div class="branch-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="6" y1="3" x2="6" y2="15"></line>
+                  <circle cx="18" cy="6" r="3"></circle>
+                  <circle cx="6" cy="18" r="3"></circle>
+                  <path d="M18 9a9 9 0 0 1-9 9"></path>
+                </svg>
+                {prdData?.branchName}
               </div>
-              <div class="stat">
-                <div class="stat-value pending">{pending}</div>
-                <div class="stat-label">Pending</div>
-              </div>
-              <div class="stat">
-                <div class="stat-value">{total}</div>
-                <div class="stat-label">Total</div>
-              </div>
+              <span class="project-name">{prdData?.project}</span>
             </div>
           </div>
-          <div class="progress-bar-container">
-            <div class="progress-bar" style={`width: ${percentage}%`}></div>
-          </div>
-          <div class="percentage">{percentage}% Complete</div>
-        </section>
 
-        <!-- Current Story -->
-        {currentStory && (
-          <section class="current-story">
-            <div class="current-label">Currently Working On</div>
-            <h2>
-              <span class="current-story-id">{currentStory.id}</span> — {currentStory.title}
-            </h2>
-            <p class="current-description">{currentStory.description}</p>
-          </section>
-        )}
-
-        <!-- All Stories -->
-        <section class="stories-section">
-          <h3>All Stories ({total})</h3>
-          <div class="stories-grid">
-            {stories.map((story) => (
-              <div class={`story-card ${story.passes ? 'passed' : 'pending'} ${story.id === currentStory?.id ? 'current' : ''}`}>
-                <div class="story-header">
-                  <span class="story-id">{story.id}</span>
-                  <span class={`status-badge ${story.passes ? 'passed' : 'pending'}`}>
-                    {story.passes ? 'Passed' : 'Pending'}
-                  </span>
-                </div>
-                <div class="story-title">{story.title}</div>
-                <div class="story-priority">Priority: {story.priority}</div>
+          <!-- Progress Bar -->
+          <div class="progress-container">
+            <div class="progress-stats">
+              <div class="stat">
+                <div class="stat-value done">{completed}</div>
+                <div class="stat-label">Done</div>
               </div>
-            ))}
+              <div class="stat">
+                <div class="stat-value progress">{currentStory ? 1 : 0}</div>
+                <div class="stat-label">Active</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value todo">{todoStories.length}</div>
+                <div class="stat-label">To Do</div>
+              </div>
+            </div>
+            <div class="progress-bar-wrapper">
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill" style={`width: ${percentage}%`}></div>
+              </div>
+              <div class="progress-text">{percentage}% Complete</div>
+            </div>
           </div>
-        </section>
+        </header>
+
+        <!-- Kanban Board -->
+        <div class="kanban">
+          <!-- Done Column -->
+          <div class="kanban-column">
+            <div class="column-header">
+              <div class="column-title">
+                <span class="column-icon done">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </span>
+                Done
+              </div>
+              <span class="column-count">{completedStories.length}</span>
+            </div>
+            <div class="column-content">
+              {completedStories.length === 0 ? (
+                <div class="empty-state">
+                  <div class="empty-icon">-</div>
+                  <div class="empty-text">No completed stories yet</div>
+                </div>
+              ) : (
+                completedStories.map((story) => (
+                  <div class="story-card" data-story-id={story.id} onclick="openModal(this.dataset.storyId)">
+                    <div class="card-header">
+                      <span class="story-id">{story.id}</span>
+                      <span class="story-priority">#{story.priority}</span>
+                    </div>
+                    <div class="story-title">{story.title}</div>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+
+          <!-- In Progress Column -->
+          <div class="kanban-column">
+            <div class="column-header">
+              <div class="column-title">
+                <span class="column-icon progress">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </span>
+                In Progress
+              </div>
+              <span class="column-count">{currentStory ? 1 : 0}</span>
+            </div>
+            <div class="column-content">
+              {!currentStory ? (
+                <div class="empty-state">
+                  <div class="empty-icon">-</div>
+                  <div class="empty-text">No active story</div>
+                </div>
+              ) : (
+                <div class="story-card current" data-story-id={currentStory.id} onclick="openModal(this.dataset.storyId)">
+                  <div class="card-header">
+                    <span class="story-id">{currentStory.id}</span>
+                    <span class="story-priority">#{currentStory.priority}</span>
+                  </div>
+                  <div class="story-title">{currentStory.title}</div>
+                  <div class="current-indicator">Currently executing...</div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <!-- To Do Column -->
+          <div class="kanban-column">
+            <div class="column-header">
+              <div class="column-title">
+                <span class="column-icon todo">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                  </svg>
+                </span>
+                To Do
+              </div>
+              <span class="column-count">{todoStories.length}</span>
+            </div>
+            <div class="column-content">
+              {todoStories.length === 0 ? (
+                <div class="empty-state">
+                  <div class="empty-icon">-</div>
+                  <div class="empty-text">All stories completed!</div>
+                </div>
+              ) : (
+                todoStories.map((story) => (
+                  <div class="story-card" data-story-id={story.id} onclick="openModal(this.dataset.storyId)">
+                    <div class="card-header">
+                      <span class="story-id">{story.id}</span>
+                      <span class="story-priority">#{story.priority}</span>
+                    </div>
+                    <div class="story-title">{story.title}</div>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
 
         <!-- Footer -->
         <footer class="footer">
-          <div class="refresh-indicator">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"></path>
-              <path d="M21 3v5h-5"></path>
-            </svg>
-            Auto-refreshing every 5 seconds
-          </div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"></path>
+            <path d="M21 3v5h-5"></path>
+          </svg>
+          Auto-refreshing every 5 seconds · Click any story for details
         </footer>
+
+        <!-- Modal -->
+        <div class="modal-overlay" id="modal-overlay" onclick="closeModalOnOverlay(event)">
+          <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+              <div class="modal-header-content">
+                <div class="modal-id-status">
+                  <span class="modal-id" id="modal-id"></span>
+                  <span class="modal-status" id="modal-status"></span>
+                </div>
+                <h2 class="modal-title" id="modal-title"></h2>
+              </div>
+              <button class="modal-close" onclick="closeModal()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="modal-section">
+                <div class="modal-section-title">Description</div>
+                <p class="modal-description" id="modal-description"></p>
+              </div>
+              <div class="modal-section">
+                <div class="modal-section-title">Acceptance Criteria</div>
+                <div class="criteria-list" id="modal-criteria"></div>
+              </div>
+              <div class="modal-section" id="modal-notes-section" style="display: none;">
+                <div class="modal-section-title">Notes</div>
+                <div class="modal-notes" id="modal-notes"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </>
     )}
   </div>
+
+  <script define:vars={{ storiesJson }}>
+    const stories = JSON.parse(storiesJson);
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Expose functions to global scope for onclick handlers
+    window.openModal = function(storyId) {
+      const story = stories.find(s => s.id === storyId);
+      if (!story) return;
+
+      // Populate modal
+      document.getElementById('modal-id').textContent = story.id;
+      document.getElementById('modal-title').textContent = story.title;
+      document.getElementById('modal-description').textContent = story.description;
+
+      // Status
+      const statusEl = document.getElementById('modal-status');
+      statusEl.textContent = story.passes ? 'Completed' : 'Pending';
+      statusEl.className = 'modal-status ' + (story.passes ? 'passed' : 'pending');
+
+      // Acceptance Criteria
+      const criteriaEl = document.getElementById('modal-criteria');
+      criteriaEl.innerHTML = story.acceptanceCriteria.map(criteria => `
+        <div class="criteria-item ${story.passes ? 'completed' : ''}">
+          <span class="criteria-icon ${story.passes ? 'check' : 'pending'}">
+            ${story.passes
+              ? '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>'
+              : '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle></svg>'
+            }
+          </span>
+          <span class="criteria-text">${escapeHtml(criteria)}</span>
+        </div>
+      `).join('');
+
+      // Notes
+      const notesSection = document.getElementById('modal-notes-section');
+      const notesEl = document.getElementById('modal-notes');
+      if (story.notes) {
+        notesSection.style.display = 'flex';
+        notesEl.textContent = story.notes;
+      } else {
+        notesSection.style.display = 'none';
+      }
+
+      // Show modal
+      document.getElementById('modal-overlay').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    };
+
+    window.closeModal = function() {
+      document.getElementById('modal-overlay').classList.remove('active');
+      document.body.style.overflow = '';
+    };
+
+    window.closeModalOnOverlay = function(event) {
+      if (event.target === event.currentTarget) {
+        window.closeModal();
+      }
+    };
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        window.closeModal();
+      }
+    });
+  </script>
 </body>
 </html>

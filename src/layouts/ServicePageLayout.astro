@@ -1,0 +1,395 @@
+---
+/**
+ * ServicePageLayout
+ *
+ * Shared layout for both service pages (/services/[service]) and
+ * service-city pages (/services/[service]-[city]-on).
+ *
+ * Consolidates 15 section components with conditional rendering based on data availability.
+ * Implements visual rhythm through background variants (default → muted → primary alternation).
+ *
+ * @example Service page usage
+ * <ServicePageLayout
+ *   pageType="service"
+ *   title={service.data.seoTitle}
+ *   description={service.data.seoDescription}
+ *   serviceTitle={service.data.title}
+ *   serviceDescription={service.data.description}
+ *   category={service.data.category}
+ *   serviceType={service.data.serviceType}
+ *   problem={service.data.problem}
+ *   solution={service.data.solution}
+ *   Content={Content}
+ *   benefits={service.data.benefits}
+ *   processSteps={service.data.processSteps}
+ *   savings={service.data.savings}
+ *   faqs={serviceFaqs}
+ *   reviews={reviewsToShow}
+ *   relatedServices={relatedServices}
+ *   business={business}
+ * />
+ *
+ * @example Service-city page usage
+ * <ServicePageLayout
+ *   pageType="service-city"
+ *   title={serviceCity.data.seoTitle}
+ *   description={serviceCity.data.seoDescription}
+ *   serviceTitle={serviceCity.data.title}
+ *   serviceDescription={serviceCity.data.seoDescription}
+ *   category={service.data.category}
+ *   cityName={location.data.title}
+ *   locationSlug={serviceCity.data.locationSlug}
+ *   trustOpener={serviceCity.data.trustOpener}
+ *   problem={serviceCity.data.problem}
+ *   solution={serviceCity.data.solution}
+ *   galleryImages={serviceCity.data.galleryImages}
+ *   Content={Content}
+ *   benefits={benefits}
+ *   processSteps={processSteps}
+ *   proof={serviceCity.data.proof}
+ *   context={serviceCity.data.context}
+ *   savings={savingsData}
+ *   faqs={serviceFaqs}
+ *   reviews={reviewsToShow}
+ *   relatedServices={relatedServices}
+ *   business={business}
+ * />
+ */
+
+import BaseLayout from './BaseLayout.astro';
+import ServiceHeroSection from '@/components/sections/ServiceHeroSection.astro';
+import TrustOpenerSection from '@/components/sections/TrustOpenerSection.astro';
+import ProblemSection from '@/components/sections/ProblemSection.astro';
+import SolutionSection from '@/components/sections/SolutionSection.astro';
+import ServiceGallerySection from '@/components/sections/ServiceGallerySection.astro';
+import ServiceBenefitsSection from '@/components/sections/ServiceBenefitsSection.astro';
+import ServiceProcessSection from '@/components/sections/ServiceProcessSection.astro';
+import ProofSection from '@/components/sections/ProofSection.astro';
+import ContextSection from '@/components/sections/ContextSection.astro';
+import LocationServicesGrid from '@/components/sections/LocationServicesGrid.astro';
+import ServiceSavingsSection from '@/components/sections/ServiceSavingsSection.astro';
+import ServiceFAQSection from '@/components/sections/ServiceFAQSection';
+import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel';
+import RelatedServicesSection from '@/components/sections/RelatedServicesSection.astro';
+import FinalCTASection from '@/components/sections/FinalCTASection.astro';
+
+// Type definitions matching actual component props
+interface ProblemData {
+  headline: string;
+  description: string;
+  issues?: string[];
+}
+
+interface SolutionData {
+  headline: string;
+  description: string;
+  differentiators?: string[];
+}
+
+interface BenefitData {
+  title: string;
+  description: string;
+  icon: string; // Required by ServiceBenefitsSection
+}
+
+interface ProcessStepData {
+  step: number;
+  title: string;
+  description: string;
+}
+
+interface ProofData {
+  testimonial: string;
+  customerName: string;
+  customerLocation: string;
+  result: string;
+}
+
+interface SavingsData {
+  headline: string;
+  description: string;
+  bullets?: string[];
+  rebateInfo?: string;
+  financingNote?: string;
+}
+
+interface FAQData {
+  question: string;
+  answer: string;
+}
+
+interface ReviewData {
+  id: string; // Required by TestimonialsCarousel
+  data: {
+    authorName: string;
+    rating: number;
+    text: string;
+    serviceSlug: string;
+    citySlug?: string;
+    verified: boolean;
+    reviewDate: string;
+  };
+}
+
+interface RelatedServiceData {
+  title: string;
+  slug: string;
+  description: string;
+}
+
+interface BusinessData {
+  business: {
+    legal_name: string;
+  };
+  contact: {
+    phone_e164: string;
+    phone_display: string;
+  };
+  reputation: {
+    google_rating: number;
+    google_review_count: number;
+  };
+}
+
+interface Props {
+  // Page type selector
+  pageType: 'service' | 'service-city';
+
+  // SEO metadata
+  title: string;
+  description: string;
+
+  // Hero section (REQUIRED - always present)
+  serviceTitle: string;
+  serviceDescription: string;
+  category: string;
+  serviceType?: string;
+
+  // Service-city specific identity
+  cityName?: string;
+  locationSlug?: string;
+
+  // Content sections (optional - conditionally rendered)
+  trustOpener?: string;
+  problem?: ProblemData;
+  solution?: SolutionData;
+  galleryImages?: Array<{ src: string; alt: string; caption?: string }>; // GalleryImage objects
+  Content?: any; // Astro Content component
+  benefits?: BenefitData[];
+  processSteps?: ProcessStepData[];
+  proof?: ProofData;
+  context?: string;
+  savings?: SavingsData;
+
+  // Collections (required for respective sections)
+  faqs: FAQData[];
+  reviews: ReviewData[];
+  relatedServices: RelatedServiceData[];
+
+  // Business data (REQUIRED)
+  business: BusinessData;
+}
+
+const {
+  pageType,
+  title,
+  description,
+  serviceTitle,
+  serviceDescription,
+  category,
+  serviceType,
+  cityName,
+  locationSlug,
+  trustOpener,
+  problem,
+  solution,
+  galleryImages,
+  Content,
+  benefits,
+  processSteps,
+  proof,
+  context,
+  savings,
+  faqs,
+  reviews,
+  relatedServices,
+  business,
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <!-- 1. Hero Section -->
+  <!-- Background: default (white) -->
+  <ServiceHeroSection
+    title={serviceTitle}
+    description={serviceDescription}
+    category={category}
+    serviceType={serviceType}
+    phoneNumber={business.contact.phone_e164}
+    phoneDisplay={business.contact.phone_display}
+  />
+
+  <!-- 2. Trust Opener (service-city only) -->
+  <!-- Background: primary (blue tint) -->
+  {trustOpener && cityName && (
+    <TrustOpenerSection
+      variant="primary"
+      cityName={cityName}
+      rating={business.reputation.google_rating}
+      localStats={trustOpener}
+    />
+  )}
+
+  <!-- 3. Problem Section -->
+  <!-- Background: muted (light gray) -->
+  {problem && (
+    <ProblemSection
+      variant="muted"
+      headline={problem.headline}
+      description={problem.description}
+      issues={problem.issues || []}
+    />
+  )}
+
+  <!-- 4. Solution Section -->
+  <!-- Background: default (white) -->
+  {solution && (
+    <SolutionSection
+      variant="default"
+      headline={solution.headline}
+      description={solution.description}
+      differentiators={solution.differentiators || []}
+      cityName={pageType === 'service-city' ? cityName : undefined}
+      showTrustIndicator={pageType === 'service-city'}
+    />
+  )}
+
+  <!-- 5. Gallery Section (service-city only) -->
+  <!-- Background: muted (light gray) -->
+  {galleryImages && galleryImages.length > 0 && cityName && (
+    <ServiceGallerySection
+      variant="muted"
+      images={galleryImages}
+      cityName={cityName}
+      serviceType={serviceTitle}
+    />
+  )}
+
+  <!-- 6. Markdown Content Section -->
+  <!-- Background: default (white) -->
+  {Content && (
+    <section class="py-16 md:py-20 lg:py-24 bg-background">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div class="max-w-4xl mx-auto prose prose-neutral dark:prose-invert prose-headings:font-bold prose-a:text-primary">
+          <Content />
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- 7. Benefits Section -->
+  <!-- Background: default (white) -->
+  {benefits && benefits.length > 0 && (
+    <ServiceBenefitsSection
+      variant="default"
+      benefits={benefits}
+      headline="Why Choose Us"
+    />
+  )}
+
+  <!-- 8. Process Section -->
+  <!-- Background: muted (light gray) -->
+  {processSteps && processSteps.length > 0 && (
+    <ServiceProcessSection
+      variant="muted"
+      steps={processSteps}
+      headline="Our Process"
+    />
+  )}
+
+  <!-- 9. Proof Section (service-city only) -->
+  <!-- Background: default (white) -->
+  {proof && (
+    <ProofSection
+      variant="default"
+      testimonial={proof.testimonial}
+      customerName={proof.customerName}
+      customerLocation={proof.customerLocation}
+      result={proof.result}
+    />
+  )}
+
+  <!-- 10. Context Section (service-city only) -->
+  <!-- Background: muted (light gray) -->
+  {context && cityName && (
+    <ContextSection
+      variant="muted"
+      cityName={cityName}
+      serviceName={serviceTitle}
+      content={context}
+    />
+  )}
+
+  <!-- 11. Location Services Grid (service-city only) -->
+  <!-- Background: muted (light gray) -->
+  {locationSlug && cityName && (
+    <LocationServicesGrid
+      variant="muted"
+      cityName={cityName}
+      locationSlug={locationSlug}
+    />
+  )}
+
+  <!-- 12. Savings Section -->
+  <!-- Background: primary (blue tint) -->
+  {savings && (
+    <ServiceSavingsSection
+      variant="primary"
+      headline={savings.headline}
+      description={savings.description}
+      bullets={savings.bullets}
+      rebateInfo={savings.rebateInfo}
+      financingNote={savings.financingNote}
+    />
+  )}
+
+  <!-- 13. FAQ Section -->
+  <!-- Background: default (white) -->
+  {faqs.length > 0 && (
+    <ServiceFAQSection
+      client:load
+      faqs={faqs}
+      headline="Frequently Asked Questions"
+    />
+  )}
+
+  <!-- 14. Testimonials Carousel -->
+  <!-- Background: muted (light gray) -->
+  {reviews.length > 0 && (
+    <TestimonialsCarousel
+      client:load
+      reviews={reviews}
+      googleRating={business.reputation.google_rating}
+      googleReviewCount={business.reputation.google_review_count}
+    />
+  )}
+
+  <!-- 15. Related Services -->
+  <!-- Background: default (white) -->
+  {relatedServices.length > 0 && (
+    <RelatedServicesSection
+      services={relatedServices}
+      headline={pageType === 'service-city' && cityName
+        ? `More Services in ${cityName}`
+        : "Related Services"
+      }
+    />
+  )}
+
+  <!-- 16. Final CTA -->
+  <!-- Background: primary (blue tint) -->
+  <FinalCTASection
+    phoneNumber={business.contact.phone_e164}
+    phoneDisplay={business.contact.phone_display}
+  />
+</BaseLayout>
