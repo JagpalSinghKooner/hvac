@@ -10,6 +10,7 @@ interface Props {
   financingNote?: string;
   imageAlt?: string;
   reversed?: boolean;
+  variant?: 'default' | 'muted' | 'primary';
 }
 
 const {
@@ -19,8 +20,16 @@ const {
   rebateInfo,
   financingNote,
   imageAlt = "Savings and rebates information",
-  reversed = false
+  reversed = false,
+  variant = 'primary'
 } = Astro.props;
+
+// Variant classes for background
+const variantClasses = {
+  default: 'bg-background',
+  muted: 'bg-muted/30',
+  primary: 'bg-primary/5'
+};
 
 // Render nothing if no content provided
 if (!headline && !description && !bullets?.length && !rebateInfo && !financingNote) {
@@ -28,7 +37,7 @@ if (!headline && !description && !bullets?.length && !rebateInfo && !financingNo
 }
 ---
 
-<section class="relative py-16 md:py-20 lg:py-24 bg-primary/5 overflow-hidden">
+<section class:list={["relative py-16 md:py-20 lg:py-24 overflow-hidden", variantClasses[variant]]}>
   <!-- Decorative Background -->
   <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
     <div class="absolute top-20 left-10 w-72 h-72 bg-primary/[0.02] rounded-full blur-3xl"></div>

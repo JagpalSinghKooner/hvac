@@ -1,0 +1,444 @@
+---
+/**
+ * Ralph Dashboard - Live Progress Visualization
+ *
+ * Dev-only page to monitor Ralph execution progress.
+ * Auto-refreshes every 5 seconds to show real-time status.
+ *
+ * URL: http://localhost:4321/dev/ralph-dashboard
+ */
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Read prd.json directly from project root
+const prdPath = path.join(process.cwd(), 'prd.json');
+let prdData: {
+  project: string;
+  branchName: string;
+  description: string;
+  userStories: Array<{
+    id: string;
+    title: string;
+    description: string;
+    acceptanceCriteria: string[];
+    priority: number;
+    passes: boolean;
+    notes?: string;
+  }>;
+} | null = null;
+
+let error: string | null = null;
+
+try {
+  const rawData = fs.readFileSync(prdPath, 'utf-8');
+  prdData = JSON.parse(rawData);
+} catch (e) {
+  error = `Could not read prd.json: ${e instanceof Error ? e.message : 'Unknown error'}`;
+}
+
+// Calculate stats
+const stories = prdData?.userStories || [];
+const completed = stories.filter(s => s.passes).length;
+const pending = stories.filter(s => !s.passes).length;
+const total = stories.length;
+const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+// Find current story (first pending story)
+const currentStory = stories.find(s => !s.passes);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="5">
+  <title>Ralph Dashboard | {prdData?.project || 'Loading...'}</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #e2e8f0;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      margin-bottom: 2rem;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #f8fafc;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .header h1::before {
+      content: '';
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background: #22c55e;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .branch-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #1e40af20;
+      border: 1px solid #3b82f640;
+      color: #60a5fa;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-family: monospace;
+    }
+
+    .description {
+      color: #94a3b8;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Progress Section */
+    .progress-section {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .progress-stats {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+
+    .stat-value.completed { color: #22c55e; }
+    .stat-value.pending { color: #f59e0b; }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .progress-bar-container {
+      background: #0f172a;
+      border-radius: 9999px;
+      height: 12px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #22c55e 0%, #4ade80 100%);
+      border-radius: 9999px;
+      transition: width 0.5s ease;
+    }
+
+    .percentage {
+      text-align: right;
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+      color: #94a3b8;
+    }
+
+    /* Current Story */
+    .current-story {
+      background: linear-gradient(135deg, #1e40af20 0%, #7c3aed20 100%);
+      border: 1px solid #6366f140;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .current-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #a78bfa;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .current-label::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #a78bfa;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    .current-story h2 {
+      font-size: 1.25rem;
+      color: #f8fafc;
+      margin-bottom: 0.5rem;
+    }
+
+    .current-story-id {
+      font-family: monospace;
+      color: #818cf8;
+      font-weight: 600;
+    }
+
+    .current-description {
+      color: #94a3b8;
+      font-size: 0.875rem;
+    }
+
+    /* Stories Grid */
+    .stories-section h3 {
+      font-size: 1rem;
+      color: #94a3b8;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .story-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .story-card:hover {
+      transform: translateY(-2px);
+      border-color: #475569;
+    }
+
+    .story-card.passed {
+      border-left: 3px solid #22c55e;
+    }
+
+    .story-card.pending {
+      border-left: 3px solid #f59e0b;
+    }
+
+    .story-card.current {
+      border-color: #818cf8;
+      background: linear-gradient(135deg, #1e293b 0%, #312e81 100%);
+    }
+
+    .story-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+    }
+
+    .story-id {
+      font-family: monospace;
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+
+    .status-badge {
+      font-size: 0.625rem;
+      padding: 0.125rem 0.5rem;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    .status-badge.passed {
+      background: #22c55e20;
+      color: #4ade80;
+    }
+
+    .status-badge.pending {
+      background: #f59e0b20;
+      color: #fbbf24;
+    }
+
+    .story-title {
+      font-size: 0.875rem;
+      color: #f1f5f9;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .story-priority {
+      font-size: 0.625rem;
+      color: #475569;
+      margin-top: 0.5rem;
+    }
+
+    /* Error state */
+    .error {
+      background: #7f1d1d40;
+      border: 1px solid #ef444480;
+      color: #fca5a5;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      text-align: center;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 3rem;
+      text-align: center;
+      color: #475569;
+      font-size: 0.75rem;
+    }
+
+    .refresh-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .refresh-indicator svg {
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    {error ? (
+      <div class="error">
+        <h2>Error Loading PRD</h2>
+        <p>{error}</p>
+        <p style="margin-top: 1rem;">Make sure prd.json exists in the project root.</p>
+      </div>
+    ) : (
+      <>
+        <!-- Header -->
+        <header class="header">
+          <h1>Ralph Dashboard</h1>
+          <div class="branch-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="6" y1="3" x2="6" y2="15"></line>
+              <circle cx="18" cy="6" r="3"></circle>
+              <circle cx="6" cy="18" r="3"></circle>
+              <path d="M18 9a9 9 0 0 1-9 9"></path>
+            </svg>
+            {prdData?.branchName}
+          </div>
+          <p class="description">{prdData?.project}</p>
+        </header>
+
+        <!-- Progress Overview -->
+        <section class="progress-section">
+          <div class="progress-header">
+            <div class="progress-stats">
+              <div class="stat">
+                <div class="stat-value completed">{completed}</div>
+                <div class="stat-label">Completed</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value pending">{pending}</div>
+                <div class="stat-label">Pending</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value">{total}</div>
+                <div class="stat-label">Total</div>
+              </div>
+            </div>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar" style={`width: ${percentage}%`}></div>
+          </div>
+          <div class="percentage">{percentage}% Complete</div>
+        </section>
+
+        <!-- Current Story -->
+        {currentStory && (
+          <section class="current-story">
+            <div class="current-label">Currently Working On</div>
+            <h2>
+              <span class="current-story-id">{currentStory.id}</span> — {currentStory.title}
+            </h2>
+            <p class="current-description">{currentStory.description}</p>
+          </section>
+        )}
+
+        <!-- All Stories -->
+        <section class="stories-section">
+          <h3>All Stories ({total})</h3>
+          <div class="stories-grid">
+            {stories.map((story) => (
+              <div class={`story-card ${story.passes ? 'passed' : 'pending'} ${story.id === currentStory?.id ? 'current' : ''}`}>
+                <div class="story-header">
+                  <span class="story-id">{story.id}</span>
+                  <span class={`status-badge ${story.passes ? 'passed' : 'pending'}`}>
+                    {story.passes ? 'Passed' : 'Pending'}
+                  </span>
+                </div>
+                <div class="story-title">{story.title}</div>
+                <div class="story-priority">Priority: {story.priority}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+          <div class="refresh-indicator">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"></path>
+              <path d="M21 3v5h-5"></path>
+            </svg>
+            Auto-refreshing every 5 seconds
+          </div>
+        </footer>
+      </>
+    )}
+  </div>
+</body>
+</html>

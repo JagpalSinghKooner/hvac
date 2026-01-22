@@ -12,14 +12,23 @@ interface Props {
   headline?: string;
   imageAlt?: string;
   reversed?: boolean;
+  variant?: 'default' | 'muted' | 'primary';
 }
 
 const {
   benefits,
   headline = "Why Choose Us",
   imageAlt = "Service benefits",
-  reversed = false
+  reversed = false,
+  variant = 'default'
 } = Astro.props;
+
+// Variant classes for background
+const variantClasses = {
+  default: 'bg-background',
+  muted: 'bg-muted/30',
+  primary: 'bg-primary/5'
+};
 
 // Handle empty benefits array
 if (!benefits || benefits.length === 0) {
@@ -27,7 +36,7 @@ if (!benefits || benefits.length === 0) {
 }
 ---
 
-<section class="py-16 md:py-20 lg:py-24 bg-background relative overflow-hidden">
+<section class:list={["py-16 md:py-20 lg:py-24 relative overflow-hidden", variantClasses[variant]]}>
   <!-- Decorative background -->
   <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
     <div class="absolute top-20 right-20 w-96 h-96 bg-primary/[0.02] rounded-full blur-3xl"></div>

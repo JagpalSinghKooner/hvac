@@ -20,13 +20,22 @@ export interface Props {
   steps: ProcessStep[];
   headline?: string;
   subheadline?: string;
+  variant?: 'default' | 'muted' | 'primary';
 }
 
 const {
   steps = [],
   headline = "Our Process",
   subheadline,
+  variant = 'default'
 } = Astro.props;
+
+// Variant classes for background
+const variantClasses = {
+  default: 'bg-background',
+  muted: 'bg-muted/30',
+  primary: 'bg-primary/5'
+};
 
 // Return nothing if no steps provided
 if (!steps || steps.length === 0) {
@@ -34,7 +43,7 @@ if (!steps || steps.length === 0) {
 }
 ---
 
-<section class="py-16 md:py-20 lg:py-24">
+<section class:list={["py-16 md:py-20 lg:py-24", variantClasses[variant]]}>
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
     <!-- Section Header -->
     <div class="text-center mb-8 md:mb-12">

@@ -18,9 +18,17 @@ interface Props {
   locationSlug: string;
   headline?: string;
   subheadline?: string;
+  variant?: 'default' | 'muted' | 'primary';
 }
 
-const { cityName, locationSlug, headline, subheadline } = Astro.props;
+const { cityName, locationSlug, headline, subheadline, variant = 'muted' } = Astro.props;
+
+// Variant classes for background
+const variantClasses = {
+  default: 'bg-background',
+  muted: 'bg-muted/30',
+  primary: 'bg-primary/5'
+};
 
 // Fetch all services from content collection
 const allServices = await getCollection('services');
@@ -82,7 +90,7 @@ const defaultHeadline = `More Services We Offer in ${cityName}`;
 const defaultSubheadline = 'Comprehensive HVAC solutions for your home';
 ---
 
-<section class="relative py-16 md:py-20 lg:py-24 bg-muted/30 overflow-hidden">
+<section class:list={["relative py-16 md:py-20 lg:py-24 overflow-hidden", variantClasses[variant]]}>
   <!-- Decorative background -->
   <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
     <div class="absolute top-20 left-10 w-72 h-72 bg-primary/[0.02] rounded-full blur-3xl"></div>
