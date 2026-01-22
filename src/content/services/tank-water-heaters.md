@@ -22,22 +22,26 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problems:
-  - title: 'No Hot Water Emergency'
-    description: 'Your water heater failed—probably at the worst possible time. Cold showers are not acceptable. You need hot water back today, not next week. Every hour without hot water is a disruption to your household.'
-    icon: 'emergency'
-  - title: 'Rusty Water or Strange Noises'
-    description: 'Rusty hot water means your tank is corroding from the inside. Rumbling or popping sounds indicate sediment buildup. These are warning signs that failure is coming—better to replace on your schedule than deal with an emergency.'
-    icon: 'warning'
-  - title: 'Water Heater Leaking'
-    description: 'A leaking water heater is a ticking time bomb. Small leaks become floods. If you see water pooling around your tank, it is time to replace before catastrophic failure damages your home.'
-    icon: 'moisture'
+problemStatement:
+  headline: 'When Your Water Heater Fails, Hot Water Cannot Wait'
+  description: 'A failed water heater disrupts your entire household. Cold showers, no hot water for dishes or laundry, no ability to clean properly. Most tanks fail suddenly—often after 10-15 years of reliable service. Warning signs like rusty water, rumbling noises, or small leaks indicate internal corrosion and imminent failure. When water pools around your tank, it is a matter of hours or days before catastrophic failure damages your home. Replacement on your schedule is far better than emergency situations at premium prices.'
+  painPoints:
+    - 'Complete loss of hot water disrupts household routines and comfort'
+    - 'Rusty water or loud rumbling indicates internal tank corrosion'
+    - 'Visible leaks signal imminent catastrophic failure and potential flooding'
+    - 'Older tanks fail suddenly after 10-15 years, rarely with advance notice'
+    - 'Emergency replacements cost more and limit your equipment choices'
 
-approach:
-  headline: 'Fast, Reliable Water Heater Replacement'
-  description: 'We stock the most common water heater sizes and can often install the same day you call. Our TSSA-certified technicians handle everything—removal of the old unit, proper installation, gas and water connections, and permit documentation. We also properly dispose of your old water heater.'
-  quote: 'No hot water is a household emergency. We keep common sizes in stock because we understand you cannot wait days for an appointment.'
-  quotePerson: 'Paul Palmer, Owner'
+solutionApproach:
+  headline: 'Same-Day Tank Water Heater Installation'
+  description: 'We stock the most common water heater sizes and can often install the same day you call. Our TSSA-certified technicians handle everything—removal of the old unit, proper installation, gas and water connections, and permit documentation. We properly dispose of your old water heater and leave the area clean. No hot water is a household emergency. We keep common sizes in stock because we understand you cannot wait days for an appointment. Your hot water is restored quickly, correctly, and with full code compliance.'
+  differentiators:
+    - 'Same-day installation available for common tank sizes'
+    - 'TSSA-certified technicians with 30+ years combined experience'
+    - 'Complete service: removal, installation, connections, permits, disposal'
+    - 'Upfront pricing with no surprise charges on installation day'
+    - 'Proper venting and code compliance guaranteed on every installation'
+    - '10-year tank warranty options for premium peace of mind'
 
 processSteps:
   - step: 1

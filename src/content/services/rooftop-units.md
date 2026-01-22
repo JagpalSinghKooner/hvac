@@ -21,22 +21,26 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problems:
-  - title: 'RTU Failure Shuts Down Business'
-    description: 'When your rooftop unit fails, employees cannot work, customers leave, and products may spoil. A restaurant without AC in July. A warehouse too cold for workers in January. Every hour of downtime costs money.'
-    icon: 'emergency'
-  - title: 'Aging RTUs Driving Up Costs'
-    description: 'Rooftop units degrade over time—compressors lose efficiency, coils corrode, economizers stick. Energy costs climb 20-30% as equipment ages. At some point, replacement makes more financial sense than continued repairs.'
-    icon: 'cost'
-  - title: 'Finding Qualified RTU Technicians'
-    description: 'Commercial rooftop units require different expertise than residential systems. Many HVAC contractors lack experience with RTUs, leading to misdiagnoses, improper repairs, and repeated failures.'
-    icon: 'tools'
+problemStatement:
+  headline: 'Rooftop Unit Failures Shut Down Your Business Operations'
+  description: 'When your rooftop unit fails, consequences are immediate and costly. Employees cannot work in extreme temperatures. Customers leave uncomfortable retail spaces or restaurants. Temperature-sensitive products may spoil. A restaurant without AC in July loses an entire day of revenue. A warehouse too cold for workers in January faces safety issues and productivity losses. Every hour of downtime costs money. Aging RTUs compound these risks—compressors lose efficiency, coils corrode, economizers stick. Energy costs climb 20-30% as equipment degrades. At some point, replacement makes more financial sense than continued repairs. Finding qualified RTU technicians adds another challenge. Commercial rooftop units require different expertise than residential systems—many HVAC contractors lack RTU experience, leading to misdiagnoses, improper repairs, and repeated failures.'
+  painPoints:
+    - 'RTU failures shut down business operations and directly impact revenue'
+    - 'Aging rooftop units drive energy costs up 20-30% while reliability declines'
+    - 'Repeated repairs accumulate costs exceeding new equipment investment'
+    - 'Many contractors lack commercial RTU expertise for proper diagnostics'
+    - 'Equipment on rooftops requires specialized tools and access for service'
 
-approach:
-  headline: 'Commercial RTU Specialists Since 1992'
-  description: 'We service all major rooftop unit brands—Carrier, Trane, Lennox, York, Rheem, and more. Our technicians understand commercial refrigeration cycles, economizers, VAV systems, and building automation integration. We work around your business hours and minimize disruption.'
-  quote: 'Commercial clients need different things than homeowners. Speed matters. Scheduling around business hours matters. We understand that your RTU directly affects your bottom line.'
-  quotePerson: 'Paul Palmer, Owner'
+solutionApproach:
+  headline: 'Commercial RTU Specialists With 30+ Years Experience'
+  description: 'We service all major rooftop unit brands—Carrier, Trane, Lennox, York, Rheem, and more. Our technicians understand commercial refrigeration cycles, economizers, VAV systems, and building automation integration. We work around your business hours and minimize disruption—night and weekend work available. Commercial clients need different things than homeowners. Speed matters. Scheduling around business hours matters. We understand that your RTU directly affects your bottom line. Crane services included for replacements. 24/7 emergency response for our commercial clients.'
+  differentiators:
+    - 'All major RTU brands serviced—Carrier, Trane, Lennox, York, Rheem'
+    - 'Commercial refrigeration expertise: economizers, VAV, building automation'
+    - 'Rapid diagnosis using commercial diagnostic equipment and common parts stocked'
+    - 'Scheduled around your operations—night/weekend work available'
+    - 'Crane services included for safe rooftop equipment placement'
+    - '24/7 emergency response with priority scheduling for commercial clients'
 
 processSteps:
   - step: 1

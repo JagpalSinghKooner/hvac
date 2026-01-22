@@ -22,22 +22,26 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problems:
-  - title: 'HVAC Failures Disrupting Business'
-    description: 'When your commercial HVAC fails, it affects employees, customers, and revenue. A restaurant without cooling on a summer day. An office too cold for employees to work. These problems cost money every hour they persist.'
-    icon: 'emergency'
-  - title: 'Aging Equipment Driving Up Costs'
-    description: 'Commercial HVAC equipment degrades over time. Efficiency drops, repairs become frequent, and energy bills climb. At some point, replacement costs less than continued operation of aging equipment.'
-    icon: 'cost'
-  - title: 'Compliance and Comfort Expectations'
-    description: 'Retail stores, restaurants, and offices have specific temperature and ventilation requirements. Meeting customer and employee comfort expectations while managing energy costs requires properly designed systems.'
-    icon: 'temperature'
+problemStatement:
+  headline: 'Commercial HVAC Failures Directly Impact Your Bottom Line'
+  description: 'When your commercial HVAC fails, consequences cascade immediately. Employees cannot work effectively in uncomfortable conditions. Customers leave retail spaces or restaurants. Temperature-sensitive products may spoil. Every hour of downtime costs money—in lost productivity, lost sales, and potential product losses. Aging equipment makes this worse: efficiency drops, repairs become frequent, and energy bills climb 20-30% compared to new equipment. At some point, replacement costs less than continued operation of aging, unreliable systems. Add compliance requirements—retail stores, restaurants, and offices have specific temperature and ventilation standards—and properly functioning HVAC becomes non-negotiable.'
+  painPoints:
+    - 'HVAC failures disrupt operations, affecting employee productivity and customer comfort'
+    - 'Aging equipment drives energy costs up 20-30% while reliability declines'
+    - 'Frequent repairs accumulate costs that exceed new equipment investment'
+    - 'Compliance requirements mandate specific temperature and ventilation standards'
+    - 'Finding qualified commercial technicians who understand complex systems'
 
-approach:
-  headline: 'Commercial HVAC Expertise Since 1992'
-  description: 'We understand that commercial HVAC is about more than equipment—it is about keeping your business running. We work around your schedule, communicate clearly, and deliver solutions that balance comfort, efficiency, and budget. From small retail spaces to large industrial facilities, we have the experience to handle your project.'
-  quote: 'Commercial work requires different thinking than residential. Schedules matter. Budgets matter. We plan carefully and execute efficiently because your business depends on it.'
-  quotePerson: 'Paul Palmer, Owner'
+solutionApproach:
+  headline: 'Commercial HVAC That Keeps Your Business Running'
+  description: 'We understand that commercial HVAC is about more than equipment—it is about keeping your business running. We work around your schedule, communicate clearly, and deliver solutions that balance comfort, efficiency, and budget. From small retail spaces to large industrial facilities, we have 30+ years of experience. Commercial work requires different thinking than residential. Schedules matter. Budgets matter. We plan carefully and execute efficiently because your business depends on it. Night and weekend work available to avoid disruption.'
+  differentiators:
+    - 'Minimal business disruption—work scheduled around your operating hours'
+    - 'Commercial-grade equipment: rooftop units, VRF systems, packaged units'
+    - 'All major brands serviced—Carrier, Trane, Lennox, York, Rheem, and more'
+    - 'Preventive maintenance plans to avoid costly emergency failures'
+    - '24/7 emergency response with priority scheduling for commercial clients'
+    - 'Energy efficiency analysis and utility rebate assistance to maximize ROI'
 
 processSteps:
   - step: 1

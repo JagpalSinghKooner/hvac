@@ -21,22 +21,26 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problems:
-  - title: 'Forgetting Annual Maintenance'
-    description: 'Life gets busy. You intend to schedule maintenance but it slips through the cracks. Then winter arrives, your furnace fails, and you realize it has been three years since anyone looked at it.'
-    icon: 'warning'
-  - title: 'Emergency Repairs at Premium Prices'
-    description: 'When your heating or cooling fails on the worst possible day, everyone is calling for service. Emergency calls cost more, and wait times are longer. Being reactive costs more than being proactive.'
-    icon: 'cost'
-  - title: 'Shortened Equipment Lifespan'
-    description: 'HVAC equipment without regular maintenance fails years earlier than it should. That $8,000 furnace that should last 20 years? Without maintenance, you might be replacing it at 12.'
-    icon: 'emergency'
+problemStatement:
+  headline: 'Without Regular Maintenance, Your HVAC Investment Fails Early'
+  description: 'Life gets busy. You intend to schedule maintenance but it slips through the cracks. Then winter arrives, your furnace fails, and you realize it has been three years since anyone looked at it. When your heating or cooling fails on the worst possible day—first cold snap, first heat wave—everyone is calling for service simultaneously. Emergency calls cost more, wait times are longer, and you are stuck in discomfort. Being reactive costs far more than being proactive. Beyond emergency costs, unmaintained HVAC equipment fails years earlier than it should. That $8,000 furnace designed to last 20 years? Without maintenance, you might be replacing it at 12. Early failure wastes your investment and forces premature replacement costs.'
+  painPoints:
+    - 'Forgetting annual maintenance until equipment fails at the worst time'
+    - 'Emergency repairs cost 3-5x more than preventive maintenance'
+    - 'Unmaintained equipment fails 5-10 years earlier than expected lifespan'
+    - 'No priority during peak demand seasons when everyone needs service'
+    - 'Inefficient operation wastes energy and increases monthly utility bills'
 
-approach:
-  headline: 'Set It and Forget It Maintenance'
-  description: 'Our maintenance plans handle the scheduling so you do not have to remember. We contact you when service is due, perform comprehensive tune-ups, and catch small problems before they become expensive emergencies. Plan members also receive priority scheduling and repair discounts.'
-  quote: 'Maintenance plans are not about selling you something extra. They are about making sure your expensive HVAC equipment lasts as long as it should—and keeping you comfortable year-round.'
-  quotePerson: 'Paul Palmer, Owner'
+solutionApproach:
+  headline: 'Automatic Maintenance That Protects Your Investment'
+  description: 'Our maintenance plans handle the scheduling so you do not have to remember. We contact you when service is due, perform comprehensive tune-ups, and catch small problems before they become expensive emergencies. Plan members receive priority scheduling and 15% repair discounts. Maintenance plans are not about selling you something extra—they are about making sure your expensive HVAC equipment lasts as long as it should and keeping you comfortable year-round. Predictable costs, better protection, no surprises.'
+  differentiators:
+    - 'Automatic scheduling—we contact you when service is due (fall heating, spring cooling)'
+    - 'Priority emergency service—plan members jump to front of the line'
+    - '15% discount on all repair labour and parts year-round'
+    - 'Comprehensive multi-point inspections catch problems early'
+    - 'Extend equipment lifespan 5-10 years with proper maintenance'
+    - 'Transferable plans add value if you sell your home'
 
 processSteps:
   - step: 1
