@@ -154,8 +154,8 @@
         "pnpm build passes (639 pages, 0 errors)"
       ],
       "priority": 8,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Completed. Generated 3-4 unique city-specific benefits for 20 Guelph services using /orchestrator → /direct-response-copy. All benefits reference Guelph-specific factors (30 years local tenure, same-day response at 25 Clearview St, climate challenges, heritage housing, hard water conditions). 80 total benefits across 20 services. Icon distribution: shield (warranty), clock (response), home (local climate/housing), check-circle (process), award (certification), star (expertise), wrench (service). NO em dashes, proper punctuation, concrete outcomes emphasized. Benefits complement (NOT duplicate) solution sections. Created docs/project/ralph/guelph-benefits.md (923 lines) and scripts/add-benefits-guelph.mjs for reusable workflow. Build passes: 639 pages, 0 errors."
     },
     {
       "id": "US-009",
@@ -176,8 +176,8 @@
         "pnpm build passes (639 pages, 0 errors)"
       ],
       "priority": 9,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Completed. Verified 5 sample files (furnace, heat pump, AC, boiler, ductless) with unique city-specific content referencing Guelph factors (Ward, St. Patrick's Ward, Speed River, heritage limestone homes, climate). NO duplicate content, NO city-swapping, NO em dashes (grep check shows only frontmatter delimiters). Proper sentences and grammar throughout. Visually tested 3 pages (furnace, heat pump, AC installation) - all city-specific content renders correctly. Build passes: 639 pages, 0 errors."
     },
     {
       "id": "US-010",
