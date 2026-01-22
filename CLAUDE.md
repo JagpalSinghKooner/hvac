@@ -73,6 +73,44 @@
 
 ---
 
+## ⚠️ MANDATORY SKILL USAGE — NO EXCEPTIONS
+
+**CRITICAL**: Every task MUST use the appropriate skill. NO task is done "freestyle."
+
+### Development Tasks — REQUIRED Skills
+
+| Task Type | REQUIRED Skill | Run BEFORE |
+|-----------|---------------|------------|
+| Create PRD | `/prd` | Starting any work |
+| Convert to prd.json | `/ralph` | Running Ralph loop |
+| Design UI/component | `/frontend-design` | Writing any component code |
+| Review .tsx files | `/vercel-react-best-practices` | Committing React code |
+| Review .astro pages | `/web-design-guidelines` | Committing Astro code |
+| Test in browser | `/agent-browser` | Marking story complete |
+
+### Marketing/Content Tasks — ALWAYS START WITH /orchestrator
+
+| Task Type | REQUIRED Flow |
+|-----------|--------------|
+| ANY marketing task | `/orchestrator` → routes to correct skills |
+| Positioning/angles | `/orchestrator` → `/positioning-angles` |
+| Keyword research | `/orchestrator` → `/keyword-research` |
+| Brand voice | `/orchestrator` → `/brand-voice` |
+| SEO content | `/orchestrator` → `/seo-content` |
+| CTAs/conversion copy | `/orchestrator` → `/direct-response-copy` |
+| Email sequences | `/orchestrator` → `/email-sequences` |
+| Newsletter | `/orchestrator` → `/newsletter` |
+| Content repurposing | `/orchestrator` → `/content-atomizer` |
+
+### Enforcement Rules
+
+1. **PRD MUST list required skills** per story (in acceptanceCriteria, not just notes)
+2. **Ralph MUST validate** skill requirements before marking `passes: true`
+3. **AGENTS.md MUST be updated** with skill patterns discovered
+4. **Marketing tasks ALWAYS start with `/orchestrator`** — NO direct skill invocation
+
+---
+
 ## Technical Stack
 
 | Layer | Technology |
@@ -122,32 +160,38 @@
 
 ---
 
-## Available Skills
+## REQUIRED Skills
 
-Skills in `.claude/skills/`. **All execute within Ralph context.**
+Skills in `.claude/skills/`. **All execute within Ralph context. NO SKILL = NO TASK.**
 
-### Design & Development (REQUIRED)
-| Skill | When |
-|-------|------|
-| `/prd` | **FIRST** — All tasks start here |
-| `/ralph` | **SECOND** — Convert PRD to prd.json |
-| `/frontend-design` | ALL component creation |
-| `/agent-browser` | ALL testing after implementation |
-| `/vercel-react-best-practices` | ALL React components (.tsx) |
-| `/web-design-guidelines` | ALL user-facing pages (.astro) |
-| `/compound-engineering` | Complex multi-step features |
+### Design & Development — MANDATORY
+| Skill | When | NEVER Skip |
+|-------|------|------------|
+| `/prd` | **FIRST** — All tasks start here | Creates acceptance criteria |
+| `/ralph` | **SECOND** — Convert PRD to prd.json | Enables autonomous execution |
+| `/frontend-design` | **BEFORE** writing any component | Creates design spec |
+| `/agent-browser` | **AFTER** implementation | Validates visual output |
+| `/vercel-react-best-practices` | **BEFORE** committing .tsx | Catches React issues |
+| `/web-design-guidelines` | **BEFORE** committing .astro | Catches UI/UX issues |
+| `/compound-engineering` | Complex multi-step features | Ensures systematic approach |
 
-### Marketing (REQUIRED via orchestrator)
-| Skill | When |
-|-------|------|
-| `/orchestrator` | Start here for marketing tasks |
-| `/positioning-angles` | Differentiation (via orchestrator) |
-| `/keyword-research` | Target keywords (via orchestrator) |
-| `/brand-voice` | Voice consistency (via orchestrator) |
-| `/seo-content` | Page content |
-| `/direct-response-copy` | CTAs/conversion copy |
+### Marketing — ORCHESTRATOR FIRST, ALWAYS
+| Skill | Purpose | ONLY via /orchestrator |
+|-------|---------|----------------------|
+| `/orchestrator` | **GATEKEEPER** — routes to correct skills | START HERE |
+| `/positioning-angles` | Differentiation strategy | orchestrator routes here |
+| `/keyword-research` | Target keywords & content strategy | orchestrator routes here |
+| `/brand-voice` | Voice consistency & tone | orchestrator routes here |
+| `/seo-content` | SEO-optimized page content | orchestrator routes here |
+| `/direct-response-copy` | CTAs, landing pages, conversion copy | orchestrator routes here |
+| `/email-sequences` | Welcome, nurture, sales sequences | orchestrator routes here |
+| `/newsletter` | Newsletter creation & format | orchestrator routes here |
+| `/content-atomizer` | Repurpose content across platforms | orchestrator routes here |
 
-**Marketing Order:** orchestrator → positioning-angles → keyword-research → brand-voice → seo-content → direct-response-copy
+**Marketing Flow (STRICT ORDER):** `/orchestrator` → diagnoses need → routes to: `/positioning-angles` → `/keyword-research` → `/brand-voice` → `/seo-content` → `/direct-response-copy`
+
+**WRONG:** "Write landing page copy" → directly writes copy
+**RIGHT:** "Write landing page copy" → `/orchestrator` → routes to correct skill chain
 
 ---
 
@@ -216,11 +260,15 @@ Skills in `.claude/skills/`. **All execute within Ralph context.**
 11. Emphasize repairs over installations
 12. Hardcode business data (use profile.yaml)
 
-### Skill Violations
+### Skill Violations (CRITICAL)
 13. Skip `/frontend-design` when creating components
 14. Skip `/agent-browser` testing
 15. Skip code review skills before committing
 16. Commit with unresolved Critical/High issues
+17. **Invoke marketing skills directly** — MUST go through `/orchestrator` first
+18. **Start content/copy tasks without `/orchestrator`** — orchestrator is MANDATORY
+19. **Mark story `passes: true` without running required skills** — validation required
+20. **Create PRD without skill requirements in acceptance criteria**
 
 ---
 

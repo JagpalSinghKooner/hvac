@@ -129,6 +129,52 @@ Contains: company name, phone numbers, service areas, hours, certifications.
 
 ---
 
+## Mandatory Skill Usage
+
+### Development Skill Chain (ALWAYS follow this order)
+
+1. `/prd` → Create PRD with user stories (INCLUDES skill requirements in acceptance criteria)
+2. `/ralph` → Convert to prd.json (VALIDATES skill requirements exist)
+3. `/frontend-design` → Design BEFORE coding (creates design spec)
+4. Write code (following design spec)
+5. `/vercel-react-best-practices` → Review .tsx files
+6. `/web-design-guidelines` → Review .astro pages
+7. `/agent-browser` → Visual testing (375px, 768px, 1024px viewports)
+8. Commit only after all required skills pass
+
+### Marketing Skill Chain (ORCHESTRATOR FIRST, ALWAYS)
+
+1. `/orchestrator` → Diagnoses need, routes to correct skill(s)
+2. Follow orchestrator's recommended skill sequence
+3. **NEVER invoke marketing skills directly** — orchestrator first
+
+**Marketing Flow:** `/orchestrator` → `/positioning-angles` → `/keyword-research` → `/brand-voice` → `/seo-content` → `/direct-response-copy`
+
+### Skill Triggers Reference
+
+| If you need to... | Use this skill |
+|-------------------|---------------|
+| Plan a feature | `/prd` |
+| Start autonomous work | `/ralph` |
+| Design a component | `/frontend-design` |
+| Review React code | `/vercel-react-best-practices` |
+| Review Astro pages | `/web-design-guidelines` |
+| Test in browser | `/agent-browser` |
+| ANY marketing/content task | `/orchestrator` (ALWAYS first) |
+
+### Common Skill Mistakes
+
+**WRONG:** "Write landing page copy" → directly writes copy
+**RIGHT:** "Write landing page copy" → `/orchestrator` → `/positioning-angles` → `/brand-voice` → `/direct-response-copy`
+
+**WRONG:** Create component → skip `/frontend-design` → write code
+**RIGHT:** Create component → `/frontend-design` (design spec) → write code → `/web-design-guidelines` → `/agent-browser`
+
+**WRONG:** Mark story `passes: true` without running required skills
+**RIGHT:** Run ALL skills listed in acceptance criteria → verify outputs → then mark complete
+
+---
+
 ## File Dependencies
 
 ### When modifying `src/content/config.ts`:
