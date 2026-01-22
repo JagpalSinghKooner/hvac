@@ -1,20 +1,6 @@
 ---
 import { getEntry, getCollection, type CollectionEntry } from 'astro:content';
-import BaseLayout from '@/layouts/BaseLayout.astro';
-import ServiceHeroSection from '@/components/sections/ServiceHeroSection.astro';
-import TrustOpenerSection from '@/components/sections/TrustOpenerSection.astro';
-import ProblemSection from '@/components/sections/ProblemSection.astro';
-import SolutionSection from '@/components/sections/SolutionSection.astro';
-import ServiceGallerySection from '@/components/sections/ServiceGallerySection.astro';
-import ServiceBenefitsSection from '@/components/sections/ServiceBenefitsSection.astro';
-import ServiceProcessSection from '@/components/sections/ServiceProcessSection.astro';
-import ProofSection from '@/components/sections/ProofSection.astro';
-import LocationServicesGrid from '@/components/sections/LocationServicesGrid.astro';
-import ServiceSavingsSection from '@/components/sections/ServiceSavingsSection.astro';
-import ServiceFAQSection from '@/components/sections/ServiceFAQSection';
-import RelatedServicesSection from '@/components/sections/RelatedServicesSection.astro';
-import FinalCTASection from '@/components/sections/FinalCTASection.astro';
-import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel';
+import ServicePageLayout from '@/layouts/ServicePageLayout.astro';
 import { getServiceCityLinks } from '@/utils/getInternalLinks';
 
 export async function getStaticPaths() {
@@ -61,9 +47,6 @@ if (!parentLocation) {
   throw new Error(`Parent location not found: ${serviceCityData.locationSlug}`);
 }
 const locationData = parentLocation.data;
-
-// Render service-city body content
-const { Content } = await serviceCityEntry.render();
 
 // Get FAQs filtered by service scope
 const allFAQs = await getCollection('faqs');
@@ -121,134 +104,72 @@ const relatedServices = relatedServiceCityLinks
     description: `Professional ${serviceData.title.toLowerCase()} services in ${link.title}, Ontario.`,
   }));
 
-// Prepare props for sections
-const heroTitle = serviceCityData.title;
-const heroDescription = serviceCityData.seoDescription;
+// Render service-city body content
+const { Content } = await serviceCityEntry.render();
 
+// Prepare data for ServicePageLayout with fallback pattern
 const benefits =
-  serviceData.benefits?.map((vp) => ({
-    title: vp.title,
-    description: vp.description,
-    icon: vp.icon || 'check',
-  })) || [];
+  serviceCityData.benefits?.map((b) => ({
+    title: b.title,
+    description: b.description,
+    icon: b.icon || 'check',
+  })) ||
+  serviceData.benefits?.map((b) => ({
+    title: b.title,
+    description: b.description,
+    icon: b.icon || 'check',
+  })) ||
+  [];
 
 const processSteps =
+  serviceCityData.processSteps?.map((ps) => ({
+    step: ps.step,
+    title: ps.title,
+    description: ps.description,
+  })) ||
   serviceData.processSteps?.map((ps) => ({
     step: ps.step,
     title: ps.title,
     description: ps.description,
-  })) || [];
+  })) ||
+  [];
 
-const savingsData = serviceData.savings
-  ? {
-      headline: serviceData.savings.headline,
-      description: serviceData.savings.description,
-      bullets: serviceData.savings.bullets,
-      rebateInfo: serviceData.savings.rebateInfo,
-      financingNote: serviceData.savings.financingNote,
-    }
-  : null;
+const savingsData = (() => {
+  const savings = serviceCityData.savings || serviceData.savings;
+  if (!savings) return undefined;
+
+  return {
+    headline: savings.headline,
+    description: savings.description,
+    bullets: 'bullets' in savings ? savings.bullets : undefined,
+    rebateInfo: savings.rebateInfo,
+    financingNote: 'financingNote' in savings ? savings.financingNote : undefined,
+  };
+})();
 ---
 
-<BaseLayout title={serviceCityData.seoTitle} description={serviceCityData.seoDescription}>
-  <ServiceHeroSection
-    title={heroTitle}
-    description={heroDescription}
-    category={serviceData.category}
-    phoneNumber={business.contact.phone_e164}
-    phoneDisplay={business.contact.phone_display}
-  />
-
-  {
-    serviceCityData.trustOpener && (
-      <TrustOpenerSection
-        cityName={locationData.title}
-        rating={business.reputation.google_rating}
-        localStats={serviceCityData.trustOpener}
-      />
-    )
-  }
-
-  {
-    serviceCityData.problem && (
-      <ProblemSection
-        headline={serviceCityData.problem.headline}
-        description={serviceCityData.problem.description}
-        issues={serviceCityData.problem.issues || []}
-      />
-    )
-  }
-
-  {
-    serviceCityData.solution && (
-      <SolutionSection
-        headline={serviceCityData.solution.headline}
-        description={serviceCityData.solution.description}
-        differentiators={[]}
-      />
-    )
-  }
-
-  {
-    serviceCityData.galleryImages && serviceCityData.galleryImages.length > 0 && (
-      <ServiceGallerySection
-        images={serviceCityData.galleryImages}
-        cityName={locationData.title}
-        serviceType={serviceData.title}
-      />
-    )
-  }
-
-  <div class="prose prose-neutral dark:prose-invert max-w-4xl mx-auto px-4 md:px-6 py-12">
-    <Content />
-  </div>
-
-  {benefits.length > 0 && <ServiceBenefitsSection benefits={benefits} />}
-
-  {processSteps.length > 0 && <ServiceProcessSection steps={processSteps} />}
-
-  {
-    serviceCityData.proof && (
-      <ProofSection
-        testimonial={serviceCityData.proof.testimonial}
-        customerName={serviceCityData.proof.customerName}
-        customerLocation={serviceCityData.proof.customerLocation}
-        result={serviceCityData.proof.result}
-      />
-    )
-  }
-
-  <LocationServicesGrid cityName={locationData.title} locationSlug={serviceCityData.locationSlug} />
-
-  {
-    savingsData && (
-      <ServiceSavingsSection
-        headline={savingsData.headline}
-        description={savingsData.description}
-        bullets={savingsData.bullets}
-        rebateInfo={savingsData.rebateInfo}
-        financingNote={savingsData.financingNote}
-      />
-    )
-  }
-
-  {serviceFAQs.length > 0 && <ServiceFAQSection client:load faqs={serviceFAQs} />}
-
-  {
-    reviewsToShow.length > 0 && (
-      <TestimonialsCarousel
-        client:load
-        reviews={reviewsToShow}
-        googleRating={business.reputation.google_rating}
-        googleReviewCount={business.reputation.google_review_count}
-      />
-    )
-  }
-
-  {relatedServices.length > 0 && <RelatedServicesSection services={relatedServices} />}
-
-  <FinalCTASection
-    phoneNumber={business.contact.phone_e164}
-    phoneDisplay={business.contact.phone_display}
-  />
-</BaseLayout>
+<ServicePageLayout
+  pageType="service-city"
+  title={serviceCityData.seoTitle}
+  description={serviceCityData.seoDescription}
+  serviceTitle={serviceCityData.title}
+  serviceDescription={serviceCityData.seoDescription}
+  category={serviceData.category}
+  serviceType={serviceData.title}
+  cityName={locationData.title}
+  locationSlug={serviceCityData.locationSlug}
+  trustOpener={serviceCityData.trustOpener}
+  problem={serviceCityData.problem || serviceData.problem}
+  solution={serviceCityData.solution || serviceData.solution}
+  galleryImages={serviceCityData.galleryImages}
+  Content={Content}
+  benefits={benefits}
+  processSteps={processSteps}
+  proof={serviceCityData.proof}
+  context={serviceCityData.context}
+  savings={savingsData}
+  faqs={serviceFAQs}
+  reviews={reviewsToShow}
+  relatedServices={relatedServices}
+  business={business}
+/>
