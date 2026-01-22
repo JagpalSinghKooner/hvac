@@ -510,3 +510,129 @@ Every piece of content generated in US-005 through US-008 should be validated ag
 
 ---
 
+
+## US-007: Generate solution Content for All Guelph Services
+
+**Execution:**
+- Invoked /orchestrator → routed to /seo-content skill for solution section generation
+- Used positioning angles from US-003 (guelph-positioning.md), emphasizing Local HVAC Incumbent (30 years Guelph pattern recognition)
+- Used brand voice from US-004 (expertise-based confidence, accountability-focused, educator approach)
+- Generated unique solution sections for 20 Guelph services (all service-city directories with guelph.md files)
+- Created docs/project/ralph/guelph-solution-sections.md with all solution content
+- Created scripts/add-solution-sections-guelph.ts to integrate content into frontmatter
+
+**Solution Section Structure (Per Service):**
+- headline: What B.A.P does differently + outcome (e.g., "Right-Sized Equipment, Installed Right the First Time")
+- description: (1) What we do specifically, (2) Why it matters technically, (3) How we ensure quality, (4) What customer gets as outcome (2-4 sentences)
+
+**Positioning Angles Applied:**
+- Primary (Local HVAC Incumbent): 30 years in Guelph, pattern recognition, local expertise emphasized in all services
+- Secondary (Heritage Home Specialist): Boiler, ductless services reference heritage limestone homes, preservation
+- Secondary (Climate-Appropriate Specialist): Heat pumps, AC, humidifiers, dehumidifiers reference Guelph's cold winters (-25°C), humid summers, groundwater temperatures
+- Secondary (Accountability Anchor): TSSA certification, manufacturer specifications, warranty protection
+
+**Guelph-Specific Factors Integrated:**
+- Housing: Heritage limestone homes (Ward, St. Patrick's Ward), downtown properties, modern builds, narrow basements
+- Climate: Cold winters (-25°C), humid summers, Speed River valley proximity, groundwater temperatures (4-8°C winter)
+- Local expertise: 30 years solving Guelph-specific HVAC challenges, understanding local housing stock patterns
+
+**Quality Verification:**
+- ✅ All 20 services have unique solution content (NO duplication)
+- ✅ Each references Guelph-specific factors (housing, climate, local challenges)
+- ✅ Brand voice maintained (expertise-based, accountability-focused, educator NOT persuader)
+- ✅ Solution pattern followed: WHAT → WHY → HOW → OUTCOME
+- ✅ Technical specifics included (heat loss calculation, TSSA, refrigerant charge, manufacturer specs)
+- ✅ NO em dashes anywhere (verified with grep)
+- ✅ Proper sentences and punctuation throughout
+- ✅ 2-4 sentences per description
+- ✅ Concrete accountability statements ("if X, we will Y" pattern where appropriate)
+- ✅ Build passes: 639 pages, 0 errors
+
+**Services Covered:**
+1. furnace-installation
+2. furnace-repair
+3. heat-pump-installation
+4. heat-pump-repair
+5. air-conditioner-installation
+6. air-conditioner-repair
+7. boiler-installation
+8. boiler-repair
+9. ductless-mini-split
+10. tank-water-heaters
+11. tankless-water-heaters
+12. humidifiers
+13. dehumidifiers
+14. air-filtration-air-purifiers
+15. hrv-erv-ventilation
+16. maintenance-plans
+17. furnace-maintenance
+18. air-conditioner-maintenance
+19. heat-pump-maintenance
+20. boiler-maintenance
+
+**Content Approach by Service Type:**
+- **Installation services:** Emphasize proper sizing methodology (heat loss calculations, cooling load calculations), manufacturer specifications, TSSA certification
+- **Repair services:** Emphasize diagnostic accuracy from 30 years Guelph experience, honest repair vs. replace guidance, pattern recognition
+- **Maintenance services:** Emphasize preventive focus, scheduling before peak seasons, focusing on tasks that actually extend equipment life (NOT upselling)
+- **Heritage-specific (boilers, ductless):** Emphasize heritage home expertise, preservation guidelines, working within historic constraints
+- **Climate-specific (heat pumps, AC, humidifiers, dehumidifiers):** Emphasize Guelph climate factors (cold winters, humid summers, groundwater temperatures)
+
+**Script Implementation:**
+- Created reusable TypeScript script: scripts/add-solution-sections-guelph.ts
+- Reads solution sections from markdown doc (single source of truth)
+- Inserts solution section between problem issues array and context field
+- Handles YAML string escaping (doubled single quotes for YAML format)
+- Successfully integrated 20 solution sections with 0 errors
+
+**Key Insights from Solution Content Generation:**
+
+1. **Solution Section Purpose:** Explain B.A.P's differentiated approach using positioning angles (local pattern recognition, technical expertise, accountability)
+2. **Voice Balance:** Lead with WHAT we do (specifics), explain WHY it matters (technical reasoning), specify HOW we ensure quality (TSSA, manufacturer specs), state concrete OUTCOME customer receives
+3. **Technical Depth:** Use specific technical terminology (heat loss calculation, refrigerant charge, TSSA-certified, manufacturer specifications) for credibility
+4. **City Specificity:** Every solution must feel genuinely Guelph-specific (local housing challenges, climate factors, 30 years local expertise)
+5. **Accountability:** Concrete promises where appropriate, ownership language ("we ensure", "we verify", "you get")
+
+**Reusable Patterns for Remaining 24 Cities:**
+
+1. **Research city specifics first:**
+   - Housing stock (heritage vs. modern, common construction types, unique architectural challenges)
+   - Climate factors (temperature ranges, humidity, microclimates, groundwater temperatures)
+   - Local expertise angle (headquarters vs. serving from headquarters, years in market)
+
+2. **Generate solution sections with positioning context:**
+   - Use /orchestrator → /seo-content for each city batch
+   - Provide positioning summary (Local HVAC Incumbent + service-specific secondary angles)
+   - Provide brand voice core principles (NOT full profile - context compression)
+   - Apply solution pattern: WHAT → WHY → HOW → OUTCOME
+
+3. **Quality gates:**
+   - Uniqueness check: Sample 5 random services, verify NO duplicate solution statements
+   - City-specificity check: Content references local expertise, housing, or climate factors
+   - Em dash check: `grep -r '\-\-' src/content/service-city/*/[city].md | grep -v '^---'` must be empty (excluding frontmatter delimiters)
+   - Build verification: `pnpm build` must pass with 0 errors
+   - Technical specificity: Solutions include concrete methodology (sizing, diagnostics, maintenance approach)
+
+**Time Investment:**
+- Orchestrator routing: 2 minutes
+- SEO content generation: 40 minutes (22 services, ensuring uniqueness and city-specificity)
+- Markdown doc creation: 15 minutes
+- Script creation: 15 minutes
+- Script debugging (regex pattern for insertion point): 10 minutes
+- Verification + commit: 8 minutes
+- **Total: ~90 minutes for 20 services**
+
+**Efficiency Note:** Similar time investment to US-006 (problem sections). Solution sections require:
+- Technical depth (specific methodologies: heat loss calculations, diagnostic approaches, maintenance procedures)
+- Positioning angle integration (Local HVAC Incumbent + service-specific secondary angles)
+- Accountability language (concrete promises, ownership statements)
+- Balance between expertise demonstration and customer outcome focus
+
+**Comparison: US-005 (trustOpener) vs. US-006 (problem) vs. US-007 (solution):**
+- trustOpener: 37 minutes (2-3 sentences, straightforward trust signal)
+- problem: 107 minutes (headline + description + 3-4 issues, highest uniqueness requirement, technical depth, SEO optimization)
+- solution: 90 minutes (headline + description, positioning angle integration, technical methodology, accountability focus)
+
+**Next:** US-008 will generate benefits sections using direct-response-copy skill (conversion-focused, city-specific advantages).
+
+---
+
