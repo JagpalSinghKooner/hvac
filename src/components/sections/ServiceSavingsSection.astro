@@ -8,9 +8,19 @@ interface Props {
   bullets?: string[];
   rebateInfo?: string;
   financingNote?: string;
+  imageAlt?: string;
+  reversed?: boolean;
 }
 
-const { headline, description, bullets, rebateInfo, financingNote } = Astro.props;
+const {
+  headline,
+  description,
+  bullets,
+  rebateInfo,
+  financingNote,
+  imageAlt = "Savings and rebates information",
+  reversed = false
+} = Astro.props;
 
 // Render nothing if no content provided
 if (!headline && !description && !bullets?.length && !rebateInfo && !financingNote) {
@@ -18,29 +28,70 @@ if (!headline && !description && !bullets?.length && !rebateInfo && !financingNo
 }
 ---
 
-<section class="py-16 md:py-24 bg-background">
-  <div class="container mx-auto px-4">
-    <div class="max-w-4xl mx-auto">
-      <!-- Headline -->
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">
-        {headline}
-      </h2>
+<section class="relative py-16 md:py-20 lg:py-24 bg-primary/5 overflow-hidden">
+  <!-- Decorative Background -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute top-20 left-10 w-72 h-72 bg-primary/[0.02] rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-primary/[0.02] rounded-full blur-3xl"></div>
+  </div>
 
-      <!-- Description -->
-      {description && (
-        <p class="text-lg text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
-          {description}
-        </p>
-      )}
+  <div class="container mx-auto px-4 max-w-7xl relative">
+    <!-- Split Layout: Image Left / Text Right (default) -->
+    <div class="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
 
-      <div class="space-y-8">
+      <!-- Image Section -->
+      <div class:list={[
+        "relative group",
+        reversed ? "md:order-2" : "md:order-1"
+      ]}>
+        <div class="relative aspect-video bg-muted rounded-xl overflow-hidden shadow-sm transition-all duration-500 group-hover:shadow-lg">
+          <!-- Placeholder Image Content -->
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center px-6">
+              <p class="text-muted-foreground font-medium">{imageAlt}</p>
+              <p class="text-xs text-muted-foreground/60 mt-2">800 × 600</p>
+            </div>
+          </div>
+
+          <!-- Decorative Overlay on Hover -->
+          <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        </div>
+      </div>
+
+      <!-- Content Section -->
+      <div class:list={[
+        "space-y-6 md:space-y-8",
+        reversed ? "md:order-1" : "md:order-2"
+      ]}>
+
+        <!-- Headline -->
+        <div class="space-y-4 savings-headline">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground leading-tight">
+            {headline}
+          </h2>
+
+          {description && (
+            <p class="text-lg text-muted-foreground leading-relaxed">
+              {description}
+            </p>
+          )}
+        </div>
+
         <!-- Bullets (Checkmark List) -->
         {bullets && bullets.length > 0 && (
-          <div class="space-y-4">
-            {bullets.map((bullet) => (
-              <div class="flex gap-3">
-                <Check className="h-6 w-6 text-green-600 flex-shrink-0 mt-0.5" />
-                <p class="text-base text-foreground">{bullet}</p>
+          <div class="space-y-4" role="list">
+            {bullets.map((bullet, index) => (
+              <div
+                class="flex gap-4 group/item savings-bullet"
+                role="listitem"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center transition-colors duration-300 group-hover/item:bg-primary/20">
+                  <Check className="w-4 h-4 text-primary" />
+                </div>
+                <p class="text-base text-foreground leading-relaxed transition-colors duration-300 group-hover/item:text-primary">
+                  {bullet}
+                </p>
               </div>
             ))}
           </div>
@@ -48,32 +99,78 @@ if (!headline && !description && !bullets?.length && !rebateInfo && !financingNo
 
         <!-- Rebate Info (Highlighted Card) -->
         {rebateInfo && (
-          <Card className="bg-primary/10 border-primary">
-            <CardContent className="p-6">
-              <div class="flex items-start gap-3">
-                <div class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-                <div>
-                  <p class="font-semibold text-lg mb-2">Available Rebates & Incentives</p>
-                  <p class="text-foreground/90">{rebateInfo}</p>
+          <div class="savings-rebate">
+            <Card className="bg-primary/10 border-primary/30 hover:border-primary transition-colors duration-300">
+              <CardContent className="p-6">
+                <div class="flex items-start gap-4">
+                  <div class="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2"></div>
+                  <div class="space-y-2">
+                    <p class="font-semibold text-lg text-foreground">Available Rebates & Incentives</p>
+                    <p class="text-foreground/90 leading-relaxed">{rebateInfo}</p>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
         )}
 
         <!-- Financing Note -->
         {financingNote && (
-          <div class="text-center pt-4">
-            <p class="text-base text-muted-foreground">
+          <div class="pt-2 savings-financing">
+            <p class="text-base text-muted-foreground leading-relaxed">
               {financingNote}
               {' '}
-              <a href="/financing" class="text-primary font-semibold hover:underline">
+              <a
+                href="/financing"
+                class="text-primary font-semibold hover:underline underline-offset-4 transition-all duration-300"
+              >
                 Learn about financing options
               </a>
             </p>
           </div>
         )}
       </div>
+
     </div>
   </div>
 </section>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* Typography */
+  .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .savings-headline {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  .savings-bullet {
+    animation: fadeInUp 0.5s ease-out backwards;
+  }
+
+  .savings-rebate {
+    animation: fadeInUp 0.6s ease-out 0.2s backwards;
+  }
+
+  .savings-financing {
+    animation: fadeInUp 0.5s ease-out 0.3s backwards;
+  }
+</style>

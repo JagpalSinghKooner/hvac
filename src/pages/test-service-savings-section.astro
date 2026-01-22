@@ -1,0 +1,60 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ServiceSavingsSection from '@/components/sections/ServiceSavingsSection.astro';
+
+const pageTitle = 'ServiceSavingsSection Test';
+const pageDescription = 'Visual testing for ServiceSavingsSection component redesign';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="py-8">
+    <div class="container mx-auto px-4 max-w-5xl">
+      <h1 class="text-4xl font-bold text-center mb-4">ServiceSavingsSection Component Tests</h1>
+      <p class="text-muted-foreground text-center mb-12">Testing split layout redesign: Image left / Text right</p>
+    </div>
+
+    <!-- Test 1: Full Props (Default Layout) -->
+    <ServiceSavingsSection
+      headline="Save on Your New Furnace Installation"
+      description="Maximize your savings with government rebates, utility incentives, and flexible financing options."
+      bullets={[
+        "Up to $5,000 in federal energy rebates for qualified installations",
+        "Additional $1,500 in provincial incentives for high-efficiency models",
+        "Utility company rebates of up to $1,000 available",
+        "Competitive financing with 0% APR for 12 months",
+        "Free energy assessment to identify maximum savings"
+      ]}
+      rebateInfo="Homeowners in Ontario can qualify for up to $7,500+ in combined rebates through federal, provincial, and utility programs when upgrading to ENERGY STAR® certified equipment. We'll help you navigate every application."
+      financingNote="Need help managing upfront costs? We offer flexible financing plans with approved credit."
+      imageAlt="Energy rebates and savings calculator"
+    />
+
+    <!-- Test 2: Reversed Layout -->
+    <ServiceSavingsSection
+      headline="Heat Pump Savings & Incentives"
+      description="Heat pumps qualify for the highest rebate levels available in Ontario."
+      bullets={[
+        "Federal Greener Homes Grant: up to $6,500",
+        "Enbridge rebates up to $1,800",
+        "Combined savings potential exceeding $8,000",
+        "Flexible payment plans available"
+      ]}
+      rebateInfo="Heat pump installations qualify for premium rebate tiers due to their superior efficiency. Average customers recover 40-60% of installation costs through available incentives."
+      financingNote="Ask about our seasonal promotions and special financing offers."
+      imageAlt="Heat pump rebate information"
+      reversed={true}
+    />
+
+    <!-- Test 3: Minimal Props -->
+    <ServiceSavingsSection
+      headline="Air Conditioner Financing Available"
+      description="Beat the heat without breaking the bank."
+      bullets={[
+        "ENERGY STAR® rebates up to $1,000",
+        "0% financing on approved credit",
+        "Flexible monthly payment options"
+      ]}
+      imageAlt="AC financing options"
+    />
+  </div>
+</BaseLayout>
