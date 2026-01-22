@@ -102,15 +102,15 @@ STEP 2: CRITICAL CHECK
 - If count > 0, proceed to STEP 2.5
 - NEVER output COMPLETE if any story has passes: false
 
-STEP 2.5: IDENTIFY REQUIRED SKILLS (MANDATORY)
-- Read the story's acceptanceCriteria for skill requirements
-- If criteria mentions /frontend-design, run it BEFORE coding
-- If criteria mentions /agent-browser, run it BEFORE marking complete
-- If criteria mentions /vercel-react-best-practices, run it for .tsx files
-- If criteria mentions /web-design-guidelines, run it for .astro files
-- If story involves content/marketing, run /orchestrator FIRST
-- Document which skills you will use for this story
-- NEVER mark passes: true without running ALL required skills
+STEP 2.5: CHECK FOR SKILL REQUIREMENTS
+- Read the story's acceptanceCriteria for any skill mentions
+- If NO skills mentioned (e.g., deletions, config changes): proceed directly to STEP 3
+- If criteria mentions /frontend-design: run it BEFORE coding
+- If criteria mentions /agent-browser: run it BEFORE marking complete
+- If criteria mentions /vercel-react-best-practices: run it for .tsx files
+- If criteria mentions /web-design-guidelines: run it for .astro files
+- If criteria mentions /orchestrator: run it FIRST for marketing tasks
+- Simple tasks (deletions, refactors, migrations) typically have NO skill requirements
 
 STEP 3: Implement the FIRST story with passes: false
 - Read docs/project/ralph/progress.txt for recent context

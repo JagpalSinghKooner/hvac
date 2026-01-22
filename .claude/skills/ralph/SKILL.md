@@ -50,31 +50,28 @@ For each requirement in the PRD, create a user story:
 
 ---
 
-## Step 2.5: Validate Skill Requirements (MANDATORY)
+## Step 2.5: Validate Skill Requirements (when applicable)
 
-Before converting each story, verify skills are in acceptanceCriteria:
+Check if story matches a task type that requires skills:
 
 | Story Type | REQUIRED in acceptanceCriteria |
 |------------|-------------------------------|
-| UI/Component stories | `/frontend-design`, `/agent-browser` |
-| React (.tsx) stories | `/vercel-react-best-practices` |
-| Astro (.astro) stories | `/web-design-guidelines` |
-| Content/Marketing stories | `/orchestrator` |
+| UI/Component creation | `/frontend-design`, `/agent-browser` |
+| React (.tsx) changes | `/vercel-react-best-practices` |
+| Astro (.astro) changes | `/web-design-guidelines` |
+| Content/Marketing writing | `/orchestrator` |
 
-**If missing, ADD the skill requirement to acceptanceCriteria before output.**
+**If story matches a type above and skill is missing, ADD it to acceptanceCriteria.**
 
-Example — Story BEFORE validation:
-```json
-{
-  "title": "Create Hero Section",
-  "acceptanceCriteria": [
-    "Create HeroSection.astro",
-    "pnpm build passes"
-  ]
-}
-```
+### Stories that do NOT require skills:
+- File deletions (e.g., "Delete LocalProblemSection.astro")
+- Config changes (e.g., "Update tsconfig.json")
+- Schema updates (e.g., "Add field to config.ts")
+- Running migrations or scripts
+- Import updates without UI changes
+- Simple refactoring (rename, move files)
 
-Example — Story AFTER validation (skills added):
+Example — UI story needs skills:
 ```json
 {
   "title": "Create Hero Section",
@@ -88,7 +85,17 @@ Example — Story AFTER validation (skills added):
 }
 ```
 
-**NEVER output prd.json without skill requirements in criteria.**
+Example — Deletion story does NOT need skills:
+```json
+{
+  "title": "Delete LocalProblemSection",
+  "acceptanceCriteria": [
+    "Delete /src/components/sections/LocalProblemSection.astro",
+    "Update imports in page templates",
+    "pnpm build passes"
+  ]
+}
+```
 
 ---
 
@@ -181,11 +188,12 @@ To run Ralph: pnpm ralph
 
 - [ ] Each story completable in one iteration
 - [ ] All stories have "pnpm build passes" criterion
-- [ ] **SKILL REQUIREMENTS in acceptanceCriteria** (not just notes)
-- [ ] UI stories have `/frontend-design` + `/agent-browser` in criteria
-- [ ] .tsx stories have `/vercel-react-best-practices` in criteria
-- [ ] .astro stories have `/web-design-guidelines` in criteria
-- [ ] Marketing stories have `/orchestrator` in criteria
+- [ ] **Skill requirements in acceptanceCriteria (when task type requires it)**
+- [ ] UI/Component stories have `/frontend-design` + `/agent-browser`
+- [ ] .tsx change stories have `/vercel-react-best-practices`
+- [ ] .astro change stories have `/web-design-guidelines`
+- [ ] Marketing/content stories have `/orchestrator`
+- [ ] Simple tasks (deletions, configs, refactors) need NO skills
 - [ ] Stories ordered by dependency (priority)
 - [ ] Descriptions detailed enough for autonomous implementation
 - [ ] Branch name matches actual git branch

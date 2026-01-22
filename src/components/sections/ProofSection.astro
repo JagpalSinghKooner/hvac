@@ -1,4 +1,19 @@
 ---
+/**
+ * ProofSection Component
+ *
+ * Displays a customer testimonial with social proof.
+ * Used on both service and service-city pages.
+ *
+ * @example
+ * <ProofSection
+ *   testimonial="The technician was professional and thorough..."
+ *   customerName="Sarah Johnson"
+ *   customerLocation="Guelph, ON"
+ *   result="30% reduction in heating bills"
+ *   variant="primary"
+ * />
+ */
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Quote } from 'lucide-react';
@@ -8,9 +23,16 @@ interface Props {
   customerName: string;
   customerLocation: string;
   result?: string;
+  variant?: 'default' | 'muted' | 'primary';
 }
 
-const { testimonial, customerName, customerLocation, result } = Astro.props;
+const { testimonial, customerName, customerLocation, result, variant = 'primary' } = Astro.props;
+
+const variantClasses = {
+  default: 'bg-background',
+  muted: 'bg-muted/30',
+  primary: 'bg-primary/5',
+};
 
 // Handle missing testimonial gracefully
 if (!testimonial || testimonial.trim() === '') {
@@ -18,7 +40,7 @@ if (!testimonial || testimonial.trim() === '') {
 }
 ---
 
-<section class="py-16 md:py-24">
+<section class={`py-16 md:py-24 ${variantClasses[variant]}`}>
   <div class="container mx-auto px-4 md:px-6">
     <div class="max-w-3xl mx-auto">
       <div class="text-center mb-8">

@@ -8,7 +8,7 @@ import SolutionSection from '@/components/sections/SolutionSection.astro';
 import ServiceGallerySection from '@/components/sections/ServiceGallerySection.astro';
 import ServiceBenefitsSection from '@/components/sections/ServiceBenefitsSection.astro';
 import ServiceProcessSection from '@/components/sections/ServiceProcessSection.astro';
-import LocalProofSection from '@/components/sections/LocalProofSection.astro';
+import ProofSection from '@/components/sections/ProofSection.astro';
 import LocationServicesGrid from '@/components/sections/LocationServicesGrid.astro';
 import ServiceSavingsSection from '@/components/sections/ServiceSavingsSection.astro';
 import ServiceFAQSection from '@/components/sections/ServiceFAQSection';
@@ -209,7 +209,7 @@ const savingsData = serviceData.savings
 
   {
     serviceCityData.proof && (
-      <LocalProofSection
+      <ProofSection
         testimonial={serviceCityData.proof.testimonial}
         customerName={serviceCityData.proof.customerName}
         customerLocation={serviceCityData.proof.customerLocation}

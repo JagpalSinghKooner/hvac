@@ -92,18 +92,25 @@ Each story should be small enough to implement in one focused session.
 - Acceptance criteria must be verifiable, not vague. "Works correctly" is bad. "Button shows confirmation dialog before deleting" is good.
 - **For any story with UI changes:** Always include "Run /agent-browser test" as acceptance criteria.
 
-### Skill Requirements (MANDATORY)
+### Skill Requirements (when applicable)
 
-Each story MUST include required skills in acceptanceCriteria (not just notes):
+Add skills to acceptanceCriteria when story type requires it:
 
 | Story Type | REQUIRED Skills in Acceptance Criteria |
 |------------|---------------------------------------|
-| UI/Component | `/frontend-design`, `/agent-browser` |
-| React (.tsx) | `/vercel-react-best-practices` |
-| Astro (.astro) | `/web-design-guidelines` |
-| Content/Marketing | `/orchestrator` → routes to correct skills |
+| UI/Component creation | `/frontend-design`, `/agent-browser` |
+| React (.tsx) changes | `/vercel-react-best-practices` |
+| Astro (.astro) changes | `/web-design-guidelines` |
+| Content/Marketing writing | `/orchestrator` → routes to correct skills |
 
-**Example with skills:**
+**Stories that do NOT need skills:**
+- File deletions
+- Config/schema changes
+- Running migrations
+- Import updates
+- Simple refactoring
+
+**Example with skills (UI creation):**
 ```json
 {
   "id": "US-001",
@@ -127,6 +134,19 @@ Each story MUST include required skills in acceptanceCriteria (not just notes):
     "Run /orchestrator to route to correct skills",
     "Follow orchestrator skill chain output",
     "Content passes brand voice guidelines",
+    "pnpm build passes"
+  ]
+}
+```
+
+**Example WITHOUT skills (deletion/refactor):**
+```json
+{
+  "id": "US-017",
+  "title": "Delete LocalProblemSection",
+  "acceptanceCriteria": [
+    "Delete /src/components/sections/LocalProblemSection.astro",
+    "Update imports in page templates",
     "pnpm build passes"
   ]
 }
@@ -279,11 +299,12 @@ Before saving the PRD:
 - [ ] Asked clarifying questions with lettered options
 - [ ] Incorporated user's answers
 - [ ] User stories are small and specific
-- [ ] **SKILL REQUIREMENTS included in acceptance criteria** (not just notes)
-- [ ] UI stories have `/frontend-design` + `/agent-browser` in criteria
-- [ ] .tsx stories have `/vercel-react-best-practices` in criteria
-- [ ] .astro stories have `/web-design-guidelines` in criteria
-- [ ] Marketing stories have `/orchestrator` in criteria
+- [ ] **Skill requirements in acceptance criteria (when task type requires it)**
+- [ ] UI/Component stories have `/frontend-design` + `/agent-browser`
+- [ ] .tsx change stories have `/vercel-react-best-practices`
+- [ ] .astro change stories have `/web-design-guidelines`
+- [ ] Marketing/content stories have `/orchestrator`
+- [ ] Simple tasks (deletions, configs, refactors) have NO skills
 - [ ] Functional requirements are numbered and unambiguous
 - [ ] Non-goals section defines clear boundaries
 - [ ] Saved to `/tasks/prd-[feature-name].md`
