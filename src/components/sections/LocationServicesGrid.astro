@@ -1,95 +1,190 @@
 ---
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { ArrowRight } from "lucide-react";
-
-interface Service {
-  title: string;
-  slug: string;
-  category: string;
-}
+import { getCollection } from 'astro:content';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import {
+  Flame,
+  Snowflake,
+  Zap,
+  Wind,
+  Wrench,
+  Settings,
+  ThermometerSun,
+  Fan
+} from 'lucide-react';
 
 interface Props {
+  cityName: string;
   locationSlug: string;
-  locationName: string;
-  services: Service[];
+  headline?: string;
+  subheadline?: string;
 }
 
-const { locationSlug, locationName, services = [] } = Astro.props;
+const { cityName, locationSlug, headline, subheadline } = Astro.props;
 
-// Group services by category
-const servicesByCategory = services.reduce((acc, service) => {
-  const category = service.category || 'other';
-  if (!acc[category]) {
-    acc[category] = [];
-  }
-  acc[category].push(service);
-  return acc;
-}, {} as Record<string, Service[]>);
+// Fetch all services from content collection
+const allServices = await getCollection('services');
 
-// Category display names
-const categoryNames: Record<string, string> = {
-  'heating': 'Heating Services',
-  'cooling': 'Cooling Services',
-  'iaq': 'Indoor Air Quality',
-  'water-heating': 'Water Heating',
-  'commercial': 'Commercial HVAC',
-  'other': 'Other Services'
+// Icon mapping for services (using Lucide icons)
+const iconMap: Record<string, any> = {
+  'furnace-installation': Flame,
+  'air-conditioning-installation': Snowflake,
+  'heat-pump-installation': Zap,
+  'furnace-repair': Flame,
+  'air-conditioning-repair': Snowflake,
+  'duct-cleaning': Wind,
+  'boiler-installation': ThermometerSun,
+  'hvac-maintenance': Settings,
+  'heat-pump-repair': Zap,
+  'air-quality': Fan,
+  'smart-thermostat': Settings,
+  'ventilation': Wind,
 };
 
-// Category order
-const categoryOrder = ['heating', 'cooling', 'iaq', 'water-heating', 'commercial', 'other'];
+// Priority service slugs (order matters)
+const prioritySlugs = [
+  'furnace-installation',
+  'air-conditioning-installation',
+  'heat-pump-installation',
+  'furnace-repair',
+  'air-conditioning-repair',
+  'duct-cleaning',
+  'boiler-installation',
+  'hvac-maintenance',
+];
 
-// Sort categories
-const sortedCategories = categoryOrder.filter(cat => servicesByCategory[cat]);
+// Sort services by priority, then filter to top 6-8
+const sortedServices = allServices
+  .map(service => ({
+    ...service,
+    priority: prioritySlugs.indexOf(service.slug)
+  }))
+  .sort((a, b) => {
+    // Priority services first (lower index = higher priority)
+    if (a.priority !== -1 && b.priority !== -1) return a.priority - b.priority;
+    if (a.priority !== -1) return -1;
+    if (b.priority !== -1) return 1;
+    // Then alphabetically
+    return a.data.title.localeCompare(b.data.title);
+  })
+  .slice(0, 8); // Take top 8 services
+
+const displayServices = sortedServices.map(service => ({
+  slug: service.slug,
+  title: service.data.title,
+  shortDescription: service.data.description.substring(0, 120) + '...',
+  href: `/services/${service.slug}-${locationSlug}-on`,
+  Icon: iconMap[service.slug] || Settings,
+}));
+
+const totalServicesCount = allServices.length;
+const defaultHeadline = `More Services We Offer in ${cityName}`;
+const defaultSubheadline = 'Comprehensive HVAC solutions for your home';
 ---
 
-<section class="py-16 md:py-24">
-  <div class="container mx-auto px-4">
-    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
-      Our Services in {locationName}
-    </h2>
+<section class="relative py-16 md:py-20 lg:py-24 bg-muted/30 overflow-hidden">
+  <!-- Decorative background -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute top-20 left-10 w-72 h-72 bg-primary/[0.02] rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-primary/[0.02] rounded-full blur-3xl"></div>
+  </div>
 
-    <div class="space-y-12">
-      {sortedCategories.map((category, categoryIndex) => (
-        <div>
-          {/* Category Heading */}
-          <h3 class="text-2xl font-semibold mb-6">
-            {categoryNames[category]}
-          </h3>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center mb-12 md:mb-16 animate-fadeInUp">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-serif mb-4 text-foreground">
+        {headline || defaultHeadline}
+      </h2>
+      {(subheadline || defaultSubheadline) && (
+        <p class="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+          {subheadline || defaultSubheadline}
+        </p>
+      )}
+    </div>
 
-          {/* Services Grid */}
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {servicesByCategory[category].map((service) => {
-              const serviceUrl = `/services/${service.slug}-${locationSlug}-on`;
+    <!-- Services Grid -->
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12"
+      role="list"
+    >
+      {displayServices.map((service, index) => {
+        const Icon = service.Icon;
+        const animationDelay = `${index * 0.1}s`;
+        return (
+          <Card
+            className="group relative bg-background border-border/50 hover:border-border hover:shadow-lg transition-all duration-300 animate-fadeInUp"
+            style={{ animationDelay }}
+          >
+            <CardHeader className="space-y-4">
+              <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors duration-300 group-hover:rotate-6 transition-transform">
+                <Icon className="w-6 h-6" aria-hidden="true" />
+              </div>
+              <CardTitle className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+                {service.title}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription className="text-muted-foreground leading-relaxed">
+                {service.shortDescription}
+              </CardDescription>
+            </CardContent>
+            <CardFooter>
+              <Button
+                variant="outline"
+                className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300"
+                asChild
+              >
+                <a href={service.href}>
+                  Learn More
+                </a>
+              </Button>
+            </CardFooter>
+          </Card>
+        );
+      })}
+    </div>
 
-              return (
-                <Card className="shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer">
-                  <CardHeader>
-                    <CardTitle className="text-lg">
-                      {service.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <a
-                      href={serviceUrl}
-                      class="inline-flex items-center text-primary hover:underline font-medium"
-                    >
-                      Get a Quote
-                      <ArrowRight className="ml-1 w-4 h-4" />
-                    </a>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
-
-          {/* Separator between categories (not after last one) */}
-          {categoryIndex < sortedCategories.length - 1 && (
-            <Separator className="mt-12" />
-          )}
-        </div>
-      ))}
+    <!-- View All CTA -->
+    <div class="text-center animate-fadeInUp" style="animation-delay: 0.9s">
+      <a
+        href={`/locations/${locationSlug}`}
+        class="inline-flex items-center gap-2 text-lg font-medium text-primary hover:text-primary/80 transition-colors group"
+      >
+        <span>View All {totalServicesCount} Services in {cityName}</span>
+        <svg
+          class="w-5 h-5 group-hover:translate-x-1 transition-transform"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
     </div>
   </div>
 </section>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+  .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+</style>

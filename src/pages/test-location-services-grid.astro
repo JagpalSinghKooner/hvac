@@ -1,0 +1,35 @@
+---
+import LocationServicesGrid from '@/components/sections/LocationServicesGrid.astro';
+
+const pageTitle = 'LocationServicesGrid Component Test';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <!-- Test Case 1: Guelph -->
+    <LocationServicesGrid
+      cityName="Guelph"
+      locationSlug="guelph"
+    />
+
+    <!-- Test Case 2: Toronto with custom headline -->
+    <LocationServicesGrid
+      cityName="Toronto"
+      locationSlug="toronto"
+      headline="Explore Our Full Range of Services"
+      subheadline="Premium HVAC solutions tailored for Toronto homes"
+    />
+
+    <!-- Test Case 3: Kitchener minimal -->
+    <LocationServicesGrid
+      cityName="Kitchener"
+      locationSlug="kitchener"
+    />
+  </body>
+</html>
