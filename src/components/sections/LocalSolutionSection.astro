@@ -1,0 +1,158 @@
+---
+/**
+ * LocalSolutionSection Component
+ *
+ * Displays B.A.P's city-specific HVAC solution approach on service-city pages.
+ * Split layout (image left/text right by default) alternates from LocalProblemSection.
+ *
+ * @component
+ * @example
+ * <LocalSolutionSection
+ *   headline="Our Approach in Guelph"
+ *   description="We've refined our installation process specifically for Guelph homes..."
+ *   cityName="Guelph"
+ *   imageAlt="B.A.P technician installing furnace in Guelph home"
+ * />
+ */
+
+interface Props {
+  headline: string;
+  description: string;
+  cityName: string;
+  imageAlt?: string;
+  reversed?: boolean;
+}
+
+const {
+  headline,
+  description,
+  cityName,
+  imageAlt = `B.A.P HVAC solution in ${cityName}`,
+  reversed = false,
+} = Astro.props;
+---
+
+<section class="section-local-solution bg-background py-16 md:py-20 lg:py-24 relative overflow-hidden">
+  <!-- Decorative background elements -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute top-20 right-10 w-64 h-64 bg-primary/[0.02] rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 left-10 w-96 h-96 bg-accent/[0.02] rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <!-- City Badge -->
+    <div class="mb-8 flex justify-center md:justify-start">
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <span>Solution in {cityName}</span>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+      <!-- Image (Left by default) -->
+      <div class:list={[
+        "image-wrapper",
+        reversed ? "md:order-2" : "md:order-1"
+      ]}>
+        <div class="bg-muted aspect-video rounded-xl flex items-center justify-center text-muted-foreground/50 text-sm relative overflow-hidden group">
+          <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <span class="relative z-10 px-4 text-center">{imageAlt}</span>
+        </div>
+      </div>
+
+      <!-- Content (Right by default) -->
+      <div class:list={[
+        "content-wrapper space-y-6",
+        reversed ? "md:order-1" : "md:order-2"
+      ]}>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif text-foreground leading-tight">
+          {headline}
+        </h2>
+
+        <div class="prose prose-neutral max-w-none">
+          <p class="text-lg text-muted-foreground leading-relaxed">
+            {description}
+          </p>
+        </div>
+
+        <!-- Trust indicator -->
+        <div class="pt-4 flex items-center gap-3 text-sm text-muted-foreground">
+          <div class="flex items-center gap-1.5">
+            <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2L3 9v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V9l-9-7zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V9.99l7-5.25v8.25z"/>
+            </svg>
+            <span class="font-medium">Proven Local Approach</span>
+          </div>
+          <span class="text-muted-foreground/50">•</span>
+          <span>Serving {cityName} Since 1994</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Typography */
+  .font-serif {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  /* Entrance animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .section-local-solution {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  .section-local-solution .image-wrapper {
+    animation: scaleIn 0.7s ease-out 0.2s both;
+  }
+
+  .section-local-solution .content-wrapper {
+    animation: fadeInUp 0.7s ease-out 0.3s both;
+  }
+
+  /* Hover effects */
+  .image-wrapper .bg-muted {
+    transition: transform 0.4s ease;
+  }
+
+  .image-wrapper:hover .bg-muted {
+    transform: scale(1.02);
+  }
+
+  /* Prose styling */
+  .prose p {
+    margin: 0;
+  }
+</style>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap"
+  rel="stylesheet"
+/>

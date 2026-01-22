@@ -1,0 +1,71 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import LocalProblemSection from '@/components/sections/LocalProblemSection.astro';
+import LocalSolutionSection from '@/components/sections/LocalSolutionSection.astro';
+---
+
+<BaseLayout
+  title="LocalSolutionSection Component Test"
+  description="Testing LocalSolutionSection component for service-city pages"
+>
+  <main>
+    <!-- Example 1: Standard (follows LocalProblemSection) -->
+    <LocalProblemSection
+      headline="Common Heating Challenges in Guelph"
+      description="Guelph homeowners face unique HVAC challenges due to the city's climate patterns and housing stock."
+      citySpecificIssues={[
+        "Older homes with outdated heating systems",
+        "Cold winters requiring reliable furnaces",
+        "Rising energy costs in Southern Ontario"
+      ]}
+      cityName="Guelph"
+      imageAlt="Guelph home requiring heating solution"
+    />
+
+    <LocalSolutionSection
+      headline="Our Proven Approach in Guelph"
+      description="Over 30 years serving Guelph families, we've refined our installation process to address these exact challenges. Our team specializes in upgrading older homes with modern, energy-efficient systems that deliver reliable comfort through the harshest winters while reducing your utility bills."
+      cityName="Guelph"
+      imageAlt="B.A.P technician installing high-efficiency furnace in Guelph home"
+    />
+
+    <!-- Example 2: Reversed (image right, text left) -->
+    <LocalProblemSection
+      headline="Air Conditioning Challenges in Kitchener"
+      description="Kitchener's humid summers and older home construction create specific cooling needs."
+      citySpecificIssues={[
+        "High humidity levels require proper dehumidification",
+        "Many homes lack adequate insulation",
+        "Undersized AC units struggle in peak summer"
+      ]}
+      cityName="Kitchener"
+      imageAlt="Kitchener home with AC issues"
+      reversed={true}
+    />
+
+    <LocalSolutionSection
+      headline="Custom Cooling Solutions for Kitchener Homes"
+      description="We don't install one-size-fits-all systems. Every Kitchener home gets a proper load calculation to ensure your AC is perfectly sized for your space. Our installations include humidity control, proper insulation recommendations, and energy-efficient equipment designed for Ontario's climate."
+      cityName="Kitchener"
+      imageAlt="B.A.P team installing properly-sized AC system in Kitchener"
+      reversed={true}
+    />
+
+    <!-- Example 3: Minimal data -->
+    <LocalProblemSection
+      headline="Heating Reliability Issues"
+      description="Cambridge residents need heating systems they can count on."
+      citySpecificIssues={[
+        "Unpredictable winter weather",
+        "Aging infrastructure"
+      ]}
+      cityName="Cambridge"
+    />
+
+    <LocalSolutionSection
+      headline="Reliable Systems, Expert Installation"
+      description="Our Cambridge installations focus on reliability above all else. We select proven equipment from trusted manufacturers and install it correctly the first time."
+      cityName="Cambridge"
+    />
+  </main>
+</BaseLayout>
