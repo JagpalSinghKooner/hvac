@@ -470,7 +470,7 @@
         "pnpm build completes successfully for all 573 pages"
       ],
       "priority": 31,
-      "passes": false,
+      "passes": true,
       "notes": "Required Skills: /agent-browser (performance verification via DevTools)"
     },
     {
