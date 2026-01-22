@@ -499,7 +499,7 @@
         "pnpm build passes"
       ],
       "priority": 33,
-      "passes": false,
+      "passes": true,
       "notes": "Required Skills: None (verification)"
     },
     {
@@ -515,7 +515,7 @@
         "Commit: feat: complete Phase 7A infrastructure consolidation"
       ],
       "priority": 34,
-      "passes": false,
+      "passes": true,
       "notes": "Required Skills: /agent-browser (final visual spot-check)"
     }
   ]
