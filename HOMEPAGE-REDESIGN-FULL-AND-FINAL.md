@@ -1304,72 +1304,86 @@ Run content skills for pages that need unique content:
 
 ---
 
-### Phase 7: Lead Conversion Page Architecture + Content
+### Phase 7: Design System Consolidation
 
-**Status:** NEXT — Requires PRD creation
+**Status:** CURRENT — Execute via Ralph
 
-**Full Specification:** See [PHASE-6-LEAD-CONVERSION-ARCHITECTURE.md](PHASE-6-LEAD-CONVERSION-ARCHITECTURE.md)
+**Full Specification:** [PHASE-7-DESIGN-SYSTEM-CONSOLIDATION.md](PHASE-7-DESIGN-SYSTEM-CONSOLIDATION.md)
 
 ---
 
 #### Overview
 
-Phase 7 is a comprehensive redesign of service and service-city pages to create proper lead conversion page flows, followed by content generation to fill the structure.
+Phase 7 consolidates the design system to enable consistent service and service-city pages:
 
-**Key Design Philosophy:**
-- **Alternating split layouts** (TEXT-LEFT/IMAGE-RIGHT → IMAGE-LEFT/TEXT-RIGHT)
-- **NO grids of boxes** for main content
-- **Horizontal scroll ONLY** for: certifications, brands, testimonials
-- **Placeholder images** during development (client adds photos later)
-
----
-
-#### Phase Structure (5 Sub-Phases)
-
-| Phase | Stories | Branch | Description |
-|-------|---------|--------|-------------|
-| **Phase 6A** | 2 | `feature/phase-6a-strategy` | Keyword research + brand voice |
-| **Phase 6B** | 15 | `feature/phase-6b-architecture` | Schemas + components + templates |
-| **Phase 6C** | 3 | `feature/phase-6c-services` | Service content (22 pages) |
-| **Phase 6D** | 7 | `feature/phase-6d-service-city` | Service-city content (550 pages) |
-| **Phase 6E** | 5 | `feature/phase-6e-locations-seo` | Location content + SEO |
-
-**Total:** 32 stories across 5 sub-phases
-
-**Execution Order:** 6B (architecture) → 6A (strategy) → 6C → 6D → 6E
+- **Unified Schema:** Identical field names for both collections (services + service-city)
+- **Global Typography:** Single font import via typography.css (Phase 7.1 COMPLETE)
+- **Component Consolidation:** Merge Local* variants into generic components
+- **Shared Layout:** ServicePageLayout.astro for both page types
+- **Content Generation:** Unique SEO content for 550 service-city pages
 
 ---
 
-#### New Components (Phase 6B)
+#### Phase Structure (8 Sub-Phases)
 
-**To Create:**
-- `src/components/sections/ProblemSection.astro`
-- `src/components/sections/SolutionSection.astro`
-- `src/components/sections/LocalTrustOpener.astro`
-- `src/components/sections/LocalProblemSection.astro`
-- `src/components/sections/LocalSolutionSection.astro`
-- `src/components/sections/LocalGallerySection.astro`
-- `src/components/sections/LocationServicesGrid.astro`
-
-**To Redesign:**
-- `src/components/sections/ServiceBenefitsSection.astro` (4-column grid → split layout)
-- `src/components/sections/ServiceSavingsSection.astro` (centered stack → split layout)
+| Phase | Description | Status |
+|-------|-------------|--------|
+| 7.1 | Global Typography System | COMPLETE |
+| 7.2 | Unified Schema | Ready |
+| 7.3 | Content Migration | Ready |
+| 7.4 | Component Consolidation | Ready |
+| 7.5 | Shared ServicePageLayout | Ready |
+| 7.6 | Background Variants | Ready |
+| 7.7 | Verification & Cleanup | Ready |
+| 7.8 | Content Generation | Ready |
 
 ---
 
-#### Success Metrics
+#### Key Schema Changes
 
-- **Service pages:** 22 pages with full lead conversion flow
-- **Service-city pages:** 550 pages with 800+ unique words, city-specific content
-- **Location pages:** 25 pages with 1000+ words
-- **Schema:** Service, Article, BreadcrumbList implemented
-- **Build:** Still passes with 628+ pages
-- **Content uniqueness:** 80%+ unique, NO city-swapping
+Both collections will use **IDENTICAL** field names:
+
+| Old (Services) | Old (Service-City) | New (Unified) |
+|----------------|-------------------|---------------|
+| `problemStatement` | `localProblem` | `problem` |
+| `solutionApproach` | `localSolution` | `solution` |
+| `valueProps` | `localBenefits` | `benefits` |
+| `images` | `localGalleryImages` | `galleryImages` |
+| (missing) | `localTrustOpener` | `trustOpener` |
+| (missing) | `localProof` | `proof` |
+| (missing) | `localContext` | `context` |
 
 ---
 
-**For detailed specifications, component designs (with ASCII layouts), schema definitions, and full user stories, see:**
-→ [PHASE-6-LEAD-CONVERSION-ARCHITECTURE.md](PHASE-6-LEAD-CONVERSION-ARCHITECTURE.md)
+#### Component Changes
+
+**Delete:**
+- `LocalProblemSection.astro` (99% identical to ProblemSection)
+- `LocalSolutionSection.astro` (merged into SolutionSection)
+
+**Rename:**
+- `LocalTrustOpener.astro` → `TrustOpenerSection.astro`
+- `LocalGallerySection.astro` → `ServiceGallerySection.astro`
+- `LocalProofSection.astro` → `ProofSection.astro`
+- `LocalContextSection.astro` → `ContextSection.astro`
+
+**Create:**
+- `ServicePageLayout.astro` (shared layout for both page types)
+
+---
+
+#### Success Criteria
+
+- **Schema:** IDENTICAL fields in both collections
+- **Layout:** Single ServicePageLayout for both page types
+- **Typography:** Single global font import (1 request vs 9)
+- **Build:** `pnpm build` passes (573+ pages)
+- **Content:** 550 service-city pages with 800+ unique words
+
+---
+
+**For field mappings, component specs, and implementation details, see:**
+→ [PHASE-7-DESIGN-SYSTEM-CONSOLIDATION.md](PHASE-7-DESIGN-SYSTEM-CONSOLIDATION.md)
 
 ---
 
