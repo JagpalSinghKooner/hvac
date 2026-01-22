@@ -6,7 +6,7 @@ status: 'live'
 priority: true
 order: 11
 serviceType: 'installation'
-valueProps:
+benefits:
   - title: '10-Year Parts & Labour Warranty'
     description: 'Every AC installation includes comprehensive coverage. No repair bills for a decade on your new system.'
     icon: 'warranty-shield'
@@ -22,17 +22,17 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problemStatement:
+problem:
   headline: 'When Cooling Your Home Becomes a Challenge'
   description: 'Ontario summers now regularly exceed 30°C with high humidity, making homes uncomfortable. Window units are noisy, inefficient, and only cool one room at a time. Air conditioners lose efficiency as they age—a 15-year-old unit may only operate at 8-10 SEER, while modern units achieve 16-21 SEER, potentially cutting cooling costs in half. High humidity makes 25°C feel like 32°C, leaving your home sticky and uncomfortable even when the AC runs constantly.'
-  painPoints:
+  issues:
     - 'Suffering through summer heat without whole-home comfort'
     - 'Old AC driving up hydro bills with 8-10 SEER efficiency'
     - 'Noisy, inefficient window units that only cool one room'
     - 'High humidity making your home feel hotter than it actually is'
     - 'Uncertainty about proper sizing and installation quality for major investment'
 
-solutionApproach:
+solution:
   headline: 'Properly Sized for Your Home, Installed for Maximum Efficiency'
   description: 'We calculate your home cooling load based on square footage, insulation, windows, and sun exposure. This ensures your new AC runs efficiently without short-cycling (too big) or running constantly (too small). Our installation follows manufacturer specifications exactly, protecting your warranty and maximizing equipment life. An oversized AC cools fast but never runs long enough to remove humidity—a properly sized unit delivers true comfort, cool and dry.'
   differentiators:
@@ -101,7 +101,7 @@ guarantee:
     - title: 'Clean Installation Guarantee'
       description: 'We protect your landscaping, clean up completely, and leave your property looking better than we found it.'
 
-images:
+galleryImages:
   - src: '/images/services/ac-installation-1.jpg'
     alt: 'New high-efficiency air conditioner installed on concrete pad'
     caption: 'Professional installation with proper equipment placement'

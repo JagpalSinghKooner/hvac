@@ -5,7 +5,7 @@ category: 'iaq'
 status: 'live'
 order: 14
 serviceType: 'installation'
-valueProps:
+benefits:
   - title: 'Stop Dry Winter Air'
     description: 'Ontario winters are brutal on indoor air. Whole-home humidifiers maintain comfortable humidity levels.'
     icon: 'home'
@@ -21,17 +21,17 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problemStatement:
+problem:
   headline: 'Ontario Winters Create Desert-Like Indoor Conditions'
   description: 'Ontario winters drop indoor humidity to 15-20%—desert-like conditions that affect your health and home. You wake up with dry throat, cracked lips, and itchy skin. Static shocks are constant throughout the day. Respiratory irritation increases your susceptibility to colds and flu. Meanwhile, dry air shrinks wood, causing hardwood floors to develop gaps, furniture joints to loosen, and wood trim to pull away from walls. Musical instruments go out of tune, and wallpaper peels at the edges. Portable humidifiers cannot keep up—they need constant refilling, only help one room, and become breeding grounds for mold if not cleaned constantly. The damage and discomfort accumulate every winter.'
-  painPoints:
+  issues:
     - 'Wake up with dry throat, cracked lips, and itchy skin every morning'
     - 'Constant static shocks throughout your home'
     - 'Hardwood floors develop gaps and furniture joints loosen from dry air'
     - 'Portable humidifiers require constant refilling and only help one room'
     - 'Increased susceptibility to respiratory irritation and illness'
 
-solutionApproach:
+solution:
   headline: 'Whole-Home Humidity Control That Works'
   description: 'We install bypass, fan-powered, and steam humidifiers that work with your furnace to humidify your entire home automatically. Water connects directly to your plumbing—no refilling required. A humidistat maintains your target humidity level without any daily attention. A whole-home humidifier transforms winter comfort. You feel warmer, sleep better, and stop waking up with that scratchy throat. Plus your hardwood floors thank you. The system works continuously and invisibly, maintaining comfortable 30-50% humidity levels throughout your home while you focus on everything else.'
   differentiators:
@@ -100,7 +100,7 @@ guarantee:
     - title: 'Comfort Guarantee'
       description: 'If your properly maintained humidifier cannot reach target humidity levels, we will work with you to find a solution.'
 
-images:
+galleryImages:
   - src: '/images/services/humidifier-1.jpg'
     alt: 'Whole-home bypass humidifier installed on furnace'
     caption: 'Bypass humidifiers work with your existing ductwork'

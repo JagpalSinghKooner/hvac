@@ -6,7 +6,7 @@ status: 'live'
 priority: true
 order: 21
 serviceType: 'installation'
-valueProps:
+benefits:
   - title: 'Minimal Business Disruption'
     description: 'We schedule around your operating hours. Your business keeps running while we work.'
     icon: 'clock'
@@ -22,17 +22,17 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problemStatement:
+problem:
   headline: 'Commercial HVAC Failures Directly Impact Your Bottom Line'
   description: 'When your commercial HVAC fails, consequences cascade immediately. Employees cannot work effectively in uncomfortable conditions. Customers leave retail spaces or restaurants. Temperature-sensitive products may spoil. Every hour of downtime costs money—in lost productivity, lost sales, and potential product losses. Aging equipment makes this worse: efficiency drops, repairs become frequent, and energy bills climb 20-30% compared to new equipment. At some point, replacement costs less than continued operation of aging, unreliable systems. Add compliance requirements—retail stores, restaurants, and offices have specific temperature and ventilation standards—and properly functioning HVAC becomes non-negotiable.'
-  painPoints:
+  issues:
     - 'HVAC failures disrupt operations, affecting employee productivity and customer comfort'
     - 'Aging equipment drives energy costs up 20-30% while reliability declines'
     - 'Frequent repairs accumulate costs that exceed new equipment investment'
     - 'Compliance requirements mandate specific temperature and ventilation standards'
     - 'Finding qualified commercial technicians who understand complex systems'
 
-solutionApproach:
+solution:
   headline: 'Commercial HVAC That Keeps Your Business Running'
   description: 'We understand that commercial HVAC is about more than equipment—it is about keeping your business running. We work around your schedule, communicate clearly, and deliver solutions that balance comfort, efficiency, and budget. From small retail spaces to large industrial facilities, we have 30+ years of experience. Commercial work requires different thinking than residential. Schedules matter. Budgets matter. We plan carefully and execute efficiently because your business depends on it. Night and weekend work available to avoid disruption.'
   differentiators:
@@ -101,7 +101,7 @@ guarantee:
     - title: '24/7 Emergency Response'
       description: 'Commercial customers receive priority emergency service. We understand that HVAC failures directly impact your bottom line.'
 
-images:
+galleryImages:
   - src: '/images/services/commercial-hvac-1.jpg'
     alt: 'Commercial rooftop HVAC unit installation'
     caption: 'Rooftop unit installation with crane services'

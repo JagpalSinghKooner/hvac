@@ -6,7 +6,7 @@ status: 'live'
 priority: true
 order: 19
 serviceType: 'installation'
-valueProps:
+benefits:
   - title: 'Endless Hot Water On-Demand'
     description: 'Never run out of hot water again. Tankless units heat water only when you need it.'
     icon: 'efficiency'
@@ -22,17 +22,17 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problemStatement:
+problem:
   headline: 'Tank Water Heaters Limit Supply, Waste Energy, and Take Up Space'
   description: 'Traditional tank water heaters store a limited supply of hot water. Back-to-back showers, laundry, and dishes can drain the tank, leaving you with cold water at the worst possible moment. Larger families and frequent guests exacerbate this problem. Beyond capacity limits, tanks maintain 40-60 gallons of hot water 24/7—even when you are at work or asleep. This standby heat loss wastes energy constantly, adding up to 25% of your water heating costs. Tanks also occupy significant floor space in basements, garages, or utility closets—space that could serve better purposes.'
-  painPoints:
+  issues:
     - 'Running out of hot water during peak usage times (morning showers, laundry)'
     - 'Standby heat loss wastes 20-25% of water heating energy costs year-round'
     - 'Large tanks occupy valuable floor space in mechanical rooms'
     - 'Tank water heaters have shorter 10-12 year average lifespan'
     - 'Recovery time after draining means long waits for hot water to return'
 
-solutionApproach:
+solution:
   headline: 'On-Demand Hot Water Without Storage Waste'
   description: 'Tankless water heaters heat water on demand—when you turn on the tap, cold water flows through a heat exchanger and arrives hot at the fixture. No tank means no standby heat loss and no running out during peak demand. We size your unit correctly for your household hot water demand and ensure proper gas line capacity. Tankless is not just about endless hot water—it is about efficiency. No heating water you are not using. Just hot water when you need it, mounted on a wall, lasting 15-20 years.'
   differentiators:
@@ -101,7 +101,7 @@ guarantee:
     - title: 'Performance Guarantee'
       description: 'If your properly maintained tankless unit cannot deliver hot water to rated capacity, we will make it right.'
 
-images:
+galleryImages:
   - src: '/images/services/tankless-water-heater-1.jpg'
     alt: 'Wall-mounted tankless water heater installation'
     caption: 'Compact wall-mounted design saves floor space'

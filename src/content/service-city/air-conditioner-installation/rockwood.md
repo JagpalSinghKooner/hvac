@@ -4,9 +4,9 @@ locationSlug: 'rockwood'
 title: 'Air Conditioner Installation in Rockwood, ON'
 seoTitle: 'AC Installation Rockwood ON | Free Estimates | B.A.P'
 seoDescription: 'Professional air conditioner installation in Rockwood, ON. Energy-efficient systems, 10-year warranty. Serving Rockwood since 1992.'
-localContext: |
+context: |
   Rockwood's location on the Eramosa River features scenic natural areas and a historic village character that influences AC installation approaches. The village centre contains heritage buildings and homes where preserving architectural character is important to residents. Proximity to Rockwood Conservation Area and the river creates localized humidity that intensifies summer cooling demands. Residential areas feature a mix of heritage homes, mid-century construction, and newer builds with varying ductwork infrastructure. The village's compact size and natural surroundings attract residents seeking small-community living with access to Guelph amenities. Rockwood homeowners typically value quality and longevity, seeking AC systems that provide reliable comfort for years with minimal maintenance requirements.
-localProof:
+proof:
   testimonial: "Our home backs onto conservation land and the humidity from the river made summers miserable. B.A.P installed a system with excellent dehumidification that handles even the muggiest August days. We can finally enjoy our screened porch."
   customerName: 'Peter and Nancy Adams'
   customerLocation: 'Rockwood'

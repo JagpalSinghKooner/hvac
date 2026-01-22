@@ -4,9 +4,9 @@ locationSlug: 'waterloo'
 title: 'Commercial HVAC Services in Waterloo, ON'
 seoTitle: 'Commercial HVAC Waterloo ON | 24/7 Service | B.A.P'
 seoDescription: 'Commercial HVAC installation and service in Waterloo, ON. RTUs, VRF systems, 24/7 emergency. Serving Waterloo businesses since 1992.'
-localContext: |
+context: |
   Waterloo's position as Canada's technology capital creates unique commercial HVAC requirements across the city. The David Johnston Research and Technology Park hosts tech giants and startups requiring precise climate control for data centres, server rooms, and modern office environments. University Avenue's commercial corridor serves the massive student population with restaurants, retail, and entertainment venues experiencing high-traffic HVAC demands. Uptown Waterloo's vibrant King Street district features restaurants, professional services, and boutique retail in historic buildings requiring thoughtful system integration. The Northfield Drive industrial and commercial area houses manufacturing, logistics, and office complexes with substantial heating and cooling requirements throughout Ontario's variable climate.
-localProof:
+proof:
   testimonial: "Our data centre expansion needed redundant cooling with zero tolerance for failure. B.A.P designed and installed a system that has maintained perfect uptime. They understand critical infrastructure."
   customerName: 'Waterloo Tech Campus'
   customerLocation: 'Research Park, Waterloo'

@@ -5,7 +5,7 @@ category: 'iaq'
 status: 'live'
 order: 16
 serviceType: 'installation'
-valueProps:
+benefits:
   - title: 'Hospital-Grade Air Filtration'
     description: 'HEPA and UV-C systems that capture 99.97% of airborne particles, allergens, and pathogens.'
     icon: 'shield'
@@ -21,17 +21,17 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problemStatement:
+problem:
   headline: 'Standard Filters Cannot Stop Allergens, VOCs, and Pathogens'
   description: 'Standard furnace filters capture only large particles. Pollen, dust mites, pet dander, and mold spores pass right through—triggering allergies and asthma symptoms in your own home. New furniture, paint, cleaning products, and building materials release volatile organic compounds that accumulate in tightly sealed modern homes without proper air filtration. Cooking odors, pet smells, and smoke from wildfires or neighbours persist without active air purification. Standard filters do nothing for gases and odors. Portable air purifiers only clean one room, and you still breathe contaminated air in the rest of your home. The air circulates constantly through your HVAC system, yet remains contaminated cycle after cycle.'
-  painPoints:
+  issues:
     - 'Allergy and asthma symptoms triggered inside your own home'
     - 'VOCs from furniture, paint, and cleaning products accumulate in sealed homes'
     - 'Cooking odors, pet smells, and wildfire smoke persist for days'
     - 'Standard furnace filters only capture large particles, not allergens'
     - 'Portable air purifiers clean one room while the rest stays contaminated'
 
-solutionApproach:
+solution:
   headline: 'Integrated Purification for Whole-Home Protection'
   description: 'We install air purification systems that work with your existing HVAC. Unlike standalone units that only clean one room, whole-home systems filter all the air that passes through your ductwork. We match the right technology to your specific concerns—HEPA for particles, UV-C for pathogens, activated carbon for odors and chemicals. The air in your home circulates through your HVAC system constantly, and a whole-home purifier cleans all of it—not just one room at a time. Every cycle through your system removes more contaminants, giving you cleaner air in every room.'
   differentiators:
@@ -100,7 +100,7 @@ guarantee:
     - title: 'Maintenance Support'
       description: 'We provide clear guidance on filter and UV bulb replacement schedules. No guesswork about maintaining your system.'
 
-images:
+galleryImages:
   - src: '/images/services/air-purifier-1.jpg'
     alt: 'Whole-home HEPA air purification system installed'
     caption: 'HEPA systems capture 99.97% of airborne particles'

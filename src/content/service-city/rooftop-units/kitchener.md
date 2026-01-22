@@ -4,9 +4,9 @@ locationSlug: 'kitchener'
 title: 'Rooftop Unit Services in Kitchener, ON'
 seoTitle: 'Rooftop Units Kitchener ON | RTU Installation & Repair | B.A.P'
 seoDescription: 'Commercial rooftop unit installation and service in Kitchener, ON. All major RTU brands. Serving Kitchener businesses since 1992.'
-localContext: |
+context: |
   Kitchener's transformation into a technology hub has created diverse RTU service demands across its commercial landscape. The Innovation District and Communitech area house tech companies requiring precise climate control for server rooms and open-concept offices. Traditional manufacturing along the Highway 7/8 corridor and in the Huron Business Park continues to rely on industrial-grade rooftop units for production facilities. Fairview Park Mall and the surrounding retail developments feature extensive multi-unit RTU installations, while the growing warehouse and logistics sector near the expressway demands high-efficiency systems for temperature-sensitive storage. Downtown Kitchener's office towers and mixed-use developments present both new construction and retrofit opportunities.
-localProof:
+proof:
   testimonial: "When our server room RTU failed on a Friday evening, B.A.P had a technician on our roof within two hours. They understood that our entire operation depended on maintaining temperature control. Exceptional emergency response."
   customerName: 'Communitech Tech Hub'
   customerLocation: 'Innovation District, Kitchener'

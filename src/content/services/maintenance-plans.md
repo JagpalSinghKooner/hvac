@@ -5,7 +5,7 @@ category: 'plans'
 status: 'live'
 order: 22
 serviceType: 'maintenance'
-valueProps:
+benefits:
   - title: 'Priority Emergency Service'
     description: 'Plan members jump to the front of the line when emergencies happen. 24/7 priority scheduling.'
     icon: 'clock-24'
@@ -21,17 +21,17 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problemStatement:
+problem:
   headline: 'Without Regular Maintenance, Your HVAC Investment Fails Early'
   description: 'Life gets busy. You intend to schedule maintenance but it slips through the cracks. Then winter arrives, your furnace fails, and you realize it has been three years since anyone looked at it. When your heating or cooling fails on the worst possible day—first cold snap, first heat wave—everyone is calling for service simultaneously. Emergency calls cost more, wait times are longer, and you are stuck in discomfort. Being reactive costs far more than being proactive. Beyond emergency costs, unmaintained HVAC equipment fails years earlier than it should. That $8,000 furnace designed to last 20 years? Without maintenance, you might be replacing it at 12. Early failure wastes your investment and forces premature replacement costs.'
-  painPoints:
+  issues:
     - 'Forgetting annual maintenance until equipment fails at the worst time'
     - 'Emergency repairs cost 3-5x more than preventive maintenance'
     - 'Unmaintained equipment fails 5-10 years earlier than expected lifespan'
     - 'No priority during peak demand seasons when everyone needs service'
     - 'Inefficient operation wastes energy and increases monthly utility bills'
 
-solutionApproach:
+solution:
   headline: 'Automatic Maintenance That Protects Your Investment'
   description: 'Our maintenance plans handle the scheduling so you do not have to remember. We contact you when service is due, perform comprehensive tune-ups, and catch small problems before they become expensive emergencies. Plan members receive priority scheduling and 15% repair discounts. Maintenance plans are not about selling you something extra—they are about making sure your expensive HVAC equipment lasts as long as it should and keeping you comfortable year-round. Predictable costs, better protection, no surprises.'
   differentiators:
@@ -100,7 +100,7 @@ guarantee:
     - title: 'Honest Recommendations'
       description: 'We report what we find without upselling. If your equipment is in good shape, we say so.'
 
-images:
+galleryImages:
   - src: '/images/services/maintenance-plan-1.jpg'
     alt: 'Technician performing furnace maintenance'
     caption: 'Comprehensive tune-ups keep your systems running efficiently'

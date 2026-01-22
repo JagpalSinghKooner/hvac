@@ -4,9 +4,9 @@ locationSlug: 'cambridge'
 title: 'Rooftop Unit Services in Cambridge, ON'
 seoTitle: 'Rooftop Units Cambridge ON | RTU Installation & Repair | B.A.P'
 seoDescription: 'Commercial rooftop unit installation and service in Cambridge, ON. All major RTU brands. Serving Cambridge businesses since 1992.'
-localContext: |
+context: |
   Cambridge's strong manufacturing heritage means extensive commercial HVAC infrastructure across its three historic cores of Galt, Preston, and Hespeler. The industrial areas along Hespeler Road and the Highway 401 corridor feature large manufacturing plants and warehouses requiring high-capacity rooftop units for process cooling and employee comfort. The Cambridge Centre mall and surrounding retail developments utilize multi-unit RTU systems for their climate control needs. Toyota's presence has attracted numerous automotive suppliers with stringent temperature control requirements, while the revitalized downtown areas present retrofit opportunities for heritage commercial buildings transitioning to modern climate systems.
-localProof:
+proof:
   testimonial: "Our manufacturing floor requires precise temperature control for our processes. B.A.P diagnosed an economizer issue that three other contractors missed. They understand commercial HVAC at a level that residential contractors simply do not."
   customerName: 'Preston Manufacturing Ltd.'
   customerLocation: 'Industrial Area, Cambridge'

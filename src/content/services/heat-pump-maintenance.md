@@ -6,7 +6,7 @@ status: 'live'
 priority: true
 order: 9
 serviceType: 'maintenance'
-valueProps:
+benefits:
   - title: 'Maximize Heat Pump Efficiency'
     description: 'A well-maintained heat pump operates at peak efficiency. Lower energy bills year-round.'
     icon: 'efficiency'
@@ -22,17 +22,17 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problemStatement:
+problem:
   headline: 'Protecting Your Year-Round Investment'
   description: 'Unlike furnaces or ACs that rest half the year, heat pumps run in every season—this continuous operation means faster wear on components, making regular maintenance even more critical. Heat pumps can lose 10-25% efficiency over time without proper maintenance as dirty coils, low refrigerant, and worn parts force the system to work harder. Most heat pump manufacturers require proof of annual maintenance to honor warranty claims—skipping maintenance could leave you paying for repairs that should be covered.'
-  painPoints:
+  issues:
     - 'Year-round wear and tear from continuous operation'
     - 'Efficiency degradation of 10-25% without regular service'
     - 'Rising energy costs as the system works harder'
     - 'Warranty voiding risk if maintenance documentation is missing'
     - 'Shorter equipment lifespan without professional care'
 
-solutionApproach:
+solution:
   headline: 'Complete Care for Your Year-Round System'
   description: 'Heat pumps need more attention than single-season equipment. Our bi-annual service covers everything that affects heating and cooling performance—coils, refrigerant, defrost systems, and reversing valves. We document everything for warranty compliance. A heat pump that runs all year needs service twice a year—spring for cooling, fall for heating. It is the only way to get the efficiency and lifespan you paid for.'
   differentiators:
@@ -101,7 +101,7 @@ guarantee:
     - title: 'On-Time Service'
       description: 'We arrive within your scheduled window or your service is discounted.'
 
-images:
+galleryImages:
   - src: '/images/services/heat-pump-maintenance-1.jpg'
     alt: 'Technician cleaning heat pump outdoor unit'
     caption: 'Thorough cleaning of outdoor coils'

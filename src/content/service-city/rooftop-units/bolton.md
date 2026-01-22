@@ -4,9 +4,9 @@ locationSlug: 'bolton'
 title: 'Rooftop Unit Services in Bolton, ON'
 seoTitle: 'Rooftop Units Bolton ON | RTU Installation & Repair | B.A.P'
 seoDescription: 'Commercial rooftop unit installation and service in Bolton, ON. All major RTU brands. Serving Bolton businesses since 1992.'
-localContext: |
+context: |
   Bolton has emerged as a major industrial and logistics hub with extensive RTU installations serving its commercial sector. The industrial parks along Highway 50 and Coleraine Drive house large distribution centres, manufacturing plants, and logistics facilities operated by national and international companies requiring high-capacity rooftop units. The Queen Street commercial corridor features retail plazas and strip malls with multi-unit RTU systems serving local businesses. Bolton's growth as a bedroom community has attracted supporting commercial services including medical offices, fitness centres, and professional services requiring reliable climate control. The nearby aggregate operations and construction industry suppliers require durable RTU systems for dusty industrial environments.
-localProof:
+proof:
   testimonial: "Our logistics facility operates around the clock with temperature-sensitive shipments. B.A.P installed multiple RTU zones allowing us to maintain different temperatures in different warehouse sections. Their solution reduced our energy costs while improving temperature control."
   customerName: 'Bolton Logistics Centre'
   customerLocation: 'Highway 50 Industrial Park, Bolton'

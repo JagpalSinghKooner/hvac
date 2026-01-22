@@ -4,9 +4,9 @@ locationSlug: 'bolton'
 title: 'Heat Pump Maintenance in Bolton, ON'
 seoTitle: 'Heat Pump Maintenance Bolton ON | Bi-Annual Service | B.A.P'
 seoDescription: 'Professional heat pump maintenance in Bolton, ON. Bi-annual tune-ups for optimal efficiency. Serving Bolton since 1992.'
-localContext: |
+context: |
   Bolton has grown from a small village into a thriving community within Caledon, with many newer homes built with energy efficiency as a priority. Heat pumps have become increasingly common in Bolton's expanding residential areas, from the established neighbourhoods near downtown to new developments along the Highway 50 corridor. The Humber River valley location brings specific humidity and drainage considerations that affect heat pump outdoor units, particularly during spring thaw and fall freeze cycles. Our technicians service heat pumps throughout Bolton, understanding the blend of older village homes and modern subdivisions that characterize this growing community. Bi-annual maintenance ensures Bolton heat pumps handle the transition between seasons smoothly while maintaining the efficiency ratings homeowners expect.
-localProof:
+proof:
   testimonial: "Bolton is growing fast and we wanted an efficient system for our new home. B.A.P maintenance has kept our heat pump running perfectly since installation. Great local service."
   customerName: 'Daniel C.'
   customerLocation: 'Bolton'

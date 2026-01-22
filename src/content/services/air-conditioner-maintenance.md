@@ -6,7 +6,7 @@ status: 'live'
 priority: true
 order: 13
 serviceType: 'maintenance'
-valueProps:
+benefits:
   - title: 'Prevent Summer Breakdowns'
     description: 'Annual AC maintenance catches problems before the heat arrives. Schedule in spring for worry-free summer comfort.'
     icon: 'shield'
@@ -22,17 +22,17 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problemStatement:
+problem:
   headline: 'Preventing AC Failures Before Summer Heat'
   description: 'Your AC works hardest on the hottest days—exactly when failure is most likely. A breakdown during a heat advisory means emergency rates and long waits while everyone else calls for help too. Dirty coils, clogged filters, and low refrigerant force your AC to work harder, raising your hydro bill 20-30% without you noticing. Neglected air conditioners fail years before their time—the average AC lasts 15-20 years with maintenance, but only 10-12 without.'
-  painPoints:
+  issues:
     - 'AC failures during heat waves when you need it most'
     - 'Emergency repair rates and long waits during peak summer'
     - 'Gradual efficiency loss raising hydro bills 20-30%'
     - 'Shortened equipment lifespan from lack of care'
     - 'Premature replacement costing thousands of dollars'
 
-solutionApproach:
+solution:
   headline: 'Complete System Care, Not Just a Filter Change'
   description: 'Our AC maintenance includes everything that affects cooling performance and reliability. We clean coils, check refrigerant charge, inspect electrical connections, and test all safety controls. You get a detailed report documenting your system condition and any concerns we identify. Spring maintenance means summer peace of mind—we catch small problems before they become big breakdowns on the hottest day of the year.'
   differentiators:
@@ -101,7 +101,7 @@ guarantee:
     - title: 'On-Time Service'
       description: 'We arrive within your scheduled window or your service is discounted.'
 
-images:
+galleryImages:
   - src: '/images/services/ac-maintenance-1.jpg'
     alt: 'Technician cleaning AC condenser coils'
     caption: 'Thorough coil cleaning for maximum efficiency'

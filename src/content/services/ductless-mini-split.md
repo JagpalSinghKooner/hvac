@@ -6,7 +6,7 @@ status: 'live'
 priority: true
 order: 10
 serviceType: 'installation'
-valueProps:
+benefits:
   - title: 'No Ductwork Required'
     description: 'Perfect for home additions, garages, and older homes without existing ducts. Quick, clean installation.'
     icon: 'home'
@@ -22,17 +22,17 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problemStatement:
+problem:
   headline: 'Solving Problem Rooms and Zone Control Challenges'
   description: 'Home additions, finished basements, above-garage rooms, and converted attics often lack ductwork—portable units are noisy and inefficient. That one room that is always too hot in summer or freezing in winter needs independent temperature control without affecting the rest of your home. Why heat or cool empty rooms when mini splits let you condition only occupied spaces, dropping your energy bills significantly?'
-  painPoints:
+  issues:
     - 'Rooms without ductwork that need real heating and cooling'
     - 'Uneven temperatures with problem rooms always too hot or too cold'
     - 'High energy bills from conditioning empty rooms'
     - 'Noisy, inefficient portable units that barely work'
     - 'Expensive ductwork installation not practical for additions or renovations'
 
-solutionApproach:
+solution:
   headline: 'Right-Sized Comfort for Every Space'
   description: 'We assess each space individually to recommend the right mini split capacity. Too small and it runs constantly. Too large and it short-cycles without removing humidity. Our installations include proper outdoor unit placement, refrigerant line routing, and electrical work—all to manufacturer specifications. Mini splits are not just alternatives to ductwork—for problem rooms and zone control, they are often the best solution with efficiency, quiet operation, and precise temperature control.'
   differentiators:
@@ -101,7 +101,7 @@ guarantee:
     - title: 'Clean Installation Promise'
       description: 'We run lines cleanly, use line hide covers, and leave your home looking professional.'
 
-images:
+galleryImages:
   - src: '/images/services/mini-split-installation-1.jpg'
     alt: 'Wall-mounted mini split indoor unit installed in living room'
     caption: 'Sleek wall-mounted units blend with any decor'

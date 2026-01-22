@@ -4,9 +4,9 @@ locationSlug: 'burlington'
 title: 'Commercial HVAC Services in Burlington, ON'
 seoTitle: 'Commercial HVAC Burlington ON | 24/7 Service | B.A.P'
 seoDescription: 'Commercial HVAC installation and service in Burlington, ON. RTUs, VRF systems, 24/7 emergency. Serving Burlington businesses since 1992.'
-localContext: |
+context: |
   Burlington's affluent commercial landscape demands premium HVAC solutions across diverse business sectors. The downtown waterfront district along Brant Street features upscale restaurants, boutique retail, and professional offices in character buildings requiring sophisticated climate control. The QEW corridor and Appleby Line commercial areas house corporate offices, automotive dealerships, and retail centres with significant heating and cooling requirements. Burlington's industrial areas near the 407 and Burloak Drive contain manufacturing, logistics, and distribution operations needing robust HVAC systems for large facilities. The growing medical and professional services sector along Upper Middle Road creates demand for precise climate control in healthcare settings and modern office environments throughout this prosperous lakeside community.
-localProof:
+proof:
   testimonial: "Our corporate headquarters needed a complete HVAC upgrade that matched our professional image. B.A.P delivered a quiet, efficient system and handled the installation with minimal disruption to our staff."
   customerName: 'Burlington Corporate Services'
   customerLocation: 'Appleby Line, Burlington'

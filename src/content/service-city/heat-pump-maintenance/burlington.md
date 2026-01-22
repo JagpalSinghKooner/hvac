@@ -4,9 +4,9 @@ locationSlug: 'burlington'
 title: 'Heat Pump Maintenance in Burlington, ON'
 seoTitle: 'Heat Pump Maintenance Burlington ON | Bi-Annual Service | B.A.P'
 seoDescription: 'Professional heat pump maintenance in Burlington, ON. Bi-annual tune-ups for optimal efficiency. Serving Burlington since 1992.'
-localContext: |
+context: |
   Burlington's lakeside location along Lake Ontario creates a unique microclimate that heat pump owners must account for in their maintenance planning. The lake effect moderates temperatures but increases humidity, affecting both heating and cooling operations throughout the year. Our technicians have extensive experience with heat pumps in Burlington's diverse neighbourhoods, from the established homes of Roseland and Tyandaga to newer installations in Alton Village and Millcroft. The city's commitment to environmental sustainability has driven strong heat pump adoption rates, and our bi-annual maintenance program helps Burlington homeowners maximize their investment. We pay particular attention to coil cleaning and drainage in this higher-humidity environment, ensuring your system operates efficiently whether you're near the waterfront or up on the escarpment.
-localProof:
+proof:
   testimonial: "The lake humidity is hard on HVAC equipment, but B.A.P keeps our heat pump in perfect condition. Their twice-yearly service has prevented any major issues. Highly recommend."
   customerName: 'Patricia D.'
   customerLocation: 'Roseland, Burlington'

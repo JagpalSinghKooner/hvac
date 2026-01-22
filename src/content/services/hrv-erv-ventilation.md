@@ -5,7 +5,7 @@ category: 'iaq'
 status: 'live'
 order: 17
 serviceType: 'installation'
-valueProps:
+benefits:
   - title: 'Fresh Air Without Heat Loss'
     description: 'HRV/ERV systems exchange stale air for fresh while recovering up to 80% of the heat energy.'
     icon: 'efficiency'
@@ -21,17 +21,17 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problemStatement:
+problem:
   headline: 'Airtight Homes Trap Stale Air, Moisture, and Pollutants'
   description: 'Modern energy-efficient homes are sealed tight—great for heating bills, terrible for air quality. Without mechanical ventilation, cooking odors, VOCs from furniture, and CO2 from breathing accumulate. You notice it as that "closed-up" smell. Showers, cooking, and breathing add moisture to your home, and in winter that moisture condenses on cold windows and can grow mold in walls. Airtight homes without proper ventilation trap this moisture inside. The old solution—open a window—sends your expensive heated or cooled air straight outside. In Ontario winters, that is not practical. You need fresh air without sacrificing comfort or energy efficiency, but you have no good options.'
-  painPoints:
+  issues:
     - 'Stuffy, stale "closed-up" smell from accumulated cooking odors and VOCs'
     - 'Window condensation and mold growth from trapped moisture'
     - 'Opening windows wastes expensive heated or cooled air'
     - 'CO2 buildup from breathing in sealed homes reduces air quality'
     - 'Ontario Building Code requires mechanical ventilation for modern homes'
 
-solutionApproach:
+solution:
   headline: 'Balanced Ventilation with Heat Recovery'
   description: 'HRV and ERV systems continuously exchange stale indoor air for fresh outdoor air—but recover 70-80% of the heat energy in the process. Your home gets fresh air without the energy penalty of opening windows. HRVs transfer heat only; ERVs also transfer moisture, making them ideal for controlling winter humidity. Modern homes need mechanical ventilation—an HRV or ERV is not optional in a well-sealed home. It is essential for health and building durability. The system operates continuously in the background, silently exchanging air while preserving your comfort and energy efficiency.'
   differentiators:
@@ -100,7 +100,7 @@ guarantee:
     - title: 'Code Compliance'
       description: 'Your HRV/ERV installation will meet Ontario Building Code ventilation requirements.'
 
-images:
+galleryImages:
   - src: '/images/services/hrv-erv-1.jpg'
     alt: 'HRV unit installed in basement mechanical room'
     caption: 'Heat recovery ventilators integrate with your HVAC system'

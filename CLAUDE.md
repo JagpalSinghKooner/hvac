@@ -54,7 +54,7 @@
 ### Why Ralph
 - **Accountability**: Every task documented with acceptance criteria
 - **Quality**: Built-in gates (pnpm build must pass)
-- **Memory**: Progress tracked in `docs/project/ralph/progress.txt`
+- **Memory**: `AGENTS.md` = long-term patterns, `progress.txt` = short-term notes
 - **Parallel execution**: Skills can run in parallel within stories when independent
 
 ### Story Sizing
@@ -228,9 +228,12 @@ Skills in `.claude/skills/`. **All execute within Ralph context.**
 
 When running inside Ralph's autonomous loop:
 
+**Step 0: Read Institutional Memory**
+- Read `AGENTS.md` for codebase patterns and gotchas (prevents repeating mistakes)
+
 **Step 1: Read State**
 - Read `prd.json` for stories
-- Read `docs/project/ralph/progress.txt` for context
+- Read `docs/project/ralph/progress.txt` for recent context
 
 **Step 2: Verify Branch**
 Confirm on branch from `prd.json.branchName`
@@ -357,12 +360,14 @@ pnpm preview     # Preview production
 
 | Need | Location |
 |------|----------|
+| **Codebase patterns** | `AGENTS.md` (read first!) |
 | Full plan | `HOMEPAGE-REDESIGN-FULL-AND-FINAL.md` |
 | Phase 7 spec | `PHASE-7-DESIGN-SYSTEM-CONSOLIDATION.md` |
 | Business data | `src/content/business/profile.yaml` |
 | Content schemas | `src/content/config.ts` |
 | Skills | `.claude/skills/` |
 | prd.json template | `prd.json.example` |
+| Ralph progress | `docs/project/ralph/progress.txt` |
 
 ---
 

@@ -6,7 +6,7 @@ status: 'live'
 priority: true
 order: 12
 serviceType: 'repair'
-valueProps:
+benefits:
   - title: '24/7 Emergency AC Repair'
     description: 'AC stopped working during a heat wave? Our technicians are available around the clock to restore your comfort.'
     icon: 'clock-24'
@@ -22,17 +22,17 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problemStatement:
+problem:
   headline: 'When Your Air Conditioner Stops Working'
   description: 'When your AC fails during a 35°C heat wave, your home becomes unsafe—especially for children, elderly, and pets. Hearing your AC run but feeling warm air means something is wrong—low refrigerant, compressor issues, or frozen coils prevent cooling while still consuming electricity. Grinding, squealing, or clicking sounds indicate mechanical problems, and water pooling around your indoor unit signals drainage issues that can damage floors and ceilings.'
-  painPoints:
+  issues:
     - 'No cooling during heat waves when you need it most'
     - 'AC running but blowing warm air and wasting electricity'
     - 'Strange grinding, squealing, or clicking sounds from the unit'
     - 'Water leaks around indoor unit threatening property damage'
     - 'Uncertainty about repair costs and whether to repair or replace'
 
-solutionApproach:
+solution:
   headline: 'Accurate Diagnosis, Reliable Repairs'
   description: 'Our technicians carry diagnostic equipment and common parts on every call. We identify the root cause—not just treat symptoms—and explain your options clearly. You get honest advice on whether repair makes sense or if replacement is the smarter choice. A good AC repair restores comfort for years. We diagnose thoroughly so you are not calling us back next month for a different problem on the same unit.'
   differentiators:
@@ -101,7 +101,7 @@ guarantee:
     - title: 'On-Time Arrival'
       description: 'We arrive within your scheduled window or your diagnostic fee is waived.'
 
-images:
+galleryImages:
   - src: '/images/services/ac-repair-1.jpg'
     alt: 'Technician diagnosing AC condenser unit outdoors'
     caption: 'Thorough diagnosis of all AC components'

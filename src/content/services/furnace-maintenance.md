@@ -6,7 +6,7 @@ status: 'live'
 priority: true
 order: 3
 serviceType: 'maintenance'
-valueProps:
+benefits:
   - title: 'Prevent Winter Breakdowns'
     description: 'Annual furnace tune-ups catch problems before they leave you without heat. Schedule before the cold hits.'
     icon: 'shield'
@@ -22,17 +22,17 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problemStatement:
+problem:
   headline: 'Preventing Furnace Failures Before They Happen'
   description: 'Furnaces rarely fail with warning. A breakdown at -20°C means emergency repair costs, frozen pipes, and a cold house. A dirty furnace works harder to produce the same heat—clogged filters, dirty burners, and worn parts can increase your heating costs by 15-30% without any visible symptoms. Cracked heat exchangers can leak deadly carbon monoxide into your home, an invisible, odorless gas that kills dozens of Canadians each year.'
-  painPoints:
+  issues:
     - 'Unexpected mid-winter failures that leave your family in the cold'
     - 'Emergency repair costs that are 3-4x higher than preventive maintenance'
     - 'Energy bills rising 15-30% due to dirty or worn components'
     - 'Carbon monoxide risk from cracked heat exchangers'
     - 'Shortened equipment lifespan from lack of regular care'
 
-solutionApproach:
+solution:
   headline: 'Comprehensive Tune-Up, Not Just a Filter Change'
   description: 'Our 21-point furnace maintenance covers every component that affects safety, efficiency, and reliability. We clean what needs cleaning, adjust what needs adjusting, and identify parts that are wearing out before they fail. You get a detailed report with photos documenting the condition of your equipment. A tune-up today prevents emergency repairs in January—it is the smartest investment a homeowner can make.'
   differentiators:
@@ -101,7 +101,7 @@ guarantee:
     - title: 'On-Time Arrival'
       description: 'We arrive within your scheduled window or your maintenance visit is discounted.'
 
-images:
+galleryImages:
   - src: '/images/services/furnace-maintenance-1.jpg'
     alt: 'Technician performing combustion analysis on furnace'
     caption: 'Comprehensive safety and efficiency testing'

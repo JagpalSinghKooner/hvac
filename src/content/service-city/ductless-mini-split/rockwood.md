@@ -4,9 +4,9 @@ locationSlug: 'rockwood'
 title: 'Ductless Mini Split Installation in Rockwood, ON'
 seoTitle: 'Mini Split Installation Rockwood ON | Zone Control | B.A.P'
 seoDescription: 'Ductless mini split installation in Rockwood, ON. Perfect for additions and problem rooms. Serving Rockwood since 1992.'
-localContext: |
+context: |
   Rockwood's unique combination of natural beauty and historic architecture creates opportunities for ductless mini split installations throughout the community. The village features limestone heritage homes dating back to the 19th century, many of which rely on older heating systems with no provisions for ductwork. The conservation area and Eramosa River attract residents who appreciate the natural setting, and many properties include workshops, studios, and accessory buildings that require independent climate control. Rockwood's compact village layout means many homes sit on modest lots where outdoor unit placement requires careful consideration, and our technicians excel at finding unobtrusive locations that maximize efficiency. The surrounding countryside includes rural estates and hobby farms with guest houses, converted barns, and outbuildings where running ductwork from the main residence would be impractical. Rockwood homeowners tend to value quality and longevity, appreciating that well-maintained mini splits provide decades of reliable service. The community's proximity to Guelph brings residents seeking village character with convenient access to urban amenities. Our technicians understand Rockwood's heritage aesthetic and install systems that complement the village's historic character.
-localProof:
+proof:
   testimonial: "Our Rockwood home had beautiful original features but no way to add AC. The limestone walls made ductwork impossible. B.A.P installed mini splits that keep us comfortable without touching the historic interior. Perfect solution."
   customerName: 'Paul & Christine E.'
   customerLocation: 'Rockwood Village'

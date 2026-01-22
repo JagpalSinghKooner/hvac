@@ -4,9 +4,9 @@ locationSlug: 'guelph'
 title: 'Air Filtration & Purifiers in Guelph, ON'
 seoTitle: 'Air Purifier Installation Guelph ON | HEPA & UV-C | B.A.P'
 seoDescription: 'Whole-home air purification in Guelph, ON. HEPA and UV-C systems for cleaner air. Serving Guelph since 1992.'
-localContext: |
+context: |
   Guelph homeowners face unique indoor air quality challenges throughout the year. The city's tree-lined neighbourhoods in areas like the Old University and Exhibition Park release significant pollen during spring and summer months, triggering allergies for many residents. With the Speed River corridor and numerous green spaces, Guelph enjoys natural beauty but also experiences elevated mould spore counts during humid summer months. Many homes in established neighbourhoods like St. Patrick's Ward and the Ward date back decades, often accumulating dust in older ductwork systems. The University of Guelph area sees high rental turnover, leaving behind pet dander and odours that persist without proper air filtration. Guelph's commitment to environmental sustainability means many residents are increasingly aware of indoor air quality and its impact on family health.
-localProof:
+proof:
   testimonial: "Our daughter has asthma and the difference since installing the HEPA system has been remarkable. She sleeps through the night now without coughing. Best investment we have made for our home."
   customerName: 'Jennifer M.'
   customerLocation: 'Exhibition Park, Guelph'

@@ -113,20 +113,20 @@ const relatedServices = await getRelatedServices(
   />
 
   <!-- Problem Section (NEW - Phase 6B) -->
-  {service.data.problemStatement && (
+  {service.data.problem && (
     <ProblemSection
-      headline={service.data.problemStatement.headline}
-      description={service.data.problemStatement.description}
-      painPoints={service.data.problemStatement.painPoints || []}
+      headline={service.data.problem.headline}
+      description={service.data.problem.description}
+      issues={service.data.problem.issues || []}
     />
   )}
 
   <!-- Solution Section (NEW - Phase 6B) -->
-  {service.data.solutionApproach && (
+  {service.data.solution && (
     <SolutionSection
-      headline={service.data.solutionApproach.headline}
-      description={service.data.solutionApproach.description}
-      differentiators={service.data.solutionApproach.differentiators || []}
+      headline={service.data.solution.headline}
+      description={service.data.solution.description}
+      differentiators={service.data.solution.differentiators || []}
     />
   )}
 
@@ -141,10 +141,10 @@ const relatedServices = await getRelatedServices(
     </section>
   )}
 
-  <!-- Service Benefits Section (valueProps) -->
-  {service.data.valueProps && service.data.valueProps.length > 0 && (
+  <!-- Service Benefits Section (benefits) -->
+  {service.data.benefits && service.data.benefits.length > 0 && (
     <ServiceBenefitsSection
-      benefits={service.data.valueProps}
+      benefits={service.data.benefits}
       headline="Why Choose Us"
     />
   )}

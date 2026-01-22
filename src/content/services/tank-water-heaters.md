@@ -6,7 +6,7 @@ status: 'live'
 priority: true
 order: 18
 serviceType: 'installation'
-valueProps:
+benefits:
   - title: 'Same-Day Water Heater Replacement'
     description: 'No hot water is an emergency. We stock common sizes and can often install the same day.'
     icon: 'clock'
@@ -22,17 +22,17 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problemStatement:
+problem:
   headline: 'When Your Water Heater Fails, Hot Water Cannot Wait'
   description: 'A failed water heater disrupts your entire household. Cold showers, no hot water for dishes or laundry, no ability to clean properly. Most tanks fail suddenly—often after 10-15 years of reliable service. Warning signs like rusty water, rumbling noises, or small leaks indicate internal corrosion and imminent failure. When water pools around your tank, it is a matter of hours or days before catastrophic failure damages your home. Replacement on your schedule is far better than emergency situations at premium prices.'
-  painPoints:
+  issues:
     - 'Complete loss of hot water disrupts household routines and comfort'
     - 'Rusty water or loud rumbling indicates internal tank corrosion'
     - 'Visible leaks signal imminent catastrophic failure and potential flooding'
     - 'Older tanks fail suddenly after 10-15 years, rarely with advance notice'
     - 'Emergency replacements cost more and limit your equipment choices'
 
-solutionApproach:
+solution:
   headline: 'Same-Day Tank Water Heater Installation'
   description: 'We stock the most common water heater sizes and can often install the same day you call. Our TSSA-certified technicians handle everything—removal of the old unit, proper installation, gas and water connections, and permit documentation. We properly dispose of your old water heater and leave the area clean. No hot water is a household emergency. We keep common sizes in stock because we understand you cannot wait days for an appointment. Your hot water is restored quickly, correctly, and with full code compliance.'
   differentiators:
@@ -101,7 +101,7 @@ guarantee:
     - title: 'Installation Warranty'
       description: 'Our workmanship is guaranteed. Problems from our installation work are fixed at no charge.'
 
-images:
+galleryImages:
   - src: '/images/services/tank-water-heater-1.jpg'
     alt: 'Standard tank water heater installation'
     caption: 'Professional installation with proper venting'

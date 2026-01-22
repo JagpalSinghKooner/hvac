@@ -4,9 +4,9 @@ locationSlug: 'cambridge'
 title: 'Heat Pump Maintenance in Cambridge, ON'
 seoTitle: 'Heat Pump Maintenance Cambridge ON | Bi-Annual Service | B.A.P'
 seoDescription: 'Professional heat pump maintenance in Cambridge, ON. Bi-annual tune-ups for optimal efficiency. Serving Cambridge since 1992.'
-localContext: |
+context: |
   Cambridge's three historic communities of Galt, Preston, and Hespeler each bring distinct heating and cooling challenges that our technicians have mastered over decades of service. The Grand River valley location creates temperature inversions and humidity conditions that directly impact heat pump defrost cycles, making proper maintenance essential for reliable winter operation. From the heritage homes along Water Street in Galt to the growing subdivisions near the 401 corridor, we've calibrated and maintained heat pumps across every Cambridge neighbourhood. Our familiarity with Cambridge's industrial heritage means we also understand how factors like proximity to manufacturing areas can affect outdoor unit cleanliness and maintenance schedules. Regular bi-annual service ensures your heat pump handles Cambridge's variable climate efficiently.
-localProof:
+proof:
   testimonial: "Living near the Grand River, our heat pump works hard in every season. B.A.P catches small issues before they become problems. Excellent preventive maintenance."
   customerName: 'Karen S.'
   customerLocation: 'Galt, Cambridge'

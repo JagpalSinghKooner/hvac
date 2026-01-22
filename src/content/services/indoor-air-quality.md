@@ -6,7 +6,7 @@ status: 'live'
 priority: true
 order: 1
 serviceType: 'service'
-valueProps:
+benefits:
   - title: 'Whole-Home IAQ Assessment'
     description: 'Professional testing identifies specific air quality issues in your home—allergens, humidity, VOCs, or ventilation problems.'
     icon: 'check'
@@ -22,10 +22,10 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problemStatement:
+problem:
   headline: 'Modern Homes Trap Poor Air Quality Inside'
   description: 'Your home is likely sealed tighter than the one you grew up in—great for energy bills, terrible for air quality. Allergens, dust, pet dander, and mold spores circulate continuously through your HVAC system without proper filtration. New furniture, paint, flooring, and cleaning products release volatile organic compounds that accumulate in sealed homes. You cannot smell most VOCs, but they affect indoor air quality constantly. Cooking, showering, and breathing add moisture and CO2 to your home. Without proper ventilation, stale air, humidity, and pollutants get trapped inside. Opening windows wastes expensive heated or cooled air—not practical in Ontario winters or humid summers. Standard furnace filters capture only large particles, doing nothing for allergens, gases, odors, or excess humidity. You live in a sealed box breathing recirculated air, and most homeowners do not realize how degraded their indoor air quality has become until someone mentions it or allergy symptoms flare up.'
-  painPoints:
+  issues:
     - 'Allergy and asthma symptoms triggered inside your own home'
     - 'Dust accumulates quickly even after cleaning thoroughly'
     - 'Stale, stuffy air with persistent cooking or pet odors'
@@ -34,7 +34,7 @@ problemStatement:
     - 'Standard furnace filters do nothing for allergens or gases'
     - 'Portable air purifiers only clean one room while the rest stays contaminated'
 
-solutionApproach:
+solution:
   headline: 'Integrated Systems for Complete Indoor Air Quality'
   description: 'Effective indoor air quality requires addressing multiple factors—filtration, purification, humidity control, and ventilation. We start with an assessment of your home and your specific concerns. Do you have allergy symptoms? Persistent odors? Window condensation? Dust buildup? Each problem has a different solution, and guessing wastes money. We test and evaluate, then recommend a system designed for your home. That might be HEPA filtration for allergens, UV-C purification for pathogens, humidity control for condensation and mold prevention, or HRV/ERV ventilation for fresh air. Often it is a combination. These systems integrate with your existing HVAC—they are not standalone units that only clean one room. Every cycle through your furnace or air conditioner cleans the air further. Properly sized and installed, whole-home IAQ systems deliver measurable improvements in air quality throughout your entire home.'
   differentiators:
@@ -107,7 +107,7 @@ guarantee:
     - title: 'Maintenance Support'
       description: 'We provide clear guidance on maintaining your IAQ system. No guesswork about filter changes, UV bulbs, or seasonal adjustments.'
 
-images:
+galleryImages:
   - src: '/images/services/iaq-solutions-1.jpg'
     alt: 'Whole-home IAQ system installed in HVAC'
     caption: 'Integrated IAQ solutions work with your existing system'

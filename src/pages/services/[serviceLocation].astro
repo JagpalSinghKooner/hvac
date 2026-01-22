@@ -126,7 +126,7 @@ const heroTitle = serviceCityData.title;
 const heroDescription = serviceCityData.seoDescription;
 
 const benefits =
-  serviceData.valueProps?.map((vp) => ({
+  serviceData.benefits?.map((vp) => ({
     title: vp.title,
     description: vp.description,
     icon: vp.icon || 'check',
@@ -160,40 +160,40 @@ const savingsData = serviceData.savings
   />
 
   {
-    serviceCityData.localTrustOpener && (
+    serviceCityData.trustOpener && (
       <LocalTrustOpener
         cityName={locationData.title}
         rating={business.reputation.google_rating}
-        localStats={serviceCityData.localTrustOpener}
+        localStats={serviceCityData.trustOpener}
       />
     )
   }
 
   {
-    serviceCityData.localProblem && (
+    serviceCityData.problem && (
       <LocalProblemSection
-        headline={serviceCityData.localProblem.headline}
-        description={serviceCityData.localProblem.description}
-        citySpecificIssues={serviceCityData.localProblem.citySpecificIssues || []}
+        headline={serviceCityData.problem.headline}
+        description={serviceCityData.problem.description}
+        citySpecificIssues={serviceCityData.problem.issues || []}
         cityName={locationData.title}
       />
     )
   }
 
   {
-    serviceCityData.localSolution && (
+    serviceCityData.solution && (
       <LocalSolutionSection
-        headline={serviceCityData.localSolution.headline}
-        description={serviceCityData.localSolution.description}
+        headline={serviceCityData.solution.headline}
+        description={serviceCityData.solution.description}
         cityName={locationData.title}
       />
     )
   }
 
   {
-    serviceCityData.localGalleryImages && serviceCityData.localGalleryImages.length > 0 && (
+    serviceCityData.galleryImages && serviceCityData.galleryImages.length > 0 && (
       <LocalGallerySection
-        images={serviceCityData.localGalleryImages}
+        images={serviceCityData.galleryImages}
         cityName={locationData.title}
         serviceType={serviceData.title}
       />
@@ -209,12 +209,12 @@ const savingsData = serviceData.savings
   {processSteps.length > 0 && <ServiceProcessSection steps={processSteps} />}
 
   {
-    serviceCityData.localProof && (
+    serviceCityData.proof && (
       <LocalProofSection
-        testimonial={serviceCityData.localProof.testimonial}
-        customerName={serviceCityData.localProof.customerName}
-        customerLocation={serviceCityData.localProof.customerLocation}
-        result={serviceCityData.localProof.result}
+        testimonial={serviceCityData.proof.testimonial}
+        customerName={serviceCityData.proof.customerName}
+        customerLocation={serviceCityData.proof.customerLocation}
+        result={serviceCityData.proof.result}
       />
     )
   }

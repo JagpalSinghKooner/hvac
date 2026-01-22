@@ -6,7 +6,7 @@ status: 'live'
 priority: true
 order: 8
 serviceType: 'repair'
-valueProps:
+benefits:
   - title: '24/7 Emergency Heat Pump Repair'
     description: 'Heat pump not working? Our technicians are available around the clock—even nights and weekends.'
     icon: 'clock-24'
@@ -22,17 +22,17 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problemStatement:
+problem:
   headline: 'When Your Heat Pump Stops Working'
   description: 'When your heat pump fails, you lose both heating and cooling capability—in winter this means no heat, in summer no AC. Some frost is normal in winter, but excessive ice indicates defrost problems that can damage compressors and coils if left unchecked. Heat pumps should reduce energy costs, but if your bills are climbing, something is wrong—low refrigerant, failing compressors, or auxiliary heat running when it should not.'
-  painPoints:
+  issues:
     - 'Heat pump not heating or cooling, leaving your home uncomfortable'
     - 'Excessive ice building up on the outdoor unit'
     - 'High energy bills despite normal use patterns'
     - 'Strange noises or unusual operating cycles'
     - 'Uncertainty about the complexity and cost of heat pump repairs'
 
-solutionApproach:
+solution:
   headline: 'Heat Pump Experts Who Understand the Technology'
   description: 'Heat pumps are more complex than traditional furnaces or ACs. Our technicians receive ongoing training on heat pump diagnostics, refrigerant circuits, and defrost systems. We find the actual problem—not just the symptom—so your repair lasts. Heat pumps require specialized knowledge because a refrigerant leak affects both heating and cooling. We diagnose completely before recommending any repair.'
   differentiators:
@@ -101,7 +101,7 @@ guarantee:
     - title: 'On-Time Arrival'
       description: 'We arrive within your scheduled window or your diagnostic fee is waived.'
 
-images:
+galleryImages:
   - src: '/images/services/heat-pump-repair-1.jpg'
     alt: 'Technician diagnosing heat pump outdoor unit'
     caption: 'Expert diagnosis of all heat pump components'

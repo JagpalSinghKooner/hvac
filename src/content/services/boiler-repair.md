@@ -6,7 +6,7 @@ status: 'live'
 priority: true
 order: 5
 serviceType: 'repair'
-valueProps:
+benefits:
   - title: '24/7 Emergency Boiler Repair'
     description: 'Boiler not working? Our TSSA-certified technicians are available around the clock.'
     icon: 'clock-24'
@@ -22,17 +22,17 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problemStatement:
+problem:
   headline: 'When Your Boiler Needs Repair'
   description: 'When your boiler fails in winter, your entire heating system stops—no hot water to radiators means no heat anywhere in your home. Water leaks around your boiler or pressure gauge readings outside normal range indicate serious issues that can cause water damage. Banging, kettling, or gurgling sounds indicate air in the system, circulation problems, or mineral buildup that reduces efficiency and can lead to component failure.'
-  painPoints:
+  issues:
     - 'No heat from your boiler when temperatures drop below freezing'
     - 'Water leaks around the boiler threatening property damage'
     - 'Pressure problems that can be dangerous if left unaddressed'
     - 'Banging, kettling, or gurgling sounds indicating system issues'
     - 'Uncertainty about repair costs and complexity of hydronic systems'
 
-solutionApproach:
+solution:
   headline: 'TSSA-Certified Expertise for Complex Systems'
   description: 'Boilers involve gas, water, pressure, and electrical systems working together. Our TSSA-certified technicians understand these complex interactions. We diagnose thoroughly before recommending repairs, and we explain your options honestly—including when replacement makes more sense. Boiler repair requires specialized knowledge because pressure, water chemistry, and venting all interact. We have been repairing boilers for over 30 years—we have seen every problem.'
   differentiators:
@@ -101,7 +101,7 @@ guarantee:
     - title: 'Honest Recommendations'
       description: 'We tell you when repair makes sense and when replacement is the smarter choice.'
 
-images:
+galleryImages:
   - src: '/images/services/boiler-repair-1.jpg'
     alt: 'Technician diagnosing boiler pressure issues'
     caption: 'Thorough diagnosis of boiler systems'

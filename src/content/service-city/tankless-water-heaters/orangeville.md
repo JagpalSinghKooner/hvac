@@ -4,9 +4,9 @@ locationSlug: 'orangeville'
 title: 'Tankless Water Heater Installation in Orangeville, ON'
 seoTitle: 'Tankless Water Heater Orangeville ON | Endless Hot Water | B.A.P'
 seoDescription: 'Tankless water heater installation in Orangeville, ON. Endless hot water, energy savings. Serving Orangeville since 1992.'
-localContext: |
+context: |
   Orangeville's charming small-town atmosphere belies a community of discerning homeowners who appreciate quality home systems. The historic Broadway corridor features beautiful heritage homes where space-saving tankless installations preserve valuable basement square footage. Montgomery Village, Hansen, and newer developments along Riddell Road bring growing families who need reliable hot water for active households. Orangeville's location at the headwaters of four rivers means varied water quality depending on your neighbourhood, making proper system selection and maintenance planning essential. The town's strong sense of community includes many multi-generational households where grandparents, parents, and children share homes and need endless hot water supply. Cold winters mean higher energy costs, and tankless systems help offset heating bills by eliminating standby losses. Orangeville homeowners find the 15-20 year lifespan of tankless units particularly appealing for long-term value in their forever homes.
-localProof:
+proof:
   testimonial: "My in-laws moved in with us last year. Without the tankless upgrade, we would be fighting over shower times every morning."
   customerName: 'The Nguyen Family'
   customerLocation: 'Montgomery Village, Orangeville'

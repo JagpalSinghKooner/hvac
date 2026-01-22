@@ -2,12 +2,12 @@
 interface Props {
   headline: string;
   description: string;
-  painPoints: string[];
+  issues: string[];
   imageAlt?: string;
   reversed?: boolean;
 }
 
-const { headline, description, painPoints, imageAlt, reversed = false } = Astro.props;
+const { headline, description, issues, imageAlt, reversed = false } = Astro.props;
 ---
 
 <section class="py-16 md:py-20 lg:py-24 bg-muted/30">
@@ -23,9 +23,9 @@ const { headline, description, painPoints, imageAlt, reversed = false } = Astro.
           {description}
         </p>
 
-        {painPoints && painPoints.length > 0 && (
+        {issues && issues.length > 0 && (
           <ul class="space-y-4 mt-8" role="list">
-            {painPoints.map((point) => (
+            {issues.map((point) => (
               <li class="flex items-start gap-4 group">
                 <span class="flex-shrink-0 w-1.5 h-1.5 bg-destructive rounded-full mt-2.5 transition-transform group-hover:scale-150" aria-hidden="true"></span>
                 <span class="text-base md:text-lg text-foreground/90 leading-relaxed">

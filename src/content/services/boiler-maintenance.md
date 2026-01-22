@@ -6,7 +6,7 @@ status: 'live'
 priority: true
 order: 6
 serviceType: 'maintenance'
-valueProps:
+benefits:
   - title: 'Prevent Costly Breakdowns'
     description: 'Annual maintenance catches small problems early. Avoid expensive emergency repairs in winter.'
     icon: 'shield'
@@ -22,17 +22,17 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problemStatement:
+problem:
   headline: 'Keeping Your Boiler Running Safely and Efficiently'
   description: 'Boilers fail when you need them most—during the coldest weather when they work hardest. A breakdown in January means emergency service calls, frozen pipes risk, and uncomfortable nights. Scale buildup, dirty burners, and sediment accumulation force your boiler to work harder, raising fuel bills 15-25% higher than they should be. Improper combustion can produce deadly carbon monoxide—annual inspection ensures your boiler burns cleanly and vents properly.'
-  painPoints:
+  issues:
     - 'Mid-winter boiler failures during the coldest weather'
     - 'Gradual efficiency loss from scale buildup and dirty burners'
     - 'Energy bills climbing 15-25% higher due to lack of maintenance'
     - 'Carbon monoxide risk from improper combustion'
     - 'Shortened equipment lifespan without regular professional care'
 
-solutionApproach:
+solution:
   headline: 'Complete Boiler Care by TSSA-Certified Technicians'
   description: 'Our annual boiler maintenance covers every component that affects safety, efficiency, and reliability. We clean what needs cleaning, adjust what needs adjusting, test what needs testing, and document everything for your records. Boilers can run for decades with proper care—or fail in ten years without it. Annual maintenance is not optional if you want reliability and efficiency.'
   differentiators:
@@ -101,7 +101,7 @@ guarantee:
     - title: 'On-Time Service'
       description: 'We arrive within your scheduled window or your maintenance visit is discounted.'
 
-images:
+galleryImages:
   - src: '/images/services/boiler-maintenance-1.jpg'
     alt: 'Technician cleaning boiler burner assembly'
     caption: 'Thorough cleaning for efficient combustion'

@@ -4,9 +4,9 @@ locationSlug: 'guelph'
 title: 'Air Conditioner Installation in Guelph, ON'
 seoTitle: 'AC Installation Guelph ON | Free Estimates | B.A.P'
 seoDescription: 'Professional air conditioner installation in Guelph, ON. Energy-efficient systems, 10-year warranty. Serving Guelph since 1992.'
-localContext: |
+context: |
   Guelph's humid continental climate brings hot, muggy summers with temperatures regularly exceeding 30°C and humidity levels that make it feel even warmer. The city's diverse housing stock—from century homes in the Ward and Downtown heritage district to modern developments in the south end near the Hanlon Expressway—requires tailored AC installation approaches. Older stone and brick homes in areas like St. Patrick's Ward and Exhibition Park often need careful ductwork assessment, while newer subdivisions in Westminster Woods and Kortright Hills typically accommodate standard central air systems. The Speed River valley creates localized humidity pockets that intensify cooling demands. Guelph homeowners increasingly seek high-efficiency units to manage summer comfort while aligning with the city's strong environmental values and reducing energy consumption during peak demand periods.
-localProof:
+proof:
   testimonial: "Our 1920s home in the Ward had never had central air. The B.A.P team designed a system that worked with our existing radiator heating and the difference has been remarkable. No more window units blocking our heritage windows."
   customerName: 'The Patterson Family'
   customerLocation: "St. Patrick's Ward, Guelph"

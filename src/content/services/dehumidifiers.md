@@ -5,7 +5,7 @@ category: 'iaq'
 status: 'live'
 order: 15
 serviceType: 'installation'
-valueProps:
+benefits:
   - title: 'Prevent Mold & Mildew'
     description: 'Control basement and whole-home humidity to stop mold growth before it starts.'
     icon: 'shield'
@@ -21,17 +21,17 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problemStatement:
+problem:
   headline: 'Excess Moisture Damages Homes and Makes Summer Unbearable'
   description: 'Ontario basements are prone to moisture problems, and that musty smell indicates mold and mildew growing in your home. Portable dehumidifiers cannot keep up with whole-basement moisture loads. High humidity makes 25°C feel like 32°C—your AC removes some moisture, but on humid days it cannot keep up. You end up over-cooling to compensate, wasting energy and money while still feeling uncomfortable. Meanwhile, excess humidity warps hardwood floors, damages furniture, fogs windows, and promotes mold growth in walls. The damage accumulates invisibly until expensive repairs are needed. You empty portable dehumidifier buckets constantly, yet the problem persists.'
-  painPoints:
+  issues:
     - 'Musty basement odors indicate active mold and mildew growth'
     - 'High humidity makes summer temperatures feel 5-7 degrees hotter'
     - 'Portable dehumidifiers cannot handle whole-home moisture loads'
     - 'Hardwood floors warp and furniture gets damaged by excess moisture'
     - 'Constant bucket-emptying with portable units that barely help'
 
-solutionApproach:
+solution:
   headline: 'Whole-Home Humidity Control That Actually Works'
   description: 'We install dehumidifiers that integrate with your HVAC system to control humidity throughout your entire home—not just one room. These units can remove 90-135 pints of moisture per day, far exceeding any portable unit. They drain automatically, so no more buckets to empty. A properly sized whole-home dehumidifier transforms basement comfort and protects your entire home. It is one of the most impactful IAQ upgrades you can make. The system works continuously, monitoring humidity levels and removing moisture before it causes problems.'
   differentiators:
@@ -100,7 +100,7 @@ guarantee:
     - title: 'Clean Installation'
       description: 'We install drainage properly and leave your space clean and organized.'
 
-images:
+galleryImages:
   - src: '/images/services/dehumidifier-1.jpg'
     alt: 'Whole-home dehumidifier installed in basement'
     caption: 'Central dehumidifiers handle whole-home moisture loads'

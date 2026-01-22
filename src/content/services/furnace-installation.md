@@ -6,7 +6,7 @@ status: 'live'
 priority: true
 order: 1
 serviceType: 'installation'
-valueProps:
+benefits:
   - title: '10-Year Parts & Labour Warranty'
     description: 'Every furnace installation includes comprehensive warranty coverage. No repair bills for a decade.'
     icon: 'warranty-shield'
@@ -22,17 +22,17 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problemStatement:
+problem:
   headline: 'When Your Furnace Shows Its Age'
   description: 'Old furnaces operate at 60-80% efficiency, meaning up to 40 cents of every dollar you spend on heating escapes through your exhaust vent. Furnaces over 15 years old are living on borrowed time—when they fail, you face emergency repairs or rushed replacement decisions in freezing temperatures. Aging systems struggle to maintain consistent temperatures, leaving some rooms cold while others overheat.'
-  painPoints:
+  issues:
     - 'Energy bills climbing 30-40% higher than they should be with modern high-efficiency equipment'
     - 'Breakdown risk increases dramatically after 15 years, often failing at the worst possible moment'
     - 'Uneven heating and cold spots as aging components lose capacity and precision'
     - 'Rising repair costs that make replacement the smarter financial decision'
     - 'Uncertainty about proper sizing and installation quality when making a major investment'
 
-solutionApproach:
+solution:
   headline: 'Right-Sized Equipment, Installed Right the First Time'
   description: 'We start with a proper heat loss calculation—not a guess based on square footage. This ensures your new furnace is perfectly sized: not too big (which causes short cycling and wear) and not too small (which leaves you cold). Our TSSA-certified installers follow manufacturer specifications to the letter, protecting your warranty and ensuring safe, efficient operation for years to come. A properly sized furnace runs longer cycles at lower speeds, delivering better comfort and lower bills than an oversized unit that blasts on and off.'
   differentiators:
@@ -101,7 +101,7 @@ guarantee:
     - title: 'Clean Site Guarantee'
       description: 'We leave your home cleaner than we found it. Booties, drop cloths, and complete debris removal—every time.'
 
-images:
+galleryImages:
   - src: '/images/services/furnace-installation-1.jpg'
     alt: 'TSSA-certified technician installing a high-efficiency furnace'
     caption: 'Professional installation by licensed technicians'

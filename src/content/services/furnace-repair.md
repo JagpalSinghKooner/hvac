@@ -6,7 +6,7 @@ status: 'live'
 priority: true
 order: 2
 serviceType: 'repair'
-valueProps:
+benefits:
   - title: '24/7 Emergency Service'
     description: 'Furnace stopped working? Our technicians are available around the clock, including nights, weekends, and holidays.'
     icon: 'clock-24'
@@ -22,17 +22,17 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problemStatement:
+problem:
   headline: 'When Your Furnace Stops Working'
   description: 'A furnace breakdown when temperatures drop below zero puts your family at risk. Pipes can freeze, causing thousands in water damage. Strange noises like banging or squealing indicate mechanical failure, while burning or rotten egg smells can signal dangerous gas leaks. When your furnace runs constantly but your home stays cold, you are wasting money on fuel while getting no benefit.'
-  painPoints:
+  issues:
     - 'No heat in freezing weather putting your family and home at risk'
     - 'Banging, squealing, or rattling sounds indicating mechanical failure'
     - 'Burning or rotten egg smells signaling potential gas leaks or electrical issues'
     - 'Furnace running constantly but delivering no warmth'
     - 'Uncertainty about repair costs and whether repair makes sense versus replacement'
 
-solutionApproach:
+solution:
   headline: 'Diagnose First, Repair Right'
   description: 'Our technicians arrive with fully stocked trucks and decades of experience. We diagnose the actual problem—not just the symptom—before recommending any repair. You get a clear explanation of what is wrong, what it will cost to fix, and whether repair makes sense versus replacement. No pressure, no upselling, just honest advice. Most furnace problems have a straightforward fix. Our job is to find it fast and get your heat back on—not sell you equipment you do not need.'
   differentiators:
@@ -101,7 +101,7 @@ guarantee:
     - title: 'Honest Advice Guarantee'
       description: 'We will never recommend a repair that does not make financial sense. If replacement is better, we will say so.'
 
-images:
+galleryImages:
   - src: '/images/services/furnace-repair-1.jpg'
     alt: 'Technician diagnosing furnace problem with diagnostic equipment'
     caption: 'Thorough diagnosis before any repair work begins'

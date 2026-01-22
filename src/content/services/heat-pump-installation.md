@@ -6,7 +6,7 @@ status: 'live'
 priority: true
 order: 7
 serviceType: 'installation'
-valueProps:
+benefits:
   - title: 'Up to $7,100 in Ontario Rebates'
     description: 'Heat pumps qualify for the highest rebates available. We handle all the paperwork for you.'
     icon: 'savings'
@@ -22,17 +22,17 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problemStatement:
+problem:
   headline: 'The Case for Heat Pump Installation'
   description: 'Natural gas and oil prices fluctuate unpredictably, making heating costs hard to budget. Heat pumps can deliver heating at 300-400% efficiency, dramatically reducing your energy costs compared to fossil fuels. Running a furnace and AC means maintaining two systems, two sets of repairs, and two points of failure. Heat pumps move heat rather than burn fuel, significantly reducing your home carbon emissions for homeowners looking to electrify.'
-  painPoints:
+  issues:
     - 'High and unpredictable heating costs with gas or oil'
     - 'Maintaining separate heating and cooling systems'
     - 'Two points of failure and two sets of repair costs'
     - 'Concerns about carbon footprint and environmental impact'
     - 'Uncertainty about heat pump performance in cold Ontario winters'
 
-solutionApproach:
+solution:
   headline: 'Cold-Climate Heat Pumps That Actually Work in Ontario'
   description: 'We install cold-climate heat pumps specifically designed for Canadian winters. These units maintain efficient heating down to -25°C and below. We size your system correctly, ensure proper installation, and verify performance so you get the efficiency and comfort you expect. Modern cold-climate heat pumps are not the same as older units that stopped working below freezing—the technology has advanced dramatically and they are now a genuine heating solution for Ontario.'
   differentiators:
@@ -101,7 +101,7 @@ guarantee:
     - title: 'Rebate Success Guarantee'
       description: 'We ensure your installation qualifies for all available rebates. If we make an error that costs you rebate money, we compensate you.'
 
-images:
+galleryImages:
   - src: '/images/services/heat-pump-installation-1.jpg'
     alt: 'Cold-climate heat pump installed outside Ontario home'
     caption: 'Professional installation with proper clearances'
