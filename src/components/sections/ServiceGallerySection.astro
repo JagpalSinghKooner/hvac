@@ -1,8 +1,8 @@
 ---
 /**
- * LocalGallerySection Component
+ * ServiceGallerySection Component
  *
- * Editorial-style project gallery for service-city pages.
+ * Editorial-style project gallery for service and service-city pages.
  * Displays completed HVAC installations with professional photography presentation.
  *
  * Design: Editorial Portfolio aesthetic
@@ -11,13 +11,14 @@
  * - Clean Card wrappers with subtle interactions
  *
  * @example
- * <LocalGallerySection
+ * <ServiceGallerySection
  *   cityName="Guelph"
  *   serviceType="Furnace Installation"
  *   images={[
  *     { src: "/images/projects/guelph-furnace-1.jpg", alt: "Modern furnace installation in Guelph home", caption: "High-efficiency furnace upgrade, Downtown Guelph" },
  *     { src: "/images/projects/guelph-furnace-2.jpg", alt: "HVAC system in Guelph basement" }
  *   ]}
+ *   variant="muted"
  * />
  */
 
@@ -35,18 +36,26 @@ interface Props {
   images: GalleryImage[];
   headline?: string;
   subheadline?: string;
+  variant?: 'default' | 'muted' | 'primary';
 }
+
+const variantClasses = {
+  default: 'bg-background',
+  muted: 'bg-muted/30',
+  primary: 'bg-primary/5'
+};
 
 const {
   cityName,
   serviceType,
   images,
   headline = `Our Work in ${cityName}`,
-  subheadline
+  subheadline,
+  variant = 'muted'
 } = Astro.props;
 ---
 
-<section class="relative py-16 md:py-20 lg:py-24 bg-muted/30 overflow-hidden">
+<section class={`relative py-16 md:py-20 lg:py-24 ${variantClasses[variant]} overflow-hidden`}>
   <!-- Decorative background elements -->
   <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
     <div class="absolute top-1/4 -left-32 w-96 h-96 bg-primary/5 rounded-full blur-3xl opacity-50"></div>

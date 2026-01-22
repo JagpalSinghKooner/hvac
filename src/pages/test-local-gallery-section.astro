@@ -1,5 +1,5 @@
 ---
-import LocalGallerySection from '@/components/sections/LocalGallerySection.astro';
+import ServiceGallerySection from '@/components/sections/ServiceGallerySection.astro';
 
 const mockImages = [
   {
@@ -51,13 +51,13 @@ const minimalImages = [
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LocalGallerySection Test Page</title>
+  <title>ServiceGallerySection Test Page</title>
 </head>
 <body>
-  <h1 style="text-align: center; padding: 2rem; font-size: 2rem; font-weight: bold;">LocalGallerySection Component Tests</h1>
+  <h1 style="text-align: center; padding: 2rem; font-size: 2rem; font-weight: bold;">ServiceGallerySection Component Tests</h1>
 
   <!-- Test 1: Full props with 6 images -->
-  <LocalGallerySection
+  <ServiceGallerySection
     cityName="Guelph"
     serviceType="Furnace Installation"
     images={mockImages}
@@ -66,13 +66,13 @@ const minimalImages = [
   />
 
   <!-- Test 2: Minimal props (default headline, 2 images, no captions) -->
-  <LocalGallerySection
+  <ServiceGallerySection
     cityName="Kitchener"
     images={minimalImages}
   />
 
   <!-- Test 3: Empty images array (should show fallback message) -->
-  <LocalGallerySection
+  <ServiceGallerySection
     cityName="Cambridge"
     serviceType="Air Conditioning"
     images={[]}

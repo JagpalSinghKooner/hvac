@@ -5,7 +5,7 @@ import ServiceHeroSection from '@/components/sections/ServiceHeroSection.astro';
 import TrustOpenerSection from '@/components/sections/TrustOpenerSection.astro';
 import ProblemSection from '@/components/sections/ProblemSection.astro';
 import SolutionSection from '@/components/sections/SolutionSection.astro';
-import LocalGallerySection from '@/components/sections/LocalGallerySection.astro';
+import ServiceGallerySection from '@/components/sections/ServiceGallerySection.astro';
 import ServiceBenefitsSection from '@/components/sections/ServiceBenefitsSection.astro';
 import ServiceProcessSection from '@/components/sections/ServiceProcessSection.astro';
 import LocalProofSection from '@/components/sections/LocalProofSection.astro';
@@ -191,7 +191,7 @@ const savingsData = serviceData.savings
 
   {
     serviceCityData.galleryImages && serviceCityData.galleryImages.length > 0 && (
-      <LocalGallerySection
+      <ServiceGallerySection
         images={serviceCityData.galleryImages}
         cityName={locationData.title}
         serviceType={serviceData.title}
