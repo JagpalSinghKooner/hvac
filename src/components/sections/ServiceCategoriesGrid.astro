@@ -4,8 +4,8 @@ import CategoryCard from "@/components/cards/CategoryCard.astro";
 
 const businessProfile = await getEntry("business", "profile");
 
-// Get the first 5 categories for the homepage (Heating through Commercial)
-const categories = businessProfile?.data.services?.navbar_categories?.slice(0, 5) || [];
+// Get the first 6 categories for the homepage (Heating through Maintenance Plans)
+const categories = businessProfile?.data.services?.navbar_categories?.slice(0, 6) || [];
 ---
 
 <section class="py-16 md:py-20 lg:py-24 bg-muted">
@@ -19,7 +19,7 @@ const categories = businessProfile?.data.services?.navbar_categories?.slice(0, 5
       </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
       {categories.map((category) => (
         <CategoryCard category={category} />
       ))}
