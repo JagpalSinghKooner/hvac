@@ -87,7 +87,7 @@ if (!headline && !description && !bullets?.length && !rebateInfo && !financingNo
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center transition-colors duration-300 group-hover/item:bg-primary/20">
-                  <Check className="w-4 h-4 text-primary" />
+                  <Check className="w-4 h-4 text-primary" aria-hidden="true" />
                 </div>
                 <p class="text-base text-foreground leading-relaxed transition-colors duration-300 group-hover/item:text-primary">
                   {bullet}
@@ -172,5 +172,15 @@ if (!headline && !description && !bullets?.length && !rebateInfo && !financingNo
 
   .savings-financing {
     animation: fadeInUp 0.5s ease-out 0.3s backwards;
+  }
+
+  /* Accessibility: Disable animations for users with motion sensitivity */
+  @media (prefers-reduced-motion: reduce) {
+    .savings-headline,
+    .savings-bullet,
+    .savings-rebate,
+    .savings-financing {
+      animation: none;
+    }
   }
 </style>
