@@ -334,20 +334,33 @@ pnpm ralph:20   # 20 iterations
 ### Phase 6: Lead Conversion Architecture (COMPLETE ✓)
 - ✅ Service/service-city page structure
 - ✅ Local* components created
-- ✅ Global typography system (Phase 7.1)
+- ✅ Global typography system
 
-### Phase 7: Design System Consolidation (CURRENT)
+### Phase 7: Design System Consolidation (DEPRECATED)
+- ✅ Phase 7A: Infrastructure (typography, unified schema, component consolidation)
+- ❌ Phase 7B: DEPRECATED - Content reset for Phase 8 fresh start
 
-**Full Specification:** [PHASE-7-DESIGN-SYSTEM-CONSOLIDATION.md](PHASE-7-DESIGN-SYSTEM-CONSOLIDATION.md)
+### Phase 8: City-Level Content Customization (CURRENT)
 
-**Key Changes:**
-- Unified schema (`problem`, `solution`, `benefits` vs old `problemStatement`/`localProblem`)
-- Component consolidation (delete Local* variants, rename others)
-- ServicePageLayout (shared for both page types)
+**Full Specification:** [PHASE-8-CITY-CONTENT-CUSTOMIZATION.md](PHASE-8-CITY-CONTENT-CUSTOMIZATION.md)
+
+**Status:** FRESH START for ALL 25 cities (550 service-city pages)
+
+**Scope:**
+- 3,850 unique keyword-researched headings (7 per page)
+- ~1,000 words per page (E-E-A-T content depth)
+- 6 new schema fields (hero, finalCta, benefitsHeadline, contextHeadline, experienceStats)
+- LocalBusiness structured data per page
+- Premium positioning (NO emergency/urgency messaging)
+
+**Required Skills Per Story Type:**
+- Schema/Component (US-001 to US-004): `/frontend-design` → `/agent-browser` → `/web-design-guidelines`
+- Content Generation (US-006 to US-014): `/orchestrator` → `/keyword-research` → `/positioning-angles` → `/seo-content` → `/direct-response-copy`
+- Verification (US-015 to US-017): `/agent-browser`
 
 **Execute via Ralph:**
 ```bash
-/prd skill → create PRD for Phase 7.2+
+/prd skill → create PRD for Phase 8A
 /ralph skill → prd.json
 pnpm ralph:20
 ```
@@ -388,7 +401,7 @@ OVERLAY: Exit Intent Modal
 | Homepage | N/A | 100% |
 | Category | 500+ | 100% |
 | Location | 1000+ | 100% |
-| Service-city | 800+ | 80%+ (NO city-swapping) |
+| Service-city | ~1,000 | 80%+ (E-E-A-T, 7 unique headings, NO city-swapping) |
 | Blog | 1500+ | 100% |
 
 ---
@@ -410,12 +423,14 @@ pnpm preview     # Preview production
 |------|----------|
 | **Codebase patterns** | `AGENTS.md` (read first!) |
 | Full plan | `HOMEPAGE-REDESIGN-FULL-AND-FINAL.md` |
-| Phase 7 spec | `PHASE-7-DESIGN-SYSTEM-CONSOLIDATION.md` |
+| Phase 8 spec | `PHASE-8-CITY-CONTENT-CUSTOMIZATION.md` |
+| Brand voice | `docs/project/ralph/brand-voice.md` |
 | Business data | `src/content/business/profile.yaml` |
 | Content schemas | `src/content/config.ts` |
 | Skills | `.claude/skills/` |
 | prd.json template | `prd.json.example` |
 | Ralph progress | `docs/project/ralph/progress.txt` |
+| Utility providers | `docs/reference/utility-providers.md` |
 
 ---
 

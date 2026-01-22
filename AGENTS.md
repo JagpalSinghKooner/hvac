@@ -9,8 +9,9 @@
 ## Project Overview
 
 **Stack:** Astro 5.0 + React 19 + TypeScript + Tailwind CSS + shadcn/ui
-**Content:** 573 pages (23 services + 550 service-city + supporting pages)
+**Content:** 639 pages (23 services + 550 service-city + supporting pages)
 **Build command:** `pnpm build` (runs astro check + astro build)
+**Content Depth:** ~1,000 words per service-city page with E-E-A-T compliance
 
 ---
 
@@ -31,7 +32,9 @@ src/content/
 
 **Pattern:** Always check `src/content/config.ts` before modifying content structure.
 
-### 2. Schema Field Names (Phase 7A Unified)
+### 2. Schema Field Names (Phase 7A Unified + Phase 8 Additions)
+
+**Phase 7A Unified Fields:**
 
 | Old Name | New Name | Collection |
 |----------|----------|------------|
@@ -51,7 +54,21 @@ src/content/
 | localRebates | rebateInfo | service-city (nested) |
 | localGalleryImages | galleryImages | service-city |
 
-**Pattern:** Both collections now use unified field names for shared components.
+**Phase 8 NEW Fields (service-city collection):**
+
+| Field | Type | Purpose |
+|-------|------|---------|
+| hero.title | string | UNIQUE keyword-researched H1, PREMIUM positioning |
+| hero.description | string | City-specific intro + experience stats (50-100 words) |
+| benefitsHeadline | string | UNIQUE keyword-researched H2 for benefits section |
+| contextHeadline | string | UNIQUE keyword-researched H2 for context section |
+| finalCta.headline | string | UNIQUE keyword-researched H2 for final CTA |
+| finalCta.copy | string | City-specific CTA copy (50-75 words) |
+| experienceStats.installationsInCity | number | Installation count for E-E-A-T |
+| experienceStats.yearsSinceCityStart | number | Years serving city for E-E-A-T |
+| processSteps | REMOVED | Inherit from parent service page |
+
+**Pattern:** Both collections now use unified field names for shared components. Phase 8 adds unique heading fields for SEO.
 
 ### 3. Typography System (Global)
 
@@ -202,246 +219,162 @@ Contains: company name, phone numbers, service areas, hours, certifications.
 
 ---
 
-## Current Phase: 7B Content Generation
+## Current Phase: 8A City-Level Content Customization (E-E-A-T Enhanced)
 
-**Branch:** feature/phase-7b-content-guelph
-**Goal:** Generate SEO-optimized, city-specific content for all 22 service-city pages in Guelph, ON
+**Branch:** feature/phase-8a-content-customization
+**Goal:** Generate E-E-A-T compliant content for 550 service-city pages with 3,850 unique headings
 
-**Completed:**
-- US-001 through US-009: Guelph batch (orchestrator, keyword research, positioning, brand voice, content generation, quality verification)
+**Status:** FRESH START for ALL 25 cities (Phase 7B content reset)
 
-**In Progress:**
-- US-010: Documentation
+**Prerequisites (COMPLETE):**
+- Phase 7A: Infrastructure (schema, components, typography)
+
+**Phase 8A User Stories:**
+- US-000: Cleanup & Reset (COMPLETE)
+- US-001: Add Schema Fields (hero, finalCta, experienceStats, etc.)
+- US-002: Update Components + Internal Linking
+- US-003: Fix LocationServicesGrid Bug
+- US-004: LocalBusiness Structured Data
+- US-005: Utility Provider Reference Document
+- US-006: Guelph Content Generation (FRESH START, 22 services, 154 headings)
+- US-007 to US-014: City Content Generation (3 cities each, 8 stories)
+- US-015: Automated Verification & Cleanup
+- US-016: Experience Stats Population
+- US-017: Internal Linking Audit
 
 **Key Files:**
-- `prd.json` - Story tracking
-- `docs/project/ralph/progress.txt` - Implementation notes
-- `docs/project/ralph/guelph-keywords.md` - Keyword research (PERMANENT reference)
-- `docs/project/ralph/guelph-positioning.md` - Positioning angles (PERMANENT reference)
+- `PHASE-8-CITY-CONTENT-CUSTOMIZATION.md` - Full specification
+- `docs/reference/utility-providers.md` - Rebate info (create in US-005)
+- `src/content/config.ts` - Schema updates (US-001)
 - `docs/project/ralph/brand-voice.md` - Brand voice profile (applies to ALL 25 cities)
-- `scripts/add-trust-openers-guelph.ts` - Reusable script template
-- `scripts/add-problem-sections-guelph.ts` - Reusable script template
-- `scripts/add-solution-sections-guelph.ts` - Reusable script template
-- `scripts/add-benefits-guelph.mjs` - Reusable script template
 
 ---
 
-## Phase 7B: Content Generation Patterns (Guelph Batch)
+## Phase 8A: Required Skills Per Story Type
 
-### Overview
+### Story Type Matrix
 
-Phase 7B generates city-specific content for 550 service-city pages (22 services × 25 cities). Guelph was the first batch, establishing the workflow for remaining 24 cities.
+| Story Type | Stories | Required Skills | Notes |
+|------------|---------|-----------------|-------|
+| Schema/Component | US-001 to US-004 | `/frontend-design` → `/agent-browser` → `/web-design-guidelines` | Technical implementation |
+| Reference Doc | US-005 | Research only | No skills required |
+| Content Generation | US-006 to US-014 | `/orchestrator` → skill chain (see below) | Marketing/content workflow |
+| Verification | US-015 to US-017 | `/agent-browser` | Visual testing |
 
-**Time investment (Guelph batch):** ~8 hours total for 20 services, 80+ content pieces
-- Setup (orchestrator, keyword research, positioning, brand voice): ~2 hours
-- Content generation (trustOpener, problem, solution, benefits): ~6 hours
+### Content Generation Skill Chain (US-006 to US-014)
 
-### Mandatory Skill Pipeline
-
-**CRITICAL:** ALL content generation MUST follow this skill sequence. NO exceptions.
+**CRITICAL:** ALL content generation MUST follow this sequence via `/orchestrator`:
 
 ```
-Step 1: /orchestrator (diagnoses task, routes to correct skills)
-Step 2: /keyword-research (identifies target keywords for city + all services)
-Step 3: /positioning-angles (finds city-specific differentiation angles)
-Step 4: /brand-voice (extracts/validates voice profile) [RUN ONCE, applies to all 25 cities]
-Step 5: /seo-content (generates problem, solution sections with keywords)
-Step 6: /direct-response-copy (generates trustOpener, benefits with conversion focus)
+Step 1: /orchestrator (diagnoses task, routes to skills)
+Step 2: /keyword-research (city + all 22 services, unique long-tail keywords)
+Step 3: /positioning-angles (city-specific differentiation)
+Step 4: /brand-voice (ONE-TIME validation - already exists in brand-voice.md)
+Step 5: /seo-content (problem, solution, context sections with keywords)
+Step 6: /direct-response-copy (hero, trustOpener, benefits, finalCta with conversion focus)
 ```
 
 **Context Passing Strategy:**
-- FULL CONTEXT to all skills: brand-voice.md (applies to all cities)
-- FULL CONTEXT to content skills: city-specific keyword research, positioning angles
+- FULL CONTEXT: brand-voice.md (applies to all cities)
+- FULL CONTEXT: city-specific keyword research, positioning angles
 - LIGHT CONTEXT: Positioning summary to /seo-content (avoid over-contexted output)
 - LIGHT CONTEXT: Keyword highlights to /direct-response-copy (main terms only)
 
-**Quality Gates:**
-- NO em dashes (--) in any content field [automated grep check]
-- Uniqueness verification [manual sample review of 5 services]
-- City-specificity check [content references local housing, climate, tenure]
-- Build passes [pnpm build must succeed with 0 errors]
+### Quality Gates (ALL Stories)
 
-### Content Field Types & Complexity
+- NO em dashes (--) in any content field: `grep -r '\--' src/content/service-city/*/[city].md | grep -v '^---'`
+- Heading uniqueness: Zero duplicates across all 550 pages
+- Word count: ~1,000 words per page
+- Build passes: `pnpm build` with 0 errors
+- Visual test: `/agent-browser` on 3 sample pages
 
-| Field | Time | Structure | Skill | Notes |
-|-------|------|-----------|-------|-------|
-| trustOpener | ~37 min | 2-3 sentences | /direct-response-copy | Trust signal, local tenure emphasis |
-| problem | ~107 min | headline + description + 3-4 issues | /seo-content | Highest uniqueness requirement, technical depth |
-| solution | ~90 min | headline + description | /seo-content | Positioning angle integration, methodology focus |
-| benefits | ~115 min | 3-4 benefits (title, description, icon) | /direct-response-copy | Icon distribution, NO duplication with solution |
+---
 
-**Batching Strategy:** Generate all 22 services in single batch per content field type (NOT service-by-service). This ensures consistency and efficient skill usage.
+## Phase 8A: Heading Requirements (CRITICAL)
 
-### City-Specific Research Requirements
+**Per Page (7 unique headings):**
 
-**BEFORE generating content for any city**, research these factors:
+| Section | Level | Requirement |
+|---------|-------|-------------|
+| Hero | H1 | UNIQUE keyword-researched, PREMIUM positioning |
+| Problem | H2 | UNIQUE keyword-researched long-tail |
+| Solution | H2 | UNIQUE keyword-researched long-tail |
+| Benefits | H2 | UNIQUE keyword-researched long-tail |
+| Context | H2 | UNIQUE keyword-researched long-tail |
+| Savings | H2 | UNIQUE keyword-researched long-tail |
+| Final CTA | H2 | UNIQUE keyword-researched long-tail |
 
-1. **Housing Stock:**
-   - Heritage vs. modern construction
-   - Common architectural types (limestone, brick, siding, etc.)
-   - Unique challenges (narrow basements, no ductwork, preservation guidelines)
-   - Neighborhood names for geographic authenticity
+**Total:** 550 pages × 7 headings = **3,850 unique headings** (ZERO duplicates allowed)
 
-2. **Climate Factors:**
-   - Temperature ranges (winter lows, summer highs)
-   - Humidity conditions (river valleys, lake effects, continental dry)
-   - Microclimates (valley vs. hilltop, urban vs. suburban)
-   - Groundwater temperatures (affects heat pumps, geothermal)
+### Premium Positioning Language
 
-3. **Local Tenure:**
-   - Headquarters city (Guelph): "Headquartered at 25 Clearview St since 1994"
-   - Service area cities (non-headquarters): "Serving [City] since 1994 from headquarters in Guelph"
-   - Years in market: 30 years (since 1994)
+**USE these keywords:**
+- "Trusted", "Expert", "Professional", "Premium", "Quality"
+- "Since 1994", "30+ Years", "Established"
 
-4. **Water Conditions:**
-   - Hard water (affects boilers, water heaters, humidifiers)
-   - Mineral content
-   - Treatment requirements
+**NEVER use these keywords:**
+- "24-Hour", "Emergency", "Same-Day", "Urgent", "Act Now"
 
-**Quality Rule:** Content must feel genuinely written by someone who knows the city. NOT generic city-name-swapping.
+---
 
-### Content Generation Workflow (Per City)
+## Phase 8A: E-E-A-T Signals
 
-**Step 1: Setup (One-Time Per City)**
-1. Run /orchestrator to confirm skill sequence
-2. Run /keyword-research for city + all 22 services
-3. Run /positioning-angles for city-specific differentiation
-4. Create city-specific reference docs:
-   - docs/project/ralph/[city]-keywords.md (PERMANENT, NEVER delete)
-   - docs/project/ralph/[city]-positioning.md (PERMANENT, NEVER delete)
+**Experience (First E - CRITICAL):**
+- Installation counts per city in `hero.description` AND `context`
+- Years serving city in `hero.description` AND `context`
+- `experienceStats` populated for structured data
 
-**Step 2: Generate Content (4 Batches Per City)**
-1. **trustOpener:** Run /direct-response-copy with positioning summary → Create docs/project/ralph/[city]-trust-openers.md → Integrate via script
-2. **problem:** Run /seo-content with keywords → Create docs/project/ralph/[city]-problem-sections.md → Integrate via script
-3. **solution:** Run /seo-content with positioning → Create docs/project/ralph/[city]-solution-sections.md → Integrate via script
-4. **benefits:** Run /direct-response-copy with accountability focus → Create docs/project/ralph/[city]-benefits.md → Integrate via script
+**Expertise:**
+- Technical accuracy in problem/solution descriptions
+- Certifications mentioned where relevant
 
-**Step 3: Quality Verification**
-1. Read 5 sample files (furnace, heat pump, AC, boiler, ductless)
-2. Verify uniqueness (NO duplicate content across services)
-3. Verify city-specificity (references local housing, climate, tenure)
-4. Run em dash check: `grep -r '\--' src/content/service-city/*/[city].md | grep -v '^---'` (output must be empty)
-5. Run build: `pnpm build` (must pass with 0 errors)
-6. Visual test 3 pages with /agent-browser: furnace, heat pump, AC installation
-7. Verify rendering: Problem, Solution, Benefits sections display correctly, city badge shows "Solution in [City]", trust indicator shows "Serving [City] Since 1994"
+**Authoritativeness:**
+- "Since 1994" in hero
+- License numbers where appropriate
+- Manufacturer certifications
 
-**Step 4: Commit**
-- Commit content files: `git add src/content/service-city/ docs/project/ralph/ scripts/ && git commit -m 'feat: add complete content for [City] services (22 pages)'`
+**Trustworthiness:**
+- Consistent NAP across pages
+- Review mentions
+- BBB membership
 
-### Script Templates (Reusable Across Cities)
+---
 
-**YAML Escaping Rule:** Single quotes in YAML single-quoted strings must be doubled.
-- WRONG: `trustOpener: 'City\'s homes'`
-- RIGHT: `trustOpener: 'City''s homes'`
-- JavaScript: `content.replace(/'/g, "''")`
+## Phase 8A: Common Gotchas
 
-**Script Patterns:**
-1. **TypeScript (.ts) for Node v20+:** Used for US-005, US-006, US-007 (add-trust-openers, add-problem-sections, add-solution-sections)
-2. **JavaScript (.mjs) for compatibility:** Used for US-008 (add-benefits) when TypeScript regex issues arise
+### 1. Em Dashes (--)
+**Problem:** Skills (especially /direct-response-copy) often output em dashes
+**Solution:** Explicitly instruct: "NO em dashes (--) - use periods, commas, semicolons"
+**Check:** `grep -r '\--' src/content/service-city/*/[city].md | grep -v '^---'` (must be empty)
 
-**Script Template Locations:**
-- `scripts/add-trust-openers-guelph.ts` - Insert trustOpener after seoDescription
-- `scripts/add-problem-sections-guelph.ts` - Insert problem after trustOpener
-- `scripts/add-solution-sections-guelph.ts` - Insert solution after problem issues array
-- `scripts/add-benefits-guelph.mjs` - Insert benefits after solution section
+### 2. YAML Single Quote Escaping
+**Problem:** Apostrophes in YAML single-quoted strings break parsing
+**Solution:** Double single quotes: `City''s homes` not `City\'s homes`
+**Script:** `content.replace(/'/g, "''")`
 
-**Duplication for New City:**
-1. Copy script: `cp scripts/add-trust-openers-guelph.ts scripts/add-trust-openers-[city].ts`
-2. Update city name in script: `'guelph'` → `'[city]'`
-3. Update source markdown: `docs/project/ralph/guelph-trust-openers.md` → `docs/project/ralph/[city]-trust-openers.md`
-4. Run script: `npx tsx scripts/add-trust-openers-[city].ts`
+### 3. City-Swap Content
+**Problem:** Same headings with city name swapped (Google penalizes)
+**Solution:** ALL 3,850 headings must be unique via `/keyword-research`
 
-### Common Gotchas
+### 4. Build Failures After Content Integration
+**Problem:** Zod schema errors if YAML frontmatter invalid
+**Solution:** Test script on 1-2 files first, verify build passes, then run batch
 
-**1. Em Dashes (--):**
-- **Problem:** Skills (especially /direct-response-copy) often output em dashes in text
-- **Solution:** Explicitly instruct skill: "NO em dashes (--) allowed - use proper sentences with periods, commas, semicolons"
-- **Verification:** `grep -r '\--' src/content/service-city/*/[city].md | grep -v '^---'` (must be empty)
+---
 
-**2. YAML Single Quote Escaping:**
-- **Problem:** Apostrophes in YAML single-quoted strings break parsing
-- **Solution:** Double single quotes: `City''s homes` not `City\'s homes`
-- **Script:** `content.replace(/'/g, "''")`
+## Phase 8A: Verification Scripts (US-015)
 
-**3. Grep False Positives:**
-- **Problem:** Frontmatter delimiters `---` match `\--` regex
-- **Solution:** Filter with `grep -v '^---'` or use field-specific grep
+```bash
+# Heading uniqueness verification
+pnpm check:h1-uniqueness  # Must return 0 duplicates
+pnpm check:h2-uniqueness  # Must return 0 duplicates
 
-**4. Service Directory Name Mismatches:**
-- **Problem:** Service directory names don't always match markdown heading names
-  - Directory: `air-conditioner-installation`
-  - Markdown heading: `Air Conditioner Installation` or `AC Installation`
-- **Solution:** Manual mapping in scripts OR normalize heading names before matching
+# Heading keyword compliance
+pnpm check:heading-keywords  # Must return 100% compliance
 
-**5. Context Overload:**
-- **Problem:** Passing full context (brand voice + keywords + positioning) to skills produces over-hedged, generic output
-- **Solution:** Use LIGHT CONTEXT approach (summaries only) for boldness, FULL CONTEXT only for brand voice
+# Word count verification
+pnpm check:word-count  # Must return ~1,000 words per page
 
-**6. Build Failures After Content Integration:**
-- **Problem:** Zod schema errors if YAML frontmatter invalid
-- **Solution:** Test script on 1-2 files first, verify build passes, then run batch
-- **Common causes:** Missing closing quotes, unescaped apostrophes, incorrect indentation
-
-### Validation Checklist (Before Marking City Complete)
-
-**Content Quality:**
-- [ ] Read 5 sample files (furnace, heat pump, AC, boiler, ductless)
-- [ ] Verify NO duplicate content across services (problem, solution, benefits unique per service)
-- [ ] Verify city-specificity (references local housing, climate, tenure in EVERY service)
-- [ ] Verify brand voice maintained (expertise-based, accountability-focused, educator NOT persuader)
-
-**Technical Quality:**
-- [ ] Run em dash check: `grep -r '\--' src/content/service-city/*/[city].md | grep -v '^---'` (output empty)
-- [ ] Verify proper punctuation (periods, commas, semicolons - NO incomplete sentences)
-- [ ] Run build: `pnpm build` (639 pages, 0 errors)
-- [ ] Verify YAML escaping correct (doubled single quotes: `City''s`)
-
-**Rendering Quality:**
-- [ ] Visual test 3 pages with /agent-browser (furnace, heat pump, AC installation at localhost:4321)
-- [ ] Verify Problem section renders (headline, description, 3-4 issues with icons)
-- [ ] Verify Solution section renders (city badge shows "Solution in [City]", trust indicator shows "Serving [City] Since 1994")
-- [ ] Verify Benefits section renders (3-4 benefits with icons, NO duplication with solution)
-- [ ] Verify responsive layouts (375px mobile, 768px tablet, 1024px desktop)
-
-**Uniqueness Verification:**
-- [ ] Sample 5 random services
-- [ ] Manually verify problem statements differ meaningfully across services
-- [ ] Manually verify solution statements differ meaningfully across services
-- [ ] Manually verify benefits differ meaningfully across services (NO generic copy)
-
-### Efficiency Metrics (Guelph Batch)
-
-**Time Investment by Story:**
-- US-001 (Orchestrator): ~5 minutes
-- US-002 (Keyword Research): ~60 minutes
-- US-003 (Positioning Angles): ~45 minutes
-- US-004 (Brand Voice): ~50 minutes [ONE-TIME, applies to all 25 cities]
-- US-005 (trustOpener): ~37 minutes (22 services)
-- US-006 (problem): ~107 minutes (20 services)
-- US-007 (solution): ~90 minutes (20 services)
-- US-008 (benefits): ~115 minutes (20 services, 80 benefits)
-- US-009 (Quality Verification): ~45 minutes
-- **Total: ~8 hours for first city batch**
-
-**Expected Efficiency Gains for Remaining 24 Cities:**
-- US-004 (Brand Voice): SKIP (already exists, applies to all cities)
-- Script templates: Already created, just duplicate and modify city name
-- Workflow established: No learning curve for cities 2-25
-- **Estimated time per city (cities 2-25): ~6 hours** (saves 2 hours per city by skipping brand voice + reduced learning curve)
-
-### Remaining Work
-
-**Cities Remaining:** 24 (Guelph complete)
-**Services Per City:** 22
-**Total Service-City Pages Remaining:** 528 (24 cities × 22 services)
-
-**Recommended Batching Strategy:**
-1. **Region-based batching:** Group cities by region for positioning angle efficiency
-   - Region 1 (Halton): Burlington, Oakville, Milton
-   - Region 2 (Waterloo): Waterloo, Kitchener, Cambridge
-   - Region 3 (Hamilton): Hamilton, Ancaster, Dundas, Stoney Creek
-   - Etc.
-2. **Positioning angle reuse:** Cities within same region share some positioning angles (climate, housing trends)
-3. **Script reuse:** Duplicate Guelph scripts for each new city, minimal modifications
-
-**Parallel Execution:** Ralph can process one city per PRD. Create separate PRDs for each city batch to enable parallel execution if needed.
+# Em-dash check
+pnpm check:em-dashes  # Must return 0 matches
+```

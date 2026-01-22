@@ -69,10 +69,15 @@ The original CRO audit was **fundamentally misaligned** with business goals. It 
 - ✅ Phase 3: Page Templates (628 pages)
 - ✅ Phase 4: Integration & QA
 - ✅ Phase 5: Branding Polish (merged to main)
+- ✅ Phase 6: Lead Conversion Architecture
+- ✅ Phase 7A: Infrastructure (typography, unified schema, component consolidation)
+- ❌ Phase 7B: DEPRECATED (content reset for Phase 8 fresh start)
 
-**Current Phase:** Phase 7 — Lead Conversion Page Architecture + Content
+**Current Phase:** Phase 8 — City-Level Content Customization (E-E-A-T Enhanced)
 
-**Key Gap:** Service and service-city pages have structure but lack lead conversion flow. Content exists but is thin (~200 words service-city, ~250 words locations). Need 800+ and 1000+ respectively.
+**Status:** FRESH START for ALL 25 cities (550 service-city pages reset to minimal frontmatter)
+
+**Scope:** Phase 8 generates E-E-A-T compliant content for all 25 cities with ~1,000 words per page and 3,850 unique keyword-researched headings. See [PHASE-8-CITY-CONTENT-CUSTOMIZATION.md](PHASE-8-CITY-CONTENT-CUSTOMIZATION.md) for full specification.
 
 ---
 
@@ -843,7 +848,7 @@ seoDescription: "..."
 | Category pages | 500+ | 100% | `/seo-content` skill |
 | Service pages | Existing | Update headlines | `/seo-content` skill |
 | Location pages | 1000+ | 100% | `/seo-content` skill |
-| Service-city pages | 800+ | 80%+ | `/seo-content` skill |
+| Service-city pages | ~1,000 | 80%+ (E-E-A-T, 7 unique headings) | `/seo-content` + `/keyword-research` |
 | Blog posts | 1500+ | 100% | `/seo-content` skill |
 | Rebates page | 1000+ | 100% | Research + skill |
 
@@ -1256,7 +1261,7 @@ Run content skills for pages that need unique content:
 **Priority Content:**
 - Category pages (5 pages, 500+ words each)
 - Location pages (top 10 priority, 1000+ words each)
-- Service-city pages (top 50 combinations, 800+ words, 80%+ unique)
+- Service-city pages (all 550 pages, ~1,000 words, 80%+ unique, E-E-A-T)
 - Blog posts (target keywords, 1500+ words)
 - Rebates page (research current programs, 1000+ words)
 
@@ -1304,86 +1309,77 @@ Run content skills for pages that need unique content:
 
 ---
 
-### Phase 7: Design System Consolidation
+### Phase 7: Design System Consolidation (DEPRECATED)
 
-**Status:** CURRENT — Execute via Ralph
+**Status:** DEPRECATED
+- ✅ Phase 7A: Infrastructure (typography, unified schema, component consolidation)
+- ❌ Phase 7B: DEPRECATED - Content reset for Phase 8 fresh start
 
-**Full Specification:** [PHASE-7-DESIGN-SYSTEM-CONSOLIDATION.md](PHASE-7-DESIGN-SYSTEM-CONSOLIDATION.md)
+---
+
+### Phase 8: City-Level Content Customization (CURRENT)
+
+**Status:** CURRENT — FRESH START for ALL 25 cities
+
+**Full Specification:** [PHASE-8-CITY-CONTENT-CUSTOMIZATION.md](PHASE-8-CITY-CONTENT-CUSTOMIZATION.md)
 
 ---
 
 #### Overview
 
-Phase 7 consolidates the design system to enable consistent service and service-city pages:
+Phase 8 generates E-E-A-T compliant content for ALL 25 cities (550 service-city pages) with fresh start:
 
-- **Unified Schema:** Identical field names for both collections (services + service-city)
-- **Global Typography:** Single font import via typography.css (Phase 7.1 COMPLETE)
-- **Component Consolidation:** Merge Local* variants into generic components
-- **Shared Layout:** ServicePageLayout.astro for both page types
-- **Content Generation:** Unique SEO content for 550 service-city pages
-
----
-
-#### Phase Structure (8 Sub-Phases)
-
-| Phase | Description | Status |
-|-------|-------------|--------|
-| 7.1 | Global Typography System | COMPLETE |
-| 7.2 | Unified Schema | Ready |
-| 7.3 | Content Migration | Ready |
-| 7.4 | Component Consolidation | Ready |
-| 7.5 | Shared ServicePageLayout | Ready |
-| 7.6 | Background Variants | Ready |
-| 7.7 | Verification & Cleanup | Ready |
-| 7.8 | Content Generation | Ready |
+- **3,850 Unique Headings:** 7 keyword-researched headings per page (H1 + 6 H2s)
+- **~1,000 Words Per Page:** E-E-A-T content depth for YMYL topics
+- **6 New Schema Fields:** hero, finalCta, benefitsHeadline, contextHeadline, experienceStats
+- **Premium Positioning:** NO emergency/urgency messaging
+- **LocalBusiness Schema:** Structured data per service-city page
 
 ---
 
-#### Key Schema Changes
+#### Phase 8 User Stories (17 total)
 
-Both collections will use **IDENTICAL** field names:
-
-| Old (Services) | Old (Service-City) | New (Unified) |
-|----------------|-------------------|---------------|
-| `problemStatement` | `localProblem` | `problem` |
-| `solutionApproach` | `localSolution` | `solution` |
-| `valueProps` | `localBenefits` | `benefits` |
-| `images` | `localGalleryImages` | `galleryImages` |
-| (missing) | `localTrustOpener` | `trustOpener` |
-| (missing) | `localProof` | `proof` |
-| (missing) | `localContext` | `context` |
+| Story | Description |
+|-------|-------------|
+| US-001 | Add Schema Fields (hero, finalCta, experienceStats) |
+| US-002 | Update Components + Internal Linking |
+| US-003 | Fix LocationServicesGrid Bug |
+| US-004 | LocalBusiness Structured Data |
+| US-005 | Utility Provider Reference Document |
+| US-006 | Guelph Content Generation (FRESH START, 22 services, 154 headings) |
+| US-007 to US-014 | City Content Generation (3 cities each) |
+| US-015 | Automated Verification & Cleanup |
+| US-016 | Experience Stats Population |
+| US-017 | Internal Linking Audit |
 
 ---
 
-#### Component Changes
+#### New Schema Fields (Phase 8)
 
-**Delete:**
-- `LocalProblemSection.astro` (99% identical to ProblemSection)
-- `LocalSolutionSection.astro` (merged into SolutionSection)
-
-**Rename:**
-- `LocalTrustOpener.astro` → `TrustOpenerSection.astro`
-- `LocalGallerySection.astro` → `ServiceGallerySection.astro`
-- `LocalProofSection.astro` → `ProofSection.astro`
-- `LocalContextSection.astro` → `ContextSection.astro`
-
-**Create:**
-- `ServicePageLayout.astro` (shared layout for both page types)
+| Field | Type | Purpose |
+|-------|------|---------|
+| `hero.title` | string | UNIQUE keyword-researched H1 |
+| `hero.description` | string | City-specific intro + experience stats |
+| `benefitsHeadline` | string | UNIQUE keyword-researched H2 |
+| `contextHeadline` | string | UNIQUE keyword-researched H2 |
+| `finalCta.headline` | string | UNIQUE keyword-researched H2 |
+| `finalCta.copy` | string | City-specific CTA copy |
+| `experienceStats` | object | installationsInCity, yearsSinceCityStart |
 
 ---
 
 #### Success Criteria
 
-- **Schema:** IDENTICAL fields in both collections
-- **Layout:** Single ServicePageLayout for both page types
-- **Typography:** Single global font import (1 request vs 9)
-- **Build:** `pnpm build` passes (573+ pages)
-- **Content:** 550 service-city pages with 800+ unique words
+- **Headings:** 3,850 unique headings (ZERO duplicates)
+- **Words:** ~1,000 words per service-city page
+- **E-E-A-T:** Experience stats visible on all pages
+- **Schema:** LocalBusiness on all service-city pages
+- **Build:** `pnpm build` passes (639+ pages)
 
 ---
 
-**For field mappings, component specs, and implementation details, see:**
-→ [PHASE-7-DESIGN-SYSTEM-CONSOLIDATION.md](PHASE-7-DESIGN-SYSTEM-CONSOLIDATION.md)
+**For full specification, see:**
+→ [PHASE-8-CITY-CONTENT-CUSTOMIZATION.md](PHASE-8-CITY-CONTENT-CUSTOMIZATION.md)
 
 ---
 
