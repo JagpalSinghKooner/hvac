@@ -1,0 +1,81 @@
+---
+import LocalGallerySection from '@/components/sections/LocalGallerySection.astro';
+
+const mockImages = [
+  {
+    src: '/images/projects/guelph-furnace-1.jpg',
+    alt: 'High-efficiency furnace installation in modern Guelph home basement',
+    caption: 'Carrier furnace upgrade with smart thermostat integration, Downtown Guelph'
+  },
+  {
+    src: '/images/projects/guelph-ac-1.jpg',
+    alt: 'Central air conditioning unit installed in Guelph backyard',
+    caption: 'Lennox AC system with energy-efficient compressor, South Guelph'
+  },
+  {
+    src: '/images/projects/guelph-hvac-1.jpg',
+    alt: 'Complete HVAC system replacement in Guelph residential property',
+    caption: 'Full system replacement: furnace, AC, and ductwork modernization'
+  },
+  {
+    src: '/images/projects/guelph-furnace-2.jpg',
+    alt: 'High-efficiency gas furnace with new air handler',
+    caption: 'Trane XL series furnace with variable-speed blower, North Guelph'
+  },
+  {
+    src: '/images/projects/guelph-ac-2.jpg',
+    alt: 'Outdoor AC condenser unit professionally installed',
+    caption: 'Bryant Evolution series AC with sound-dampening pad'
+  },
+  {
+    src: '/images/projects/guelph-hvac-2.jpg',
+    alt: 'Clean HVAC installation with organized ducting',
+    caption: 'Premium installation with sealed ductwork and zone controls'
+  }
+];
+
+const minimalImages = [
+  {
+    src: '/images/projects/kitchener-furnace-1.jpg',
+    alt: 'Furnace installation in Kitchener'
+  },
+  {
+    src: '/images/projects/kitchener-ac-1.jpg',
+    alt: 'Air conditioning unit in Kitchener backyard'
+  }
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LocalGallerySection Test Page</title>
+</head>
+<body>
+  <h1 style="text-align: center; padding: 2rem; font-size: 2rem; font-weight: bold;">LocalGallerySection Component Tests</h1>
+
+  <!-- Test 1: Full props with 6 images -->
+  <LocalGallerySection
+    cityName="Guelph"
+    serviceType="Furnace Installation"
+    images={mockImages}
+    headline="Our Work in Guelph"
+    subheadline="Premium HVAC installations across Guelph and surrounding areas"
+  />
+
+  <!-- Test 2: Minimal props (default headline, 2 images, no captions) -->
+  <LocalGallerySection
+    cityName="Kitchener"
+    images={minimalImages}
+  />
+
+  <!-- Test 3: Empty images array (should show fallback message) -->
+  <LocalGallerySection
+    cityName="Cambridge"
+    serviceType="Air Conditioning"
+    images={[]}
+  />
+</body>
+</html>

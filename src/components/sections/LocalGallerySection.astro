@@ -1,0 +1,153 @@
+---
+/**
+ * LocalGallerySection Component
+ *
+ * Editorial-style project gallery for service-city pages.
+ * Displays completed HVAC installations with professional photography presentation.
+ *
+ * Design: Editorial Portfolio aesthetic
+ * - Magazine-quality layout with masonry-inspired animations
+ * - Hover states reveal project context
+ * - Clean Card wrappers with subtle interactions
+ *
+ * @example
+ * <LocalGallerySection
+ *   cityName="Guelph"
+ *   serviceType="Furnace Installation"
+ *   images={[
+ *     { src: "/images/projects/guelph-furnace-1.jpg", alt: "Modern furnace installation in Guelph home", caption: "High-efficiency furnace upgrade, Downtown Guelph" },
+ *     { src: "/images/projects/guelph-furnace-2.jpg", alt: "HVAC system in Guelph basement" }
+ *   ]}
+ * />
+ */
+
+import { Card } from '@/components/ui/card';
+
+interface GalleryImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+interface Props {
+  cityName: string;
+  serviceType?: string;
+  images: GalleryImage[];
+  headline?: string;
+  subheadline?: string;
+}
+
+const {
+  cityName,
+  serviceType,
+  images,
+  headline = `Our Work in ${cityName}`,
+  subheadline
+} = Astro.props;
+---
+
+<section class="relative py-16 md:py-20 lg:py-24 bg-muted/30 overflow-hidden">
+  <!-- Decorative background elements -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute top-1/4 -left-32 w-96 h-96 bg-primary/5 rounded-full blur-3xl opacity-50"></div>
+    <div class="absolute bottom-1/4 -right-32 w-96 h-96 bg-primary/5 rounded-full blur-3xl opacity-50"></div>
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="max-w-3xl mb-12 md:mb-16 text-center mx-auto">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4 leading-tight">
+        {headline}
+      </h2>
+      {subheadline && (
+        <p class="text-lg text-muted-foreground">
+          {subheadline}
+        </p>
+      )}
+      {serviceType && (
+        <p class="text-sm text-muted-foreground mt-2">
+          {serviceType}
+        </p>
+      )}
+    </div>
+
+    <!-- Gallery Grid -->
+    {images.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {images.map((image, index) => (
+        <div class="gallery-item" style={`animation-delay: ${index * 0.1}s`}>
+          <Card key={index} className="group overflow-hidden border-border/50 hover:border-border transition-all duration-300 hover:shadow-lg h-full">
+            <div class="relative aspect-video overflow-hidden">
+            {/* Actual image from schema */}
+            <img
+              src={image.src}
+              alt={image.alt}
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+
+            {/* Hover overlay for caption visibility */}
+            {image.caption && (
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                <div class="p-4 w-full">
+                  <p class="text-white text-sm font-medium leading-snug">
+                    {image.caption}
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Caption below image (always visible) */}
+          {image.caption && (
+            <div class="p-4 bg-background">
+              <p class="text-sm text-muted-foreground leading-relaxed">
+                {image.caption}
+              </p>
+            </div>
+          )}
+          </Card>
+        </div>
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-12 text-muted-foreground">
+        <p>No gallery images available yet. Check back soon for completed projects in {cityName}.</p>
+      </div>
+    )}
+
+    {/* Optional bottom CTA */}
+    {images.length >= 6 && (
+      <div class="mt-12 text-center">
+        <p class="text-sm text-muted-foreground">
+          {images.length}+ completed projects in {cityName}
+        </p>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  /* Masonry-inspired staggered entrance */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .gallery-item {
+    animation: fadeInUp 0.6s ease-out backwards;
+  }
+
+  /* Playfair Display for headline */
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+  .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
+</style>
