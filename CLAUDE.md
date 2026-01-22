@@ -268,25 +268,38 @@ pnpm ralph:20   # 20 iterations
 ### Phase 1: Foundation (COMPLETE ✓)
 - ✅ shadcn MCP + CSS variables + components
 
-### Phase 2: Homepage Build (CURRENT) — RALPH-DRIVEN
+### Phase 2: Homepage Build (COMPLETE ✓)
+- ✅ 17 sections (Header through Exit Intent Modal)
 
-**Execute via Ralph only:**
+### Phase 3: Page Templates (COMPLETE ✓)
+- ✅ Categories → Services → Locations → Service-City → Supporting
+
+### Phase 4: Integration & QA (COMPLETE ✓)
+- ✅ Linking, mobile testing, SEO, performance
+
+### Phase 5: Branding Polish (COMPLETE ✓)
+- ✅ Colors, typography, spacing, accessibility
+
+### Phase 6: Lead Conversion Architecture (COMPLETE ✓)
+- ✅ Service/service-city page structure
+- ✅ Local* components created
+- ✅ Global typography system (Phase 7.1)
+
+### Phase 7: Design System Consolidation (CURRENT)
+
+**Full Specification:** [PHASE-7-DESIGN-SYSTEM-CONSOLIDATION.md](PHASE-7-DESIGN-SYSTEM-CONSOLIDATION.md)
+
+**Key Changes:**
+- Unified schema (`problem`, `solution`, `benefits` vs old `problemStatement`/`localProblem`)
+- Component consolidation (delete Local* variants, rename others)
+- ServicePageLayout (shared for both page types)
+
+**Execute via Ralph:**
 ```bash
-/prd skill → docs/project/prds/phase-2-homepage/prd-homepage.md
+/prd skill → create PRD for Phase 7.2+
 /ralph skill → prd.json
 pnpm ralph:20
 ```
-
-17 stories (Header through Exit Intent Modal). See `prd.json.example` for structure.
-
-### Phase 3: Page Templates
-Categories → Services → Locations → Service-City → Supporting
-
-### Phase 4: Integration & QA
-Linking, mobile testing, SEO, performance
-
-### Phase 5: Branding Polish
-Colors, photos, typography
 
 ---
 
@@ -345,6 +358,7 @@ pnpm preview     # Preview production
 | Need | Location |
 |------|----------|
 | Full plan | `HOMEPAGE-REDESIGN-FULL-AND-FINAL.md` |
+| Phase 7 spec | `PHASE-7-DESIGN-SYSTEM-CONSOLIDATION.md` |
 | Business data | `src/content/business/profile.yaml` |
 | Content schemas | `src/content/config.ts` |
 | Skills | `.claude/skills/` |
