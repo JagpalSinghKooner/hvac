@@ -22,22 +22,26 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problems:
-  - title: 'High Heating Costs with Gas or Oil'
-    description: 'Natural gas and oil prices fluctuate unpredictably. Heat pumps can deliver heating at 300-400% efficiency, dramatically reducing your energy costs compared to fossil fuels.'
-    icon: 'cost'
-  - title: 'Separate Heating and Cooling Systems'
-    description: 'Running a furnace and AC means maintaining two systems, two sets of repairs, and two points of failure. A heat pump handles both heating and cooling with one efficient unit.'
-    icon: 'complexity'
-  - title: 'Carbon Footprint Concerns'
-    description: 'Heat pumps move heat rather than burn fuel, significantly reducing your home carbon emissions. For homeowners looking to electrify, heat pumps are the most efficient option.'
-    icon: 'environment'
+problemStatement:
+  headline: 'The Case for Heat Pump Installation'
+  description: 'Natural gas and oil prices fluctuate unpredictably, making heating costs hard to budget. Heat pumps can deliver heating at 300-400% efficiency, dramatically reducing your energy costs compared to fossil fuels. Running a furnace and AC means maintaining two systems, two sets of repairs, and two points of failure. Heat pumps move heat rather than burn fuel, significantly reducing your home carbon emissions for homeowners looking to electrify.'
+  painPoints:
+    - 'High and unpredictable heating costs with gas or oil'
+    - 'Maintaining separate heating and cooling systems'
+    - 'Two points of failure and two sets of repair costs'
+    - 'Concerns about carbon footprint and environmental impact'
+    - 'Uncertainty about heat pump performance in cold Ontario winters'
 
-approach:
+solutionApproach:
   headline: 'Cold-Climate Heat Pumps That Actually Work in Ontario'
-  description: 'We install cold-climate heat pumps specifically designed for Canadian winters. These units maintain efficient heating down to -25°C and below. We size your system correctly, ensure proper installation, and verify performance so you get the efficiency and comfort you expect.'
-  quote: 'Modern cold-climate heat pumps are not the same as older units that stopped working below freezing. The technology has advanced dramatically—they are now a genuine heating solution for Ontario.'
-  quotePerson: 'Paul Palmer, Owner'
+  description: 'We install cold-climate heat pumps specifically designed for Canadian winters. These units maintain efficient heating down to -25°C and below. We size your system correctly, ensure proper installation, and verify performance so you get the efficiency and comfort you expect. Modern cold-climate heat pumps are not the same as older units that stopped working below freezing—the technology has advanced dramatically and they are now a genuine heating solution for Ontario.'
+  differentiators:
+    - 'Cold-climate models rated to -25°C and below'
+    - 'Proper heat load calculation for right-sizing'
+    - 'TSSA-certified installation following manufacturer specifications'
+    - '10-year parts and labour warranty'
+    - 'Rebate application assistance for heat pump incentives'
+    - 'Performance verification to ensure efficiency targets are met'
 
 processSteps:
   - step: 1

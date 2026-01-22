@@ -22,22 +22,26 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problems:
-  - title: 'Skyrocketing Energy Bills'
-    description: 'Old furnaces operate at 60-80% efficiency, meaning up to 40 cents of every dollar you spend on heating escapes through your exhaust vent. A new high-efficiency furnace can cut your heating costs by 30-40%.'
-    icon: 'cost'
-  - title: 'Breakdown Risk in Mid-Winter'
-    description: 'Furnaces over 15 years old are living on borrowed time. When they fail—and they always fail at the worst moment—you face emergency repairs or rushed replacement decisions in freezing temperatures.'
-    icon: 'warning'
-  - title: 'Uneven Heating & Cold Spots'
-    description: 'Aging furnaces struggle to maintain consistent temperatures. Some rooms stay cold while others overheat. Modern variable-speed furnaces deliver even comfort throughout your entire home.'
-    icon: 'temperature'
+problemStatement:
+  headline: 'When Your Furnace Shows Its Age'
+  description: 'Old furnaces operate at 60-80% efficiency, meaning up to 40 cents of every dollar you spend on heating escapes through your exhaust vent. Furnaces over 15 years old are living on borrowed time—when they fail, you face emergency repairs or rushed replacement decisions in freezing temperatures. Aging systems struggle to maintain consistent temperatures, leaving some rooms cold while others overheat.'
+  painPoints:
+    - 'Energy bills climbing 30-40% higher than they should be with modern high-efficiency equipment'
+    - 'Breakdown risk increases dramatically after 15 years, often failing at the worst possible moment'
+    - 'Uneven heating and cold spots as aging components lose capacity and precision'
+    - 'Rising repair costs that make replacement the smarter financial decision'
+    - 'Uncertainty about proper sizing and installation quality when making a major investment'
 
-approach:
+solutionApproach:
   headline: 'Right-Sized Equipment, Installed Right the First Time'
-  description: 'We start with a proper heat loss calculation—not a guess based on square footage. This ensures your new furnace is perfectly sized: not too big (which causes short cycling and wear) and not too small (which leaves you cold). Our TSSA-certified installers follow manufacturer specifications to the letter, protecting your warranty and ensuring safe, efficient operation for years to come.'
-  quote: 'A properly sized furnace runs longer cycles at lower speeds, delivering better comfort and lower bills than an oversized unit that blasts on and off.'
-  quotePerson: 'Paul Palmer, Owner'
+  description: 'We start with a proper heat loss calculation—not a guess based on square footage. This ensures your new furnace is perfectly sized: not too big (which causes short cycling and wear) and not too small (which leaves you cold). Our TSSA-certified installers follow manufacturer specifications to the letter, protecting your warranty and ensuring safe, efficient operation for years to come. A properly sized furnace runs longer cycles at lower speeds, delivering better comfort and lower bills than an oversized unit that blasts on and off.'
+  differentiators:
+    - 'Proper heat loss calculation for right-sizing—not guesswork based on square footage'
+    - 'TSSA-certified installers who follow manufacturer specifications to protect your warranty'
+    - '10-year parts and labour warranty on every installation'
+    - 'Upfront pricing with no surprises—the quote we give is the price you pay'
+    - 'Rebate application assistance to maximize your available incentives'
+    - 'Post-installation inspection by senior technician to ensure quality'
 
 processSteps:
   - step: 1

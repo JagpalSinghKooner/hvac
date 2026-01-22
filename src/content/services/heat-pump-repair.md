@@ -22,22 +22,26 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problems:
-  - title: 'Heat Pump Not Heating or Cooling'
-    description: 'When your heat pump fails, you lose both heating and cooling capability. In winter, this means no heat. In summer, no AC. Either way, your home becomes uncomfortable fast.'
-    icon: 'emergency'
-  - title: 'Ice Building Up on Outdoor Unit'
-    description: 'Some frost is normal in winter, but excessive ice indicates defrost problems. Left unchecked, ice buildup damages compressors and coils—turning a minor issue into a major repair.'
-    icon: 'warning'
-  - title: 'High Energy Bills Despite Normal Use'
-    description: 'Heat pumps should reduce energy costs. If your bills are climbing, something is wrong—low refrigerant, failing compressors, or auxiliary heat running when it should not.'
-    icon: 'cost'
+problemStatement:
+  headline: 'When Your Heat Pump Stops Working'
+  description: 'When your heat pump fails, you lose both heating and cooling capability—in winter this means no heat, in summer no AC. Some frost is normal in winter, but excessive ice indicates defrost problems that can damage compressors and coils if left unchecked. Heat pumps should reduce energy costs, but if your bills are climbing, something is wrong—low refrigerant, failing compressors, or auxiliary heat running when it should not.'
+  painPoints:
+    - 'Heat pump not heating or cooling, leaving your home uncomfortable'
+    - 'Excessive ice building up on the outdoor unit'
+    - 'High energy bills despite normal use patterns'
+    - 'Strange noises or unusual operating cycles'
+    - 'Uncertainty about the complexity and cost of heat pump repairs'
 
-approach:
+solutionApproach:
   headline: 'Heat Pump Experts Who Understand the Technology'
-  description: 'Heat pumps are more complex than traditional furnaces or ACs. Our technicians receive ongoing training on heat pump diagnostics, refrigerant circuits, and defrost systems. We find the actual problem—not just the symptom—so your repair lasts.'
-  quote: 'Heat pumps require specialized knowledge. A refrigerant leak in a heat pump affects both heating and cooling. We diagnose completely before recommending any repair.'
-  quotePerson: 'Paul Palmer, Owner'
+  description: 'Heat pumps are more complex than traditional furnaces or ACs. Our technicians receive ongoing training on heat pump diagnostics, refrigerant circuits, and defrost systems. We find the actual problem—not just the symptom—so your repair lasts. Heat pumps require specialized knowledge because a refrigerant leak affects both heating and cooling. We diagnose completely before recommending any repair.'
+  differentiators:
+    - 'Specialized heat pump diagnostic training and expertise'
+    - 'Refrigerant circuit and defrost system knowledge'
+    - 'Thorough diagnosis to find root causes, not just symptoms'
+    - '90-day guarantee on all heat pump repairs'
+    - 'Honest assessment of repair versus replacement economics'
+    - 'Experience with all major heat pump brands and models'
 
 processSteps:
   - step: 1

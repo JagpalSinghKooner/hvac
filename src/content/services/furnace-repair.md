@@ -22,22 +22,26 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problems:
-  - title: 'No Heat in Freezing Weather'
-    description: 'A furnace breakdown when temperatures drop below zero puts your family at risk. Pipes can freeze, causing thousands in water damage. Every hour without heat matters.'
-    icon: 'emergency'
-  - title: 'Strange Noises or Smells'
-    description: 'Banging, squealing, or rattling sounds indicate mechanical failure. Burning or rotten egg smells can signal dangerous gas leaks or electrical problems that require immediate attention.'
-    icon: 'warning'
-  - title: 'Furnace Running But No Warmth'
-    description: 'When your furnace runs constantly but your home stays cold, you are wasting money on fuel while getting no benefit. This often indicates blower motor issues, ductwork problems, or thermostat failures.'
-    icon: 'temperature'
+problemStatement:
+  headline: 'When Your Furnace Stops Working'
+  description: 'A furnace breakdown when temperatures drop below zero puts your family at risk. Pipes can freeze, causing thousands in water damage. Strange noises like banging or squealing indicate mechanical failure, while burning or rotten egg smells can signal dangerous gas leaks. When your furnace runs constantly but your home stays cold, you are wasting money on fuel while getting no benefit.'
+  painPoints:
+    - 'No heat in freezing weather putting your family and home at risk'
+    - 'Banging, squealing, or rattling sounds indicating mechanical failure'
+    - 'Burning or rotten egg smells signaling potential gas leaks or electrical issues'
+    - 'Furnace running constantly but delivering no warmth'
+    - 'Uncertainty about repair costs and whether repair makes sense versus replacement'
 
-approach:
+solutionApproach:
   headline: 'Diagnose First, Repair Right'
-  description: 'Our technicians arrive with fully stocked trucks and decades of experience. We diagnose the actual problem—not just the symptom—before recommending any repair. You get a clear explanation of what is wrong, what it will cost to fix, and whether repair makes sense versus replacement. No pressure, no upselling, just honest advice.'
-  quote: 'Most furnace problems have a straightforward fix. Our job is to find it fast and get your heat back on—not sell you equipment you do not need.'
-  quotePerson: 'Paul Palmer, Owner'
+  description: 'Our technicians arrive with fully stocked trucks and decades of experience. We diagnose the actual problem—not just the symptom—before recommending any repair. You get a clear explanation of what is wrong, what it will cost to fix, and whether repair makes sense versus replacement. No pressure, no upselling, just honest advice. Most furnace problems have a straightforward fix. Our job is to find it fast and get your heat back on—not sell you equipment you do not need.'
+  differentiators:
+    - 'Fully stocked service trucks for most same-day repairs'
+    - 'Upfront diagnostic fee applied to repair cost if you proceed'
+    - 'Honest assessment of repair versus replacement economics'
+    - 'No-pressure service—we explain options and let you decide'
+    - '90-day guarantee on all repairs'
+    - 'TSSA-licensed technicians with decades of combined experience'
 
 processSteps:
   - step: 1

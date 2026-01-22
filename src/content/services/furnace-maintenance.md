@@ -22,22 +22,26 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problems:
-  - title: 'Unexpected Mid-Winter Failures'
-    description: 'Furnaces rarely fail with warning. A breakdown at -20°C means emergency repair costs, frozen pipes, and a cold house. Annual maintenance catches failing components before they strand you.'
-    icon: 'warning'
-  - title: 'Rising Energy Bills'
-    description: 'A dirty furnace works harder to produce the same heat. Clogged filters, dirty burners, and worn parts can increase your heating costs by 15-30% without any visible symptoms.'
-    icon: 'cost'
-  - title: 'Carbon Monoxide Risk'
-    description: 'Cracked heat exchangers can leak deadly carbon monoxide into your home. This invisible, odorless gas kills dozens of Canadians each year. Annual inspection is your best protection.'
-    icon: 'safety'
+problemStatement:
+  headline: 'Preventing Furnace Failures Before They Happen'
+  description: 'Furnaces rarely fail with warning. A breakdown at -20°C means emergency repair costs, frozen pipes, and a cold house. A dirty furnace works harder to produce the same heat—clogged filters, dirty burners, and worn parts can increase your heating costs by 15-30% without any visible symptoms. Cracked heat exchangers can leak deadly carbon monoxide into your home, an invisible, odorless gas that kills dozens of Canadians each year.'
+  painPoints:
+    - 'Unexpected mid-winter failures that leave your family in the cold'
+    - 'Emergency repair costs that are 3-4x higher than preventive maintenance'
+    - 'Energy bills rising 15-30% due to dirty or worn components'
+    - 'Carbon monoxide risk from cracked heat exchangers'
+    - 'Shortened equipment lifespan from lack of regular care'
 
-approach:
+solutionApproach:
   headline: 'Comprehensive Tune-Up, Not Just a Filter Change'
-  description: 'Our 21-point furnace maintenance covers every component that affects safety, efficiency, and reliability. We clean what needs cleaning, adjust what needs adjusting, and identify parts that are wearing out before they fail. You get a detailed report with photos documenting the condition of your equipment.'
-  quote: 'A $150 tune-up today prevents a $500 emergency repair in January. It is the smartest investment a homeowner can make.'
-  quotePerson: 'Paul Palmer, Owner'
+  description: 'Our 21-point furnace maintenance covers every component that affects safety, efficiency, and reliability. We clean what needs cleaning, adjust what needs adjusting, and identify parts that are wearing out before they fail. You get a detailed report with photos documenting the condition of your equipment. A tune-up today prevents emergency repairs in January—it is the smartest investment a homeowner can make.'
+  differentiators:
+    - '21-point inspection covering safety, efficiency, and reliability'
+    - 'Detailed photo report documenting equipment condition'
+    - 'Carbon monoxide testing and heat exchanger inspection'
+    - 'Priority scheduling for maintenance plan members'
+    - 'Parts and labour discounts on any needed repairs'
+    - 'Annual reminder program so you never miss a tune-up'
 
 processSteps:
   - step: 1

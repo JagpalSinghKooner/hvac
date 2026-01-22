@@ -22,22 +22,26 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problems:
-  - title: 'Old Boiler Wasting Fuel'
-    description: 'Boilers from the 1990s and earlier typically operate at 65-80% efficiency. That means 20-35% of your heating dollars go straight up the flue. Modern condensing boilers recover that waste heat.'
-    icon: 'cost'
-  - title: 'Frequent Repairs Adding Up'
-    description: 'When you are calling for boiler repairs every winter, the costs accumulate fast. A 20-year-old boiler often costs more to keep running than to replace with a reliable new system.'
-    icon: 'warning'
-  - title: 'Inconsistent Heat and Comfort'
-    description: 'Aging boilers struggle to maintain even temperatures. Hot spots, cold spots, and radiators that never quite warm up indicate a system past its prime.'
-    icon: 'temperature'
+problemStatement:
+  headline: 'When Your Boiler Shows Its Age'
+  description: 'Boilers from the 1990s and earlier typically operate at 65-80% efficiency—that means 20-35% of your heating dollars go straight up the flue. When you are calling for boiler repairs every winter, the costs accumulate fast. A 20-year-old boiler often costs more to keep running than to replace. Aging boilers struggle to maintain even temperatures, with hot spots, cold spots, and radiators that never quite warm up.'
+  painPoints:
+    - 'Old boilers wasting 20-35% of fuel costs through inefficiency'
+    - 'Frequent repairs adding up to more than replacement would cost'
+    - 'Inconsistent heat delivery with hot and cold spots throughout the home'
+    - 'Uncertainty about proper sizing and complexity of hydronic systems'
+    - 'Outdated equipment that no longer meets modern efficiency standards'
 
-approach:
+solutionApproach:
   headline: 'Properly Sized for Even, Efficient Heat'
-  description: 'We calculate your home heat load to ensure your new boiler is sized correctly. Oversized boilers cycle too frequently, reducing efficiency and comfort. Undersized boilers run constantly without delivering adequate heat. Our TSSA-certified installers handle everything from the boiler itself to radiators, piping, and controls.'
-  quote: 'A boiler installation is more complex than a furnace. It involves water, pressure, venting, and often decades-old piping. Experience matters—we have been doing this since 1992.'
-  quotePerson: 'Paul Palmer, Owner'
+  description: 'We calculate your home heat load to ensure your new boiler is sized correctly. Oversized boilers cycle too frequently, reducing efficiency and comfort. Undersized boilers run constantly without delivering adequate heat. Our TSSA-certified installers handle everything from the boiler itself to radiators, piping, and controls. A boiler installation is more complex than a furnace—it involves water, pressure, venting, and often decades-old piping. Experience matters, and we have been doing this since 1992.'
+  differentiators:
+    - 'Proper heat load calculation for right-sizing—not guesswork'
+    - 'TSSA-certified installers experienced with hydronic systems'
+    - '10-year parts and labour warranty on every installation'
+    - 'Complete system design including radiators, piping, and controls'
+    - 'Condensing boiler expertise for maximum efficiency'
+    - 'Rebate application assistance for available incentives'
 
 processSteps:
   - step: 1

@@ -22,22 +22,26 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problems:
-  - title: 'No Heat from Your Boiler'
-    description: 'When your boiler fails in winter, your entire heating system stops. No hot water to radiators means no heat anywhere in your home. With temperatures below freezing, this becomes urgent fast.'
-    icon: 'emergency'
-  - title: 'Leaking or Pressure Problems'
-    description: 'Water leaks around your boiler or pressure gauge readings outside normal range indicate serious issues. Left unaddressed, leaks can cause water damage and pressure problems can be dangerous.'
-    icon: 'warning'
-  - title: 'Strange Noises from the Boiler'
-    description: 'Banging, kettling, or gurgling sounds indicate air in the system, circulation problems, or mineral buildup. These issues reduce efficiency and can lead to component failure.'
-    icon: 'alert'
+problemStatement:
+  headline: 'When Your Boiler Needs Repair'
+  description: 'When your boiler fails in winter, your entire heating system stops—no hot water to radiators means no heat anywhere in your home. Water leaks around your boiler or pressure gauge readings outside normal range indicate serious issues that can cause water damage. Banging, kettling, or gurgling sounds indicate air in the system, circulation problems, or mineral buildup that reduces efficiency and can lead to component failure.'
+  painPoints:
+    - 'No heat from your boiler when temperatures drop below freezing'
+    - 'Water leaks around the boiler threatening property damage'
+    - 'Pressure problems that can be dangerous if left unaddressed'
+    - 'Banging, kettling, or gurgling sounds indicating system issues'
+    - 'Uncertainty about repair costs and complexity of hydronic systems'
 
-approach:
+solutionApproach:
   headline: 'TSSA-Certified Expertise for Complex Systems'
-  description: 'Boilers involve gas, water, pressure, and electrical systems working together. Our TSSA-certified technicians understand these complex interactions. We diagnose thoroughly before recommending repairs, and we explain your options honestly—including when replacement makes more sense.'
-  quote: 'Boiler repair requires specialized knowledge. Pressure, water chemistry, and venting all interact. We have been repairing boilers for over 30 years—we have seen every problem.'
-  quotePerson: 'Paul Palmer, Owner'
+  description: 'Boilers involve gas, water, pressure, and electrical systems working together. Our TSSA-certified technicians understand these complex interactions. We diagnose thoroughly before recommending repairs, and we explain your options honestly—including when replacement makes more sense. Boiler repair requires specialized knowledge because pressure, water chemistry, and venting all interact. We have been repairing boilers for over 30 years—we have seen every problem.'
+  differentiators:
+    - 'TSSA-certified technicians specializing in hydronic systems'
+    - 'Thorough diagnosis before recommending any repairs'
+    - 'Honest assessment of repair versus replacement economics'
+    - '90-day guarantee on all boiler repairs'
+    - 'Experience with all boiler makes and models since 1992'
+    - 'Fully stocked trucks for most common boiler repairs'
 
 processSteps:
   - step: 1

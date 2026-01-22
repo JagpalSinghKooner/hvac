@@ -22,22 +22,26 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problems:
-  - title: 'Year-Round Wear and Tear'
-    description: 'Unlike furnaces or ACs that rest half the year, heat pumps run in every season. This continuous operation means faster wear on components—making regular maintenance even more critical.'
-    icon: 'warning'
-  - title: 'Efficiency Degradation'
-    description: 'Heat pumps can lose 10-25% efficiency over time without proper maintenance. Dirty coils, low refrigerant, and worn parts force the system to work harder, costing you more every month.'
-    icon: 'cost'
-  - title: 'Warranty Voiding Risk'
-    description: 'Most heat pump manufacturers require proof of annual maintenance to honor warranty claims. Skipping maintenance could leave you paying for repairs that should be covered.'
-    icon: 'document'
+problemStatement:
+  headline: 'Protecting Your Year-Round Investment'
+  description: 'Unlike furnaces or ACs that rest half the year, heat pumps run in every season—this continuous operation means faster wear on components, making regular maintenance even more critical. Heat pumps can lose 10-25% efficiency over time without proper maintenance as dirty coils, low refrigerant, and worn parts force the system to work harder. Most heat pump manufacturers require proof of annual maintenance to honor warranty claims—skipping maintenance could leave you paying for repairs that should be covered.'
+  painPoints:
+    - 'Year-round wear and tear from continuous operation'
+    - 'Efficiency degradation of 10-25% without regular service'
+    - 'Rising energy costs as the system works harder'
+    - 'Warranty voiding risk if maintenance documentation is missing'
+    - 'Shorter equipment lifespan without professional care'
 
-approach:
+solutionApproach:
   headline: 'Complete Care for Your Year-Round System'
-  description: 'Heat pumps need more attention than single-season equipment. Our bi-annual service covers everything that affects heating and cooling performance—coils, refrigerant, defrost systems, and reversing valves. We document everything for warranty compliance.'
-  quote: 'A heat pump that runs all year needs service twice a year. Spring for cooling, fall for heating. It is the only way to get the efficiency and lifespan you paid for.'
-  quotePerson: 'Paul Palmer, Owner'
+  description: 'Heat pumps need more attention than single-season equipment. Our bi-annual service covers everything that affects heating and cooling performance—coils, refrigerant, defrost systems, and reversing valves. We document everything for warranty compliance. A heat pump that runs all year needs service twice a year—spring for cooling, fall for heating. It is the only way to get the efficiency and lifespan you paid for.'
+  differentiators:
+    - 'Bi-annual service covering both heating and cooling modes'
+    - 'Refrigerant charge verification every visit'
+    - 'Defrost system and reversing valve testing'
+    - 'Detailed documentation for warranty compliance'
+    - 'Priority scheduling and repair discounts for maintenance plan members'
+    - 'Specialized training on heat pump systems and diagnostics'
 
 processSteps:
   - step: 1
