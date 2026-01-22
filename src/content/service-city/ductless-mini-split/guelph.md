@@ -16,6 +16,19 @@ problem:
 solution:
   headline: 'Ductless Solutions for Heritage Homes Without Compromising Character'
   description: 'Guelph''s downtown limestone homes and century properties often lack ductwork, making traditional central systems impractical or invasive. We design ductless mini-split placements that deliver even heating and cooling without visible equipment dominating your historic interiors. Our installations work within heritage preservation guidelines while providing modern comfort control. You get climate control that respects your home''s character, not installations that require tearing out original walls.'
+benefits:
+  - title: 'Heritage Home Installation Expertise'
+    description: 'We have installed ductless systems in Guelph''s heritage homes for over 15 years, before they were common in Ontario. We know placement strategies that preserve original architecture.'
+    icon: 'home'
+  - title: '10-Year Parts and Labour Warranty'
+    description: 'We guarantee every ductless installation with 10 years of parts and labour coverage. If anything goes wrong with your installation, we fix it at no cost to you.'
+    icon: 'shield'
+  - title: 'Cold Climate Performance Verified'
+    description: 'We only install ductless systems rated for -25°C operation, proven in Guelph winters. Your system heats reliably when temperatures drop below zero.'
+    icon: 'award'
+  - title: 'Multi-Zone Design for Century Homes'
+    description: 'We design ductless systems for Guelph''s century homes with room layout challenges and no ductwork. You get even heating and cooling without visible equipment dominating interiors.'
+    icon: 'star'
 context: |
   Guelph's eclectic mix of architectural styles makes ductless mini splits an ideal heating and cooling solution for many homeowners. The historic stone homes in the Ward and Downtown area often lack ductwork entirely, and retrofitting traditional HVAC would damage original plaster walls and heritage features. Mini splits provide efficient climate control without invasive installation. Many University of Guelph area properties have been converted from single-family homes to multi-unit rentals, where zone control allows individual temperature preferences in each unit. The city's commitment to sustainability aligns perfectly with mini split technology, as these systems achieve SEER ratings up to 30 and qualify for various rebate programs. South End additions and sunroom conversions are particularly well-suited for ductless systems, as extending existing ductwork often proves impractical. Our Guelph technicians regularly install mini splits in Kortright Hills home offices, Exhibition Park basement conversions, and St. Patrick's Ward attic bedrooms where traditional heating falls short.
 proof:

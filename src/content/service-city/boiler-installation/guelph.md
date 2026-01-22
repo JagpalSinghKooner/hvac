@@ -16,6 +16,19 @@ problem:
 solution:
   headline: 'Boiler Systems Designed for Guelph''s Heritage and Modern Homes'
   description: 'Guelph''s mix of heritage limestone homes and modern builds requires different boiler approaches. We match boiler capacity and distribution systems to your home''s heating method, whether cast-iron radiators or modern radiant floors. Our installations respect heritage home constraints while delivering modern efficiency and control. TSSA-certified installation ensures safety compliance and warranty protection. You get reliable heat distribution designed for how your specific home was built.'
+benefits:
+  - title: 'Heritage Home Expertise'
+    description: 'We have installed boilers in Guelph''s heritage limestone homes for 30 years, understanding narrow basements and preservation requirements. Your installation respects original architecture.'
+    icon: 'home'
+  - title: '10-Year Parts and Labour Warranty'
+    description: 'We guarantee every boiler installation with 10 years of parts and labour coverage. If anything goes wrong with your installation, we fix it at no cost to you.'
+    icon: 'shield'
+  - title: 'TSSA Certification and Permit Handling'
+    description: 'We handle all TSSA permitting and inspections for your boiler installation. Your system passes inspection the first time because we follow code exactly.'
+    icon: 'check-circle'
+  - title: 'Guelph Water Condition Adaptation'
+    description: 'We account for Guelph''s water hardness when specifying boilers and water treatment. Hard water damages boilers over time. We prevent that from day one.'
+    icon: 'award'
 context: |
   Guelph's historic downtown core and established neighbourhoods like the Ward, St. Patrick's Ward, and Exhibition Park feature numerous century homes where boiler systems with radiators remain the preferred heating method. These heritage properties often have original cast iron radiators that homeowners wish to preserve, making boiler replacement rather than full system conversion the logical choice. The stone and brick construction common in Old University and Brooklyn-College Hill provides excellent thermal mass that pairs beautifully with radiant heat distribution. Many Guelph homeowners appreciate the quiet, even warmth that boilers provide compared to forced air systems, particularly in these older homes with plaster walls and hardwood floors where ductwork installation would be disruptive and costly.
 proof:

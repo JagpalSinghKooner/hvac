@@ -16,6 +16,19 @@ problem:
 solution:
   headline: 'Cold-Climate Heat Pumps Proven in Guelph''s Winters'
   description: 'We install only cold-climate heat pump models rated for Ontario winter performance, not standard units that fail below freezing. Thirty years in Guelph means we know which manufacturers deliver on their cold-weather claims and which don''t. Our installations include proper backup heat sizing and refrigerant line insulation for Guelph''s temperature swings. You get a heat pump system that works reliably at minus 25°C, not just on moderate days.'
+benefits:
+  - title: 'Cold Climate Performance Guarantee'
+    description: 'We only install heat pumps rated for -25°C operation because we have seen which models fail in Guelph winters. If your heat pump cannot maintain temperature, we make it right.'
+    icon: 'shield'
+  - title: 'Provincial and Utility Rebate Coordination'
+    description: 'We handle both Enbridge rebates and provincial programs, submitting all paperwork on your behalf. You get maximum rebates without navigating multiple application processes.'
+    icon: 'check-circle'
+  - title: '10-Year Parts and Labour Warranty'
+    description: 'We guarantee every heat pump installation with 10 years of parts and labour coverage. If anything goes wrong, we fix it at no cost to you.'
+    icon: 'award'
+  - title: 'Guelph-Proven Equipment Selection'
+    description: 'We have installed heat pumps in Guelph for over a decade, tracking which models perform reliably in this climate. Your equipment is chosen based on local performance data, not sales incentives.'
+    icon: 'star'
 context: |
   Guelph's commitment to environmental sustainability makes it one of Ontario's most heat pump-friendly communities. The city's Community Energy Initiative actively promotes heat pump adoption, and Guelph Hydro (now Alectra Utilities) offers competitive time-of-use rates that maximize heat pump savings. Guelph's climate sees winter temperatures regularly dropping to -15°C to -20°C, making cold-climate heat pumps essential—our installations are rated to -25°C and beyond. Older homes in the Ward, Downtown, and St. Patrick's Ward benefit significantly from ductless mini-split options, while newer developments in the South End and Hanlon Creek Business Park are ideal for central ducted systems. Guelph homeowners typically see 35-45% reductions in heating costs when switching from natural gas, with the Canada Greener Homes Grant providing up to $7,100 to offset installation costs. The university community has driven strong demand for efficient, eco-friendly heating solutions across all neighborhoods.
 proof:

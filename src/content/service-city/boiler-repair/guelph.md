@@ -16,6 +16,19 @@ problem:
 solution:
   headline: 'Boiler Repair Experience Across Guelph''s Diverse Housing Stock'
   description: 'Heritage home boilers present different challenges than modern systems, from managing cast-iron radiator distribution to working around original home features. We service boilers across Guelph''s entire housing spectrum and understand the repair complexities each era presents. Our diagnostics identify whether problems stem from the boiler itself or distribution system issues. You get repairs that address actual failures, not guesswork that wastes money.'
+benefits:
+  - title: 'Same-Day Service in Guelph'
+    description: 'Headquartered at 25 Clearview St means we reach your home the same day for boiler repairs, critical in winter. Local customers get priority over distant service areas.'
+    icon: 'clock'
+  - title: 'Repair Warranty with Replacement Credit'
+    description: 'Repairs are covered for 90 days. If the same issue recurs, we credit your repair cost toward boiler replacement. You do not pay twice for the same problem.'
+    icon: 'shield'
+  - title: 'Heritage System Knowledge'
+    description: 'We have repaired boilers in Guelph''s heritage homes for 30 years, knowing the quirks of older systems and tight installation spaces. We diagnose issues others miss.'
+    icon: 'wrench'
+  - title: 'Water Quality Inspection Included'
+    description: 'We check water treatment during every boiler repair. Hard water causes scale buildup that kills boilers. We catch problems before they become expensive failures.'
+    icon: 'star'
 context: |
   Guelph's historic downtown and established neighbourhoods like the Ward, St. George's Park, and Exhibition Park feature many homes built between 1880 and 1960 that rely on hydronic boiler heating systems. These older properties often have cast iron radiators fed by boilers that have served faithfully for decades. Common issues we encounter in Guelph include aging circulator pumps, corroded expansion tanks, and pressure relief valve failures. The limestone-heavy water in this region accelerates mineral buildup inside boiler heat exchangers, reducing efficiency and causing kettling sounds. University of Guelph area rentals frequently have boiler systems that see heavy use during the academic year. Emergency boiler repair is critical during Guelph's cold winters when temperatures regularly drop below minus twenty degrees, making a functioning heating system essential for home safety and preventing frozen pipes.
 proof:

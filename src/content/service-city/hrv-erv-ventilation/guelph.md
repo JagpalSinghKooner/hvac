@@ -16,6 +16,19 @@ problem:
 solution:
   headline: 'Ventilation Systems That Recover Heat While Exchanging Stale Air'
   description: 'Modern Guelph homes built to newer energy standards trap indoor air, requiring mechanical ventilation for air quality. We install heat recovery or energy recovery ventilators that bring fresh outdoor air in while recovering heating or cooling energy from exhaust air. System sizing accounts for your home''s occupancy and square footage. You get fresh air continuously without the energy penalty of opening windows in Guelph''s temperature extremes.'
+benefits:
+  - title: 'Balanced for Guelph Climate'
+    description: 'We balance HRV/ERV systems for Guelph''s cold, humid climate, recovering heat in winter and managing moisture year-round. Generic settings waste energy and create humidity problems.'
+    icon: 'home'
+  - title: '10-Year Parts and Labour Warranty'
+    description: 'We guarantee every HRV/ERV installation with 10 years of parts and labour coverage. If anything goes wrong with your installation, we fix it at no cost to you.'
+    icon: 'shield'
+  - title: 'Fresh Air Without Heat Loss'
+    description: 'We size HRV/ERV systems to provide continuous fresh air while recovering 70-90% of heat from exhausted air. You get ventilation without heating penalties.'
+    icon: 'award'
+  - title: 'Humidity Control Integrated'
+    description: 'We integrate ERV systems with your HVAC to control both temperature and humidity, critical in Guelph''s humid summers. You avoid mold and moisture damage from poor ventilation.'
+    icon: 'star'
 context: |
   Guelph has emerged as a leader in sustainable building practices, with the city's commitment to becoming a net-zero community by 2050 driving demand for energy-efficient ventilation solutions. The airtight construction standards in newer developments like Clair Hills, South End, and the revitalized Downtown core create ideal conditions for HRV and ERV systems. These tightly sealed homes trap indoor pollutants, cooking odours, and excess moisture without proper mechanical ventilation. Historic stone homes in the Ward and older properties near the University of Guelph often undergo energy retrofits that include improved insulation and air sealing, making fresh air ventilation essential. The Speed River valley's humidity levels fluctuate significantly between seasons, requiring ERV systems that manage moisture transfer effectively. Our Guelph installations consistently meet Ontario Building Code requirements for continuous ventilation while recovering up to 80% of heating energy that would otherwise be lost through traditional exhaust fans.
 proof:

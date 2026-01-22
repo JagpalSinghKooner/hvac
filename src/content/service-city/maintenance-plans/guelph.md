@@ -16,6 +16,19 @@ problem:
 solution:
   headline: 'Scheduled HVAC Maintenance Based on What Actually Extends Equipment Life'
   description: 'Our maintenance plans focus on service procedures that prevent premature failure, not unnecessary upselling. Thirty years servicing equipment in Guelph''s climate shows which maintenance tasks matter and which don''t. We schedule service before heating and cooling seasons when breakdowns are most disruptive and contractors hardest to book. You get equipment longevity without paying for make-work services designed to generate revenue.'
+benefits:
+  - title: 'Scheduled Before Peak Seasons'
+    description: 'We schedule your furnace maintenance in fall and AC maintenance in spring, before breakdowns happen and contractors are hard to book. You avoid emergency calls when systems are most critical.'
+    icon: 'clock'
+  - title: 'Priority Emergency Service'
+    description: 'Maintenance plan customers get same-day emergency service in Guelph, ahead of non-plan customers. When your system fails, you are first in line.'
+    icon: 'shield'
+  - title: 'Extended Equipment Life'
+    description: 'Regular maintenance extends furnace and AC life by 3-5 years on average, based on 30 years of Guelph installations. Preventive service costs less than premature replacement.'
+    icon: 'wrench'
+  - title: 'No Surprise Breakdowns'
+    description: 'We catch failing components during maintenance visits before they cause breakdowns. You replace parts on your schedule, not during heat waves or cold snaps.'
+    icon: 'check-circle'
 context: |
   Guelph homeowners face unique HVAC maintenance challenges due to the city's diverse housing stock and variable climate conditions. Historic neighbourhoods like the Ward, St. George's Park, and Exhibition Park contain homes spanning over a century of construction, each with different heating and cooling systems requiring specialized attention. The University of Guelph area sees high tenant turnover in rental properties, making scheduled maintenance essential to catch problems before they escalate. Guelph's limestone-rich water contributes to mineral buildup in humidifiers and boiler systems, requiring regular cleaning during tune-ups. The city experiences significant temperature swings between seasons, with humid summers demanding air conditioner maintenance and harsh winters putting furnaces through extended operation. Many Guelph residents have invested in high-efficiency equipment to reduce their environmental footprint, and these systems require precise annual calibration to maintain their efficiency ratings and warranty coverage.
 proof:

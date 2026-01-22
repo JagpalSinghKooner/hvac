@@ -16,6 +16,19 @@ problem:
 solution:
   headline: 'AC Diagnostics That Find Root Causes, Not Symptoms'
   description: 'We diagnose why your AC failed, not just what stopped working. Low refrigerant means a leak somewhere; we find and fix it rather than topping up the charge and sending you a bill next season. Our experience with Guelph''s climate patterns helps identify whether problems stem from equipment age, improper sizing, or maintenance neglect. You get honest guidance on repair economics vs. replacement timing.'
+benefits:
+  - title: 'Same-Day Repair in Guelph'
+    description: 'We reach your Guelph home the same day for AC repairs during heat waves, not next week. Being local at 25 Clearview St means faster response when you need cooling most.'
+    icon: 'clock'
+  - title: 'Refrigerant Leak Detection Guarantee'
+    description: 'If we repair a refrigerant leak and it recurs within 90 days, we fix it at no charge. You do not pay for repeated leak repairs on the same system.'
+    icon: 'shield'
+  - title: 'Honest Repair vs Replace Guidance'
+    description: 'After 30 years repairing ACs in Guelph, we know when repair makes sense and when replacement saves money long term. We give you both options with real numbers.'
+    icon: 'wrench'
+  - title: 'Humidity Problem Diagnosis'
+    description: 'We diagnose why your AC is not removing humidity, common in Guelph summers. Oversized systems or low airflow cause humidity problems. We find and fix root causes.'
+    icon: 'home'
 context: |
   Guelph's humid continental climate brings intense summer heat waves that push air conditioning systems to their limits, particularly during July and August when temperatures regularly climb into the high 30s with humidity. The Old University area and downtown core feature many heritage homes from the 1800s that have been retrofitted with central air systems, often requiring specialized repair knowledge for older ductwork configurations. Newer subdivisions in the south end near the Hanlon Expressway and developments around Guelph Lake have modern high-efficiency units that demand technicians certified in current refrigerant standards. The Westminster Woods and Kortright Hills neighbourhoods see high demand for emergency AC repairs during heat waves, especially from families with young children and seniors who cannot safely endure extended periods without cooling. Common issues we address include compressor failures from overworked systems, refrigerant leaks in aging equipment, and frozen evaporator coils caused by restricted airflow in dusty older homes.
 proof:

@@ -16,6 +16,19 @@ problem:
 solution:
   headline: 'Heat Pump Troubleshooting That Understands Cold-Climate Systems'
   description: 'Cold-climate heat pumps operate differently than standard models, requiring diagnostic expertise most HVAC techs lack. We service what we install and understand the defrost cycle issues, refrigerant charge requirements, and backup heat integration unique to cold-climate units. Our technicians diagnose whether problems stem from equipment failure or installation errors. You get accurate repairs that restore full heating capacity, not temporary fixes that fail next winter.'
+benefits:
+  - title: 'Same-Day Service in Guelph'
+    description: 'Headquartered at 25 Clearview St means we reach your home the same day, critical when heat pumps struggle in cold snaps. You get priority because you are local.'
+    icon: 'clock'
+  - title: 'Cold Weather Expertise'
+    description: 'We have diagnosed heat pump issues through 30 Guelph winters, including -25°C cold snaps. We know why heat pumps lose capacity in extreme cold and how to restore performance.'
+    icon: 'wrench'
+  - title: 'Repair Warranty with Replacement Credit'
+    description: 'Repairs are covered for 90 days. If the same issue recurs, we credit your repair cost toward replacement. You do not pay twice.'
+    icon: 'shield'
+  - title: 'Backup Heat System Check'
+    description: 'We verify your backup heating works correctly during every heat pump repair. When temperatures drop below heat pump range, you have guaranteed heat.'
+    icon: 'home'
 context: |
   Guelph homeowners rely on heat pumps year-round for efficient heating and cooling, but the city's variable climate can put significant stress on these systems. In neighborhoods like the Ward, South End, and Exhibition Park, we see common issues including defrost cycle failures during cold snaps, refrigerant leaks from thermal cycling, and compressor strain from the humid summers along the Speed River corridor. Many older homes in Downtown Guelph and the historic areas have been retrofitted with ductless mini-split heat pumps, which require specialized repair knowledge. The University of Guelph area sees high demand for emergency repairs during extreme weather when students and residents depend on reliable climate control. Our technicians understand the unique challenges of Guelph's housing stock, from century homes in the Old University to newer builds in the south end, ensuring your heat pump receives expert diagnosis and lasting repairs.
 proof:

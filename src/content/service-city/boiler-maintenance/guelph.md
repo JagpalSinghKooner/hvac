@@ -16,6 +16,19 @@ problem:
 solution:
   headline: 'Boiler Service Across Heritage and Modern Guelph Systems'
   description: 'Boiler maintenance requirements vary significantly between Guelph''s heritage cast-iron systems and modern high-efficiency units. We service both with appropriate expertise, from managing sediment in older boilers to maintaining condensing efficiency in newer models. Our maintenance prevents mid-winter failures and identifies component wear before breakdowns occur. You get heating reliability throughout Guelph''s coldest months.'
+benefits:
+  - title: 'Fall Scheduling Before Heating Season'
+    description: 'We schedule boiler maintenance in September and October, before Guelph''s heating season when contractors are hard to book. Your boiler is ready when temperatures drop.'
+    icon: 'clock'
+  - title: 'Water Treatment Verified'
+    description: 'We test and treat boiler water during every maintenance visit, preventing scale buildup from Guelph''s hard water. Untreated water shortens boiler life by years.'
+    icon: 'wrench'
+  - title: 'Pressure and Safety Controls Tested'
+    description: 'We test pressure relief valves, aquastats, and limit controls during every visit. Failed safety controls cause dangerous operating conditions and expensive damage.'
+    icon: 'shield'
+  - title: 'Efficiency Optimization'
+    description: 'We measure combustion efficiency and adjust as needed during maintenance. Boilers lose efficiency over time without adjustment. We restore peak performance and lower fuel costs.'
+    icon: 'star'
 context: |
   Guelph's historic downtown and established neighborhoods like the Ward, St. Patrick's Ward, and Exhibition Park feature many older homes with hydronic boiler heating systems. These century-old limestone and brick houses rely on well-maintained boilers to handle Guelph's cold winters, where temperatures regularly drop below minus fifteen degrees Celsius. The city's commitment to environmental sustainability through initiatives like the Community Energy Plan means many Guelph homeowners prioritize efficient heating systems. University of Guelph faculty housing and the mature residential areas near the Speed River contain numerous homes where annual boiler maintenance is essential for reliable winter comfort and energy efficiency.
 proof:

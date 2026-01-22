@@ -16,6 +16,19 @@ problem:
 solution:
   headline: 'Air Quality Systems Matched to Guelph''s Seasonal Challenges'
   description: 'Guelph faces spring pollen, summer humidity, and winter dry air issues that affect indoor air quality differently across seasons. We recommend filtration and purification systems based on your specific concerns, whether allergies, asthma, or general air quality improvement. Our installations integrate with existing HVAC systems for whole-home coverage. You get cleaner air throughout your home, not just in rooms with portable units.'
+benefits:
+  - title: 'Filter Replacement on Schedule'
+    description: 'We track your filter replacement schedule and remind you before filters lose effectiveness. Clean filters maintain air quality and protect your HVAC system from damage.'
+    icon: 'clock'
+  - title: 'Duct Integration Verified'
+    description: 'We verify air purifiers integrate correctly with your furnace ductwork, ensuring treated air reaches all rooms. Poor integration leaves some rooms untreated.'
+    icon: 'check-circle'
+  - title: '5-Year Parts and Labour Warranty'
+    description: 'We guarantee every air filtration installation with 5 years of parts and labour coverage. If anything goes wrong, we fix it at no cost to you.'
+    icon: 'shield'
+  - title: 'Guelph Allergen Expertise'
+    description: 'We know the common allergens in Guelph (ragweed, mold from river valley humidity, tree pollen). Your air filtration system is specified to capture the particles that affect you locally.'
+    icon: 'home'
 context: |
   Guelph homeowners face unique indoor air quality challenges throughout the year. The city's tree-lined neighbourhoods in areas like the Old University and Exhibition Park release significant pollen during spring and summer months, triggering allergies for many residents. With the Speed River corridor and numerous green spaces, Guelph enjoys natural beauty but also experiences elevated mould spore counts during humid summer months. Many homes in established neighbourhoods like St. Patrick's Ward and the Ward date back decades, often accumulating dust in older ductwork systems. The University of Guelph area sees high rental turnover, leaving behind pet dander and odours that persist without proper air filtration. Guelph's commitment to environmental sustainability means many residents are increasingly aware of indoor air quality and its impact on family health.
 proof:

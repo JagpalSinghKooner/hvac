@@ -16,6 +16,19 @@ problem:
 solution:
   headline: 'Water Heater Sizing Based on Your Household''s Actual Usage'
   description: 'We size tank water heaters based on your household''s peak demand, not generic square footage estimates. Guelph''s cold groundwater temperatures affect recovery time, which we factor into capacity recommendations. Our installations include proper venting, sediment management access, and code-compliant safety features. You get hot water capacity that matches your family''s needs without paying for excess tank size you never use.'
+benefits:
+  - title: '10-Year Parts and Labour Warranty'
+    description: 'We guarantee every tank water heater installation with 10 years of parts and labour coverage. If anything goes wrong, we fix it at no cost to you.'
+    icon: 'shield'
+  - title: 'Same-Day Replacement in Guelph'
+    description: 'When your water heater fails, we replace it the same day, not next week. Being headquartered at 25 Clearview St means we prioritize Guelph customers.'
+    icon: 'clock'
+  - title: 'Sized for Guelph Water Hardness'
+    description: 'We account for Guelph''s hard water when selecting tank capacity and anode rods. Hard water shortens tank life. We specify equipment that lasts in this water condition.'
+    icon: 'home'
+  - title: 'Expansion Tank Included'
+    description: 'We install expansion tanks on every water heater to protect against pressure buildup, required by code but often skipped. Your installation is done right the first time.'
+    icon: 'check-circle'
 context: |
   Guelph homeowners face unique water heater challenges due to the city's moderately hard water supply drawn from deep aquifers. The mineral content accelerates sediment buildup in tank water heaters, often shortening their lifespan compared to areas with softer water. Many homes in established Guelph neighbourhoods like St. Patrick's Ward and the Ward feature original water heaters from the 1990s or earlier that are well past their expected service life. The University of Guelph area sees high demand for student housing, where reliable hot water is essential for multi-tenant properties. When your water heater fails in Guelph—whether it is a cold February morning or during exam season—waiting days for replacement is not an option. Our technicians understand Guelph's housing stock and water conditions, ensuring proper tank sizing and installation for your specific situation.
 proof:

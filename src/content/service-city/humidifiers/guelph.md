@@ -16,6 +16,19 @@ problem:
 solution:
   headline: 'Whole-Home Humidification Calibrated for Guelph''s Heating Season'
   description: 'Guelph''s cold winters drop indoor humidity to uncomfortable levels once heating systems run continuously. We size whole-home humidifiers to match your home''s air exchange rate and heating system capacity. Installation includes proper drainage, maintenance access, and humidistat placement for accurate control. You get consistent humidity levels throughout winter without over-humidifying and causing condensation problems.'
+benefits:
+  - title: 'Sized for Guelph Winter Dryness'
+    description: 'We size humidifiers for Guelph''s dry winter conditions, not generic guidelines. Your system maintains healthy humidity levels even when outdoor air is below zero.'
+    icon: 'home'
+  - title: 'Hard Water Maintenance Plan'
+    description: 'Guelph''s hard water causes mineral buildup in humidifiers. We include annual maintenance to clean scale deposits and replace pads, keeping your system working correctly.'
+    icon: 'wrench'
+  - title: 'Duct Integration Verified'
+    description: 'We verify humidifiers integrate correctly with your furnace ductwork, ensuring even humidity distribution. Poor integration creates dry zones and wet zones in your home.'
+    icon: 'check-circle'
+  - title: 'Same-Day Service in Guelph'
+    description: 'Headquartered at 25 Clearview St means we service your humidifier the same day when winter dryness becomes uncomfortable. Local customers get priority.'
+    icon: 'clock'
 context: |
   Guelph homeowners understand the challenges of Ontario's harsh winter climate. When temperatures plunge and furnaces run constantly, indoor humidity levels can drop below 20%, creating an uncomfortable and potentially harmful environment. The historic stone homes in the Ward and older properties throughout the Royal City are particularly susceptible to dry air damage, with hardwood floors cracking and antique furniture suffering from moisture loss. Families across Guelph report increased respiratory issues, dry skin, and static electricity during the coldest months. A whole-home humidifier integrated with your existing HVAC system maintains optimal humidity between 35-45%, protecting your home investment while improving health and comfort for your entire household.
 proof:

@@ -16,6 +16,19 @@ problem:
 solution:
   headline: 'Cold-Climate Heat Pump Service That Maintains Winter Heating Capacity'
   description: 'Heat pumps work year-round in Guelph, requiring maintenance attention to both heating and cooling modes. We service defrost cycles, backup heat integration, and refrigerant charge with cold-climate operation in mind. Our technicians verify your heat pump maintains full heating capacity at design temperatures, not just moderate weather performance. You get confidence your system will deliver heat when outdoor temperatures drop to minus 20°C.'
+benefits:
+  - title: 'Fall and Spring Service Schedule'
+    description: 'We service heat pumps twice annually, in fall before heating season and spring before cooling season. Year-round equipment needs year-round attention to perform reliably.'
+    icon: 'clock'
+  - title: 'Cold Weather Performance Check'
+    description: 'We verify defrost cycles and backup heat operation during fall maintenance, ensuring your heat pump performs when Guelph temperatures drop below -10°C.'
+    icon: 'wrench'
+  - title: 'Refrigerant Charge Verified'
+    description: 'We verify refrigerant charge during every maintenance visit. Heat pumps lose charge faster than ACs due to year-round operation. We catch leaks before they cause failures.'
+    icon: 'check-circle'
+  - title: 'Outdoor Unit Protection'
+    description: 'We inspect outdoor units for ice buildup, blocked airflow, and damaged fins, common issues in Guelph winters. Protected units last longer and perform better.'
+    icon: 'shield'
 context: |
   Guelph homeowners have embraced heat pump technology at remarkable rates, driven by the city's strong environmental consciousness and commitment to sustainability. The Royal City's diverse housing stock, from historic stone homes in the downtown core to modern developments in the south end, presents unique maintenance requirements for heat pump systems. Our technicians understand how Guelph's position along the Speed River creates localized humidity patterns that affect outdoor unit performance, particularly during shoulder seasons when heat pumps work hardest transitioning between heating and cooling modes. We've maintained heat pumps throughout Guelph's distinct neighbourhoods, from the tree-lined streets of the Ward to newer installations in the Hanlon Creek area, ensuring each system operates at peak efficiency year-round.
 proof:

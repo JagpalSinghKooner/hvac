@@ -16,6 +16,19 @@ problem:
 solution:
   headline: 'AC Service Calibrated for Guelph''s Humid Summer Performance'
   description: 'Guelph''s humid summers stress air conditioner components differently than dry climates. We service refrigerant charge, condensate drainage, and airflow factors that affect both cooling and dehumidification performance. Pre-season maintenance ensures your AC is ready when the first heat wave hits, not limping along and failing mid-summer. You get reliable cooling capacity when you need it most.'
+benefits:
+  - title: 'Spring Scheduling Before Heat Waves'
+    description: 'We schedule AC maintenance in April and May, before Guelph''s first heat wave when every contractor is booked. Your AC is ready when temperatures climb.'
+    icon: 'clock'
+  - title: 'Refrigerant Charge Verified'
+    description: 'We verify refrigerant charge to manufacturer specifications during every maintenance visit. Low charge kills efficiency and damages compressors. We catch leaks before they become expensive.'
+    icon: 'wrench'
+  - title: 'Condensate Drain Cleared'
+    description: 'We clear condensate drains during every maintenance visit, preventing water damage and overflow shutdowns common in Guelph''s humid summers.'
+    icon: 'check-circle'
+  - title: 'Coil Cleaning for Guelph Pollen'
+    description: 'We clean outdoor coils to remove cottonwood seeds and pollen that clog fins in Guelph springs. Dirty coils reduce capacity by 20-30% and cause compressor failures.'
+    icon: 'home'
 context: |
   Guelph summers bring humid conditions with temperatures regularly climbing into the high 20s and low 30s from June through August. The Speed River valley location creates unique microclimate patterns that can stress cooling systems, particularly in older homes throughout the Ward and St. Patrick's Ward neighbourhoods. Many properties in South End and Exhibition Park feature AC units installed during the building boom of the early 2000s, meaning these systems are now approaching 20 years of service and require diligent maintenance to continue performing efficiently. We recommend scheduling spring tune-ups by mid-April before the University of Guelph graduation season, when many homeowners are preparing for family visits. Common maintenance findings in Guelph include cottonwood seed buildup in condenser coils and limestone-related drain line issues from the local water supply.
 proof:

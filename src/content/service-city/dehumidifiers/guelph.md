@@ -16,6 +16,19 @@ problem:
 solution:
   headline: 'Whole-Home Dehumidification for Guelph''s Humid Summer Conditions'
   description: 'River valley proximity and humid Southern Ontario summers create moisture challenges in Guelph basements and living spaces. We install whole-home dehumidifiers integrated with your HVAC system, not portable units that need constant emptying. Our systems automatically remove excess moisture before it creates mold or comfort problems. You get controlled humidity year-round without managing multiple basement units.'
+benefits:
+  - title: 'Sized for Speed River Valley Humidity'
+    description: 'We size dehumidifiers accounting for Guelph''s proximity to the Speed River, where basement humidity is higher than average. Your system controls moisture in this microclimate.'
+    icon: 'home'
+  - title: 'Condensate Drain Installed Correctly'
+    description: 'We install condensate drains to code, preventing water damage from failed pumps or clogged lines. Incorrect drainage ruins basements. We get it right the first time.'
+    icon: 'check-circle'
+  - title: '5-Year Parts and Labour Warranty'
+    description: 'We guarantee every dehumidifier installation with 5 years of parts and labour coverage. If anything goes wrong with your installation, we fix it at no cost to you.'
+    icon: 'shield'
+  - title: 'Basement Humidity Expertise'
+    description: 'After 30 years solving Guelph basement humidity issues, we know which dehumidifiers work in limestone foundation homes versus newer construction. You get equipment matched to your home.'
+    icon: 'star'
 context: |
   Guelph's older neighbourhoods like the Ward, St. George's Park, and Exhibition Park feature many century homes with stone and rubble foundations that are particularly susceptible to moisture infiltration. The Speed River and Eramosa River valleys create naturally humid conditions during summer months, while the heavy clay soil composition in much of Guelph prevents proper drainage away from foundation walls. Basements in these historic homes often have that persistent musty smell that indicates active mold and mildew growth behind walls and under flooring. University of Guelph area rental properties frequently suffer from inadequate ventilation combined with high occupancy, creating perfect conditions for excess humidity and condensation on windows. The limestone-rich soil also contributes to efflorescence on basement walls where moisture carries mineral deposits through the concrete. Whole-home dehumidification is essential for protecting Guelph homes from the structural damage that unchecked moisture causes over time.
 proof:

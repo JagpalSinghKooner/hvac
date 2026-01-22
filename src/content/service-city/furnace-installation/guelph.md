@@ -16,6 +16,19 @@ problem:
 solution:
   headline: 'Right-Sized Furnace Systems, Installed to Manufacturer Specifications'
   description: 'We start with a proper heat loss calculation for your Guelph home, accounting for insulation levels, window types, and local climate factors. This ensures your new furnace is sized correctly, not guessed based on square footage like many contractors do. Our TSSA-certified installers follow manufacturer specifications exactly, protecting your warranty and ensuring efficient operation. You get a furnace that heats evenly, runs efficiently, and lasts the full expected lifespan.'
+benefits:
+  - title: '10-Year Parts and Labour Warranty'
+    description: 'We guarantee every furnace installation with 10 years of parts and labour coverage. If anything goes wrong with your furnace installation, we fix it at no cost to you.'
+    icon: 'shield'
+  - title: 'Same-Day Service in Guelph'
+    description: 'Headquartered at 25 Clearview St means we reach your Guelph home the same day you call, not next week. You get priority scheduling because you are local, not an afterthought.'
+    icon: 'clock'
+  - title: 'Sized for Guelph Winters'
+    description: 'We have installed furnaces in Guelph through 30 winters, including the -25°C weeks. Your furnace is sized using heat loss calculations specific to your home, not estimations.'
+    icon: 'home'
+  - title: 'Rebate Paperwork Handled'
+    description: 'We complete your Enbridge rebate application and submit it directly. You receive your rebate cheque without chasing paperwork or making phone calls.'
+    icon: 'check-circle'
 context: |
   Guelph's diverse housing stock presents unique heating challenges that require specialized knowledge. The historic Ward neighbourhood features stunning Victorian and Edwardian homes built between 1880-1920, many with original stone foundations and converted coal furnace infrastructure that demands careful modernization. St. Patrick's Ward and the Old University area contain charming century homes with narrow basements and unique ductwork configurations. Meanwhile, newer developments in the south end near Kortright Hills and the growing communities around Hanlon Creek feature modern construction with high-efficiency requirements. Guelph's position at the confluence of the Speed and Eramosa Rivers creates a microclimate with slightly higher humidity levels, making proper furnace sizing critical to prevent short-cycling. Guelph Hydro (now Alectra) customers may qualify for time-of-use rate optimization when pairing a new furnace with a smart thermostat. Enbridge Gas rebates of up to $5,000 are available for qualifying high-efficiency furnace installations.
 proof:

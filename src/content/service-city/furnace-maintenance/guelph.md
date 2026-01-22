@@ -16,6 +16,19 @@ problem:
 solution:
   headline: 'Furnace Service That Catches Problems Before They Become Breakdowns'
   description: 'Annual furnace maintenance identifies wear patterns and efficiency loss before they cause heating failures or safety concerns. We inspect heat exchangers for cracks, test safety controls, verify proper combustion, and clean components that affect efficiency. Our technicians document furnace condition so you understand remaining service life. You get advance warning of necessary repairs or replacement timing, not surprise breakdowns in January.'
+benefits:
+  - title: 'Fall Scheduling Before Cold Snaps'
+    description: 'We schedule furnace maintenance in September and October, before Guelph''s first cold snap when every contractor is booked. Your furnace is ready when temperatures drop.'
+    icon: 'clock'
+  - title: 'Efficiency Verified Annually'
+    description: 'We measure combustion efficiency during every maintenance visit. Furnaces lose 2-4% efficiency per year without maintenance. We restore peak performance.'
+    icon: 'wrench'
+  - title: 'Catch Problems Before Breakdowns'
+    description: 'We identify failing heat exchangers, flame sensors, and blower motors before they cause no-heat calls in January. You replace parts on your schedule, not during emergencies.'
+    icon: 'shield'
+  - title: 'Carbon Monoxide Safety Check'
+    description: 'We test for carbon monoxide during every maintenance visit, ensuring your furnace vents correctly. Cracked heat exchangers and blocked vents are safety hazards we catch early.'
+    icon: 'star'
 context: |
   Guelph homeowners understand the importance of reliable heating through our cold Southern Ontario winters. With the city's diverse housing stock ranging from historic stone homes in the Ward to newer developments in the south end near Kortright Hills, furnace maintenance requirements vary significantly. Many homes in established neighbourhoods like St. Georges Park and Exhibition Park feature furnaces that are 15-20 years old, making annual maintenance critical for extending equipment life. The proximity to the Speed River corridor means homes in areas like Riverside Park can experience higher humidity levels, which affects furnace components. We recommend scheduling maintenance in September or early October before temperatures drop, ensuring your system is optimized for Guelph's typically harsh January and February conditions. Common issues we find during Guelph maintenance visits include dirty flame sensors from hard water deposits, worn blower motor bearings, and cracked heat exchangers in aging units.
 proof:

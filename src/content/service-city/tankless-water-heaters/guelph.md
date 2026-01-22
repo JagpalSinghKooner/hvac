@@ -16,6 +16,19 @@ problem:
 solution:
   headline: 'Tankless Systems Sized for Guelph''s Cold Groundwater Temperatures'
   description: 'Guelph''s groundwater enters homes at 4-8°C in winter, requiring higher BTU capacity than mild climate regions. We size tankless units for worst-case temperature rise scenarios, ensuring adequate hot water flow even in January. Our installations include proper gas line sizing and venting for full-capacity operation. You get endless hot water that actually delivers on the tankless promise, not units that struggle in winter.'
+benefits:
+  - title: '10-Year Parts and Labour Warranty'
+    description: 'We guarantee every tankless installation with 10 years of parts and labour coverage. If anything goes wrong with your installation, we fix it at no cost to you.'
+    icon: 'shield'
+  - title: 'Hard Water Treatment Specified'
+    description: 'Guelph''s hard water kills tankless heaters without proper treatment. We specify descaling schedules and water softening based on 30 years of local installations.'
+    icon: 'home'
+  - title: 'Gas Line Sizing Verified'
+    description: 'Tankless heaters require higher gas flow than tank models. We verify your gas line capacity and upgrade if needed. Undersized lines cause performance problems and failures.'
+    icon: 'check-circle'
+  - title: 'Guelph Climate Performance Guarantee'
+    description: 'We account for Guelph''s cold groundwater temperatures (4-8°C in winter) when sizing tankless heaters. Your system delivers hot water even when input water is near freezing.'
+    icon: 'award'
 context: |
   Guelph homeowners increasingly recognize the benefits of tankless water heater technology, particularly in the city's diverse housing stock ranging from historic stone homes in the downtown core to newer subdivisions in the south end. The University of Guelph brings thousands of students and faculty whose rental properties and family homes benefit from endless hot water supply. Guelph's commitment to environmental sustainability through initiatives like the Community Energy Plan aligns perfectly with the energy efficiency of tankless systems. Many larger Victorian-era homes in areas like the Ward have multiple bathrooms that strain traditional tank systems, while newer builds in developments near the Hanlon Expressway often feature smaller mechanical rooms where space-saving tankless units are ideal. Hard water in some Guelph neighbourhoods requires proper descaling maintenance, which we address during installation consultation.
 proof:

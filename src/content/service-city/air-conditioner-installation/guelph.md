@@ -16,6 +16,19 @@ problem:
 solution:
   headline: 'Properly Sized AC That Cools AND Dehumidifies Guelph Homes'
   description: 'We perform cooling load calculations specific to your home''s orientation, insulation, and Guelph''s humid summer conditions. An oversized AC cools quickly but never runs long enough to remove humidity, leaving your home clammy. We size units to handle both temperature and moisture removal. Our installations include proper refrigerant charge verification and airflow testing. You get comfortable indoor conditions, not just cold air.'
+benefits:
+  - title: '10-Year Parts and Labour Warranty'
+    description: 'We guarantee every AC installation with 10 years of parts and labour coverage. If anything goes wrong with your installation, we fix it at no cost to you.'
+    icon: 'shield'
+  - title: 'Sized for Guelph Humidity'
+    description: 'We size AC systems using cooling load calculations that account for Guelph''s humid summers, not contractor estimates. Your system removes humidity and cools efficiently.'
+    icon: 'home'
+  - title: 'Same-Day Service in Guelph'
+    description: 'Being headquartered at 25 Clearview St means we install your AC when you need it, not weeks later when heat waves hit. Local customers get priority scheduling.'
+    icon: 'clock'
+  - title: 'Refrigerant Charge Verified'
+    description: 'We verify refrigerant charge to manufacturer specifications on every installation. Improper charge kills efficiency and shortens equipment life. We get it right the first time.'
+    icon: 'check-circle'
 context: |
   Guelph's humid continental climate brings hot, muggy summers with temperatures regularly exceeding 30°C and humidity levels that make it feel even warmer. The city's diverse housing stock—from century homes in the Ward and Downtown heritage district to modern developments in the south end near the Hanlon Expressway—requires tailored AC installation approaches. Older stone and brick homes in areas like St. Patrick's Ward and Exhibition Park often need careful ductwork assessment, while newer subdivisions in Westminster Woods and Kortright Hills typically accommodate standard central air systems. The Speed River valley creates localized humidity pockets that intensify cooling demands. Guelph homeowners increasingly seek high-efficiency units to manage summer comfort while aligning with the city's strong environmental values and reducing energy consumption during peak demand periods.
 proof:

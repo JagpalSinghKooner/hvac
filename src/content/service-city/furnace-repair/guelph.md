@@ -16,6 +16,19 @@ problem:
 solution:
   headline: 'Accurate Diagnosis Based on 30 Years of Guelph Furnace Failures'
   description: 'After three decades repairing furnaces across Guelph''s housing stock, we recognize failure patterns most contractors miss. We diagnose the actual problem, not symptoms, and provide honest repair vs. replace guidance based on your furnace''s age and condition. Our technicians carry common parts for Guelph''s most prevalent furnace models, reducing return trips. You get straight answers about whether repair makes financial sense or replacement is the better investment.'
+benefits:
+  - title: 'Fixed Right or Replacement Credit'
+    description: 'If we repair your furnace and it fails again within 90 days, we credit the repair cost toward a new installation. You do not pay twice for the same problem.'
+    icon: 'shield'
+  - title: 'Same-Day Diagnostics in Guelph'
+    description: 'We reach your Guelph home the same day for furnace diagnostics, not next week when temperatures drop further. Being local at 25 Clearview St means faster response.'
+    icon: 'clock'
+  - title: 'Honest Repair vs Replace Guidance'
+    description: 'After 30 years fixing furnaces in Guelph, we know when repair makes sense and when replacement is smarter. We give you the numbers for both options, you decide.'
+    icon: 'wrench'
+  - title: 'Pattern Recognition from Guelph Climate'
+    description: 'We have diagnosed thousands of furnace failures in Guelph winters. We know the failure patterns specific to this climate and find root causes faster than contractors guessing.'
+    icon: 'star'
 context: |
   Guelph's diverse housing stock presents unique furnace repair challenges that our technicians handle daily. The historic stone homes in the Ward and Downtown area often have older heating systems that require specialized diagnostic expertise, while newer developments in the South End and Kortright Hills feature high-efficiency units that demand modern troubleshooting skills. Guelph experiences significant temperature swings during winter months, with the Speed River valley creating localized cold pockets that push furnaces harder than surrounding areas. Common repair calls in Guelph include igniter failures in older homes near the University of Guelph campus, blower motor issues in St. Patrick's Ward properties, and heat exchanger problems in Exhibition Park area residences. Our emergency response teams are strategically positioned to reach any Guelph neighbourhood within 45 minutes, ensuring rapid service when your furnace fails during a cold snap.
 proof:
