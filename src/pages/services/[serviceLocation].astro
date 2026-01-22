@@ -2,7 +2,7 @@
 import { getEntry, getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ServiceHeroSection from '@/components/sections/ServiceHeroSection.astro';
-import LocalTrustOpener from '@/components/sections/LocalTrustOpener.astro';
+import TrustOpenerSection from '@/components/sections/TrustOpenerSection.astro';
 import ProblemSection from '@/components/sections/ProblemSection.astro';
 import SolutionSection from '@/components/sections/SolutionSection.astro';
 import LocalGallerySection from '@/components/sections/LocalGallerySection.astro';
@@ -161,7 +161,7 @@ const savingsData = serviceData.savings
 
   {
     serviceCityData.trustOpener && (
-      <LocalTrustOpener
+      <TrustOpenerSection
         cityName={locationData.title}
         rating={business.reputation.google_rating}
         localStats={serviceCityData.trustOpener}

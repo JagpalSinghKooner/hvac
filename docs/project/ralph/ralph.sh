@@ -99,8 +99,18 @@ STEP 1: Read prd.json and COUNT all stories where \"passes\": false
 
 STEP 2: CRITICAL CHECK
 - If count is 0 (zero stories with passes: false), output <promise>COMPLETE</promise> and STOP
-- If count > 0, proceed to STEP 3
+- If count > 0, proceed to STEP 2.5
 - NEVER output COMPLETE if any story has passes: false
+
+STEP 2.5: IDENTIFY REQUIRED SKILLS (MANDATORY)
+- Read the story's acceptanceCriteria for skill requirements
+- If criteria mentions /frontend-design, run it BEFORE coding
+- If criteria mentions /agent-browser, run it BEFORE marking complete
+- If criteria mentions /vercel-react-best-practices, run it for .tsx files
+- If criteria mentions /web-design-guidelines, run it for .astro files
+- If story involves content/marketing, run /orchestrator FIRST
+- Document which skills you will use for this story
+- NEVER mark passes: true without running ALL required skills
 
 STEP 3: Implement the FIRST story with passes: false
 - Read docs/project/ralph/progress.txt for recent context

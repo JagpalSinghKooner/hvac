@@ -50,6 +50,48 @@ For each requirement in the PRD, create a user story:
 
 ---
 
+## Step 2.5: Validate Skill Requirements (MANDATORY)
+
+Before converting each story, verify skills are in acceptanceCriteria:
+
+| Story Type | REQUIRED in acceptanceCriteria |
+|------------|-------------------------------|
+| UI/Component stories | `/frontend-design`, `/agent-browser` |
+| React (.tsx) stories | `/vercel-react-best-practices` |
+| Astro (.astro) stories | `/web-design-guidelines` |
+| Content/Marketing stories | `/orchestrator` |
+
+**If missing, ADD the skill requirement to acceptanceCriteria before output.**
+
+Example — Story BEFORE validation:
+```json
+{
+  "title": "Create Hero Section",
+  "acceptanceCriteria": [
+    "Create HeroSection.astro",
+    "pnpm build passes"
+  ]
+}
+```
+
+Example — Story AFTER validation (skills added):
+```json
+{
+  "title": "Create Hero Section",
+  "acceptanceCriteria": [
+    "Run /frontend-design skill (output: design spec)",
+    "Create HeroSection.astro per design spec",
+    "Run /web-design-guidelines review",
+    "Run /agent-browser test (375px, 768px, 1024px)",
+    "pnpm build passes"
+  ]
+}
+```
+
+**NEVER output prd.json without skill requirements in criteria.**
+
+---
+
 ## Step 3: Size Check
 
 Each story MUST be completable in ONE iteration (~one context window).
@@ -139,7 +181,11 @@ To run Ralph: pnpm ralph
 
 - [ ] Each story completable in one iteration
 - [ ] All stories have "pnpm build passes" criterion
-- [ ] UI stories have browser verification
+- [ ] **SKILL REQUIREMENTS in acceptanceCriteria** (not just notes)
+- [ ] UI stories have `/frontend-design` + `/agent-browser` in criteria
+- [ ] .tsx stories have `/vercel-react-best-practices` in criteria
+- [ ] .astro stories have `/web-design-guidelines` in criteria
+- [ ] Marketing stories have `/orchestrator` in criteria
 - [ ] Stories ordered by dependency (priority)
 - [ ] Descriptions detailed enough for autonomous implementation
 - [ ] Branch name matches actual git branch

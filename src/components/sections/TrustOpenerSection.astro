@@ -6,12 +6,19 @@ interface Props {
   neighborhoods?: string[];
   rating?: number;
   localStats?: string;
+  variant?: 'default' | 'muted' | 'primary';
 }
 
-const { cityName, neighborhoods, rating, localStats } = Astro.props;
+const { cityName, neighborhoods, rating, localStats, variant = 'primary' } = Astro.props;
+
+const variantClasses = {
+  default: 'bg-background',
+  muted: 'bg-muted/30',
+  primary: 'bg-primary/5'
+};
 ---
 
-<section class="py-20 md:py-28 bg-primary/5 relative overflow-hidden">
+<section class={`py-20 md:py-28 ${variantClasses[variant]} relative overflow-hidden`}>
   <!-- Subtle decorative element -->
   <div class="absolute inset-0 opacity-[0.02] pointer-events-none" aria-hidden="true">
     <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary rounded-full blur-3xl"></div>

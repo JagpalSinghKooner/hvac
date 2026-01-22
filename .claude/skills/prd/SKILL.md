@@ -79,15 +79,58 @@ Each story should be small enough to implement in one focused session.
 **Description:** As a [user], I want [feature] so that [benefit].
 
 **Acceptance Criteria:**
+- [ ] Run /frontend-design skill (output: design spec) [UI stories]
 - [ ] Specific verifiable criterion
 - [ ] Another criterion
-- [ ] npm run typecheck passes
-- [ ] **[UI stories only]** Verify in browser using dev-browser skill
+- [ ] Run /web-design-guidelines review [.astro files]
+- [ ] Run /vercel-react-best-practices review [.tsx files]
+- [ ] Run /agent-browser test (375px, 768px, 1024px) [UI stories]
+- [ ] pnpm build passes
 ```
 
-**Important:** 
+**Important:**
 - Acceptance criteria must be verifiable, not vague. "Works correctly" is bad. "Button shows confirmation dialog before deleting" is good.
-- **For any story with UI changes:** Always include "Verify in browser using dev-browser skill" as acceptance criteria. This ensures visual verification of frontend work.
+- **For any story with UI changes:** Always include "Run /agent-browser test" as acceptance criteria.
+
+### Skill Requirements (MANDATORY)
+
+Each story MUST include required skills in acceptanceCriteria (not just notes):
+
+| Story Type | REQUIRED Skills in Acceptance Criteria |
+|------------|---------------------------------------|
+| UI/Component | `/frontend-design`, `/agent-browser` |
+| React (.tsx) | `/vercel-react-best-practices` |
+| Astro (.astro) | `/web-design-guidelines` |
+| Content/Marketing | `/orchestrator` → routes to correct skills |
+
+**Example with skills:**
+```json
+{
+  "id": "US-001",
+  "title": "Create Hero Section",
+  "acceptanceCriteria": [
+    "Run /frontend-design skill (output: design spec)",
+    "Create HeroSection.astro per design spec",
+    "Run /web-design-guidelines review",
+    "Run /agent-browser test (375px, 768px, 1024px)",
+    "pnpm build passes"
+  ]
+}
+```
+
+**Example for marketing task:**
+```json
+{
+  "id": "US-010",
+  "title": "Write Service Page Copy",
+  "acceptanceCriteria": [
+    "Run /orchestrator to route to correct skills",
+    "Follow orchestrator skill chain output",
+    "Content passes brand voice guidelines",
+    "pnpm build passes"
+  ]
+}
+```
 
 ### 4. Functional Requirements
 Numbered list of specific functionalities:
@@ -236,6 +279,11 @@ Before saving the PRD:
 - [ ] Asked clarifying questions with lettered options
 - [ ] Incorporated user's answers
 - [ ] User stories are small and specific
+- [ ] **SKILL REQUIREMENTS included in acceptance criteria** (not just notes)
+- [ ] UI stories have `/frontend-design` + `/agent-browser` in criteria
+- [ ] .tsx stories have `/vercel-react-best-practices` in criteria
+- [ ] .astro stories have `/web-design-guidelines` in criteria
+- [ ] Marketing stories have `/orchestrator` in criteria
 - [ ] Functional requirements are numbered and unambiguous
 - [ ] Non-goals section defines clear boundaries
 - [ ] Saved to `/tasks/prd-[feature-name].md`
