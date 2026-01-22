@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import LocalProblemSection from '@/components/sections/LocalProblemSection.astro';
+import ProblemSection from '@/components/sections/ProblemSection.astro';
 import LocalSolutionSection from '@/components/sections/LocalSolutionSection.astro';
 ---
 
@@ -10,17 +10,17 @@ import LocalSolutionSection from '@/components/sections/LocalSolutionSection.ast
 >
   <main>
     <!-- Example 1: Standard (follows LocalProblemSection) -->
-    <LocalProblemSection
+    <ProblemSection
       headline="Common Heating Challenges in Guelph"
       description="Guelph homeowners face unique HVAC challenges due to the city's climate patterns and housing stock."
-      citySpecificIssues={[
+      issues={[
         "Older homes with outdated heating systems",
         "Cold winters requiring reliable furnaces",
         "Rising energy costs in Southern Ontario"
       ]}
-      cityName="Guelph"
       imageAlt="Guelph home requiring heating solution"
     />
+
 
     <LocalSolutionSection
       headline="Our Proven Approach in Guelph"
@@ -29,19 +29,20 @@ import LocalSolutionSection from '@/components/sections/LocalSolutionSection.ast
       imageAlt="B.A.P technician installing high-efficiency furnace in Guelph home"
     />
 
+
     <!-- Example 2: Reversed (image right, text left) -->
-    <LocalProblemSection
+    <ProblemSection
       headline="Air Conditioning Challenges in Kitchener"
       description="Kitchener's humid summers and older home construction create specific cooling needs."
-      citySpecificIssues={[
+      issues={[
         "High humidity levels require proper dehumidification",
         "Many homes lack adequate insulation",
         "Undersized AC units struggle in peak summer"
       ]}
-      cityName="Kitchener"
       imageAlt="Kitchener home with AC issues"
       reversed={true}
     />
+
 
     <LocalSolutionSection
       headline="Custom Cooling Solutions for Kitchener Homes"
@@ -51,21 +52,23 @@ import LocalSolutionSection from '@/components/sections/LocalSolutionSection.ast
       reversed={true}
     />
 
+
     <!-- Example 3: Minimal data -->
-    <LocalProblemSection
+    <ProblemSection
       headline="Heating Reliability Issues"
       description="Cambridge residents need heating systems they can count on."
-      citySpecificIssues={[
+      issues={[
         "Unpredictable winter weather",
         "Aging infrastructure"
       ]}
-      cityName="Cambridge"
     />
+
 
     <LocalSolutionSection
       headline="Reliable Systems, Expert Installation"
       description="Our Cambridge installations focus on reliability above all else. We select proven equipment from trusted manufacturers and install it correctly the first time."
       cityName="Cambridge"
     />
+
   </main>
 </BaseLayout>

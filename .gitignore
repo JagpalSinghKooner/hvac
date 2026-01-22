@@ -43,3 +43,6 @@ docs/project/ralph/archive/
 docs/project/ralph/.last-branch
 prd.json
 .claude/vendor/
+
+# Migration backups (large, temporary)
+backups/

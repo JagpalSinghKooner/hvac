@@ -3,7 +3,7 @@ import { getEntry, getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ServiceHeroSection from '@/components/sections/ServiceHeroSection.astro';
 import LocalTrustOpener from '@/components/sections/LocalTrustOpener.astro';
-import LocalProblemSection from '@/components/sections/LocalProblemSection.astro';
+import ProblemSection from '@/components/sections/ProblemSection.astro';
 import LocalSolutionSection from '@/components/sections/LocalSolutionSection.astro';
 import LocalGallerySection from '@/components/sections/LocalGallerySection.astro';
 import ServiceBenefitsSection from '@/components/sections/ServiceBenefitsSection.astro';
@@ -171,11 +171,10 @@ const savingsData = serviceData.savings
 
   {
     serviceCityData.problem && (
-      <LocalProblemSection
+      <ProblemSection
         headline={serviceCityData.problem.headline}
         description={serviceCityData.problem.description}
-        citySpecificIssues={serviceCityData.problem.issues || []}
-        cityName={locationData.title}
+        issues={serviceCityData.problem.issues || []}
       />
     )
   }
