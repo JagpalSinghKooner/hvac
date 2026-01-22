@@ -2,10 +2,14 @@
 import { getEntry, getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ServiceHeroSection from '@/components/sections/ServiceHeroSection.astro';
-import LocalContextSection from '@/components/sections/LocalContextSection.astro';
+import LocalTrustOpener from '@/components/sections/LocalTrustOpener.astro';
+import LocalProblemSection from '@/components/sections/LocalProblemSection.astro';
+import LocalSolutionSection from '@/components/sections/LocalSolutionSection.astro';
+import LocalGallerySection from '@/components/sections/LocalGallerySection.astro';
 import ServiceBenefitsSection from '@/components/sections/ServiceBenefitsSection.astro';
 import ServiceProcessSection from '@/components/sections/ServiceProcessSection.astro';
 import LocalProofSection from '@/components/sections/LocalProofSection.astro';
+import LocationServicesGrid from '@/components/sections/LocationServicesGrid.astro';
 import ServiceSavingsSection from '@/components/sections/ServiceSavingsSection.astro';
 import ServiceFAQSection from '@/components/sections/ServiceFAQSection';
 import RelatedServicesSection from '@/components/sections/RelatedServicesSection.astro';
@@ -156,11 +160,42 @@ const savingsData = serviceData.savings
   />
 
   {
-    serviceCityData.localContext && (
-      <LocalContextSection
+    serviceCityData.localTrustOpener && (
+      <LocalTrustOpener
         cityName={locationData.title}
-        serviceName={serviceData.title}
-        content={serviceCityData.localContext}
+        rating={business.reputation.google_rating}
+        localStats={serviceCityData.localTrustOpener}
+      />
+    )
+  }
+
+  {
+    serviceCityData.localProblem && (
+      <LocalProblemSection
+        headline={serviceCityData.localProblem.headline}
+        description={serviceCityData.localProblem.description}
+        citySpecificIssues={serviceCityData.localProblem.citySpecificIssues || []}
+        cityName={locationData.title}
+      />
+    )
+  }
+
+  {
+    serviceCityData.localSolution && (
+      <LocalSolutionSection
+        headline={serviceCityData.localSolution.headline}
+        description={serviceCityData.localSolution.description}
+        cityName={locationData.title}
+      />
+    )
+  }
+
+  {
+    serviceCityData.localGalleryImages && serviceCityData.localGalleryImages.length > 0 && (
+      <LocalGallerySection
+        images={serviceCityData.localGalleryImages}
+        cityName={locationData.title}
+        serviceType={serviceData.title}
       />
     )
   }
@@ -183,6 +218,8 @@ const savingsData = serviceData.savings
       />
     )
   }
+
+  <LocationServicesGrid cityName={locationData.title} locationSlug={serviceCityData.locationSlug} />
 
   {
     savingsData && (
