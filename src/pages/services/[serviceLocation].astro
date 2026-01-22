@@ -121,12 +121,8 @@ const benefits =
   })) ||
   [];
 
+// Phase 8A: processSteps now inherit from parent service only (removed from service-city schema)
 const processSteps =
-  serviceCityData.processSteps?.map((ps) => ({
-    step: ps.step,
-    title: ps.title,
-    description: ps.description,
-  })) ||
   serviceData.processSteps?.map((ps) => ({
     step: ps.step,
     title: ps.title,

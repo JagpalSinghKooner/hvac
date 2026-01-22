@@ -638,15 +638,37 @@ const serviceCity = defineCollection({
       )
       .optional(),
 
-    // OPTIONAL processSteps (to match services schema)
-    processSteps: z
-      .array(
-        z.object({
-          step: z.number(),
-          title: z.string(),
-          description: z.string(),
-        })
-      )
+    // Phase 8A (2026-01-22): City-specific content fields for E-E-A-T
+    // Added for unique keyword-researched headings and city-level content customization
+
+    // OPTIONAL hero (city-specific hero section)
+    hero: z
+      .object({
+        title: z.string(), // UNIQUE keyword-researched H1, PREMIUM positioning
+        description: z.string(), // City-specific intro + experience stats (50-100 words)
+      })
+      .optional(),
+
+    // OPTIONAL finalCta (city-specific final call-to-action)
+    finalCta: z
+      .object({
+        headline: z.string(), // UNIQUE keyword-researched H2
+        copy: z.string(), // City-specific CTA copy (50-75 words)
+      })
+      .optional(),
+
+    // OPTIONAL benefitsHeadline (UNIQUE keyword-researched H2 for benefits section)
+    benefitsHeadline: z.string().optional(),
+
+    // OPTIONAL contextHeadline (UNIQUE keyword-researched H2 for context section)
+    contextHeadline: z.string().optional(),
+
+    // OPTIONAL experienceStats (E-E-A-T experience signals)
+    experienceStats: z
+      .object({
+        installationsInCity: z.number().optional(), // Installation count for E-E-A-T
+        yearsSinceCityStart: z.number().optional(), // Years serving city for E-E-A-T
+      })
       .optional(),
 
     // Workflow fields
