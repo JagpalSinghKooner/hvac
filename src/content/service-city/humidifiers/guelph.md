@@ -4,6 +4,7 @@ locationSlug: 'guelph'
 title: 'Whole-Home Humidifier Installation in Guelph, ON'
 seoTitle: 'Humidifier Installation Guelph ON | Combat Dry Air | B.A.P'
 seoDescription: 'Whole-home humidifier installation in Guelph, ON. Combat dry winter air. Serving Guelph since 1992.'
+trustOpener: 'Thirty years in Guelph has shown B.A.P that winter indoor humidity control prevents more than just dry skin and static electricity. Properly humidified homes feel warmer at lower thermostat settings, reducing heating costs. We size humidifiers based on your home''s actual cubic footage and air exchange rate, not generic capacity charts that result in over-humidification and window condensation problems.'
 context: |
   Guelph homeowners understand the challenges of Ontario's harsh winter climate. When temperatures plunge and furnaces run constantly, indoor humidity levels can drop below 20%, creating an uncomfortable and potentially harmful environment. The historic stone homes in the Ward and older properties throughout the Royal City are particularly susceptible to dry air damage, with hardwood floors cracking and antique furniture suffering from moisture loss. Families across Guelph report increased respiratory issues, dry skin, and static electricity during the coldest months. A whole-home humidifier integrated with your existing HVAC system maintains optimal humidity between 35-45%, protecting your home investment while improving health and comfort for your entire household.
 proof:

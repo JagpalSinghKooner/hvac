@@ -4,6 +4,7 @@ locationSlug: 'guelph'
 title: 'Boiler Maintenance in Guelph, ON'
 seoTitle: 'Boiler Maintenance Guelph ON | Annual Service | B.A.P'
 seoDescription: 'Professional boiler maintenance in Guelph, ON. Annual tune-ups prevent breakdowns. TSSA certified. Serving Guelph since 1992.'
+trustOpener: 'Three decades of boiler maintenance in Guelph''s heritage properties has taught B.A.P which service procedures actually extend boiler life and which are unnecessary in modern sealed systems. We focus on water quality, pressure levels, and combustion efficiency because these factors most directly affect boiler longevity. Regular maintenance prevents the mid-winter failures that leave heritage homes without heat for days while parts are sourced for older systems.'
 context: |
   Guelph's historic downtown and established neighborhoods like the Ward, St. Patrick's Ward, and Exhibition Park feature many older homes with hydronic boiler heating systems. These century-old limestone and brick houses rely on well-maintained boilers to handle Guelph's cold winters, where temperatures regularly drop below minus fifteen degrees Celsius. The city's commitment to environmental sustainability through initiatives like the Community Energy Plan means many Guelph homeowners prioritize efficient heating systems. University of Guelph faculty housing and the mature residential areas near the Speed River contain numerous homes where annual boiler maintenance is essential for reliable winter comfort and energy efficiency.
 proof:
