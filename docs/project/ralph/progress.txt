@@ -954,3 +954,93 @@ All 20 Guelph service-city pages meet quality standards for production deploymen
 
 ---
 
+
+
+## US-010: Update AGENTS.md with Content Generation Patterns
+
+**Execution:**
+- Read AGENTS.md current state
+- Added comprehensive "Phase 7B: Content Generation Patterns (Guelph Batch)" section
+- Documented all patterns discovered during US-001 through US-009
+
+**Sections Added to AGENTS.md:**
+
+1. **Overview:** Phase 7B scope (550 pages, 22 services × 25 cities), time investment (~8 hours first city, ~6 hours per subsequent city)
+
+2. **Mandatory Skill Pipeline:** Complete workflow from /orchestrator through /direct-response-copy with context passing strategy
+
+3. **Content Field Types & Complexity:** Time estimates per field type (trustOpener: 37min, problem: 107min, solution: 90min, benefits: 115min)
+
+4. **City-Specific Research Requirements:** Checklist for housing stock, climate factors, local tenure, water conditions research BEFORE content generation
+
+5. **Content Generation Workflow (Per City):** Step-by-step process for setup, content generation (4 batches), quality verification, commit
+
+6. **Script Templates (Reusable Across Cities):** YAML escaping rules, script patterns, duplication instructions for new cities
+
+7. **Common Gotchas:** 6 critical issues discovered during Guelph batch:
+   - Em dashes (--) in skill output - requires explicit instruction and grep verification
+   - YAML single quote escaping (double single quotes: `City''s` not `City\'s`)
+   - Grep false positives (frontmatter delimiters match em dash regex)
+   - Service directory name mismatches (require manual mapping in scripts)
+   - Context overload (LIGHT CONTEXT approach for boldness)
+   - Build failures from invalid YAML (test scripts on 1-2 files first)
+
+8. **Validation Checklist:** Complete quality gates for content, technical, rendering, and uniqueness verification
+
+9. **Efficiency Metrics:** Time investment breakdown per story (US-001 through US-009) with expected gains for remaining 24 cities
+
+10. **Remaining Work:** 528 service-city pages (24 cities), recommended region-based batching strategy, parallel execution notes
+
+**Key Patterns Documented:**
+
+**Skill Pipeline (MANDATORY):**
+```
+/orchestrator → /keyword-research → /positioning-angles → /brand-voice → /seo-content → /direct-response-copy
+```
+
+**Quality Gates (MANDATORY):**
+- NO em dashes: `grep -r '\--' src/content/service-city/*/[city].md | grep -v '^---'` must be empty
+- Uniqueness: Manual sample review of 5 services
+- City-specificity: Content references local housing, climate, tenure
+- Build: `pnpm build` must pass with 0 errors
+
+**Batching Strategy:**
+- Generate all 22 services in single batch per content field type (NOT service-by-service)
+- Region-based batching for positioning angle efficiency across remaining 24 cities
+
+**Script Templates:**
+- All Guelph scripts reusable with minimal modifications (city name swap)
+- YAML escaping critical: `content.replace(/'/g, "''")`
+- Test on 1-2 files before batch run
+
+**Time Investment:**
+- First city (Guelph): ~8 hours (includes brand voice extraction, learning curve)
+- Subsequent cities: ~6 hours (brand voice reused, workflow established)
+- Total remaining: ~144 hours for 24 cities (6 hours × 24)
+
+**Reusable Reference Files (Apply to ALL Cities):**
+- docs/project/ralph/brand-voice.md (ONE-TIME, used by all 25 cities)
+- Per-city files: [city]-keywords.md, [city]-positioning.md (PERMANENT, NEVER delete)
+
+**Content Quality Standards:**
+- Unique content per service (NO duplication)
+- City-specific references (housing, climate, tenure) in EVERY service
+- Brand voice maintained (expertise-based, accountability-focused, educator NOT persuader)
+- Technical depth (specific numbers, methodologies, outcomes)
+
+**Workflow Proven Effective:**
+- Skill-generated content produces higher quality than manual writing
+- Markdown doc as intermediate step (single source of truth) enables review before integration
+- Automated scripts reduce errors and ensure consistency across 20+ files
+- Quality verification catches issues before production deployment
+
+**AGENTS.md Update Complete:**
+- 220+ lines added to Phase 7B section
+- All patterns from Guelph batch documented
+- Ready for reuse across remaining 24 cities
+
+**Next Steps (Future PRDs):**
+- Create PRDs for remaining 24 cities using Guelph patterns
+- Execute region-based batching strategy for efficiency
+- Leverage script templates and brand voice for consistency
+
