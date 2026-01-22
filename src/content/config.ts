@@ -253,24 +253,9 @@ const services = defineCollection({
       )
       .optional(),
 
-    problems: z
-      .array(
-        z.object({
-          title: z.string(),
-          description: z.string(),
-          icon: z.string(),
-        })
-      )
-      .optional(),
-
-    approach: z
-      .object({
-        headline: z.string(),
-        description: z.string(),
-        quote: z.string().optional(),
-        quotePerson: z.string().optional(),
-      })
-      .optional(),
+    // Legacy schema removed 2026-01-22 after Phase 6C migration
+    // Old fields: problems (array), approach (object)
+    // Replaced by: problemStatement (object), solutionApproach (object)
 
     processSteps: z
       .array(
