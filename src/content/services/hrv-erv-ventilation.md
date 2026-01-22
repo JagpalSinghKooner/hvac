@@ -21,22 +21,26 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problems:
-  - title: 'Stuffy, Stale Indoor Air'
-    description: 'Modern energy-efficient homes are sealed tight—great for heating bills, terrible for air quality. Without mechanical ventilation, cooking odors, VOCs from furniture, and CO2 from breathing accumulate. You notice it as that "closed-up" smell.'
-    icon: 'air'
-  - title: 'Moisture and Condensation Problems'
-    description: 'Showers, cooking, and breathing add moisture to your home. In winter, that moisture condenses on cold windows and can grow mold in walls. Airtight homes without proper ventilation trap this moisture inside.'
-    icon: 'moisture'
-  - title: 'Opening Windows Wastes Energy'
-    description: 'The old solution—open a window—sends your expensive heated or cooled air straight outside. In Ontario winters, that is not practical. You need fresh air without sacrificing comfort or energy efficiency.'
-    icon: 'cost'
+problemStatement:
+  headline: 'Airtight Homes Trap Stale Air, Moisture, and Pollutants'
+  description: 'Modern energy-efficient homes are sealed tight—great for heating bills, terrible for air quality. Without mechanical ventilation, cooking odors, VOCs from furniture, and CO2 from breathing accumulate. You notice it as that "closed-up" smell. Showers, cooking, and breathing add moisture to your home, and in winter that moisture condenses on cold windows and can grow mold in walls. Airtight homes without proper ventilation trap this moisture inside. The old solution—open a window—sends your expensive heated or cooled air straight outside. In Ontario winters, that is not practical. You need fresh air without sacrificing comfort or energy efficiency, but you have no good options.'
+  painPoints:
+    - 'Stuffy, stale "closed-up" smell from accumulated cooking odors and VOCs'
+    - 'Window condensation and mold growth from trapped moisture'
+    - 'Opening windows wastes expensive heated or cooled air'
+    - 'CO2 buildup from breathing in sealed homes reduces air quality'
+    - 'Ontario Building Code requires mechanical ventilation for modern homes'
 
-approach:
+solutionApproach:
   headline: 'Balanced Ventilation with Heat Recovery'
-  description: 'HRV and ERV systems continuously exchange stale indoor air for fresh outdoor air—but recover 70-80% of the heat energy in the process. Your home gets fresh air without the energy penalty of opening windows. HRVs transfer heat only; ERVs also transfer moisture, making them ideal for controlling winter humidity.'
-  quote: 'Modern homes need mechanical ventilation. An HRV or ERV is not optional in a well-sealed home—it is essential for health and building durability.'
-  quotePerson: 'Paul Palmer, Owner'
+  description: 'HRV and ERV systems continuously exchange stale indoor air for fresh outdoor air—but recover 70-80% of the heat energy in the process. Your home gets fresh air without the energy penalty of opening windows. HRVs transfer heat only; ERVs also transfer moisture, making them ideal for controlling winter humidity. Modern homes need mechanical ventilation—an HRV or ERV is not optional in a well-sealed home. It is essential for health and building durability. The system operates continuously in the background, silently exchanging air while preserving your comfort and energy efficiency.'
+  differentiators:
+    - 'Recover 70-80% of heat energy during air exchange'
+    - 'ERV models also transfer moisture for better humidity control'
+    - 'Continuous fresh air supply without opening windows'
+    - 'Meet Ontario Building Code ventilation requirements'
+    - 'Professional CFM calculations ensure adequate fresh air volume'
+    - 'Balanced airflow prevents pressure imbalances and drafts'
 
 processSteps:
   - step: 1

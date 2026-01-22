@@ -21,22 +21,26 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problems:
-  - title: 'Allergy and Asthma Triggers'
-    description: 'Standard furnace filters capture only large particles. Pollen, dust mites, pet dander, and mold spores pass right through—triggering allergies and asthma symptoms in your own home.'
-    icon: 'health'
-  - title: 'Household VOCs and Chemicals'
-    description: 'New furniture, paint, cleaning products, and building materials release volatile organic compounds. These chemicals accumulate in tightly sealed modern homes without proper air filtration.'
-    icon: 'warning'
-  - title: 'Lingering Odors and Smoke'
-    description: 'Cooking odors, pet smells, and smoke from wildfires or neighbours persist in homes without active air purification. Standard filters do nothing for gases and odors.'
-    icon: 'air'
+problemStatement:
+  headline: 'Standard Filters Cannot Stop Allergens, VOCs, and Pathogens'
+  description: 'Standard furnace filters capture only large particles. Pollen, dust mites, pet dander, and mold spores pass right through—triggering allergies and asthma symptoms in your own home. New furniture, paint, cleaning products, and building materials release volatile organic compounds that accumulate in tightly sealed modern homes without proper air filtration. Cooking odors, pet smells, and smoke from wildfires or neighbours persist without active air purification. Standard filters do nothing for gases and odors. Portable air purifiers only clean one room, and you still breathe contaminated air in the rest of your home. The air circulates constantly through your HVAC system, yet remains contaminated cycle after cycle.'
+  painPoints:
+    - 'Allergy and asthma symptoms triggered inside your own home'
+    - 'VOCs from furniture, paint, and cleaning products accumulate in sealed homes'
+    - 'Cooking odors, pet smells, and wildfire smoke persist for days'
+    - 'Standard furnace filters only capture large particles, not allergens'
+    - 'Portable air purifiers clean one room while the rest stays contaminated'
 
-approach:
+solutionApproach:
   headline: 'Integrated Purification for Whole-Home Protection'
-  description: 'We install air purification systems that work with your existing HVAC. Unlike standalone units that only clean one room, whole-home systems filter all the air that passes through your ductwork. We match the right technology to your specific concerns—HEPA for particles, UV-C for pathogens, activated carbon for odors and chemicals.'
-  quote: 'The air in your home circulates through your HVAC system constantly. A whole-home purifier cleans all of it—not just one room at a time.'
-  quotePerson: 'Paul Palmer, Owner'
+  description: 'We install air purification systems that work with your existing HVAC. Unlike standalone units that only clean one room, whole-home systems filter all the air that passes through your ductwork. We match the right technology to your specific concerns—HEPA for particles, UV-C for pathogens, activated carbon for odors and chemicals. The air in your home circulates through your HVAC system constantly, and a whole-home purifier cleans all of it—not just one room at a time. Every cycle through your system removes more contaminants, giving you cleaner air in every room.'
+  differentiators:
+    - 'HEPA filtration captures 99.97% of particles down to 0.3 microns'
+    - 'UV-C germicidal technology neutralizes airborne viruses and bacteria'
+    - 'Activated carbon filters eliminate odors, smoke, and VOCs'
+    - 'Whole-home coverage—cleans air in every room continuously'
+    - 'Integrates with existing HVAC—no major modifications required'
+    - 'Professional sizing matches purification capacity to your airflow'
 
 processSteps:
   - step: 1

@@ -21,22 +21,26 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problems:
-  - title: 'Painful Dry Winter Air'
-    description: 'Ontario winters drop indoor humidity to 15-20%—desert-like conditions. You wake up with dry throat, cracked lips, and itchy skin. Static shocks are constant. Respiratory irritation increases cold and flu susceptibility.'
-    icon: 'health'
-  - title: 'Damage to Your Home'
-    description: 'Dry air shrinks wood. Hardwood floors develop gaps, furniture joints loosen, and wood trim pulls away from walls. Musical instruments go out of tune. Wallpaper peels at the edges. The damage accumulates every winter.'
-    icon: 'warning'
-  - title: 'Portable Humidifiers Cannot Keep Up'
-    description: 'A single room humidifier needs constant refilling and only helps one space. Meanwhile, the rest of your home remains parched. Portable units also become breeding grounds for mold if not cleaned constantly.'
-    icon: 'cost'
+problemStatement:
+  headline: 'Ontario Winters Create Desert-Like Indoor Conditions'
+  description: 'Ontario winters drop indoor humidity to 15-20%—desert-like conditions that affect your health and home. You wake up with dry throat, cracked lips, and itchy skin. Static shocks are constant throughout the day. Respiratory irritation increases your susceptibility to colds and flu. Meanwhile, dry air shrinks wood, causing hardwood floors to develop gaps, furniture joints to loosen, and wood trim to pull away from walls. Musical instruments go out of tune, and wallpaper peels at the edges. Portable humidifiers cannot keep up—they need constant refilling, only help one room, and become breeding grounds for mold if not cleaned constantly. The damage and discomfort accumulate every winter.'
+  painPoints:
+    - 'Wake up with dry throat, cracked lips, and itchy skin every morning'
+    - 'Constant static shocks throughout your home'
+    - 'Hardwood floors develop gaps and furniture joints loosen from dry air'
+    - 'Portable humidifiers require constant refilling and only help one room'
+    - 'Increased susceptibility to respiratory irritation and illness'
 
-approach:
+solutionApproach:
   headline: 'Whole-Home Humidity Control That Works'
-  description: 'We install bypass, fan-powered, and steam humidifiers that work with your furnace to humidify your entire home automatically. Water connects directly to your plumbing—no refilling required. A humidistat maintains your target humidity level without any daily attention.'
-  quote: 'A whole-home humidifier transforms winter comfort. You feel warmer, sleep better, and stop waking up with that scratchy throat. Plus your hardwood floors thank you.'
-  quotePerson: 'Paul Palmer, Owner'
+  description: 'We install bypass, fan-powered, and steam humidifiers that work with your furnace to humidify your entire home automatically. Water connects directly to your plumbing—no refilling required. A humidistat maintains your target humidity level without any daily attention. A whole-home humidifier transforms winter comfort. You feel warmer, sleep better, and stop waking up with that scratchy throat. Plus your hardwood floors thank you. The system works continuously and invisibly, maintaining comfortable 30-50% humidity levels throughout your home while you focus on everything else.'
+  differentiators:
+    - 'Direct plumbing connection—no daily refilling required'
+    - 'Humidistat maintains target humidity automatically'
+    - 'Whole-home coverage—every room stays comfortable'
+    - 'Works seamlessly with your existing furnace system'
+    - 'Choice of bypass, fan-powered, or steam units for your needs'
+    - 'Professional sizing prevents condensation and ensures adequate humidity'
 
 processSteps:
   - step: 1

@@ -21,22 +21,26 @@ valueProps:
 
 # ========== FULL FUNNEL CONTENT ==========
 
-problems:
-  - title: 'Damp Basements and Musty Odors'
-    description: 'Ontario basements are prone to moisture problems. That musty smell indicates mold and mildew growing in your home. Portable dehumidifiers cannot keep up with whole-basement moisture loads.'
-    icon: 'moisture'
-  - title: 'Humidity Making Summer Unbearable'
-    description: 'High humidity makes 25°C feel like 32°C. Your AC removes some moisture, but on humid days it cannot keep up. You end up over-cooling to compensate, wasting energy and money.'
-    icon: 'temperature'
-  - title: 'Moisture Damaging Your Home'
-    description: 'Excess humidity warps hardwood floors, damages furniture, fogs windows, and promotes mold growth in walls. The damage accumulates invisibly until expensive repairs are needed.'
-    icon: 'warning'
+problemStatement:
+  headline: 'Excess Moisture Damages Homes and Makes Summer Unbearable'
+  description: 'Ontario basements are prone to moisture problems, and that musty smell indicates mold and mildew growing in your home. Portable dehumidifiers cannot keep up with whole-basement moisture loads. High humidity makes 25°C feel like 32°C—your AC removes some moisture, but on humid days it cannot keep up. You end up over-cooling to compensate, wasting energy and money while still feeling uncomfortable. Meanwhile, excess humidity warps hardwood floors, damages furniture, fogs windows, and promotes mold growth in walls. The damage accumulates invisibly until expensive repairs are needed. You empty portable dehumidifier buckets constantly, yet the problem persists.'
+  painPoints:
+    - 'Musty basement odors indicate active mold and mildew growth'
+    - 'High humidity makes summer temperatures feel 5-7 degrees hotter'
+    - 'Portable dehumidifiers cannot handle whole-home moisture loads'
+    - 'Hardwood floors warp and furniture gets damaged by excess moisture'
+    - 'Constant bucket-emptying with portable units that barely help'
 
-approach:
+solutionApproach:
   headline: 'Whole-Home Humidity Control That Actually Works'
-  description: 'We install dehumidifiers that integrate with your HVAC system to control humidity throughout your entire home—not just one room. These units can remove 90-135 pints of moisture per day, far exceeding any portable unit. They drain automatically, so no more buckets to empty.'
-  quote: 'A properly sized whole-home dehumidifier transforms basement comfort and protects your entire home. It is one of the most impactful IAQ upgrades you can make.'
-  quotePerson: 'Paul Palmer, Owner'
+  description: 'We install dehumidifiers that integrate with your HVAC system to control humidity throughout your entire home—not just one room. These units can remove 90-135 pints of moisture per day, far exceeding any portable unit. They drain automatically, so no more buckets to empty. A properly sized whole-home dehumidifier transforms basement comfort and protects your entire home. It is one of the most impactful IAQ upgrades you can make. The system works continuously, monitoring humidity levels and removing moisture before it causes problems.'
+  differentiators:
+    - 'Remove 90-135 pints per day—far exceeds portable units'
+    - 'Automatic drainage—no buckets to empty ever'
+    - 'Whole-home coverage via HVAC integration'
+    - 'Digital controls maintain ideal 30-50% humidity automatically'
+    - 'Professional sizing prevents over-drying and ensures adequate capacity'
+    - 'Condensate pump options for installations without floor drains'
 
 processSteps:
   - step: 1
