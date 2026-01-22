@@ -243,7 +243,7 @@ const services = defineCollection({
     serviceType: z.enum(['installation', 'repair', 'maintenance', 'service']).optional(),
 
     // OPTIONAL complex nested fields (exist in content, but not strictly enforced)
-    valueProps: z
+    benefits: z
       .array(
         z.object({
           title: z.string(),
@@ -255,7 +255,11 @@ const services = defineCollection({
 
     // Legacy schema removed 2026-01-22 after Phase 6C migration
     // Old fields: problems (array), approach (object)
-    // Replaced by: problemStatement (object), solutionApproach (object)
+    // Phase 7A (2026-01-22): Unified field names
+    // problemStatement → problem, painPoints → issues
+    // solutionApproach → solution
+    // valueProps → benefits
+    // images → galleryImages
 
     processSteps: z
       .array(
@@ -293,7 +297,7 @@ const services = defineCollection({
       })
       .optional(),
 
-    images: z
+    galleryImages: z
       .array(
         z.union([
           z.string(),
@@ -317,21 +321,36 @@ const services = defineCollection({
       .optional(),
 
     // Phase 6B: Problem → Solution narrative flow
-    problemStatement: z
+    problem: z
       .object({
         headline: z.string(),
         description: z.string(),
-        painPoints: z.array(z.string()).optional(),
+        issues: z.array(z.string()).optional(),
       })
       .optional(),
 
-    solutionApproach: z
+    solution: z
       .object({
         headline: z.string(),
         description: z.string(),
         differentiators: z.array(z.string()).optional(),
       })
       .optional(),
+
+    // OPTIONAL trust opener and proof fields (for unified schema)
+    trustOpener: z.string().optional(),
+
+    proof: z
+      .object({
+        testimonial: z.string(),
+        customerName: z.string(),
+        customerLocation: z.string(),
+        result: z.string().optional(),
+      })
+      .optional(),
+
+    // OPTIONAL context field (for unified schema)
+    context: z.string().optional(),
 
     // Workflow fields
     workflowStatus: z.enum(['published', 'draft', 'review']),
@@ -544,11 +563,22 @@ const serviceCity = defineCollection({
     seoTitle: z.string(),
     seoDescription: z.string(),
 
-    // OPTIONAL local context
-    localContext: z.string().optional(), // Markdown content for local context
+    // Phase 7A (2026-01-22): Unified field names
+    // Removed "local" prefix to match services schema
+    // localContext → context
+    // localProof → proof
+    // localTrustOpener → trustOpener
+    // localProblem → problem (citySpecificIssues → issues)
+    // localSolution → solution
+    // localBenefits → benefits
+    // localSavings → savings (localRebates → rebateInfo)
+    // localGalleryImages → galleryImages
 
-    // OPTIONAL local proof (testimonial)
-    localProof: z
+    // OPTIONAL context (markdown content for local context)
+    context: z.string().optional(),
+
+    // OPTIONAL proof (testimonial)
+    proof: z
       .object({
         testimonial: z.string(),
         customerName: z.string(),
@@ -557,28 +587,28 @@ const serviceCity = defineCollection({
       })
       .optional(),
 
-    // OPTIONAL local trust opener (100-150 words about why city trusts B.A.P)
-    localTrustOpener: z.string().optional(),
+    // OPTIONAL trust opener (100-150 words about why city trusts B.A.P)
+    trustOpener: z.string().optional(),
 
-    // OPTIONAL local problem (city-specific heating/cooling challenges)
-    localProblem: z
+    // OPTIONAL problem (city-specific heating/cooling challenges)
+    problem: z
       .object({
         headline: z.string(),
         description: z.string(),
-        citySpecificIssues: z.array(z.string()),
+        issues: z.array(z.string()),
       })
       .optional(),
 
-    // OPTIONAL local solution (B.A.P's approach in this city)
-    localSolution: z
+    // OPTIONAL solution (B.A.P's approach in this city)
+    solution: z
       .object({
         headline: z.string(),
         description: z.string(),
       })
       .optional(),
 
-    // OPTIONAL local benefits (city-specific advantages)
-    localBenefits: z
+    // OPTIONAL benefits (city-specific advantages)
+    benefits: z
       .array(
         z.object({
           title: z.string(),
@@ -588,22 +618,33 @@ const serviceCity = defineCollection({
       )
       .optional(),
 
-    // OPTIONAL local savings (rebates and financing specific to city)
-    localSavings: z
+    // OPTIONAL savings (rebates and financing specific to city)
+    savings: z
       .object({
         headline: z.string(),
         description: z.string(),
-        localRebates: z.string().optional(),
+        rebateInfo: z.string().optional(),
       })
       .optional(),
 
-    // OPTIONAL local gallery images (completed projects in this city)
-    localGalleryImages: z
+    // OPTIONAL gallery images (completed projects in this city)
+    galleryImages: z
       .array(
         z.object({
           src: z.string(), // Image path (e.g., /images/projects/guelph-furnace-1.jpg)
           alt: z.string(), // Accessibility description
           caption: z.string().optional(), // Optional caption below image
+        })
+      )
+      .optional(),
+
+    // OPTIONAL processSteps (to match services schema)
+    processSteps: z
+      .array(
+        z.object({
+          step: z.number(),
+          title: z.string(),
+          description: z.string(),
         })
       )
       .optional(),
