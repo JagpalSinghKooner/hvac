@@ -484,7 +484,7 @@
         "Commit: chore: remove migration script after successful migration"
       ],
       "priority": 32,
-      "passes": false,
+      "passes": true,
       "notes": "Required Skills: None (file deletion)"
     },
     {
