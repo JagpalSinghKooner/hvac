@@ -1,16 +1,6 @@
 ---
 import { getCollection, type CollectionEntry, getEntry } from 'astro:content';
-import BaseLayout from '@/layouts/BaseLayout.astro';
-import ServiceHeroSection from '@/components/sections/ServiceHeroSection.astro';
-import ProblemSection from '@/components/sections/ProblemSection.astro';
-import SolutionSection from '@/components/sections/SolutionSection.astro';
-import ServiceBenefitsSection from '@/components/sections/ServiceBenefitsSection.astro';
-import ServiceProcessSection from '@/components/sections/ServiceProcessSection.astro';
-import ServiceSavingsSection from '@/components/sections/ServiceSavingsSection.astro';
-import ServiceFAQSection from '@/components/sections/ServiceFAQSection';
-import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel';
-import RelatedServicesSection from '@/components/sections/RelatedServicesSection.astro';
-import FinalCTASection from '@/components/sections/FinalCTASection.astro';
+import ServicePageLayout from '@/layouts/ServicePageLayout.astro';
 import { getRelatedServices } from '@/utils/getInternalLinks';
 
 export async function getStaticPaths() {
@@ -98,103 +88,22 @@ const relatedServices = await getRelatedServices(
 );
 ---
 
-<BaseLayout
+<ServicePageLayout
+  pageType="service"
   title={service.data.seoTitle || `${service.data.title} | ${business.business.legal_name}`}
   description={service.data.seoDescription || service.data.description}
->
-  <!-- Service Hero Section -->
-  <ServiceHeroSection
-    title={service.data.title}
-    description={service.data.description}
-    category={service.data.category}
-    serviceType={service.data.serviceType}
-    phoneNumber={business.contact.phone_e164}
-    phoneDisplay={business.contact.phone_display}
-  />
-
-  <!-- Problem Section (NEW - Phase 6B) -->
-  {service.data.problem && (
-    <ProblemSection
-      headline={service.data.problem.headline}
-      description={service.data.problem.description}
-      issues={service.data.problem.issues || []}
-    />
-  )}
-
-  <!-- Solution Section (NEW - Phase 6B) -->
-  {service.data.solution && (
-    <SolutionSection
-      headline={service.data.solution.headline}
-      description={service.data.solution.description}
-      differentiators={service.data.solution.differentiators || []}
-    />
-  )}
-
-  <!-- Service Content (Markdown) -->
-  {Content && (
-    <section class="py-16 md:py-20 lg:py-24 bg-background">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <div class="max-w-4xl mx-auto prose prose-neutral dark:prose-invert prose-headings:font-bold prose-a:text-primary">
-          <Content />
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Service Benefits Section (benefits) -->
-  {service.data.benefits && service.data.benefits.length > 0 && (
-    <ServiceBenefitsSection
-      benefits={service.data.benefits}
-      headline="Why Choose Us"
-    />
-  )}
-
-  <!-- Service Process Section (processSteps) -->
-  {service.data.processSteps && service.data.processSteps.length > 0 && (
-    <ServiceProcessSection
-      steps={service.data.processSteps}
-      headline="Our Process"
-    />
-  )}
-
-  <!-- Service Savings Section -->
-  {service.data.savings && (
-    <ServiceSavingsSection
-      headline={service.data.savings.headline}
-      description={service.data.savings.description}
-      bullets={service.data.savings.bullets}
-      rebateInfo={service.data.savings.rebateInfo}
-      financingNote={service.data.savings.financingNote}
-    />
-  )}
-
-  <!-- Service FAQ Section -->
-  {serviceFaqs.length > 0 && (
-    <ServiceFAQSection
-      client:load
-      faqs={serviceFaqs}
-      headline="Frequently Asked Questions"
-    />
-  )}
-
-  <!-- Testimonials -->
-  {reviewsToShow.length > 0 && (
-    <TestimonialsCarousel
-      client:load
-      reviews={reviewsToShow}
-      googleRating={business.reputation.google_rating}
-      googleReviewCount={business.reputation.google_review_count}
-    />
-  )}
-
-  <!-- Related Services -->
-  {relatedServices.length > 0 && (
-    <RelatedServicesSection
-      services={relatedServices}
-      headline="Related Services"
-    />
-  )}
-
-  <!-- Final CTA -->
-  <FinalCTASection />
-</BaseLayout>
+  serviceTitle={service.data.title}
+  serviceDescription={service.data.description}
+  category={service.data.category}
+  serviceType={service.data.serviceType}
+  problem={service.data.problem}
+  solution={service.data.solution}
+  Content={Content}
+  benefits={service.data.benefits}
+  processSteps={service.data.processSteps}
+  savings={service.data.savings}
+  faqs={serviceFaqs}
+  reviews={reviewsToShow}
+  relatedServices={relatedServices}
+  business={business}
+/>
