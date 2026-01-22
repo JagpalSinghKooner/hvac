@@ -2,6 +2,8 @@
 import { getCollection, type CollectionEntry, getEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ServiceHeroSection from '@/components/sections/ServiceHeroSection.astro';
+import ProblemSection from '@/components/sections/ProblemSection.astro';
+import SolutionSection from '@/components/sections/SolutionSection.astro';
 import ServiceBenefitsSection from '@/components/sections/ServiceBenefitsSection.astro';
 import ServiceProcessSection from '@/components/sections/ServiceProcessSection.astro';
 import ServiceSavingsSection from '@/components/sections/ServiceSavingsSection.astro';
@@ -109,6 +111,24 @@ const relatedServices = await getRelatedServices(
     phoneNumber={business.contact.phone_e164}
     phoneDisplay={business.contact.phone_display}
   />
+
+  <!-- Problem Section (NEW - Phase 6B) -->
+  {service.data.problemStatement && (
+    <ProblemSection
+      headline={service.data.problemStatement.headline}
+      description={service.data.problemStatement.description}
+      painPoints={service.data.problemStatement.painPoints || []}
+    />
+  )}
+
+  <!-- Solution Section (NEW - Phase 6B) -->
+  {service.data.solutionApproach && (
+    <SolutionSection
+      headline={service.data.solutionApproach.headline}
+      description={service.data.solutionApproach.description}
+      differentiators={service.data.solutionApproach.differentiators || []}
+    />
+  )}
 
   <!-- Service Content (Markdown) -->
   {Content && (
