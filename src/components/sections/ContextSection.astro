@@ -3,9 +3,17 @@ interface Props {
   cityName: string;
   serviceName?: string;
   content: string;
+  variant?: 'default' | 'muted' | 'primary';
 }
 
-const { cityName, serviceName, content } = Astro.props;
+const { cityName, serviceName, content, variant = 'muted' } = Astro.props;
+
+// Variant background classes
+const variantClasses = {
+  default: 'bg-background',
+  muted: 'bg-muted/30',
+  primary: 'bg-primary/5'
+};
 
 // Handle empty content gracefully
 if (!content || content.trim() === '') {
@@ -17,7 +25,7 @@ const headline = serviceName
   : `Local Context for ${cityName}`;
 ---
 
-<section class="py-16 md:py-24 bg-muted/30">
+<section class={`py-16 md:py-24 ${variantClasses[variant]}`}>
   <div class="container mx-auto px-4 md:px-6">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">
