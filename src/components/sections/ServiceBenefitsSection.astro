@@ -1,5 +1,5 @@
 ---
-import { Card, CardContent } from '@/components/ui/card';
+import { Check } from 'lucide-react';
 
 interface Benefit {
   title: string;
@@ -10,9 +10,16 @@ interface Benefit {
 interface Props {
   benefits: Benefit[];
   headline?: string;
+  imageAlt?: string;
+  reversed?: boolean;
 }
 
-const { benefits, headline = "Why Choose Us" } = Astro.props;
+const {
+  benefits,
+  headline = "Why Choose Us",
+  imageAlt = "Service benefits",
+  reversed = false
+} = Astro.props;
 
 // Handle empty benefits array
 if (!benefits || benefits.length === 0) {
@@ -20,28 +27,96 @@ if (!benefits || benefits.length === 0) {
 }
 ---
 
-<section class="py-16 md:py-20 lg:py-24 bg-background">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-    <div class="text-center mb-8 md:mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold tracking-tight">
-        {headline}
-      </h2>
-    </div>
+<section class="py-16 md:py-20 lg:py-24 bg-background relative overflow-hidden">
+  <!-- Decorative background -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute top-20 right-20 w-96 h-96 bg-primary/[0.02] rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 left-20 w-96 h-96 bg-primary/[0.02] rounded-full blur-3xl"></div>
+  </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-      {benefits.map((benefit) => (
-        <Card className="border-border shadow-sm hover:shadow-md transition-shadow duration-200">
-          <CardContent className="p-6 flex flex-col gap-4">
-            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary">
-              <div class="text-sm font-medium">{benefit.icon}</div>
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative">
+    <div class="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+      <!-- Content section -->
+      <div class:list={[
+        "space-y-6 md:space-y-8",
+        reversed ? "md:order-2" : "md:order-1"
+      ]}>
+        <div class="space-y-4">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground leading-tight" style="font-family: 'Playfair Display', serif;">
+            {headline}
+          </h2>
+        </div>
+
+        <!-- Benefits list -->
+        <div class="space-y-6" role="list">
+          {benefits.map((benefit, index) => (
+            <div
+              class="flex gap-4 group benefit-item"
+              role="listitem"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <!-- Check icon -->
+              <div class="flex-shrink-0 mt-1">
+                <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
+                  <Check className="w-4 h-4 text-primary" aria-hidden="true" />
+                </div>
+              </div>
+
+              <!-- Benefit content -->
+              <div class="flex-1 space-y-1">
+                <h3 class="text-lg md:text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+                  {benefit.title}
+                </h3>
+                <p class="text-base text-muted-foreground leading-relaxed">
+                  {benefit.description}
+                </p>
+              </div>
             </div>
-            <div class="space-y-2">
-              <h3 class="font-semibold text-lg leading-tight">{benefit.title}</h3>
-              <p class="text-sm text-muted-foreground">{benefit.description}</p>
+          ))}
+        </div>
+      </div>
+
+      <!-- Image placeholder -->
+      <div class:list={[
+        "relative",
+        reversed ? "md:order-1" : "md:order-2"
+      ]}>
+        <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-muted group">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center space-y-2 px-4">
+              <p class="text-sm text-muted-foreground font-medium">
+                {imageAlt}
+              </p>
+              <p class="text-xs text-muted-foreground/60">
+                Image placeholder — 1200×900
+              </p>
             </div>
-          </CardContent>
-        </Card>
-      ))}
+          </div>
+
+          <!-- Decorative overlay on hover -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+  .benefit-item {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

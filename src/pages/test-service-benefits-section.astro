@@ -1,0 +1,61 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ServiceBenefitsSection from '@/components/sections/ServiceBenefitsSection.astro';
+
+const benefits = [
+  {
+    title: "30+ Years of Experience",
+    description: "Trusted HVAC expertise serving Southern Ontario families since 1994, with thousands of successful installations.",
+    icon: "⭐"
+  },
+  {
+    title: "Premium Equipment Only",
+    description: "We install Carrier, Lennox, and other top-tier brands that deliver lasting comfort and efficiency.",
+    icon: "🏆"
+  },
+  {
+    title: "Lifetime Workmanship Warranty",
+    description: "Our installations are backed by a lifetime guarantee on labor, giving you complete peace of mind.",
+    icon: "✓"
+  },
+  {
+    title: "Transparent Pricing",
+    description: "Detailed quotes with no hidden fees. You'll know exactly what you're paying for before we start.",
+    icon: "💰"
+  },
+  {
+    title: "Licensed & Insured",
+    description: "Fully certified technicians with comprehensive insurance coverage for your protection.",
+    icon: "🛡️"
+  }
+];
+---
+
+<BaseLayout
+  title="ServiceBenefitsSection Component Test"
+  description="Testing the redesigned ServiceBenefitsSection component with split layout"
+>
+  <div class="bg-background">
+    <!-- Example 1: Normal layout (text left, image right) -->
+    <ServiceBenefitsSection
+      benefits={benefits}
+      headline="Why Homeowners Choose B.A.P"
+      imageAlt="B.A.P HVAC installation benefits"
+    />
+
+    <!-- Example 2: Reversed layout (image left, text right) -->
+    <ServiceBenefitsSection
+      benefits={benefits.slice(0, 4)}
+      headline="Peace of Mind Guarantee"
+      imageAlt="B.A.P quality guarantee"
+      reversed={true}
+    />
+
+    <!-- Example 3: Minimal (3 benefits) -->
+    <ServiceBenefitsSection
+      benefits={benefits.slice(0, 3)}
+      headline="Our Commitment"
+      imageAlt="B.A.P service commitment"
+    />
+  </div>
+</BaseLayout>
