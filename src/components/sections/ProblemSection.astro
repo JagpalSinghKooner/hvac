@@ -5,12 +5,19 @@ interface Props {
   issues: string[];
   imageAlt?: string;
   reversed?: boolean;
+  variant?: 'default' | 'muted' | 'primary';
 }
 
-const { headline, description, issues, imageAlt, reversed = false } = Astro.props;
+const { headline, description, issues, imageAlt, reversed = false, variant = 'muted' } = Astro.props;
+
+const variantClasses = {
+  default: 'bg-background',
+  muted: 'bg-muted/30',
+  primary: 'bg-primary/5'
+};
 ---
 
-<section class="py-16 md:py-20 lg:py-24 bg-muted/30">
+<section class={`py-16 md:py-20 lg:py-24 ${variantClasses[variant]}`}>
   <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
       <!-- Text Content (Left by default, right if reversed) -->
