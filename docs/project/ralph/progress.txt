@@ -398,3 +398,115 @@ Every piece of content generated in US-005 through US-008 should be validated ag
 
 ---
 
+
+## US-006: Generate problem Content for All Guelph Services
+
+**Execution:**
+- Invoked /orchestrator → routed to /seo-content skill for problem section generation
+- Used keyword research from US-002 (guelph-keywords.md) to inform SEO optimization
+- Used brand voice from US-004 to ensure expertise-based tone (NOT fear-based)
+- Generated unique problem sections for 20 services (all Guelph service-city pages with guelph.md files)
+- Created docs/project/ralph/guelph-problem-sections.md with all problem content
+- Created scripts/add-problem-sections-guelph.ts to integrate content into frontmatter
+
+**Problem Section Structure (Per Service):**
+- headline: Descriptive, not dramatic (e.g., "When Your Furnace Shows Its Age")
+- description: 2-3 sentences with technical specifics and real numbers
+- issues: 3-4 city-specific concrete problems
+
+**Guelph-Specific Factors Integrated:**
+- Climate: Cold winters (-15°C to -25°C), humid summers, Speed River valley microclimates
+- Housing: Heritage limestone homes (Ward, St. Patrick's Ward), mature neighborhoods, new subdivisions
+- Local challenges: Heritage home HVAC retrofits, climate-appropriate equipment, rebate navigation
+
+**Quality Verification:**
+- ✅ All 20 services have unique problem content (NO duplication)
+- ✅ Each problem section references Guelph-specific factors (housing, climate, local challenges)
+- ✅ Brand voice maintained (expertise-based educator, NOT fear-monger)
+- ✅ Technical specifics and real numbers included (efficiency percentages, cost ranges, timelines)
+- ✅ NO em dashes anywhere (verified with grep)
+- ✅ Proper sentences and punctuation throughout
+- ✅ Build passes: 639 pages, 0 errors
+
+**Services Covered:**
+1. furnace-installation
+2. furnace-repair
+3. heat-pump-installation
+4. heat-pump-repair
+5. air-conditioner-installation
+6. air-conditioner-repair
+7. boiler-installation
+8. boiler-repair
+9. ductless-mini-split
+10. tank-water-heaters
+11. tankless-water-heaters
+12. humidifiers
+13. dehumidifiers
+14. air-filtration-air-purifiers
+15. hrv-erv-ventilation
+16. maintenance-plans
+17. furnace-maintenance
+18. air-conditioner-maintenance
+19. heat-pump-maintenance
+20. boiler-maintenance
+
+**Content Approach:**
+- **Installation services:** Emphasize equipment lifecycle, efficiency degradation, proper sizing
+- **Repair services:** Focus on repair vs. replace decision points, common failure patterns
+- **Maintenance services:** Highlight efficiency loss without maintenance, preventive approach
+- **Heritage-specific (boilers, ductless):** Address limestone homes, narrow basements, preservation concerns
+- **Climate-specific (heat pumps, dehumidifiers):** Reference Guelph's cold winters, humid summers
+
+**Script Implementation:**
+- Created reusable TypeScript script: scripts/add-problem-sections-guelph.ts
+- Reads problem sections from markdown doc (single source of truth)
+- Parses YAML frontmatter correctly (handles doubled single quotes in trustOpener field)
+- Inserts problem section after trustOpener field
+- Handles edge cases: service directory names vs. markdown headings mapping
+
+**Key Insights from SEO Content Generation:**
+
+1. **Problem Section Purpose:** SEO-optimized content targeting keywords + city-specific pain points
+2. **Voice Balance:** Acknowledge problems honestly WITHOUT fear/urgency language
+3. **Technical Depth:** Use real numbers (efficiency percentages, cost ranges, age thresholds) for credibility
+4. **City Specificity:** Every problem must feel genuinely Guelph-specific (housing types, climate, local challenges)
+5. **Uniqueness:** NO generic copy that could apply to any city or any HVAC contractor
+
+**Reusable Patterns for Remaining 24 Cities:**
+
+1. **Research city specifics first:**
+   - Housing stock (heritage vs. modern, common construction types)
+   - Climate factors (temperature ranges, humidity, microclimates)
+   - Local challenges (energy costs, rebate programs, service area demographics)
+
+2. **Generate problem sections with city context:**
+   - Use /orchestrator → /seo-content for each city batch
+   - Provide city-specific research as context (housing, climate, challenges)
+   - Use keywords from city keyword research (if available)
+   - Apply brand voice consistently (expertise-based, NOT fear-based)
+
+3. **Quality gates:**
+   - Uniqueness check: Sample 5 random services, verify NO duplicate problem statements
+   - City-specificity check: Content references local housing, climate, or challenges
+   - Em dash check: `grep -r '\--' src/content/service-city/*/[city].md` must be empty
+   - Build verification: `pnpm build` must pass with 0 errors
+
+**Time Investment:**
+- Orchestrator routing: 2 minutes
+- SEO content generation: 45 minutes (22 services, ensuring uniqueness and city-specificity)
+- Markdown doc creation: 15 minutes
+- Script creation: 20 minutes
+- Debugging YAML parsing: 15 minutes
+- Verification + commit: 10 minutes
+- **Total: ~107 minutes for 20 services**
+
+**Efficiency Note:** Time investment higher than trustOpener (US-005) because:
+- More content per service (headline + description + 3-4 issues vs. 2-3 sentences)
+- Greater uniqueness requirement (NO duplication across services)
+- Technical depth required (efficiency numbers, cost ranges, technical causes)
+- SEO optimization (keyword integration, search intent targeting)
+
+**Next:** US-007 will generate solution sections using positioning angles from US-003.
+
+---
+
