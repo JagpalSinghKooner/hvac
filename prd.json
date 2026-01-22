@@ -33,8 +33,8 @@
         "pnpm build passes"
       ],
       "priority": 2,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Keyword research completed. Created comprehensive 943-line keyword guide covering all 22 services with primary, secondary, and long-tail keywords. Includes strategic tiers, local SEO factors, competitive intelligence, and implementation checklist. File: docs/project/ralph/guelph-keywords.md"
     },
     {
       "id": "US-003",
@@ -51,8 +51,8 @@
         "pnpm build passes"
       ],
       "priority": 3,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Positioning angles completed. Generated 5 distinct angles: (1) Local HVAC Incumbent (30 years in Guelph = pattern recognition), (2) Heritage Home Specialist (limestone homes, mature neighborhoods), (3) Rebate Navigator (handle paperwork start to finish), (4) Climate-Appropriate Specialist (proven in Guelph's climate), (5) Accountability Anchor (25 Clearview St = verifiable presence). Recommended primary angle: Local HVAC Incumbent with service-specific secondary angles. File: docs/project/ralph/guelph-positioning.md (251 lines)"
     },
     {
       "id": "US-004",
@@ -69,8 +69,8 @@
         "pnpm build passes"
       ],
       "priority": 4,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Brand voice extracted from existing service pages (furnace, heat pump, AC). Created comprehensive 384-line voice profile. Key characteristics: expertise-based confidence, accountability-focused, educator not persuader, respectful realism. Tone: professional-casual, serious with warmth, measured bold, simple words with sophisticated ideas, direct but respectful. Core principles: (1) Expertise over persuasion, (2) Specificity over claims, (3) Accountability over promises. Includes content type examples (trustOpener, problem, solution, benefits), city-specific adaptation guidelines, quality control checklist, and skills integration instructions. File: docs/project/ralph/brand-voice.md. Applies to ALL 25 city batches (550 service-city pages)."
     },
     {
       "id": "US-005",
@@ -89,8 +89,8 @@
         "pnpm build passes (639 pages, 0 errors)"
       ],
       "priority": 5,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Completed. Generated unique trustOpener content for all 22 Guelph services using /direct-response-copy guidance. All content references Guelph-specific factors (heritage housing, Speed River valley, local tenure since 1994). Used Local HVAC Incumbent positioning angle. NO em dashes (properly escaped YAML with doubled quotes). Verified uniqueness with grep. Build passes: 639 pages, 0 errors. Script: scripts/add-trust-openers-guelph.ts for reusability across remaining 24 cities."
     },
     {
       "id": "US-006",

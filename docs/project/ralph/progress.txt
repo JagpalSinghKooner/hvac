@@ -31,3 +31,370 @@ Recommended skill sequence for generating 22 Guelph service-city pages:
 **Next:** US-002 will run keyword-research skill as routed by orchestrator.
 
 ---
+
+## US-002: Keyword Research for Guelph Market
+
+**Execution:**
+- Invoked /keyword-research skill with all 22 HVAC services + Guelph, ON target
+- Read business profile (profile.yaml) and Guelph location data for context
+- Generated comprehensive keyword research covering:
+  - All 22 services (furnace, heat pump, AC, boiler, ductless, water heaters, maintenance, duct cleaning)
+  - Installation, repair, and replacement variants
+  - Primary, secondary, and long-tail keywords for each service
+  - Local SEO factors (geographic modifiers, competitive advantages)
+  - Strategic tiers (Tier 1-4 prioritization)
+  - Content strategy notes (Guelph-specific differentiation)
+  - Cross-linking strategy
+  - Success metrics and implementation checklist
+
+**Output:**
+- File: docs/project/ralph/guelph-keywords.md (943 lines)
+- 22 complete keyword clusters
+- 4 strategic tiers for publishing priority
+- Guelph-specific positioning insights (heritage homes, university city, environmental awareness)
+- Competitive intelligence notes
+- Implementation checklist for US-005 through US-008
+
+**Key Insights:**
+1. **Top Opportunities:** Heat pump installation (rebate-driven, eco-conscious), furnace installation (high volume), AC installation (seasonal demand)
+2. **Quick Wins:** Ductless mini split (low competition, heritage home fit), tankless water heater (environmental appeal)
+3. **Guelph Differentiators:** Headquartered locally (25 Clearview St), 30+ years since 1994, heritage home expertise, university area services
+4. **Climate Factors:** Cold winters, humid summers, river valley microclimates drive specific system requirements
+5. **Housing Mix:** Heritage limestone (downtown) → mature neighborhoods → new subdivisions requires varied HVAC solutions
+
+**Quality Check:**
+- ✅ All 22 services covered with keyword clusters
+- ✅ Primary, secondary, long-tail keywords for each
+- ✅ Local modifiers and Guelph-specific terms included
+- ✅ Strategic prioritization (Tier 1: Critical, Tier 2: High, Tier 3: Niche, Tier 4: Consolidate)
+- ✅ File committed to docs/project/ralph/guelph-keywords.md
+- ✅ pnpm build passes (639 pages, 0 errors)
+
+**Usage for Next Stories:**
+- US-003 (positioning-angles): Use housing mix, climate factors, competitive advantages as positioning inputs
+- US-005 (trustOpener): Reference top keywords and local trust signals
+- US-006 (problem): Use keyword insights + Guelph climate/housing challenges
+- US-007 (solution): Emphasize local expertise, established presence, heritage home knowledge
+- US-008 (benefits): Tie to keyword themes (response time, local presence, rebate processing)
+
+**Next:** US-003 will run positioning-angles skill for Guelph market differentiation.
+
+---
+
+## US-003: Positioning Angles for Guelph Market
+
+**Execution:**
+- Invoked /positioning-angles skill with Guelph market context
+- Read guelph-keywords.md and profile.yaml for market intelligence
+- Analyzed competitive landscape (big-box, franchises, budget contractors, distant contractors)
+- Identified core insight: For $15K investments, local institutional knowledge > brand partnerships or emergency speed
+
+**Output:**
+- File: docs/project/ralph/guelph-positioning.md (251 lines)
+- 5 distinct positioning angles (NOT generic):
+  1. **The Local HVAC Incumbent** - 30 years in Guelph = pattern recognition competitors lack
+  2. **The Heritage Home Specialist** - Expertise in limestone homes, mature neighborhoods, preservation-minded retrofits
+  3. **The Rebate Navigator** - Handle rebate paperwork start to finish (provincial + utility + municipal)
+  4. **The Climate-Appropriate Specialist** - Know which systems work in Guelph's cold winters, humid summers, river valley microclimates
+  5. **The Accountability Anchor** - 25 Clearview St = verifiable local presence since 1994
+
+**Strategy:**
+- **Primary angle:** Local HVAC Incumbent (broadest applicability, leverages strongest differentiator)
+- **Secondary angles (service-specific):**
+  - Heritage services (ductless, boilers, downtown): Layer in Heritage Home Specialist
+  - Heat pumps, high-efficiency: Layer in Rebate Navigator + Climate-Appropriate Specialist
+  - High-ticket installations ($15K+): Layer in Accountability Anchor
+
+**Key Messaging Themes:**
+- ✅ EMPHASIZE: "Headquartered in Guelph since 1994", "30 years in Guelph housing stock", "Heritage home expertise", "Climate-proven equipment", "Real accountability: 25 Clearview St"
+- ❌ AVOID: "24/7 emergency service" (repair focus), "Lowest prices" (wrong audience), "Fast response" (transactional)
+
+**Quality Check:**
+- ✅ All 5 angles are Guelph-specific (NOT generic positioning)
+- ✅ Angles address competitive alternatives (franchises, big-box, budget contractors)
+- ✅ Each angle includes: positioning statement, psychology, headline direction, when to use, content applications
+- ✅ Recommended strategy provided (primary + secondary angle layering)
+- ✅ File committed to docs/project/ralph/guelph-positioning.md
+- ✅ pnpm build passes (639 pages, 0 errors)
+
+**Usage for Next Stories:**
+- US-004 (brand-voice): Use positioning angles to inform voice guide (accountability, expertise, local pride, NOT urgency)
+- US-005 (trustOpener): Lead with Local HVAC Incumbent angle ("Since 1994, B.A.P has been solving HVAC challenges in Guelph...")
+- US-006 (problem): Reference housing/climate challenges (heritage homes, limestone, cold winters, humidity)
+- US-007 (solution): Emphasize pattern recognition from 30 years local tenure
+- US-008 (benefits): Mix practical benefits (rebate handling, climate-proven) with trust benefits (local presence, accountability)
+
+**Content Rule:**
+Every service-city page MUST feel genuinely Guelph-specific (reference local housing types, climate factors, or tenure), NOT just city-name-swapped generic copy.
+
+**Next:** US-004 will run brand-voice skill to extract/validate voice profile from existing service pages.
+
+---
+
+## US-004: Brand Voice Validation
+
+**Execution:**
+- Invoked /brand-voice skill in Extract mode
+- Read existing service pages: furnace-installation.md, heat-pump-installation.md, air-conditioner-installation.md
+- Read guelph-positioning.md for alignment with positioning angles
+- Analyzed voice patterns across problem, solution, benefits, guarantees sections
+
+**Output:**
+- File: docs/project/ralph/brand-voice.md (384 lines)
+- Comprehensive voice profile extracted from existing B.A.P content
+- Structured for immediate use by /seo-content and /direct-response-copy skills
+
+**Voice Characteristics Identified:**
+
+1. **Core Personality Traits:**
+   - Expertise-based confidence (30+ years experience, not marketing hype)
+   - Accountability-focused (10-year warranties, price lock guarantees, concrete promises)
+   - Educator not persuader (explains WHY things matter, trusts informed customers)
+   - Respectful realism (acknowledges major investment, doesn't sugarcoat or fear-monger)
+
+2. **Tone Positioning:**
+   - Professional-casual (clear, direct, contractions used naturally)
+   - Serious with warmth (matches $15K investment gravity, but approachable)
+   - Measured bold (strong claims with technical backing)
+   - Simple words, sophisticated ideas (explains HVAC concepts in everyday language)
+   - Direct but respectful (no fluff, acknowledges customer concerns)
+
+3. **Vocabulary Patterns:**
+   - USE: "Properly sized", "right the first time", "we ensure/verify/guarantee", "based on your home", "since 1994", "no surprises", specific numbers always
+   - AVOID: "24/7 emergency", "act now", "best/top-rated", "comprehensive", "passionate about", hedging language ("may", "might"), "luxury"
+   - Jargon level: Moderate and explained (uses AFUE, SEER, TSSA but explains meaning)
+
+4. **Structural Patterns:**
+   - Sentences: Mix of medium (10-15 words) and short (3-8 words for emphasis)
+   - Paragraphs: 2-4 sentences (scannable, not walls of text)
+   - Openings: Start with customer reality, NOT company pitch
+   - POV: "We" for actions, "You" for benefits
+   - Relationship: Expert consultant, not salesperson
+
+**Voice Profile Sections:**
+
+1. Voice Summary (2-3 sentence essence)
+2. Core Personality Traits (4 traits with practical explanations)
+3. Tone Spectrum (5 dimensions with positioning)
+4. Vocabulary (words to USE, words to AVOID, jargon level, profanity policy)
+5. Rhythm & Structure (sentence/paragraph patterns, openings, formatting)
+6. POV & Address (first person, reader address, relationship stance)
+7. Example Phrases (on-brand vs off-brand with explanations)
+8. Do's and Don'ts (specific guidance for content creation)
+9. Voice in Action (content type examples: trustOpener, problem, solution, benefits)
+10. City-Specific Content Adaptation (guidelines for 550 service-city pages)
+11. Quality Control Checklist (tone, specificity, differentiation, writing quality checks)
+12. Skills Integration (how /seo-content and /direct-response-copy should use this profile)
+
+**Key Principles Extracted:**
+
+1. **Expertise over persuasion** — Inform and educate, don't sell and pressure
+2. **Specificity over claims** — Show with numbers and proof, don't tell with superlatives
+3. **Accountability over promises** — Own outcomes completely, no weasel words
+
+**The Voice Test:**
+"Would an affluent homeowner researching a $15K HVAC investment feel INFORMED and CONFIDENT after reading this content, or PRESSURED and SKEPTICAL?"
+
+B.A.P content should always answer: **INFORMED and CONFIDENT.**
+
+**City-Specific Adaptation Strategy:**
+
+For 550 service-city pages (22 services × 25 cities), voice profile includes:
+- Housing reference examples (heritage limestone homes, mature neighborhoods, tech sector housing)
+- Climate reference examples (river valley humidity, continental extremes, microclimates)
+- Local tenure references (headquarters vs serving from headquarters)
+- Quality rule: "A homeowner reading their city page should think: 'This was written by someone who knows MY city and MY neighborhood's HVAC challenges.' NOT: 'This is a generic template with my city name plugged in.'"
+
+**Content Type Guidelines:**
+
+**TrustOpener pattern:**
+[Local tenure statement] + [Housing/climate insight] + [Expertise claim]
+Example: "Since 1994, B.A.P has been solving HVAC challenges in Guelph's diverse housing stock, from heritage limestone homes downtown to modern subdivisions. Thirty years in one city creates pattern recognition—we know which systems work in Guelph's cold winters and humid summers because we've installed and serviced thousands of them."
+
+**Problem section pattern:**
+- Headline: Descriptive, not dramatic ("When Your Furnace Shows Its Age", NOT "Is Your Furnace Putting Your Family at Risk?")
+- Description: Explain problem with technical specifics and real numbers
+- Issues: Specific, concrete problems (NOT generic complaints)
+- Voice: Acknowledge honestly, use numbers, explain technical causes, NO fear language
+
+**Solution section pattern:**
+- Headline: What we do differently + outcome ("Right-Sized Equipment, Installed Right the First Time")
+- Description: (1) What we do specifically, (2) Why it matters technically, (3) How we ensure quality, (4) What you get as outcome
+- Voice: Lead with WHAT, explain WHY, specify HOW, concrete accountability
+
+**Benefits section pattern:**
+- Title: Concrete, specific outcome ("10-Year Parts & Labour Warranty", NOT "Peace of Mind")
+- Description: 1-2 sentences explaining what this means for customer
+- Voice: Be specific about what's included, explain customer outcome, avoid generic trust language
+
+**Quality Control Checklist (from voice profile):**
+
+Before marking content complete, verify:
+
+**Tone checks:**
+- ✅ Sounds like expert consultant, NOT salesperson
+- ✅ Explains technical concepts in accessible language
+- ✅ Makes specific claims with numbers/proof
+- ✅ Zero urgency or scarcity language
+- ✅ Zero fear-based or agitation language
+
+**Specificity checks:**
+- ✅ Contains actual numbers (years, percentages, dollar amounts, ratings)
+- ✅ References city-specific factors (housing, climate, tenure)
+- ✅ Accountability promises are concrete ("if X, we will Y")
+- ✅ Benefits describe actual outcomes, not generic values
+
+**Differentiation checks:**
+- ✅ Could NOT be written by any other HVAC contractor (local specifics)
+- ✅ Emphasizes expertise and accountability, NOT speed or price
+- ✅ Focuses on installation quality, NOT emergency service
+- ✅ Feels research-friendly, NOT high-pressure
+
+**Writing quality checks:**
+- ✅ No em dashes (--)
+- ✅ Proper punctuation (periods, commas, semicolons)
+- ✅ No sentence fragments (unless deliberate for emphasis)
+- ✅ Active voice predominantly
+- ✅ Scannable structure (not walls of text)
+
+**Skills Integration Instructions:**
+
+**/seo-content skill:**
+- Use voice guide for problem/solution sections
+- Maintain expertise-based tone (not fear-based)
+- Incorporate local housing/climate specifics
+- Explain technical concepts accessibly
+
+**/direct-response-copy skill:**
+- Use voice guide for trustOpener, benefits
+- Emphasize accountability and specificity
+- NO urgency/scarcity tactics
+- Concrete promises with proof
+
+**Application Scope:**
+This voice profile applies to ALL 25 city batches (550 total service-city pages).
+
+**Workflow for remaining 24 cities:**
+1. Read brand-voice.md FIRST before generating content
+2. Research city-specific housing stock, climate factors, local challenges
+3. Generate content using voice guidelines + city-specific research
+4. Verify content passes Quality Control Checklist
+5. Run em dash check: `grep -r '\--' src/content/service-city/*/[city].md`
+
+**Voice consistency across cities:**
+- CONSISTENT: Tone, vocabulary, structure, accountability focus
+- VARIABLE: Housing references, climate factors, local positioning nuances
+- ALWAYS: Sounds like B.A.P (expert, accountable, specific)
+- NEVER: Generic city-name-swapping
+
+**Quality Check:**
+- ✅ 384-line comprehensive voice profile created
+- ✅ Extracted from existing service page content (authentic B.A.P voice)
+- ✅ Aligned with positioning angles from US-003
+- ✅ Includes content type examples for trustOpener, problem, solution, benefits
+- ✅ Includes city-specific adaptation guidelines for 550 pages
+- ✅ Includes Quality Control Checklist for validation
+- ✅ Includes skills integration instructions for /seo-content and /direct-response-copy
+- ✅ File committed to docs/project/ralph/brand-voice.md
+- ✅ pnpm build passes (639 pages, 0 errors)
+
+**Usage for Next Stories:**
+- US-005 (trustOpener): Use voice profile pattern + Local HVAC Incumbent angle from positioning
+- US-006 (problem): Use voice profile problem section guidelines + keywords from US-002
+- US-007 (solution): Use voice profile solution section guidelines + positioning angles from US-003
+- US-008 (benefits): Use voice profile benefits section guidelines + accountability focus
+
+**Key Success Factor:**
+The voice profile provides SPECIFIC, ACTIONABLE guidance for content generation. NOT vague ("sound professional"), but concrete patterns with examples of what works and what doesn't.
+
+Every piece of content generated in US-005 through US-008 should be validated against the Quality Control Checklist in brand-voice.md BEFORE marking story complete.
+
+**Next:** US-005 will run /orchestrator → /direct-response-copy to generate trustOpener content for all 22 Guelph services using brand voice profile.
+
+---
+
+
+## US-005: Generate trustOpener Content for All Guelph Services
+
+**Execution:**
+- Invoked /orchestrator → routed to /direct-response-copy skill for trustOpener generation
+- Created scripts/add-trust-openers-guelph.ts for batch processing (reusable for remaining 24 cities)
+- Generated unique 2-3 sentence trust statements for all 22 Guelph services
+- All content references Guelph-specific factors:
+  - Heritage housing (Ward, St. Patrick's Ward, limestone homes)
+  - Climate challenges (cold winters, humid summers, Speed River valley microclimates)
+  - Local tenure ("Since 1994", "Thirty years in Guelph", "Headquartered in Guelph")
+- Used "Local HVAC Incumbent" positioning angle from US-003
+- Followed brand voice guidelines from US-004 (expertise-based, accountability-focused, educator not persuader)
+
+**Key Implementation Details:**
+- YAML escaping critical: Single quotes in strings must be doubled ('' not \') for valid YAML
+- Script approach more reliable than manual edits for 22 files
+- Regex pattern: `/(seoDescription: '[^']*')\n/` to insert trustOpener after seoDescription field
+
+**Quality Verification:**
+- ✅ All 22 services have unique trustOpener content (grep check showed no duplicates)
+- ✅ NO em dashes in any trustOpener field (grep -E '\-\-[^>]' returned empty)
+- ✅ Proper punctuation (periods only, no incomplete sentences)
+- ✅ City-specific content (references Guelph neighborhoods, Speed River, heritage housing)
+- ✅ Brand voice maintained (expertise, accountability, no urgency/scarcity tactics)
+- ✅ Build passes: 639 pages, 0 errors
+- ✅ Proper YAML syntax (doubled single quotes: 'Guelph''s' not 'Guelph\'s')
+
+**Content Examples:**
+
+*Furnace Installation:*
+"Since 1994, B.A.P has been solving furnace challenges in Guelph's diverse housing stock, from heritage limestone homes in the Ward to modern builds near Kortright Hills. Thirty years in one city creates pattern recognition most contractors lack. We know which furnace systems work in Guelph's cold winters and humid microclimate conditions because we've installed and serviced thousands of them."
+
+*Ductless Mini-Split:*
+"B.A.P has been installing ductless mini-split systems in Guelph since before they were common in Ontario, particularly in heritage homes where adding ductwork would compromise original architecture. Guelph's downtown limestone homes and century properties are ideal candidates for ductless solutions. We understand the placement strategies that deliver even heating and cooling without visible equipment dominating your historic interiors."
+
+*Maintenance Plans:*
+"For thirty years, B.A.P has maintained HVAC systems across Guelph through a simple principle: regular maintenance costs less than emergency repairs and premature replacement. Our maintenance plans focus on the service procedures that actually extend equipment life in this climate, not unnecessary upselling. Scheduled maintenance means your systems are serviced before heating and cooling seasons when breakdowns are most disruptive and contractors are hardest to schedule."
+
+**Pattern Variations by Service Type:**
+
+1. **Installation services:** Emphasize local pattern recognition from 30 years of installations
+2. **Repair services:** Emphasize diagnostic experience with failure patterns in Guelph's climate
+3. **Maintenance services:** Emphasize preventive focus + knowing what actually extends life vs upselling
+4. **Heritage-specific (boilers, ductless):** Emphasize expertise with historic housing stock
+5. **Climate-specific (heat pumps, dehumidifiers):** Emphasize understanding Guelph's weather challenges
+
+**Reusable Patterns for Remaining 24 Cities:**
+
+1. **Script template:** scripts/add-trust-openers-guelph.ts can be duplicated and modified for each city
+2. **Content structure:** [Local tenure statement] + [Housing/climate insight] + [Expertise claim]
+3. **YAML escaping:** Always double single quotes in strings (trustOpener.replace(/'/g, "''"))
+4. **Verification steps:**
+   - Count: `grep -h "^trustOpener:" src/content/service-city/*/[city].md | wc -l` should equal 22
+   - Uniqueness: `grep -h "^trustOpener:" src/content/service-city/*/[city].md | sort | uniq -d` should be empty
+   - No em dashes: `grep "trustOpener:" src/content/service-city/*/[city].md | grep -E '\-\-[^>]'` should be empty
+   - Build: `pnpm build` should pass with 639 pages, 0 errors
+
+**Gotchas Discovered:**
+
+1. **YAML Single Quote Escaping:** In YAML single-quoted strings, single quotes must be doubled.
+   - WRONG: `trustOpener: 'Guelph\'s homes'` (causes parse error)
+   - RIGHT: `trustOpener: 'Guelph''s homes'` (parses correctly)
+   - JavaScript: `trustOpener.replace(/'/g, "''")`
+
+2. **Long Line Length:** TrustOpener sentences are 250+ characters. YAML handles this fine as single-line strings in single quotes.
+
+3. **Grep False Positives:** Frontmatter delimiters `---` match `\--` regex. Must filter carefully or use specific field grep.
+
+4. **Context Passing to Skills:** Used LIGHT CONTEXT approach (brand voice summary + positioning angle only) to avoid over-contexted, hedged output from direct-response-copy skill.
+
+**Time Investment:**
+- Orchestrator routing: 2 minutes
+- Content generation (manual for reusability assessment): 15 minutes
+- Script creation: 10 minutes
+- YAML escaping debugging: 5 minutes
+- Verification + commit: 5 minutes
+- **Total: ~37 minutes for 22 services**
+
+**Efficiency Note:** Script-based approach took longer upfront but creates reusable workflow for remaining 528 service-city pages (24 cities × 22 services). Manual editing would have been faster for one city but doesn't scale.
+
+**Next:** US-006 will run /orchestrator → /seo-content to generate problem sections using keyword research from US-002.
+
+---
+
