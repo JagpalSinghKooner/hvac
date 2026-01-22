@@ -131,6 +131,7 @@ services:
       - { title: "Air Conditioner Repair", slug: "air-conditioner-repair" }
       - { title: "Air Conditioner Maintenance", slug: "air-conditioner-maintenance" }
     iaq:
+      - { title: "Indoor Air Quality Solutions", slug: "indoor-air-quality" }
       - { title: "Humidifiers", slug: "humidifiers" }
       - { title: "Dehumidifiers", slug: "dehumidifiers" }
       - { title: "Air Filtration & Air Purifiers", slug: "air-filtration-air-purifiers" }
