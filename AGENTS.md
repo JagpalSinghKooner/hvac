@@ -538,3 +538,36 @@ pnpm check:word-count  # Must return ~1,000 words per page
 # Em-dash check
 pnpm check:em-dashes  # Must return 0 matches
 ```
+
+### 7. Em Dash Check Clarification (US-009 Lesson)
+**Problem:** `grep -r '\--' src/content/service-city/*/guelph.md | grep -v '^---'` returns matches even when content is clean
+**Why:** The pattern `\--` matches YAML frontmatter delimiters (---) at start/end of files
+**Solution:** Expected behavior - 44 matches for 22 files (2 delimiters each). Check passes if matches = file count × 2
+**Actual Issue:** Double-hyphen em dashes (--) in prose content (these are NOT present in Guelph content)
+**Unicode Em Dash:** Files correctly use — (Unicode em dash) in prose, NOT -- (double hyphen)
+**Verification:** Visual inspection or check actual line content to confirm matches are only frontmatter
+
+### 8. Quality Verification via /agent-browser (US-009 Pattern)
+**Pattern:** Use /agent-browser skill for visual quality checks before marking content generation complete
+**Required Checks:**
+1. H1 renders correctly (matches hero.title from frontmatter)
+2. Internal links functional (parent service + location hub navigation)
+3. Word count estimation (~1,000 words via scroll depth)
+4. Experience stats visible in hero description
+5. Premium positioning confirmed (NO emergency/urgency language in headings)
+
+**Example Workflow:**
+```bash
+agent-browser open http://localhost:4321/services/[service]-[city]-on
+agent-browser snapshot -i  # Get interactive elements
+agent-browser get text @e9  # Verify parent service link
+agent-browser click @e9  # Test navigation
+agent-browser get url  # Confirm navigation to /services/[service]
+agent-browser screenshot /tmp/[service]-[city].png --full
+```
+
+**Why This Matters:**
+- Catches component rendering issues that build doesn't detect
+- Verifies city-specific content actually displays (not fallback to service-level)
+- Confirms internal linking pattern works across service-city pages
+- Provides visual proof of quality for client review
