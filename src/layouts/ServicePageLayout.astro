@@ -168,6 +168,17 @@ interface Props {
   // Service-city specific identity
   cityName?: string;
   locationSlug?: string;
+  serviceSlug?: string;  // Phase 8A: For internal linking
+
+  // Phase 8A: City-specific content fields
+  cityHero?: {
+    title: string;
+    description: string;
+  };
+  finalCtaHeadline?: string;
+  finalCtaCopy?: string;
+  benefitsHeadline?: string;
+  contextHeadline?: string;
 
   // Content sections (optional - conditionally rendered)
   trustOpener?: string;
@@ -200,6 +211,12 @@ const {
   serviceType,
   cityName,
   locationSlug,
+  serviceSlug,
+  cityHero,  // Phase 8A
+  finalCtaHeadline,  // Phase 8A
+  finalCtaCopy,  // Phase 8A
+  benefitsHeadline,  // Phase 8A
+  contextHeadline,  // Phase 8A
   trustOpener,
   problem,
   solution,
@@ -227,6 +244,11 @@ const {
     serviceType={serviceType}
     phoneNumber={business.contact.phone_e164}
     phoneDisplay={business.contact.phone_display}
+    cityHero={cityHero}
+    serviceSlug={serviceSlug}
+    locationSlug={locationSlug}
+    cityName={cityName}
+    serviceName={serviceType}
   />
 
   <!-- 2. Trust Opener (service-city only) -->
@@ -294,6 +316,7 @@ const {
       variant="default"
       benefits={benefits}
       headline="Why Choose Us"
+      benefitsHeadline={benefitsHeadline}
     />
   )}
 
@@ -327,6 +350,7 @@ const {
       cityName={cityName}
       serviceName={serviceTitle}
       content={context}
+      contextHeadline={contextHeadline}
     />
   )}
 
@@ -389,7 +413,8 @@ const {
   <!-- 16. Final CTA -->
   <!-- Background: primary (blue tint) -->
   <FinalCTASection
-    phoneNumber={business.contact.phone_e164}
-    phoneDisplay={business.contact.phone_display}
+    headline={finalCtaHeadline}
+    copy={finalCtaCopy}
+    cityName={cityName}
   />
 </BaseLayout>

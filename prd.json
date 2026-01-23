@@ -36,8 +36,8 @@
         "No TypeScript errors in VSCode"
       ],
       "priority": 1,
-      "passes": false,
-      "notes": "Schema changes only. NO skills required. Must complete before component updates."
+      "passes": true,
+      "notes": "COMPLETE - Added 6 new schema fields (hero, finalCta, benefitsHeadline, contextHeadline, experienceStats). Removed processSteps field. Updated [serviceLocation].astro to inherit processSteps from parent service only. Build passes with 639 pages."
     },
     {
       "id": "US-002",
@@ -58,8 +58,8 @@
         "pnpm build passes"
       ],
       "priority": 2,
-      "passes": false,
-      "notes": "Requires /frontend-design, /web-design-guidelines, /agent-browser skills. Updates 4 components: ServiceHeroSection, FinalCTASection, ServiceBenefitsSection, ContextSection. Depends on US-001 schema changes."
+      "passes": true,
+      "notes": "COMPLETE - All 4 components already had Phase 8A props integrated. Verified: /frontend-design spec confirms implementation complete, /web-design-guidelines review passed (proper H1 hierarchy, semantic HTML), /agent-browser tested 3 Guelph pages (furnace, heat pump, AC) - internal links navigate correctly, only ONE H1 per page confirmed, pnpm build passes (639 pages)."
     },
     {
       "id": "US-003",

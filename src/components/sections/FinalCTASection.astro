@@ -3,10 +3,26 @@ import { getEntry } from 'astro:content';
 import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
 
+interface Props {
+  // Phase 8A: City-specific CTA content
+  headline?: string;
+  copy?: string;
+  cityName?: string;
+}
+
+const { headline, copy, cityName } = Astro.props;
+
 const businessProfile = await getEntry('business', 'profile');
 const phoneDisplay = businessProfile?.data.contact?.phone_display || '+1 519-835-4858';
 const phoneE164 = businessProfile?.data.contact?.phone_e164 || '+15198354858';
 const email = businessProfile?.data.contact?.email || 'info@bapheating.ca';
+
+// Use city-specific content when available, else fallback
+const displayHeadline = headline || "Get Your Free Installation Estimate";
+const displayCopy = copy ||
+  (cityName
+    ? `Ready to upgrade your ${cityName} home? Call now for a free consultation with zero obligation.`
+    : "No obligation • Same-day response • 10-year warranty");
 
 // Same trust bullets as Expert Consultation section (US-006)
 const trustBullets = [
@@ -22,10 +38,10 @@ const trustBullets = [
     <div class="max-w-3xl mx-auto text-center">
       {/* Header */}
       <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4 md:mb-6">
-        Get Your Free Installation Estimate
+        {displayHeadline}
       </h2>
       <p class="text-lg text-muted-foreground mb-8">
-        No obligation • Same-day response • 10-year warranty
+        {displayCopy}
       </p>
 
       {/* Trust Bullets */}

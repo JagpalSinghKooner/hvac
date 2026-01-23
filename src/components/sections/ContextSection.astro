@@ -3,10 +3,11 @@ interface Props {
   cityName: string;
   serviceName?: string;
   content: string;
+  contextHeadline?: string;  // Phase 8A: City-specific headline (overrides dynamic headline)
   variant?: 'default' | 'muted' | 'primary';
 }
 
-const { cityName, serviceName, content, variant = 'muted' } = Astro.props;
+const { cityName, serviceName, content, contextHeadline, variant = 'muted' } = Astro.props;
 
 // Variant background classes
 const variantClasses = {
@@ -20,16 +21,18 @@ if (!content || content.trim() === '') {
   return null;
 }
 
-const headline = serviceName
-  ? `${serviceName} in ${cityName}`
-  : `Local Context for ${cityName}`;
+// City-specific headline takes priority
+const displayHeadline = contextHeadline ||
+  (serviceName
+    ? `${serviceName} in ${cityName}`
+    : `Local Context for ${cityName}`);
 ---
 
 <section class={`py-16 md:py-24 ${variantClasses[variant]}`}>
   <div class="container mx-auto px-4 md:px-6">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">
-        {headline}
+        {displayHeadline}
       </h2>
 
       <div

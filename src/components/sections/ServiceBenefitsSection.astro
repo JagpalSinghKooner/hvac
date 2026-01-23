@@ -10,6 +10,7 @@ interface Benefit {
 interface Props {
   benefits: Benefit[];
   headline?: string;
+  benefitsHeadline?: string;  // Phase 8A: City-specific headline (overrides headline)
   imageAlt?: string;
   reversed?: boolean;
   variant?: 'default' | 'muted' | 'primary';
@@ -18,10 +19,14 @@ interface Props {
 const {
   benefits,
   headline = "Why Choose Us",
+  benefitsHeadline,  // Phase 8A
   imageAlt = "Service benefits",
   reversed = false,
   variant = 'default'
 } = Astro.props;
+
+// City-specific headline takes priority
+const displayHeadline = benefitsHeadline || headline;
 
 // Variant classes for background
 const variantClasses = {
@@ -52,7 +57,7 @@ if (!benefits || benefits.length === 0) {
       ]}>
         <div class="space-y-4">
           <h2 class="text-3xl md:text-4xl lg:text-5xl font-heading text-foreground leading-tight">
-            {headline}
+            {displayHeadline}
           </h2>
         </div>
 

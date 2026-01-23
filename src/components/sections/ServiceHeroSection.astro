@@ -10,9 +10,38 @@ interface Props {
   serviceType?: string;
   phoneNumber: string;
   phoneDisplay: string;
+  // Phase 8A: City-specific hero content
+  cityHero?: {
+    title: string;
+    description: string;
+  };
+  // Phase 8A: Internal navigation links
+  serviceSlug?: string;
+  locationSlug?: string;
+  cityName?: string;
+  serviceName?: string;
 }
 
-const { title, description, category, serviceType, phoneNumber, phoneDisplay } = Astro.props;
+const {
+  title,
+  description,
+  category,
+  serviceType,
+  phoneNumber,
+  phoneDisplay,
+  cityHero,
+  serviceSlug,
+  locationSlug,
+  cityName,
+  serviceName
+} = Astro.props;
+
+// Use city-specific content when available, else fallback to service content
+const displayTitle = cityHero?.title || title;
+const displayDescription = cityHero?.description || description;
+
+// Show internal links only when all required data present (service-city pages only)
+const showInternalLinks = serviceSlug && locationSlug && cityName && serviceName;
 ---
 
 <section class="relative w-full bg-background py-12 md:py-16 lg:py-20">
@@ -29,13 +58,32 @@ const { title, description, category, serviceType, phoneNumber, phoneDisplay } =
 
         <!-- Title -->
         <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-foreground leading-tight">
-          {title}
+          {displayTitle}
         </h1>
 
         <!-- Description -->
         <p class="text-lg md:text-xl text-muted-foreground leading-relaxed">
-          {description}
+          {displayDescription}
         </p>
+
+        <!-- Phase 8A: Internal navigation links (service-city pages only) -->
+        {showInternalLinks && (
+          <div class="flex flex-wrap gap-4 text-sm text-muted-foreground">
+            <a
+              href={`/services/${serviceSlug}`}
+              class="inline-flex items-center gap-1 hover:text-foreground transition-colors duration-200 underline underline-offset-4"
+            >
+              Learn more about {serviceName}
+            </a>
+            <span aria-hidden="true" class="text-muted-foreground/50">•</span>
+            <a
+              href={`/locations/${locationSlug}`}
+              class="inline-flex items-center gap-1 hover:text-foreground transition-colors duration-200 underline underline-offset-4"
+            >
+              See all services in {cityName}
+            </a>
+          </div>
+        )}
 
         <!-- CTA Button -->
         <div class="pt-4">

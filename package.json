@@ -15,7 +15,8 @@
     "ralph": "bash docs/project/ralph/ralph.sh --tool claude",
     "ralph:5": "bash docs/project/ralph/ralph.sh 5 --tool claude",
     "ralph:17": "bash docs/project/ralph/ralph.sh 17 --tool claude",
-    "ralph:20": "bash docs/project/ralph/ralph.sh 20 --tool claude"
+    "ralph:20": "bash docs/project/ralph/ralph.sh 20 --tool claude",
+    "ralph:infinite": "bash docs/project/ralph/ralph.sh 999 --tool claude"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",

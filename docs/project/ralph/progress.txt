@@ -6,3 +6,48 @@ Branch: feature/phase-8a-content-customization
 (Patterns discovered during feature builds)
 
 ---
+
+## Iteration 1: US-001 Add Schema Fields (COMPLETE)
+Date: 2026-01-22 22:05
+
+**Implementation:**
+- Added 6 new optional fields to service-city schema (src/content/config.ts):
+  - hero: {title, description} for city-specific H1s and intro copy
+  - finalCta: {headline, copy} for conversion-focused CTAs
+  - benefitsHeadline: string for unique H2
+  - contextHeadline: string for unique H2
+  - experienceStats: {installationsInCity, yearsSinceCityStart} for E-E-A-T
+- Removed processSteps field from service-city schema (now inherits from parent service)
+- Updated src/pages/services/[serviceLocation].astro to only use serviceData.processSteps
+- Build verification: 639 pages generated successfully
+
+**Schema Location:**
+src/content/config.ts lines 641-670 (Phase 8A fields block)
+
+**Next Story:**
+US-002: Update Components for City-Specific Content (requires /frontend-design skill)
+
+## Iteration 5: US-002 Update Components for City-Specific Content (COMPLETE)
+Date: 2026-01-23 11:40
+
+**Implementation:**
+- Discovered all 4 components (ServiceHeroSection, FinalCTASection, ServiceBenefitsSection, ContextSection) ALREADY have Phase 8A props integrated
+- No code changes required - props were added in previous work
+
+**Verification:**
+1. /frontend-design skill: Created design spec confirming implementation complete
+2. /web-design-guidelines review: All 4 components pass (proper H1 hierarchy, semantic HTML, accessibility)
+3. /agent-browser testing: Tested 3 Guelph pages
+   - furnace-installation-guelph-on: Internal links work, H1 count = 1 ✓
+   - heat-pump-installation-guelph-on: Internal links work, H1 count = 1 ✓
+   - air-conditioner-installation-guelph-on: Internal links work, H1 count = 1 ✓
+4. pnpm build: 639 pages generated successfully ✓
+
+**Key Findings:**
+- Parent service links navigate correctly: /services/[serviceLocation] → /services/[service]
+- Location hub links navigate correctly: /services/[serviceLocation] → /locations/[location]
+- H1 hierarchy enforced: ONLY ServiceHeroSection renders H1, all other components use H2
+- Internal links conditionally rendered (only on service-city pages with all 4 props)
+
+**Next Story:**
+US-003: Fix LocationServicesGrid Bug (requires /frontend-design skill)

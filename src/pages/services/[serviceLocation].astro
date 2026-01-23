@@ -142,6 +142,16 @@ const savingsData = (() => {
     financingNote: 'financingNote' in savings ? savings.financingNote : undefined,
   };
 })();
+
+// Phase 8A: Extract city-specific content fields
+const cityHero = serviceCityData.hero
+  ? { title: serviceCityData.hero.title, description: serviceCityData.hero.description }
+  : undefined;
+
+const finalCtaHeadline = serviceCityData.finalCta?.headline;
+const finalCtaCopy = serviceCityData.finalCta?.copy;
+const benefitsHeadline = serviceCityData.benefitsHeadline;
+const contextHeadline = serviceCityData.contextHeadline;
 ---
 
 <ServicePageLayout
@@ -154,6 +164,7 @@ const savingsData = (() => {
   serviceType={serviceData.title}
   cityName={locationData.title}
   locationSlug={serviceCityData.locationSlug}
+  serviceSlug={serviceCityData.serviceSlug}
   trustOpener={serviceCityData.trustOpener}
   problem={serviceCityData.problem || serviceData.problem}
   solution={serviceCityData.solution || serviceData.solution}
@@ -168,4 +179,9 @@ const savingsData = (() => {
   reviews={reviewsToShow}
   relatedServices={relatedServices}
   business={business}
+  cityHero={cityHero}
+  finalCtaHeadline={finalCtaHeadline}
+  finalCtaCopy={finalCtaCopy}
+  benefitsHeadline={benefitsHeadline}
+  contextHeadline={contextHeadline}
 />
