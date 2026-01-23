@@ -1388,3 +1388,51 @@ Single-quoted strings BREAK with these characters even with apostrophe escaping.
 **Next Iteration:**
 Continue New Hamburg content generation (next 4-5 files: air-conditioner-repair, air-filtration, boilers, commercial)
 
+## Iteration 10 (Ralph Loop - Autonomous): US-010 New Hamburg Batch 3 (IN PROGRESS)
+Date: 2026-01-23 22:47
+
+**Status Update:**
+Continuing New Hamburg content generation. Generated 4 more files (air-conditioner-repair, air-filtration-air-purifiers, boiler-installation, boiler-maintenance).
+
+**Implementation (Iteration 10):**
+- Generated 4 New Hamburg files with Phase 8A structure
+- Files: air-conditioner-repair, air-filtration-air-purifiers, boiler-installation, boiler-maintenance
+- Used CORRECT multiline YAML format: `description: |` for problem, solution, context fields (prevents Unicode character breakage)
+- Word count: ~1,000 words per file
+- Premium positioning: All H1s use "Trusted", "Expert", "New Hamburg [Service] Since 1994" (NO emergency language)
+- Family positioning: "Built to Last the Mortgage" angle applied consistently
+- E-E-A-T signals: experienceStats populated (750 AC repair, 280 air filtration, 145 boiler install, 840 boiler maintenance)
+- YAML apostrophe escaping: New Hamburg''s, Wilmot''s, won''t (double apostrophes in single-quoted strings)
+- Markdown content present after frontmatter (H1 + 2-3 sentences verified)
+
+**Content Quality:**
+- All files reference New Hamburg-specific context: growing community, family-oriented, Wilmot Township, Kitchener-Wilmot Hydro, modern subdivisions, commuter lifestyle
+- Positioning emphasizes long-term thinking, family investment, predictable costs, 20-year outlook
+- Technical accuracy: proper AC diagnosis, HEPA filtration efficiency, condensing boiler venting, combustion analysis
+- Rebate info: Kitchener-Wilmot Hydro (NOT Waterloo North Hydro like Elmira/St. Jacobs)
+
+**YAML Format Success:**
+Multiline format (`description: |`) continues to WORK correctly for all long text fields containing:
+- Degree symbols (°C)
+- Em dashes (—)
+- Any Unicode characters beyond basic ASCII
+Single-quoted strings would BREAK with these characters even with apostrophe escaping.
+
+**Verification:**
+- Build passes: 682 pages (up from 678, +4 new pages)
+- Zero Zod schema errors
+- All 4 files have populated hero.title fields
+- Markdown content verified via tail -3 (shows H1 + description, NOT ---)
+
+**Commit:** [hash] - "feat: US-010 New Hamburg content (AC repair + air filtration + boilers) - 12/66 files"
+
+**Progress:**
+- Elmira: 22/22 COMPLETE (iteration 9)
+- St. Jacobs: 22/22 COMPLETE (iteration 6)
+- New Hamburg: 12/22 IN PROGRESS (furnace-installation, furnace-maintenance, furnace-repair, heat-pump-installation, heat-pump-maintenance, heat-pump-repair, air-conditioner-installation, air-conditioner-maintenance, air-conditioner-repair, air-filtration-air-purifiers, boiler-installation, boiler-maintenance)
+- New Hamburg remaining: 10 files (boiler-repair through rooftop-units)
+- Total remaining for US-010: 10 files
+
+**Next Iteration:**
+Continue New Hamburg content generation (next 4-5 files: boiler-repair, commercial-hvac, dehumidifiers, ductless-mini-split, hrv-erv-ventilation)
+

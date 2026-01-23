@@ -1,6 +1,10 @@
 # B.A.P Heating & Cooling — Homepage Redesign
 ## Full & Final Implementation Document
 
+> **NOTE (2026-01-23):** Homepage section specifications in this document are **superseded by Phase 9**.
+> See [phase-9-prd-reference.md](NEW-todo/homepage/phase-9-prd-reference.md) for current homepage rebuild plan.
+> This document remains valid for: **business context, value proposition, design guidelines, content architecture**.
+
 **Document Status:** FINAL — Ready for Implementation
 **Date:** January 21, 2026
 **Supersedes:** CRO-PHONE-CONVERSION-AUDIT.md, HOMEPAGE-REDESIGN-DECISIONS.md

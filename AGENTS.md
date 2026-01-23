@@ -249,6 +249,11 @@ Contains: company name, phone numbers, service areas, hours, certifications.
 - `src/content/config.ts` - Schema updates (US-001)
 - `docs/project/ralph/brand-voice.md` - Brand voice profile (applies to ALL 25 cities)
 
+**Next Phase:** Phase 9 Homepage Component Rebuild
+- Spec: `NEW-todo/homepage/phase-9-prd-reference.md`
+- Prerequisites: Phase 8A COMPLETE, ontario.md exists, schema extended
+- Key changes: Three-tier fallback, SectionHeader pattern, ScrollBanner replaces StickyPhoneDrawer
+
 ---
 
 ## Phase 8A: Required Skills Per Story Type

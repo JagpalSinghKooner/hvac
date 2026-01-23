@@ -365,9 +365,31 @@ pnpm ralph:20   # 20 iterations
 pnpm ralph:20
 ```
 
+### Phase 9: Homepage Component Rebuild (PLANNED)
+
+**Status:** Waiting for Phase 8A completion
+**Specification:** [phase-9-prd-reference.md](NEW-todo/homepage/phase-9-prd-reference.md)
+**Content Prep:** COMPLETE (US-001 to US-005 done)
+
+When Phase 9 starts:
+- Three-tier fallback architecture (ontario.md → profile.yaml)
+- 12 homepage components with shadcn MCP + `/frontend-design`
+- SectionHeader pattern for all sections (except Hero)
+- ScrollBanner replaces StickyPhoneDrawer
+- AnnouncementBar (new) for rebate/financing promo
+- Header/Footer restructure with region accordions
+
+**Key Changes from Current Homepage:**
+- REMOVES: StickyPhoneDrawer, ExitIntentModal, "Since 1994" header badge
+- ADDS: ScrollBanner, AnnouncementBar, SectionHeader component
+- RESTRUCTURES: Header (4 service links + More dropdown), Footer (region accordions)
+
 ---
 
 ## Homepage Sections (17)
+
+> **NOTE:** This section reflects current Phase 2 implementation. Phase 9 will restructure to 12 sections.
+> See [phase-9-prd-reference.md](NEW-todo/homepage/phase-9-prd-reference.md) for Phase 9 structure.
 
 ```
 0. Header (sticky, "Since 1994" badge)
@@ -424,6 +446,7 @@ pnpm preview     # Preview production
 | **Codebase patterns** | `AGENTS.md` (read first!) |
 | Full plan | `HOMEPAGE-REDESIGN-FULL-AND-FINAL.md` |
 | Phase 8 spec | `PHASE-8-CITY-CONTENT-CUSTOMIZATION.md` |
+| **Phase 9 PRD** | `NEW-todo/homepage/phase-9-prd-reference.md` |
 | Brand voice | `docs/project/ralph/brand-voice.md` |
 | Business data | `src/content/business/profile.yaml` |
 | Content schemas | `src/content/config.ts` |
@@ -434,4 +457,7 @@ pnpm preview     # Preview production
 
 ---
 
-**When in doubt, consult HOMEPAGE-REDESIGN-FULL-AND-FINAL.md**
+**When in doubt:**
+- **Phase 8A (city content):** Consult PHASE-8-CITY-CONTENT-CUSTOMIZATION.md
+- **Phase 9 (homepage rebuild):** Consult NEW-todo/homepage/phase-9-prd-reference.md
+- **Business context:** Consult HOMEPAGE-REDESIGN-FULL-AND-FINAL.md

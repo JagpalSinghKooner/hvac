@@ -402,7 +402,7 @@
       ],
       "priority": 10,
       "passes": false,
-      "notes": "IN PROGRESS - Elmira 22/22 COMPLETE. St. Jacobs 22/22 COMPLETE. New Hamburg 4/22 (iteration 8: YAML blocker RESOLVED using multiline format). Build passes with 674 pages. REMAINING: New Hamburg (18 files: heat-pump-maintenance through rooftop-units). Keyword research and positioning angles complete. SOLUTION CONFIRMED: Use `description: |` multiline format for ALL long text fields to handle Unicode characters (degree symbols, em dashes). Commit cb77b0e."
+      "notes": "IN PROGRESS - Elmira 22/22 COMPLETE. St. Jacobs 22/22 COMPLETE. New Hamburg 12/22 (iteration 10 complete). Build passes with 682 pages. REMAINING: New Hamburg (10 files: boiler-repair through rooftop-units). Keyword research and positioning angles complete. SOLUTION CONFIRMED: Use `description: |` multiline format for ALL long text fields to handle Unicode characters (degree symbols, em dashes). Commit 8aef3bf."
     },
     {
       "id": "US-011",
