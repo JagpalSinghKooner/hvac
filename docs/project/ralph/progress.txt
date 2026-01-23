@@ -1276,3 +1276,66 @@ Single-quoted YAML strings work for short values and simple contractions (with '
 - Elmira: 22/22 COMPLETE
 - St. Jacobs: 22/22 COMPLETE  
 - New Hamburg: 0/22 (blocked by YAML syntax, will fix next iteration)
+
+## Iteration 8 (Ralph Loop - Autonomous): US-010 New Hamburg Batch 1 (BREAKTHROUGH)
+Date: 2026-01-23 22:35
+
+**Status Update:**
+YAML syntax blocker RESOLVED! Generated first 4 New Hamburg files using correct multiline YAML format.
+
+**CRITICAL DISCOVERY - Multiline YAML Format Required:**
+Single-quoted YAML strings BREAK when they contain Unicode characters (degree symbols °, em dashes —).
+SOLUTION: Use `description: |` multiline format for ALL long text fields.
+
+**WRONG (causes build failure):**
+```yaml
+problem:
+  description: 'Text with 30°C temperatures and em dashes — breaks YAML parser'
+```
+
+**RIGHT (required for Unicode characters):**
+```yaml
+problem:
+  description: |
+    Text with 30°C temperatures and em dashes — works correctly.
+    Multiple paragraphs supported with blank lines.
+```
+
+**Implementation (Iteration 8):**
+- Generated 4 New Hamburg files with Phase 8A structure
+- Files: furnace-installation, furnace-maintenance, furnace-repair, heat-pump-installation
+- Used CORRECT multiline YAML format: `description: |` for problem, solution, context, trustOpener
+- Word count: ~1,000 words per file
+- Premium positioning: All H1s use "Trusted", "Professional", "Expert" (NO emergency language)
+- Family positioning: "Built to Last the Mortgage" angle applied consistently
+- E-E-A-T signals: experienceStats populated (1100 furnace, 750 maintenance, 1250 repair, 380 heat pump)
+- YAML apostrophe escaping: New Hamburg''s, Wilmot''s, won''t (double apostrophes in single-quoted strings)
+- Markdown content present after frontmatter (H1 + 2-3 sentences verified via tail -5)
+
+**Content Quality:**
+- All files reference New Hamburg-specific context: growing community, family-oriented, Wilmot Township, Kitchener-Wilmot Hydro, commuter lifestyle, modern homes
+- Positioning emphasizes long-term thinking, family investment, predictable costs, 20-year outlook
+- Technical accuracy: proper sizing, cold-climate heat pumps for -25°C operation, backup integration
+- Rebate info: Kitchener-Wilmot Hydro (NOT Waterloo North Hydro like Elmira/St. Jacobs)
+
+**Verification:**
+- Build passes: 674 pages (up from 670, +4 new pages)
+- Zero Zod schema errors
+- All 4 files have populated hero.title fields
+- Markdown content verified via tail -5 (shows H1 + description, NOT ---)
+
+**Commit:** cb77b0e - "feat: US-010 New Hamburg content (furnace services + heat pump install) - 4/66 files"
+
+**Progress:**
+- Elmira: 22/22 COMPLETE (iteration 9)
+- St. Jacobs: 22/22 COMPLETE (iteration 6)
+- New Hamburg: 4/22 IN PROGRESS (furnace-installation, furnace-maintenance, furnace-repair, heat-pump-installation)
+- New Hamburg remaining: 18 files (heat-pump-maintenance through rooftop-units)
+- Total remaining for US-010: 18 files
+
+**Next Iteration:**
+Continue New Hamburg content generation (next 4-5 files: heat-pump-maintenance, heat-pump-repair, AC services)
+
+**AGENTS.md Update Required:**
+Add YAML multiline format gotcha to AGENTS.md #2 (YAML Single Quote Escaping section):
+"For long text fields containing Unicode characters (degree symbols °, em dashes —), use multiline format `description: |` instead of single-quoted strings. Single quotes work for short values and simple contractions (with '' escaping), but BREAK with Unicode."
