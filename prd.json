@@ -402,7 +402,7 @@
       ],
       "priority": 10,
       "passes": false,
-      "notes": "IN PROGRESS - STEPS 1&2 COMPLETE (keywords+positioning for 3 cities), STEP 3 PARTIAL (5/66 files): Elmira content (furnace-installation, furnace-maintenance, furnace-repair, heat-pump-installation, heat-pump-maintenance, heat-pump-repair). Remaining: 17 Elmira + 22 St. Jacobs + 22 New Hamburg = 61 files. Build passes (639 pages). Continue iteration 5."
+      "notes": "IN PROGRESS - STEPS 1&2 COMPLETE (keywords+positioning for 3 cities), STEP 3 PARTIAL (8/66 files): Elmira content (furnace-installation, furnace-maintenance, furnace-repair, heat-pump-installation, heat-pump-maintenance, heat-pump-repair, air-conditioner-installation, air-conditioner-maintenance, air-conditioner-repair). Remaining: 14 Elmira + 22 St. Jacobs + 22 New Hamburg = 58 files. Build passes (639 pages). Continue iteration 6."
     },
     {
       "id": "US-011",
