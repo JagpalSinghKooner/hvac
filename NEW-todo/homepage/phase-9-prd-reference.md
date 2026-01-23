@@ -1054,8 +1054,33 @@ experienceStats: z.object({
 ### US-005: Homepage Marketing Copy (Task 3)
 
 **Type:** Marketing/Content
-**Skills Required:** `/positioning-angles` → `/direct-response-copy`
+**Skills Required:** `/orchestrator` → routes to skill chain (see below)
 **Output:** Complete frontmatter for `src/content/locations/ontario.md`
+
+**⚠️ CRITICAL: Orchestrator Rule Applies**
+
+This story MUST use `/orchestrator` first. NEVER directly invoke marketing skills.
+
+**Skill Execution Sequence (via /orchestrator):**
+```
+/orchestrator (diagnoses task) →
+  /positioning-angles (homepage differentiation) →
+  /brand-voice (verify consistency) →
+  /direct-response-copy (all 10 section contents)
+```
+
+**Anti-Loop Pattern (MANDATORY):**
+```markdown
+STEP 1: Check if docs/reference/homepage-positioning.md exists
+  - IF FILE EXISTS: Read file, verify positioning angle present, SKIP to STEP 2
+  - IF FILE NOT EXISTS: Run /orchestrator → /positioning-angles, save output
+
+STEP 2: Check if ontario.md has marketing copy in all 10 sections
+  - IF SECTIONS POPULATED: Read file, verify copy present, SKIP to VERIFICATION
+  - IF SECTIONS EMPTY/PLACEHOLDER: Run /orchestrator → /direct-response-copy, update file
+
+VERIFICATION: ontario.md has complete copy in all 10 sections
+```
 
 **Section Content Needed (10 sections):**
 1. hero (title, subtitle, trustBadgeText, rebateBadge, answeringTeamText)
@@ -1076,6 +1101,8 @@ experienceStats: z.object({
 - YES: Accountability, full-service positioning, premium
 
 **Acceptance Criteria:**
+- [ ] `/orchestrator` invoked FIRST (not direct skill calls)
+- [ ] docs/reference/homepage-positioning.md exists (prevents re-running positioning)
 - [ ] All 10 sections have complete copy
 - [ ] hero.rebateBadge uses data from rebate-deadlines.md
 - [ ] No emergency/urgency language
