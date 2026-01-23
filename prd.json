@@ -402,7 +402,7 @@
       ],
       "priority": 10,
       "passes": false,
-      "notes": "IN PROGRESS - Elmira 22/22 COMPLETE (iteration 9). St. Jacobs 22/22 COMPLETE (iteration 6). New Hamburg 0/22 pending. Build passes with 670 pages. REMAINING: New Hamburg (22 files). Keyword research and positioning angles complete for all 3 cities. St. Jacobs completion establishes heritage positioning quality baseline (Comfort Without Compromise angle, architectural sensitivity, discrete installations)."
+      "notes": "IN PROGRESS - Elmira 22/22 COMPLETE. St. Jacobs 22/22 COMPLETE. New Hamburg 0/22 (iteration 7: YAML syntax blocker discovered - multiline description format required for Unicode characters). Build passes with 670 pages. REMAINING: New Hamburg (22 files). Keyword research and positioning angles complete. CRITICAL: Must use `description: |` multiline format for problem/solution/context fields, NOT single-quoted strings (breaks with degree symbols and em dashes)."
     },
     {
       "id": "US-011",

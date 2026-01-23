@@ -1220,3 +1220,59 @@ St. Jacobs content generation COMPLETE. All 22 services finished with Phase 8A s
 - YAML apostrophe escaping pattern now automatic (double all apostrophes in single-quoted strings)
 - Markdown body verification via tail -3 prevents build failures
 - St. Jacobs establishes heritage positioning quality for other historic village cities (Elora, Fergus)
+
+## Iteration 7 (Ralph Loop - Autonomous): US-010 New Hamburg YAML Syntax Blocker
+Date: 2026-01-23 22:29
+
+**Status Update:**
+Attempted New Hamburg content generation (4 files) but hit YAML syntax error.
+
+**Root Cause:**
+Single-quoted YAML strings CANNOT contain certain Unicode characters (degree symbols °, em dashes —) even with apostrophe escaping. Build fails with "bad indentation of a mapping entry" error.
+
+**WRONG Syntax (causes build failure):**
+```yaml
+problem:
+  headline: 'Some Heading'
+  description: 'Long text with 30°C temperatures and em dashes — breaks YAML parser'
+```
+
+**RIGHT Syntax (required for Unicode characters):**
+```yaml
+problem:
+  headline: 'Some Heading'
+  description: |
+    Long text with 30°C temperatures and em dashes — works correctly.
+    Multiple paragraphs supported with blank lines.
+```
+
+**Attempted Fixes:**
+1. Fixed apostrophes: you're → you''re, Hamburg's → Hamburg''s (standard escaping)
+2. Fixed contractions: don't → don''t, won't → won''t, it's → it''s
+3. Build still failed at line 18:685 (deep in problem.description field)
+4. Discovered issue is Unicode degree symbol (°) and em dash (—) in single-quoted string
+
+**Solution:**
+ALL long description fields MUST use multiline format with `|`:
+- problem.description: | (then newline, indent content)
+- solution.description: | (then newline, indent content)
+- context: | (already documented in AGENTS.md, applies to description fields too)
+
+**Files Affected:**
+Deleted 4 New Hamburg files (air-conditioner-installation, air-conditioner-maintenance, air-conditioner-repair, air-filtration-air-purifiers) due to YAML syntax errors.
+
+**Next Iteration Actions:**
+1. Reference St. Jacobs files for correct multiline YAML syntax (problem.description: | format)
+2. Regenerate New Hamburg files with proper YAML structure from start
+3. Use multiline format for ALL description fields over ~100 characters
+4. Continue with remaining 22 New Hamburg files using correct syntax
+
+**Lesson Learned:**
+Single-quoted YAML strings work for short values and simple contractions (with '' escaping), but BREAK with Unicode characters. Long description fields (problem, solution, trustOpener, context, etc.) MUST use multiline format (`description: |`) to handle degree symbols, em dashes, and other special characters. This applies to ALL future content generation.
+
+**Build Status:** PASSING (670 pages, St. Jacobs complete, New Hamburg files deleted)
+
+**US-010 Progress:**
+- Elmira: 22/22 COMPLETE
+- St. Jacobs: 22/22 COMPLETE  
+- New Hamburg: 0/22 (blocked by YAML syntax, will fix next iteration)
