@@ -1438,3 +1438,462 @@ After PRD completes, proceed to Phase 9 homepage component build:
 /ralph skill # Convert to prd.json
 pnpm ralph:20
 ```
+
+---
+
+# IMPLEMENTATION SPECIFICATIONS (Gap Analysis Resolved)
+
+**Source:** Gap analysis + user interviews on 2026-01-23
+
+---
+
+## NEW COMPONENT: Announcement Bar
+
+**NOT in original PRD — Adding based on user input.**
+
+| Aspect | Specification |
+|--------|---------------|
+| **Position** | Above sticky header, fixed top |
+| **Content** | "Save thousands with rebates + 0% financing → See your options" |
+| **Link** | /financing |
+| **Dismissible** | Yes, X button, sessionStorage key: `bap-announcement-dismissed` |
+| **Visibility** | All pages |
+| **Mobile** | Full-width, text wraps, button below text |
+
+```astro
+// src/components/AnnouncementBar.astro (NEW)
+---
+import { Button } from '@/components/ui/button';
+---
+<div id="announcement-bar" class="bg-primary text-primary-foreground py-2 px-4 text-center text-sm">
+  <div class="container flex items-center justify-center gap-4 flex-wrap">
+    <span>Save thousands with rebates + 0% financing</span>
+    <a href="/financing" class="underline font-medium hover:no-underline">
+      See your options →
+    </a>
+    <button
+      aria-label="Dismiss announcement"
+      class="ml-auto text-primary-foreground/70 hover:text-primary-foreground"
+      onclick="this.closest('#announcement-bar').remove(); sessionStorage.setItem('bap-announcement-dismissed', 'true')"
+    >
+      ✕
+    </button>
+  </div>
+</div>
+```
+
+---
+
+## SPEC 1: SectionHeader Component
+
+**File:** `src/components/ui/SectionHeader.astro`
+
+```typescript
+interface Props {
+  eyebrow?: string;              // Badge text (optional)
+  headline: string;              // H2 heading (required)
+  subtext?: string;              // Paragraph below headline
+  variant?: 'default' | 'dark';  // dark = white text on bg-primary
+  align?: 'left' | 'center';     // Default: center
+  headingLevel?: 2 | 3;          // Allow H2 or H3 (default: 2)
+}
+```
+
+**Spacing:**
+- Eyebrow → Headline: 12px (`mb-3`)
+- Headline → Subtext: 16px (`mt-4`)
+- Subtext max-width: 672px (`max-w-2xl`)
+- Section vertical padding: Component does NOT add padding (section wrapper handles it)
+
+**Alignment:** Center by default
+
+**Tailwind Implementation:**
+```html
+<div class="text-center">
+  {eyebrow && <Badge variant="secondary" class="mb-3">{eyebrow}</Badge>}
+  <h2 class="text-3xl font-bold tracking-tight md:text-4xl">{headline}</h2>
+  {subtext && <p class="mt-4 mx-auto max-w-2xl text-muted-foreground">{subtext}</p>}
+</div>
+```
+
+---
+
+## SPEC 2: Content Strategy by Section Type
+
+| Section Type | Sections | Content Approach |
+|--------------|----------|------------------|
+| **Minimal Text** | Hero, BrandLogoTicker, FinalCTA, ScrollBanner | Impact/CTA — visuals and action, not reading |
+| **Trust Signals** | WhyChoose (Bento), Testimonials | Social proof — stats, quotes, badges (not prose) |
+| **Information-Rich** | ServiceCategories, ExpertConsultation, Financing, ServiceArea, FAQ, BlogPreview | E-E-A-T content |
+
+**Information-Rich sections schema:**
+- `bodyText`: Optional string (1-2 paragraphs of prose)
+- `bullets`: Optional array of strings (factual figures)
+- Content skills (`/direct-response-copy`) decide what each section needs
+
+---
+
+## SPEC 3: Header Navigation Structure
+
+**Desktop (≥1024px):**
+```
+[Logo] Heating Cooling Air Quality Water Heating More▼ Locations [📞 Phone]
+                                                 │
+                                                 └── Commercial
+                                                     Maintenance Plans
+```
+
+**Main categories (direct links):**
+1. Heating → /services/category/heating
+2. Cooling → /services/category/cooling
+3. Air Quality → /services/category/air-quality
+4. Water Heating → /services/category/water-heating
+
+**More dropdown:**
+1. Commercial → /services/category/commercial
+2. Maintenance Plans → /services/category/maintenance
+
+**Locations:** Direct link → /locations
+
+**REMOVE from header:**
+- "Since 1994" badge
+- About, Financing, Blog (moved to footer)
+
+---
+
+## SPEC 4: Footer Structure
+
+**Grid:** 4 columns (Services, Locations, Company, Contact)
+
+**Locations Column — Accordion by Region:**
+- All regions collapsed by default
+- Only one region open at a time
+- Each region expands to show cities within
+
+**6 Regions (from profile.yaml):**
+1. Guelph Region
+2. Kitchener-Waterloo Region
+3. Halton Region
+4. Hamilton Region
+5. Tri-Cities Region
+6. Wellington County
+
+**Company Links (7 total):**
+1. About → /about
+2. Reviews → /reviews
+3. Blog → /blog
+4. Contact → /contact
+5. FAQs → /faqs
+6. Financing → /financing
+7. Rebates → /rebates
+
+**REMOVE:** /careers, /emergency-service (delete pages if they exist)
+
+**Trust Badge Row:** TSSA, BBB, Google (above contact info)
+
+**Styling:** Use CSS variables (`bg-foreground`, `text-background`)
+
+---
+
+## SPEC 5: BrandLogoTicker Animation
+
+| Aspect | Value |
+|--------|-------|
+| **Speed** | 30 seconds full cycle (medium pace) |
+| **Pause on hover** | Yes |
+| **Gap between logos** | 4rem (64px) |
+| **Reduced motion** | Static grid of logos (no animation) |
+
+```css
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.logo-track {
+  animation: scroll 30s linear infinite;
+  gap: 4rem;
+}
+
+.logo-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-track {
+    animation: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+```
+
+---
+
+## SPEC 6: Testimonials Carousel
+
+| Aspect | Value |
+|--------|-------|
+| **Visible cards - Mobile** | 1 |
+| **Visible cards - Tablet** | 2 |
+| **Visible cards - Desktop** | 2 |
+| **Auto-play** | Yes, 5-second intervals |
+| **Pause on hover** | Yes |
+| **Navigation** | Dots only (count SLIDES, not reviews) |
+| **Peek effect** | No (clean edges) |
+
+**Dot counting:**
+- 9 reviews ÷ 2 per slide = 5 dots
+- Dots represent slide position, not individual reviews
+
+---
+
+## SPEC 7: Project Gallery
+
+| Aspect | Value |
+|--------|-------|
+| **Layout type** | Uniform grid (not masonry) |
+| **Desktop columns** | 3 |
+| **Tablet columns** | 2 |
+| **Mobile** | Horizontal scroll (1.5 cards visible) |
+| **Project count** | 6 projects |
+| **CTA** | None (no /case-studies page exists) |
+| **Mobile navigation** | Dots below carousel |
+
+```css
+/* Desktop & Tablet */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+@screen lg {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Mobile: horizontal scroll */
+@media (max-width: 767px) {
+  .gallery-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    padding-bottom: 1rem; /* space for dots */
+  }
+
+  .gallery-grid > * {
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+  }
+}
+```
+
+---
+
+## SPEC 8: Mobile Hero CTA
+
+| Aspect | Value |
+|--------|-------|
+| **Button height** | h-14 (56px) |
+| **Button width** | Full width on mobile |
+| **Phone number** | IN the button text (not below) |
+| **Text below button** | None |
+| **Button text** | Determined by `/direct-response-copy` skill |
+| **Safe area** | `padding-bottom: env(safe-area-inset-bottom, 1rem)` |
+
+```html
+<a
+  href="tel:+15198354858"
+  class="w-full h-14 inline-flex items-center justify-center bg-primary text-primary-foreground rounded-md font-medium text-lg"
+>
+  📞 {buttonText} {phoneDisplay}
+</a>
+```
+
+---
+
+## SPEC 9: WhyChoose Bento Grid
+
+**Layout:** Large card on RIGHT (not left as in original PRD)
+
+**Stats cards:**
+- Google Rating: "4.8★ from 407 reviews" (from profile.yaml)
+- Installations: "2,500+ installations" (from profile.yaml)
+
+**Mobile stack order:**
+1. Full-service card
+2. Warranty card
+3. Rating card
+4. Installations card
+
+```html
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <!-- Small cards on LEFT -->
+  <div class="space-y-6">
+    <!-- Warranty card -->
+    <Card>...</Card>
+    <!-- Rating card -->
+    <Card>...</Card>
+  </div>
+
+  <!-- Small card bottom left on desktop -->
+  <div class="lg:self-end">
+    <!-- Installations card -->
+    <Card>...</Card>
+  </div>
+
+  <!-- Full-service card on RIGHT, spans 2 rows -->
+  <div class="md:col-start-2 md:row-start-1 md:row-span-2 lg:col-start-3">
+    <Card class="h-full">...</Card>
+  </div>
+</div>
+```
+
+---
+
+## SPEC 10: ScrollBanner (Bottom)
+
+| Aspect | Value |
+|--------|-------|
+| **Keep component** | Yes (alongside Announcement Bar at top) |
+| **Trigger** | 75% scroll depth |
+| **Dismissible** | Yes, sessionStorage: `bap-scroll-banner-dismissed` |
+| **Z-index** | 40 (below header at 100) |
+
+**Remove StickyPhoneDrawer** — ScrollBanner replaces it.
+
+```css
+:root {
+  --z-scroll-banner: 40;
+  --z-header: 100;
+  --z-modal: 200;
+}
+```
+
+---
+
+## SPEC 11: Skip Link (Accessibility)
+
+**Implementation:** Standard WCAG pattern
+
+```html
+<!-- First element inside <body> in BaseLayout.astro -->
+<a
+  href="#main-content"
+  class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[999] focus:bg-background focus:px-4 focus:py-2 focus:ring-2 focus:ring-ring focus:rounded-md"
+>
+  Skip to main content
+</a>
+
+<!-- Add id to main content area -->
+<main id="main-content" role="main">
+```
+
+---
+
+## SPEC 12: Blog Collection Schema
+
+**Add to `src/content/config.ts` in blog collection:**
+
+```typescript
+locations: z.array(z.string()).optional(),  // City slugs: ["guelph", "kitchener"]
+```
+
+**Behavior:**
+- Posts can tag multiple locations
+- Untagged posts show everywhere (homepage + all location pages)
+- Location pages filter by matching slugs
+
+---
+
+## SPEC 13: FAQPage JSON-LD
+
+**Add to HomepageFAQ.astro:**
+
+```html
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+})} />
+```
+
+---
+
+## SPEC 14: Service Area Map
+
+| Aspect | Value |
+|--------|-------|
+| **Map type** | Google Maps embed (from profile.yaml) |
+| **Same map for all pages** | Yes (no city-specific centering) |
+| **Accessibility** | `title` attribute, `tabindex="-1"` |
+
+```html
+<iframe
+  src={business.locations.primary.map_embed}
+  title="B.A.P Heating & Cooling service area map"
+  tabindex="-1"
+  class="w-full aspect-video rounded-lg"
+  loading="lazy"
+/>
+```
+
+---
+
+## Summary of Key Decisions
+
+| Decision | User Choice |
+|----------|-------------|
+| SectionHeader alignment | Center |
+| SectionHeader spacing | Medium (12px/16px) |
+| Subtext max-width | 672px (max-w-2xl) |
+| Information-rich content | Optional bodyText + optional bullets |
+| Header main categories | Heating, Cooling, Air Quality, Water Heating |
+| Header "More" dropdown | Commercial, Maintenance Plans |
+| Financing/Rebates visibility | Announcement Bar at top |
+| Announcement bar | Combined message, dismissible, all pages |
+| Logo ticker speed | Medium (30s), pause on hover |
+| Logo ticker reduced motion | Static grid |
+| Testimonials visible (desktop) | 2 cards |
+| Testimonials navigation | Dots counting SLIDES |
+| Project gallery layout | Uniform grid, 3 cols desktop |
+| Project gallery mobile | Horizontal scroll with dots |
+| Project gallery count | 6 projects, no CTA |
+| Mobile Hero CTA | h-14, phone in button text |
+| Bento large card position | RIGHT side |
+| Bento stats | Google Rating + Installations |
+| Footer locations | Region accordions, one open at a time |
+| Delete pages | /careers, /emergency-service |
+| Keep ScrollBanner | Yes (alongside Announcement Bar) |
+| Remove StickyPhoneDrawer | Yes (replaced by ScrollBanner) |
+| Skip link | Standard WCAG implementation |
+| Service Area map | Same map for all pages |
+| Blog locations | Multiple per post, untagged shows everywhere |
+
+---
+
+## Files to Create/Modify for Phase 9
+
+| File | Action |
+|------|--------|
+| `src/components/AnnouncementBar.astro` | **NEW** — Rebate/financing announcement |
+| `src/components/ui/SectionHeader.astro` | **NEW** — Reusable section header |
+| `src/components/Header.astro` | **MODIFY** — Remove badge, restructure nav |
+| `src/components/Footer.astro` | **MODIFY** — Region accordions, update links |
+| `src/components/MobileNav.tsx` | **MODIFY** — Update nav items |
+| `src/layouts/BaseLayout.astro` | **MODIFY** — Add skip link, announcement bar |
+| `src/content/config.ts` | **MODIFY** — Add `locations` to blog schema |
+| `src/pages/careers.astro` | **DELETE** — If exists |
+| `src/pages/emergency-service.astro` | **DELETE** — If exists |
+| `src/components/cta/StickyPhoneDrawer.tsx` | **DELETE** — Replaced by ScrollBanner |

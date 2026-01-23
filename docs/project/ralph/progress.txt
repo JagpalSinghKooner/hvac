@@ -1339,3 +1339,52 @@ Continue New Hamburg content generation (next 4-5 files: heat-pump-maintenance, 
 **AGENTS.md Update Required:**
 Add YAML multiline format gotcha to AGENTS.md #2 (YAML Single Quote Escaping section):
 "For long text fields containing Unicode characters (degree symbols °, em dashes —), use multiline format `description: |` instead of single-quoted strings. Single quotes work for short values and simple contractions (with '' escaping), but BREAK with Unicode."
+
+## Iteration 9 (Ralph Loop - Autonomous): US-010 New Hamburg Batch 2 (IN PROGRESS)
+Date: 2026-01-23 22:40
+
+**Status Update:**
+Continuing New Hamburg content generation. Generated 4 more files (heat-pump-maintenance, heat-pump-repair, air-conditioner-installation, air-conditioner-maintenance).
+
+**Implementation (Iteration 9):**
+- Generated 4 New Hamburg files with Phase 8A structure  
+- Files: heat-pump-maintenance, heat-pump-repair, air-conditioner-installation, air-conditioner-maintenance
+- Used CORRECT multiline YAML format: `description: |` for problem, solution, context fields (prevents Unicode character breakage)
+- Word count: ~1,000 words per file
+- Premium positioning: All H1s use "Trusted", "Professional", "Expert", "Established" (NO emergency language)
+- Family positioning: "Built to Last the Mortgage" angle applied consistently
+- E-E-A-T signals: experienceStats populated (450 heat pump maintenance, 390 heat pump repair, 820 AC install, 790 AC maintenance)
+- YAML apostrophe escaping: New Hamburg''s, Wilmot''s, won''t (double apostrophes in single-quoted strings)
+- Markdown content present after frontmatter (H1 + 2-3 sentences verified)
+
+**Content Quality:**
+- All files reference New Hamburg-specific context: growing community, family-oriented, Wilmot Township, Kitchener-Wilmot Hydro, modern subdivisions, commuter lifestyle
+- Positioning emphasizes long-term thinking, family investment, predictable costs, 20-year outlook
+- Technical accuracy: dual-fuel integration, refrigerant charge optimization, load calculations for modern open-concept homes
+- Rebate info: Kitchener-Wilmot Hydro (NOT Waterloo North Hydro like Elmira/St. Jacobs)
+
+**YAML Format Lesson Reinforced:**
+Multiline format (`description: |`) REQUIRED for all long text fields containing:
+- Degree symbols (°C)
+- Em dashes (—)
+- Any Unicode characters beyond basic ASCII
+Single-quoted strings BREAK with these characters even with apostrophe escaping.
+
+**Verification:**
+- Build passes: 678 pages (up from 674, +4 new pages)
+- Zero Zod schema errors
+- All 4 files have populated hero.title fields
+- Markdown content verified via tail -3 (shows H1 + description, NOT ---)
+
+**Commit:** c801515 - "feat: US-010 New Hamburg content (heat pump maintenance/repair + AC install/maintenance) - 8/66 files"
+
+**Progress:**
+- Elmira: 22/22 COMPLETE (iteration 9)
+- St. Jacobs: 22/22 COMPLETE (iteration 6)
+- New Hamburg: 8/22 IN PROGRESS (furnace-installation, furnace-maintenance, furnace-repair, heat-pump-installation, heat-pump-maintenance, heat-pump-repair, air-conditioner-installation, air-conditioner-maintenance)
+- New Hamburg remaining: 14 files (air-conditioner-repair through rooftop-units)
+- Total remaining for US-010: 14 files
+
+**Next Iteration:**
+Continue New Hamburg content generation (next 4-5 files: air-conditioner-repair, air-filtration, boilers, commercial)
+
