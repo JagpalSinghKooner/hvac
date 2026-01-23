@@ -1115,4 +1115,48 @@ This is CRITICAL for ALL future content generation (AGENTS.md #2 documented).
 - Total remaining: 31 files for US-010 completion
 
 **Next Iteration:**
-Continue St. Jacobs content generation (next 4-5 files: commercial, dehumidifiers, ductless, ventilation, humidifiers)
+Continue St. Jacobs content generation (next 5 files: humidifiers, maintenance-plans, rooftop-units, tank-water-heaters, tankless-water-heaters)
+
+
+## Iteration 5 (Ralph Loop - Autonomous): US-010 St. Jacobs Batch 5 (IN PROGRESS)
+Date: 2026-01-23 22:16
+
+**Status Update:**
+Continuing St. Jacobs content generation. Generated 4 more files (commercial-hvac, dehumidifiers, ductless-mini-split, hrv-erv-ventilation).
+
+**Implementation (Iteration 5):**
+- Generated 4 St. Jacobs files with Phase 8A structure
+- Files: commercial-hvac, dehumidifiers, ductless-mini-split, hrv-erv-ventilation
+- Used CORRECT schema structure (issues=strings, context=multiline string, rebateInfo inside savings)
+- Word count: ~1,000 words per file
+- Premium positioning: All H1s use trust signals (NO emergency language)
+- Heritage positioning: "Comfort Without Compromise" angle applied consistently
+- E-E-A-T signals: experienceStats populated (65 commercial, 140 dehumidifiers, 175 ductless, 190 ventilation)
+- YAML apostrophe escaping: Fixed St. Jacobs''s, village''s, won''t, Conestogo''s (double apostrophes)
+- Markdown content present after frontmatter (H1 + 2-3 sentences verified)
+
+**Content Quality:**
+- All files reference St. Jacobs-specific context: heritage architecture, century-old buildings, Conestogo River valley, Main Street tourist area, village character preservation
+- Waterloo North Hydro Electric mentioned (correct LDC per utility-providers.md)
+- Thoughtful installation approach emphasized (respecting architectural character, discrete equipment placement)
+- Commercial HVAC addresses unique business challenges (heritage retail spaces, tourist-facing operations)
+- Dehumidifiers address stone foundation moisture challenges common in century properties
+- Ductless systems positioned as ideal for heritage homes (no ductwork modifications needed)
+- Ventilation systems for renovated heritage homes (tight building envelopes need mechanical fresh air)
+
+**Verification:**
+- Build passes: 665 pages (up from 661, +4 new pages)
+- Zero Zod schema errors
+- All 4 files have populated hero.title fields
+- Markdown content verified (shows H1 + description, NOT ---)
+
+**Commit:** 73c4fd6 - "feat: US-010 St. Jacobs content (commercial, dehumidifiers, ductless, ventilation) - 17/66 files"
+
+**Progress:**
+- St. Jacobs: 17/22 files complete (all furnace/heat pump/AC/boiler/air filtration services + commercial/dehumidifiers/ductless/ventilation)
+- St. Jacobs remaining: 5 files (humidifiers, maintenance-plans, rooftop-units, tank-water-heaters, tankless-water-heaters)
+- New Hamburg: 22 files (all services pending)
+- Total remaining: 27 files for US-010 completion
+
+**Next Iteration:**
+Continue St. Jacobs content generation (final 5 files to complete St. Jacobs city)
