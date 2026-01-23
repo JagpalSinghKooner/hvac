@@ -462,6 +462,64 @@ savings:
 - Components expect schema-compliant data structure
 - Service-city pages use simpler schema than service pages (strings not nested objects)
 
+### 6. Markdown Content Body Required (CRITICAL - US-008 Lesson)
+**Problem:** Astro content collections require BOTH frontmatter AND markdown body content
+**What Happened:** Ralph generated perfect YAML frontmatter but ended files with `---` and NO content after
+**Build Error:** `workflowStatus: Required` (confusing error - real issue is missing markdown body)
+**Solution:** EVERY .md file MUST have content after the closing `---`
+
+**WRONG (File ends with frontmatter):**
+```yaml
+---
+serviceSlug: 'furnace-maintenance'
+title: 'Furnace Maintenance in Guelph, ON'
+# ... all frontmatter fields ...
+finalCta:
+  headline: '...'
+  copy: '...'
+---
+```
+
+**RIGHT (Markdown content follows frontmatter):**
+```yaml
+---
+serviceSlug: 'furnace-maintenance'
+title: 'Furnace Maintenance in Guelph, ON'
+# ... all frontmatter fields ...
+finalCta:
+  headline: '...'
+  copy: '...'
+---
+
+# Furnace Maintenance in Guelph, ON
+
+Professional furnace maintenance for Guelph homes. Annual tune-ups preserve efficiency, prevent breakdowns, and ensure safe operation throughout Ontario winters.
+```
+
+**Required Acceptance Criteria (add to ALL content generation stories):**
+```
+AFTER WRITING EACH FILE:
+1. Verify frontmatter closes with ---
+2. Verify markdown content exists AFTER ---
+3. Minimum markdown: H1 (matches title) + 2-3 sentence description
+4. Run pnpm build to verify file is valid
+```
+
+**Verification Command:**
+```bash
+# Check if file ends with --- (WRONG)
+tail -1 file.md  # Should NOT be "---"
+
+# Check markdown content exists
+tail -5 file.md  # Should show H1 + description text
+```
+
+**Why This Matters:**
+- Astro requires BOTH frontmatter AND body content
+- Build fails with confusing error messages (says "Required" but real issue is missing body)
+- 11 files failed in US-008 due to this (had to manually fix all)
+- Must be part of PRD acceptance criteria to prevent future issues
+
 ---
 
 ## Phase 8A: Verification Scripts (US-015)

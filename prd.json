@@ -258,6 +258,12 @@
         "       copy: 'When cooling fails, you need...'",
         "     ---",
         "  6. Save the file (use Write tool with EXACT file path from list above, OVERWRITE existing file)",
+        "  7. CRITICAL - Verify markdown content exists AFTER frontmatter (AGENTS.md #6):",
+        "     - File MUST NOT end with --- (frontmatter closing)",
+        "     - File MUST have markdown content after ---",
+        "     - Minimum required: H1 (matches title) + 2-3 sentence description",
+        "     - Command to verify: tail -5 [file_path] (should show # Heading + text, NOT ---)",
+        "     - If file ends with ---, ADD markdown content immediately",
         "AFTER ALL 11 FILES PROCESSED:",
         "VERIFICATION STEP 1: Count how many files have hero.title populated (read all 11 files, count non-empty hero.title)",
         "VERIFICATION STEP 2: Confirm count = 11 (all files must have content)",
@@ -309,6 +315,12 @@
         "     - savings.rebateInfo: string INSIDE savings object (NOT separate top-level object)",
         "     - proof: object with {testimonial, customerName, customerLocation, result} (NOT array)",
         "  5. Save the file (use Write tool with EXACT file path from list above, OVERWRITE existing file)",
+        "  6. CRITICAL - Verify markdown content exists AFTER frontmatter (AGENTS.md #6):",
+        "     - File MUST NOT end with --- (frontmatter closing)",
+        "     - File MUST have markdown content after ---",
+        "     - Minimum required: H1 (matches title) + 2-3 sentence description",
+        "     - Command to verify: tail -5 [file_path] (should show # Heading + text, NOT ---)",
+        "     - If file ends with ---, ADD markdown content immediately",
         "AFTER ALL 11 FILES PROCESSED:",
         "VERIFICATION STEP 1: Count how many files have hero.title populated (read all 11 files, count non-empty hero.title)",
         "VERIFICATION STEP 2: Confirm count = 11 (all files must have content)",
@@ -319,8 +331,8 @@
         "SUCCESS CRITERIA: All 6 verification steps pass (11 files complete, correct word counts, premium positioning, build passes)"
       ],
       "priority": 8,
-      "passes": false,
-      "notes": "FIXED - Removed orchestrator loop (same fix as US-007). Generates content directly using prerequisite files. Completes remaining 11 services (files 12-22). Next: US-009 (quality verification)."
+      "passes": true,
+      "notes": "COMPLETE with CRITICAL LESSON LEARNED - Ralph generated perfect frontmatter for all 11 files but FORGOT markdown content after closing ---. This caused build to fail with confusing 'workflowStatus: Required' error (real issue: missing markdown body). FIXED by manually adding markdown content (H1 + description) to all 11 files. ROOT CAUSE: PRD acceptance criteria did NOT explicitly require markdown body verification. SOLUTION: Added new gotcha to AGENTS.md (#6) and acceptance criteria template requiring: 1) Verify frontmatter closes with ---, 2) Verify markdown content exists AFTER ---, 3) Minimum: H1 + 2-3 sentences. Build now passes (639 pages). This pattern MUST be added to ALL future content generation PRDs."
     },
     {
       "id": "US-009",
