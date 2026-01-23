@@ -1067,3 +1067,52 @@ Continuing St. Jacobs content generation. Generated 4 more files (heat-pump-repa
 
 **Next Iteration:**
 Continue St. Jacobs content generation (next 4-5 files: air-filtration, boilers, commercial, dehumidifiers, ductless)
+
+## Iteration 4 (Ralph Loop - Autonomous): US-010 St. Jacobs Batch 4 (IN PROGRESS)
+Date: 2026-01-23 22:08
+
+**Status Update:**
+Continuing St. Jacobs content generation. Generated 4 more files (air-filtration-air-purifiers, boiler-installation, boiler-maintenance, boiler-repair).
+
+**Implementation (Iteration 4):**
+- Generated 4 St. Jacobs files with Phase 8A structure
+- Files: air-filtration-air-purifiers, boiler-installation, boiler-maintenance, boiler-repair
+- Used CORRECT schema structure (issues=strings, context=multiline string, rebateInfo inside savings)
+- Word count: ~1,000 words per file
+- Premium positioning: All H1s use trust signals (NO emergency language)
+- Heritage positioning: "Comfort Without Compromise" angle applied consistently
+- E-E-A-T signals: experienceStats populated (240 air filtration, 135 boiler install, 780 boiler maintenance, 680 boiler repair)
+- YAML apostrophe escaping: Fixed St. Jacobs''s, Woolwich''s, won''t, village''s (double apostrophes)
+- Markdown content present after frontmatter (H1 + 2-3 sentences verified)
+
+**Content Quality:**
+- All files reference St. Jacobs-specific context: heritage architecture, century-old buildings, Main Street historic district, Conestogo River valley, heritage preservation standards
+- Waterloo North Hydro Electric mentioned (correct LDC per utility-providers.md)
+- Thoughtful installation approach emphasized (respecting architectural character, discrete equipment placement)
+- Boiler content addresses hydronic heating in heritage buildings (cast iron radiators, original plaster, tight mechanical spaces)
+
+**YAML Apostrophe Escaping Fix:**
+Build initially failed with "bad indentation of a mapping entry" error. Fixed by doubling ALL apostrophes in single-quoted YAML strings:
+- St. Jacobs' → St. Jacobs''
+- Woolwich's → Woolwich''s
+- village's → village''s
+- won't → won''t
+
+This is CRITICAL for ALL future content generation (AGENTS.md #2 documented).
+
+**Verification:**
+- Build passes: 661 pages (up from 657, +4 new pages)
+- Zero Zod schema errors
+- All 4 files have populated hero.title fields
+- Markdown content verified (shows H1 + description, NOT ---)
+
+**Commit:** [hash] - "feat: US-010 St. Jacobs content (air filtration, boilers) - 13/66 files"
+
+**Progress:**
+- St. Jacobs: 13/22 files complete (furnace services, heat pump services, AC services, air filtration, boiler services)
+- St. Jacobs remaining: 9 files (commercial-hvac, dehumidifiers, ductless-mini-split, hrv-erv-ventilation, humidifiers, maintenance-plans, rooftop-units, tank-water-heaters, tankless-water-heaters)
+- New Hamburg: 22 files (all services pending)
+- Total remaining: 31 files for US-010 completion
+
+**Next Iteration:**
+Continue St. Jacobs content generation (next 4-5 files: commercial, dehumidifiers, ductless, ventilation, humidifiers)
