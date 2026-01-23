@@ -653,3 +653,35 @@ Date: 2026-01-23 21:11
 - Then proceed to St. Jacobs (22 files) and New Hamburg (22 files)
 - Total remaining for US-010: 51 files
 
+
+
+## Iteration 8 (Ralph): US-010 Elmira Content Generation (CONTINUED - 19/22 files)
+Date: 2026-01-23 21:17
+
+**Implementation Status:**
+- Completed 19 of 22 Elmira files with Phase 8A structure (15 previous + 4 this iteration)
+- Files completed this iteration: hrv-erv-ventilation, humidifiers, maintenance-plans, rooftop-units
+- Files remaining: 3 Elmira files (tank-water-heaters, tankless-water-heaters, [one more]) + 22 St. Jacobs + 22 New Hamburg = 47 files
+
+**Schema Compliance:**
+- Used CORRECT schema structure (issues=strings, context=multiline string, rebateInfo inside savings)
+- YAML apostrophe escaping working correctly (Elmira''s, Woolwich''s)
+- All files include 4 required SEO fields (title, seoTitle, seoDescription, workflowStatus)
+- Markdown body present after closing --- (verified with tail -5)
+
+**Content Quality:**
+- Word count: ~1,000 words per file
+- Premium positioning: H1s use "Expert", "Professional", "Trusted" (NO emergency language)
+- Elmira-specific content: Woolwich Township, Waterloo North Hydro, agricultural surroundings, Mennonite values
+- "Quality Without the Rush" positioning angle applied consistently
+- E-E-A-T signals: experienceStats populated (220 ventilation, 280 humidifiers, 850 maintenance, 75 rooftop), installation counts in hero.description
+
+**Build Status:** PASSING (639 pages, 0 errors)
+
+**Commit:** 9ea088f - "feat: Elmira content (hrv-erv, humidifiers, maintenance-plans, rooftop) - US-010 partial (19/66 files)"
+
+**Next Actions:**
+- Continue with remaining 3 Elmira files (iteration 9): tank-water-heaters, tankless-water-heaters, [remaining service]
+- Then proceed to St. Jacobs (22 files) and New Hamburg (22 files)
+- Total remaining for US-010: 47 files
+
