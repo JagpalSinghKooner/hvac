@@ -241,16 +241,33 @@ finalCta:
 Brief markdown summary (2-3 sentences minimum).
 ```
 
-### 6. Single Quotes in YAML
+### 6. Apostrophes in Single-Quoted YAML (CRITICAL - BUILD BREAKER)
 
-**WRONG:**
+In YAML single-quoted strings, apostrophes MUST be doubled (`''`). This is the #1 cause of build failures.
+
+**WRONG (causes YAMLException: bad indentation):**
 ```yaml
-context: 'City\'s homes need...'
+headline: 'Connect With Elmira's Furnace Repair Specialists'
+copy: 'Your home's comfort depends on...'
+description: 'We've been serving the community...'
 ```
 
-**RIGHT:**
+**RIGHT (double the apostrophe):**
 ```yaml
-context: 'City''s homes need...'  # Double single quotes for apostrophes
+headline: 'Connect With Elmira''s Furnace Repair Specialists'
+copy: 'Your home''s comfort depends on...'
+description: 'We''ve been serving the community...'
+```
+
+**Common occurrences to watch for:**
+- City possessives: `Elmira''s`, `Guelph''s`, `St. Jacob''s`
+- Contractions: `don''t`, `won''t`, `it''s`, `we''ve`, `we''re`, `you''re`
+- Possessives: `homeowner''s`, `B.A.P''s`, `home''s`, `system''s`
+
+**Verification after writing:**
+```bash
+# This grep finds unescaped apostrophes (should return nothing)
+grep -n "': '.*[^']'[^']" src/content/service-city/*/[city].md
 ```
 
 ---

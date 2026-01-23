@@ -416,10 +416,25 @@ const schema = {
 **Solution:** Explicitly instruct: "NO em dashes (--) - use periods, commas, semicolons"
 **Check:** `grep -r '\--' src/content/service-city/*/[city].md | grep -v '^---'` (must be empty)
 
-### 2. YAML Single Quote Escaping
-**Problem:** Apostrophes in YAML single-quoted strings break parsing
-**Solution:** Double single quotes: `City''s homes` not `City\'s homes`
-**Script:** `content.replace(/'/g, "''")`
+### 2. YAML Single Quote Escaping (CRITICAL - BUILD BREAKER)
+**Problem:** Apostrophes in YAML single-quoted strings cause `YAMLException: bad indentation of a mapping entry`
+**Error Example:**
+```
+YAMLException: bad indentation of a mapping entry (66:34)
+ 65 | finalCta:
+ 66 |   headline: 'Connect With Elmira's Furnace Repair Specialists'
+---------------------------------------^
+```
+**Solution:** Double ALL apostrophes in single-quoted YAML strings
+**WRONG:** `headline: 'Connect With Elmira's Furnace'`
+**RIGHT:** `headline: 'Connect With Elmira''s Furnace'`
+
+**Common patterns to watch (ALWAYS double the apostrophe):**
+- City possessives: `Elmira''s`, `Guelph''s`, `St. Jacob''s`
+- Contractions: `don''t`, `won''t`, `it''s`, `we''ve`, `we''re`, `you''re`
+- Possessives: `homeowner''s`, `B.A.P''s`, `home''s`, `system''s`
+
+**Verification after writing:** If Astro dev server crashes with "bad indentation", search for unescaped apostrophes
 
 ### 3. City-Swap Content
 **Problem:** Same headings with city name swapped (Google penalizes)

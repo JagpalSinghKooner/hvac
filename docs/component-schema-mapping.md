@@ -6,7 +6,7 @@ This document maps which components render on service pages vs service-city page
 
 | # | Component | Service Page | Service-City Page | Schema Fields (Service) | Schema Fields (Service-City) |
 |---|-----------|--------------|-------------------|-------------------------|------------------------------|
-| 1 | **ServiceHeroSection** | ✅ | ✅ | `title`<br>`description`<br>`category`<br>`serviceType` | `title`<br>`seoDescription`<br>`category` (from parent service)<br>`serviceType` (from parent service) |
+| 1 | **ServiceHeroSection** | ✅ | ✅ | `title`<br>`description`<br>`category`<br>`serviceType` | `hero.title` (Phase 8A H1)<br>`hero.description` (Phase 8A intro)<br>`category` (from parent service)<br>`serviceType` (from parent service)<br>`serviceSlug`, `locationSlug`, `cityName`, `serviceName` (internal links) |
 | 2 | **TrustOpenerSection** | ❌ | ✅ | N/A | `trustOpener`<br>`cityName` (from location)<br>`business.reputation.google_rating` |
 | 3 | **ProblemSection** | ✅ (if exists) | ✅ (if exists) | `problem.headline`<br>`problem.description`<br>`problem.issues[]` | `problem.headline`<br>`problem.description`<br>`problem.issues[]`<br>*Fallback to parent service if not present* |
 | 4 | **SolutionSection** | ✅ (if exists) | ✅ (if exists) | `solution.headline`<br>`solution.description`<br>`solution.differentiators[]` | `solution.headline`<br>`solution.description`<br>*Fallback to parent service if not present*<br>**PLUS:**<br>`cityName` (for city badge)<br>`showTrustIndicator` (displays "Serving [City] Since 1994") |
@@ -21,7 +21,7 @@ This document maps which components render on service pages vs service-city page
 | 13 | **ServiceFAQSection** | ✅ | ✅ | *(Queries FAQs collection by service slug)* | *(Queries FAQs collection by service slug)* |
 | 14 | **TestimonialsCarousel** | ✅ | ✅ | *(Queries reviews collection by service slug)*<br>`business.reputation.google_rating`<br>`business.reputation.google_review_count` | *(Queries reviews collection by service slug and city)*<br>`business.reputation.google_rating`<br>`business.reputation.google_review_count` |
 | 15 | **RelatedServicesSection** | ✅ | ✅ | *(Queries services in same category)* | *(Queries services available in same city)*<br>`cityName` (for headline) |
-| 16 | **FinalCTASection** | ✅ | ✅ | `business.contact.phone_e164`<br>`business.contact.phone_display` | `business.contact.phone_e164`<br>`business.contact.phone_display` |
+| 16 | **FinalCTASection** | ✅ | ✅ | `business.contact.phone_e164`<br>`business.contact.phone_display` | `finalCta.headline` (Phase 8A H2)<br>`finalCta.copy` (Phase 8A copy)<br>`cityName`<br>`business.contact.phone_e164`<br>`business.contact.phone_display` |
 
 ## Key Differences: Service vs Service-City
 
@@ -92,8 +92,8 @@ Phase 8 adds 6 new schema fields for enhanced E-E-A-T compliance and unique head
 | `contextHeadline` | ContextSection | UNIQUE keyword-researched H2 | N/A |
 | `finalCta.headline` | FinalCTASection | UNIQUE keyword-researched H2 | N/A |
 | `finalCta.copy` | FinalCTASection | City-specific CTA copy | 50-75 |
-| `experienceStats.installationsInCity` | ServiceHeroSection, ContextSection | E-E-A-T experience signal | N/A |
-| `experienceStats.yearsSinceCityStart` | ServiceHeroSection, ContextSection | E-E-A-T experience signal | N/A |
+| `experienceStats.installationsInCity` | N/A (embedded in `hero.description` prose) | E-E-A-T experience signal | N/A |
+| `experienceStats.yearsSinceCityStart` | N/A (embedded in `hero.description` prose) | E-E-A-T experience signal | N/A |
 
 ### Removed Field
 
