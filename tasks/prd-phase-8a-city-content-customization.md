@@ -260,20 +260,40 @@ Transform 550 service-city pages from 50% generic content to 80%+ city-specific 
 **Scope:** 66 files, 462 unique keyword-researched headings, ~1,000 words per page
 
 **Acceptance Criteria:**
-- [ ] Run /orchestrator skill to confirm skill sequence
-- [ ] Run /keyword-research skill for Elmira, St. Jacobs, New Hamburg + all 22 services (462 unique headings)
-- [ ] Run /positioning-angles skill for city-specific differentiation (rural communities, Mennonite heritage)
-- [ ] Validate brand-voice.md applies
-- [ ] Run /seo-content skill for problem, solution, context sections
-- [ ] Run /direct-response-copy skill for hero, trustOpener, benefits, finalCta, savings
-- [ ] All 66 files contain Phase 8 schema fields
+
+**STEP 0: Read Reference Files (MANDATORY)**
+- [ ] Read `docs/reference/service-city-template.md` - canonical schema structure
+- [ ] Read `docs/reference/utility-providers.md` - rebate info for these cities
+- [ ] Read `docs/project/ralph/brand-voice.md` - voice consistency
+
+**STEP 1: Keyword Research (Anti-Loop Pattern)**
+- [ ] FOR EACH city (elmira, st-jacobs, new-hamburg):
+  - [ ] Check if `docs/reference/[city]-keywords.md` exists
+  - [ ] IF FILE EXISTS: Read file, verify 154 headings present, SKIP to STEP 2
+  - [ ] IF FILE NOT EXISTS: Run /orchestrator → /keyword-research, save to `docs/reference/[city]-keywords.md`
+
+**STEP 2: Positioning Angles (Anti-Loop Pattern)**
+- [ ] FOR EACH city:
+  - [ ] Check if `docs/reference/[city]-positioning.md` exists
+  - [ ] IF FILE EXISTS: Read file, verify positioning present, SKIP to STEP 3
+  - [ ] IF FILE NOT EXISTS: Run /orchestrator → /positioning-angles (rural communities, Mennonite heritage), save output
+
+**STEP 3: Content Generation**
+- [ ] FOR EACH of 66 files:
+  - [ ] Check if hero.title is populated (content exists)
+  - [ ] IF POPULATED: SKIP to next file
+  - [ ] IF EMPTY: Generate content using template structure (see service-city-template.md)
+  - [ ] CRITICAL: Verify markdown body exists after `---` (file MUST NOT end with frontmatter)
+  - [ ] CRITICAL: Include all 4 SEO fields (title, seoTitle, seoDescription, workflowStatus)
+
+**STEP 4: Quality Verification**
 - [ ] All 462 headings are UNIQUE (zero duplicates globally)
 - [ ] All H1s use PREMIUM positioning (NO emergency language)
 - [ ] Word count ~1,000 per page verified
-- [ ] Em dash check passes (0 matches)
-- [ ] Experience stats added and visible
-- [ ] pnpm build passes
-- [ ] Run /agent-browser on 3 sample pages
+- [ ] Em dash check passes (only frontmatter delimiters)
+- [ ] Experience stats visible in hero.description
+- [ ] pnpm build passes (0 errors)
+- [ ] Run /agent-browser on 3 sample pages (1 per city)
 
 ---
 
@@ -284,20 +304,40 @@ Transform 550 service-city pages from 50% generic content to 80%+ city-specific 
 **Scope:** 66 files, 462 unique keyword-researched headings, ~1,000 words per page
 
 **Acceptance Criteria:**
-- [ ] Run /orchestrator skill to confirm skill sequence
-- [ ] Run /keyword-research skill for Fergus, Elora, Arthur + all 22 services (462 unique headings)
-- [ ] Run /positioning-angles skill for city-specific differentiation (historic towns, Elora Gorge area)
-- [ ] Validate brand-voice.md applies
-- [ ] Run /seo-content skill for problem, solution, context sections
-- [ ] Run /direct-response-copy skill for hero, trustOpener, benefits, finalCta, savings
-- [ ] All 66 files contain Phase 8 schema fields
+
+**STEP 0: Read Reference Files (MANDATORY)**
+- [ ] Read `docs/reference/service-city-template.md` - canonical schema structure
+- [ ] Read `docs/reference/utility-providers.md` - rebate info for these cities
+- [ ] Read `docs/project/ralph/brand-voice.md` - voice consistency
+
+**STEP 1: Keyword Research (Anti-Loop Pattern)**
+- [ ] FOR EACH city (fergus, elora, arthur):
+  - [ ] Check if `docs/reference/[city]-keywords.md` exists
+  - [ ] IF FILE EXISTS: Read file, verify 154 headings present, SKIP to STEP 2
+  - [ ] IF FILE NOT EXISTS: Run /orchestrator → /keyword-research, save to `docs/reference/[city]-keywords.md`
+
+**STEP 2: Positioning Angles (Anti-Loop Pattern)**
+- [ ] FOR EACH city:
+  - [ ] Check if `docs/reference/[city]-positioning.md` exists
+  - [ ] IF FILE EXISTS: Read file, verify positioning present, SKIP to STEP 3
+  - [ ] IF FILE NOT EXISTS: Run /orchestrator → /positioning-angles (historic towns, Elora Gorge area), save output
+
+**STEP 3: Content Generation**
+- [ ] FOR EACH of 66 files:
+  - [ ] Check if hero.title is populated (content exists)
+  - [ ] IF POPULATED: SKIP to next file
+  - [ ] IF EMPTY: Generate content using template structure (see service-city-template.md)
+  - [ ] CRITICAL: Verify markdown body exists after `---` (file MUST NOT end with frontmatter)
+  - [ ] CRITICAL: Include all 4 SEO fields (title, seoTitle, seoDescription, workflowStatus)
+
+**STEP 4: Quality Verification**
 - [ ] All 462 headings are UNIQUE (zero duplicates globally)
 - [ ] All H1s use PREMIUM positioning (NO emergency language)
 - [ ] Word count ~1,000 per page verified
-- [ ] Em dash check passes (0 matches)
-- [ ] Experience stats added and visible
-- [ ] pnpm build passes
-- [ ] Run /agent-browser on 3 sample pages
+- [ ] Em dash check passes (only frontmatter delimiters)
+- [ ] Experience stats visible in hero.description
+- [ ] pnpm build passes (0 errors)
+- [ ] Run /agent-browser on 3 sample pages (1 per city)
 
 ---
 
@@ -308,20 +348,40 @@ Transform 550 service-city pages from 50% generic content to 80%+ city-specific 
 **Scope:** 66 files, 462 unique keyword-researched headings, ~1,000 words per page
 
 **Acceptance Criteria:**
-- [ ] Run /orchestrator skill to confirm skill sequence
-- [ ] Run /keyword-research skill for Mount Forest, Orangeville, Shelburne + all 22 services (462 unique headings)
-- [ ] Run /positioning-angles skill for city-specific differentiation
-- [ ] Validate brand-voice.md applies
-- [ ] Run /seo-content skill for problem, solution, context sections
-- [ ] Run /direct-response-copy skill for hero, trustOpener, benefits, finalCta, savings
-- [ ] All 66 files contain Phase 8 schema fields
+
+**STEP 0: Read Reference Files (MANDATORY)**
+- [ ] Read `docs/reference/service-city-template.md` - canonical schema structure
+- [ ] Read `docs/reference/utility-providers.md` - rebate info for these cities
+- [ ] Read `docs/project/ralph/brand-voice.md` - voice consistency
+
+**STEP 1: Keyword Research (Anti-Loop Pattern)**
+- [ ] FOR EACH city (mount-forest, orangeville, shelburne):
+  - [ ] Check if `docs/reference/[city]-keywords.md` exists
+  - [ ] IF FILE EXISTS: Read file, verify 154 headings present, SKIP to STEP 2
+  - [ ] IF FILE NOT EXISTS: Run /orchestrator → /keyword-research, save to `docs/reference/[city]-keywords.md`
+
+**STEP 2: Positioning Angles (Anti-Loop Pattern)**
+- [ ] FOR EACH city:
+  - [ ] Check if `docs/reference/[city]-positioning.md` exists
+  - [ ] IF FILE EXISTS: Read file, verify positioning present, SKIP to STEP 3
+  - [ ] IF FILE NOT EXISTS: Run /orchestrator → /positioning-angles, save output
+
+**STEP 3: Content Generation**
+- [ ] FOR EACH of 66 files:
+  - [ ] Check if hero.title is populated (content exists)
+  - [ ] IF POPULATED: SKIP to next file
+  - [ ] IF EMPTY: Generate content using template structure (see service-city-template.md)
+  - [ ] CRITICAL: Verify markdown body exists after `---` (file MUST NOT end with frontmatter)
+  - [ ] CRITICAL: Include all 4 SEO fields (title, seoTitle, seoDescription, workflowStatus)
+
+**STEP 4: Quality Verification**
 - [ ] All 462 headings are UNIQUE (zero duplicates globally)
 - [ ] All H1s use PREMIUM positioning (NO emergency language)
 - [ ] Word count ~1,000 per page verified
-- [ ] Em dash check passes (0 matches)
-- [ ] Experience stats added and visible
-- [ ] pnpm build passes
-- [ ] Run /agent-browser on 3 sample pages
+- [ ] Em dash check passes (only frontmatter delimiters)
+- [ ] Experience stats visible in hero.description
+- [ ] pnpm build passes (0 errors)
+- [ ] Run /agent-browser on 3 sample pages (1 per city)
 
 ---
 
@@ -332,20 +392,40 @@ Transform 550 service-city pages from 50% generic content to 80%+ city-specific 
 **Scope:** 66 files, 462 unique keyword-researched headings, ~1,000 words per page
 
 **Acceptance Criteria:**
-- [ ] Run /orchestrator skill to confirm skill sequence
-- [ ] Run /keyword-research skill for Erin, Hillsburgh, Harriston + all 22 services (462 unique headings)
-- [ ] Run /positioning-angles skill for city-specific differentiation
-- [ ] Validate brand-voice.md applies
-- [ ] Run /seo-content skill for problem, solution, context sections
-- [ ] Run /direct-response-copy skill for hero, trustOpener, benefits, finalCta, savings
-- [ ] All 66 files contain Phase 8 schema fields
+
+**STEP 0: Read Reference Files (MANDATORY)**
+- [ ] Read `docs/reference/service-city-template.md` - canonical schema structure
+- [ ] Read `docs/reference/utility-providers.md` - rebate info for these cities
+- [ ] Read `docs/project/ralph/brand-voice.md` - voice consistency
+
+**STEP 1: Keyword Research (Anti-Loop Pattern)**
+- [ ] FOR EACH city (erin, hillsburgh, harriston):
+  - [ ] Check if `docs/reference/[city]-keywords.md` exists
+  - [ ] IF FILE EXISTS: Read file, verify 154 headings present, SKIP to STEP 2
+  - [ ] IF FILE NOT EXISTS: Run /orchestrator → /keyword-research, save to `docs/reference/[city]-keywords.md`
+
+**STEP 2: Positioning Angles (Anti-Loop Pattern)**
+- [ ] FOR EACH city:
+  - [ ] Check if `docs/reference/[city]-positioning.md` exists
+  - [ ] IF FILE EXISTS: Read file, verify positioning present, SKIP to STEP 3
+  - [ ] IF FILE NOT EXISTS: Run /orchestrator → /positioning-angles, save output
+
+**STEP 3: Content Generation**
+- [ ] FOR EACH of 66 files:
+  - [ ] Check if hero.title is populated (content exists)
+  - [ ] IF POPULATED: SKIP to next file
+  - [ ] IF EMPTY: Generate content using template structure (see service-city-template.md)
+  - [ ] CRITICAL: Verify markdown body exists after `---` (file MUST NOT end with frontmatter)
+  - [ ] CRITICAL: Include all 4 SEO fields (title, seoTitle, seoDescription, workflowStatus)
+
+**STEP 4: Quality Verification**
 - [ ] All 462 headings are UNIQUE (zero duplicates globally)
 - [ ] All H1s use PREMIUM positioning (NO emergency language)
 - [ ] Word count ~1,000 per page verified
-- [ ] Em dash check passes (0 matches)
-- [ ] Experience stats added and visible
-- [ ] pnpm build passes
-- [ ] Run /agent-browser on 3 sample pages
+- [ ] Em dash check passes (only frontmatter delimiters)
+- [ ] Experience stats visible in hero.description
+- [ ] pnpm build passes (0 errors)
+- [ ] Run /agent-browser on 3 sample pages (1 per city)
 
 ---
 
@@ -356,20 +436,40 @@ Transform 550 service-city pages from 50% generic content to 80%+ city-specific 
 **Scope:** 66 files, 462 unique keyword-researched headings, ~1,000 words per page
 
 **Acceptance Criteria:**
-- [ ] Run /orchestrator skill to confirm skill sequence
-- [ ] Run /keyword-research skill for Palmerston, Listowel, Drayton + all 22 services (462 unique headings)
-- [ ] Run /positioning-angles skill for city-specific differentiation
-- [ ] Validate brand-voice.md applies
-- [ ] Run /seo-content skill for problem, solution, context sections
-- [ ] Run /direct-response-copy skill for hero, trustOpener, benefits, finalCta, savings
-- [ ] All 66 files contain Phase 8 schema fields
+
+**STEP 0: Read Reference Files (MANDATORY)**
+- [ ] Read `docs/reference/service-city-template.md` - canonical schema structure
+- [ ] Read `docs/reference/utility-providers.md` - rebate info for these cities
+- [ ] Read `docs/project/ralph/brand-voice.md` - voice consistency
+
+**STEP 1: Keyword Research (Anti-Loop Pattern)**
+- [ ] FOR EACH city (palmerston, listowel, drayton):
+  - [ ] Check if `docs/reference/[city]-keywords.md` exists
+  - [ ] IF FILE EXISTS: Read file, verify 154 headings present, SKIP to STEP 2
+  - [ ] IF FILE NOT EXISTS: Run /orchestrator → /keyword-research, save to `docs/reference/[city]-keywords.md`
+
+**STEP 2: Positioning Angles (Anti-Loop Pattern)**
+- [ ] FOR EACH city:
+  - [ ] Check if `docs/reference/[city]-positioning.md` exists
+  - [ ] IF FILE EXISTS: Read file, verify positioning present, SKIP to STEP 3
+  - [ ] IF FILE NOT EXISTS: Run /orchestrator → /positioning-angles, save output
+
+**STEP 3: Content Generation**
+- [ ] FOR EACH of 66 files:
+  - [ ] Check if hero.title is populated (content exists)
+  - [ ] IF POPULATED: SKIP to next file
+  - [ ] IF EMPTY: Generate content using template structure (see service-city-template.md)
+  - [ ] CRITICAL: Verify markdown body exists after `---` (file MUST NOT end with frontmatter)
+  - [ ] CRITICAL: Include all 4 SEO fields (title, seoTitle, seoDescription, workflowStatus)
+
+**STEP 4: Quality Verification**
 - [ ] All 462 headings are UNIQUE (zero duplicates globally)
 - [ ] All H1s use PREMIUM positioning (NO emergency language)
 - [ ] Word count ~1,000 per page verified
-- [ ] Em dash check passes (0 matches)
-- [ ] Experience stats added and visible
-- [ ] pnpm build passes
-- [ ] Run /agent-browser on 3 sample pages
+- [ ] Em dash check passes (only frontmatter delimiters)
+- [ ] Experience stats visible in hero.description
+- [ ] pnpm build passes (0 errors)
+- [ ] Run /agent-browser on 3 sample pages (1 per city)
 
 ---
 

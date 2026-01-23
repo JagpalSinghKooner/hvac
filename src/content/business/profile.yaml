@@ -243,3 +243,96 @@ copy_blocks:
   service_in_city_intro_template: "B.A.P Heating & Cooling Services Ltd provides **{Service Title}** in **{City Name}, ON**, with 24/7 emergency support and response typically within 60 minutes across our service area. Call +1 519-835-4858 to speak to a person."
   locations_page_intro: "We serve Wellington County, Waterloo Region, Halton Region, Peel Region, Hamilton & Brant, and Dufferin County with 24/7 HVAC service."
   services_page_intro: "Heating, cooling, indoor air quality, water heating, and commercial HVAC services, delivered 24/7 with transparent recommendations and strong warranties."
+
+# ============================================================================
+# CITY STATS — E-E-A-T Credibility
+# Population-based installation estimates for homepage/location pages
+# Formula: Large (>100k) = 2.5/1000, Medium (20k-100k) = 3.5/1000, Small (<20k) = 4.5/1000
+# ============================================================================
+city_stats:
+  # Wellington County
+  guelph:
+    population: 145000
+    installations_estimate: 435
+  fergus:
+    population: 22000
+    installations_estimate: 77
+  elora:
+    population: 8000
+    installations_estimate: 36
+  rockwood:
+    population: 5000
+    installations_estimate: 22
+  erin:
+    population: 12000
+    installations_estimate: 54
+  eden-mills:
+    population: 500
+    installations_estimate: 2
+
+  # Waterloo Region
+  kitchener:
+    population: 270000
+    installations_estimate: 675
+  waterloo:
+    population: 140000
+    installations_estimate: 420
+  cambridge:
+    population: 140000
+    installations_estimate: 420
+  breslau:
+    population: 8000
+    installations_estimate: 36
+  elmira:
+    population: 12000
+    installations_estimate: 54
+
+  # Halton Region
+  milton:
+    population: 140000
+    installations_estimate: 420
+  halton-hills:
+    population: 65000
+    installations_estimate: 227
+  georgetown:
+    population: 45000
+    installations_estimate: 157
+  burlington:
+    population: 195000
+    installations_estimate: 487
+  acton:
+    population: 10000
+    installations_estimate: 45
+  oakville:
+    population: 215000
+    installations_estimate: 537
+
+  # Peel Region
+  caledon:
+    population: 80000
+    installations_estimate: 280
+  bolton:
+    population: 35000
+    installations_estimate: 122
+
+  # Hamilton & Brant
+  hamilton:
+    population: 580000
+    installations_estimate: 1450
+  brantford:
+    population: 105000
+    installations_estimate: 315
+  jerseyville:
+    population: 1500
+    installations_estimate: 7
+
+  # Dufferin County
+  orangeville:
+    population: 32000
+    installations_estimate: 112
+  shelburne:
+    population: 10000
+    installations_estimate: 45
+  grand-valley:
+    population: 3500
+    installations_estimate: 17

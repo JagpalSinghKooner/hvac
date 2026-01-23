@@ -571,3 +571,61 @@ agent-browser screenshot /tmp/[service]-[city].png --full
 - Verifies city-specific content actually displays (not fallback to service-level)
 - Confirms internal linking pattern works across service-city pages
 - Provides visual proof of quality for client review
+
+### 9. Anti-Loop Pattern for Keyword/Positioning Stories (CRITICAL)
+**Problem:** Ralph kept re-running `/orchestrator` → `/keyword-research` every iteration instead of progressing to content generation
+**Root Cause:** PRD acceptance criteria didn't have conditional checks to skip already-completed work
+**Solution:** ALL keyword research and positioning stories MUST use IF EXISTS / IF NOT EXISTS pattern:
+
+```markdown
+STEP 1: Check if docs/reference/[city]-keywords.md exists
+  - IF FILE EXISTS: Read file, verify headings present, SKIP to STEP 2
+  - IF FILE NOT EXISTS: Run /orchestrator → /keyword-research, save output
+
+STEP 2: Check if docs/reference/[city]-positioning.md exists
+  - IF FILE EXISTS: Read file, verify positioning present, SKIP to VERIFICATION
+  - IF FILE NOT EXISTS: Run /orchestrator → /positioning-angles, save output
+
+VERIFICATION: Both files exist in docs/reference/
+```
+
+**Why This Works:**
+- First iteration: Files don't exist → skills run → files created
+- Second iteration: Files exist → skills SKIPPED → proceeds to next story
+- Prevents infinite loop on same step
+
+**Apply to:** ALL city keyword research stories (US-010+)
+
+---
+
+## Phase 8A: Pre-Generation Checklist (MANDATORY)
+
+**Before generating ANY service-city content, Ralph MUST:**
+
+### Step 0: Read Reference Files
+1. [ ] Read `docs/reference/service-city-template.md` - canonical structure with correct schema
+2. [ ] Read `src/content/config.ts` lines 556-681 - schema definition for validation
+3. [ ] Read `docs/reference/utility-providers.md` - accurate rebate info per city
+4. [ ] Read `docs/reference/[city]-keywords.md` - city-specific headings
+5. [ ] Read `docs/reference/[city]-positioning.md` - positioning angle
+6. [ ] Read `docs/project/ralph/brand-voice.md` - voice consistency
+
+### Step 1: Verify Schema Structure
+Confirm these CRITICAL patterns before writing:
+- `problem.issues`: Array of **strings** (NOT objects)
+- `context`: Multiline **string** with `|` (NOT object with description)
+- `savings.rebateInfo`: String **INSIDE** savings object (NOT separate top-level)
+- `proof`: Single **object** (NOT array)
+
+### Step 2: Post-Generation Verification
+After writing EACH file:
+1. [ ] `tail -5 [file]` shows markdown content (NOT `---`)
+2. [ ] All 4 SEO fields present: `title`, `seoTitle`, `seoDescription`, `workflowStatus`
+3. [ ] `pnpm build` passes (0 errors)
+
+### Step 3: Quality Gates
+Before marking story complete:
+- [ ] 154 unique headings (22 H1s + 132 H2s) per city
+- [ ] Zero em dashes in content (only frontmatter delimiters)
+- [ ] Experience stats visible in hero.description
+- [ ] Premium positioning in all H1s (NO emergency language)

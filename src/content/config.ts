@@ -375,6 +375,145 @@ const locations = defineCollection({
     seoTitle: z.string(),
     seoDescription: z.string(),
 
+    // =========================================================================
+    // PHASE 9: Homepage/Landing Page Flag
+    // =========================================================================
+    // When true, this entry is the homepage (ontario.md) and should be
+    // excluded from location listings. Enables shared template architecture.
+    isLandingPage: z.boolean().optional().default(false),
+
+    // =========================================================================
+    // PHASE 9: Section Objects (Three-Tier Fallback System)
+    // Tier 1: Location-specific (from this file)
+    // Tier 2: Homepage defaults (from ontario.md)
+    // Tier 3: Business profile (from profile.yaml)
+    // =========================================================================
+
+    // HERO SECTION - Standalone (does NOT use SectionHeader)
+    // Uses 'title' for H1 (not 'headline' like other sections)
+    hero: z.object({
+      title: z.string(),                    // H1 with "HVAC Contractor" for SEO
+      subtitle: z.string().optional(),      // Supporting statement
+      trustBadgeText: z.string().optional(), // e.g., "Google A+ Rated"
+      rebateBadge: z.object({
+        text: z.string(),                   // e.g., "$7,100 rebates available"
+        deadline: z.string(),               // e.g., "March 2026"
+      }).optional(),
+      answeringTeamText: z.string().optional(), // e.g., "Call anytime — live answering team"
+    }).optional(),
+
+    // SERVICE CATEGORIES SECTION
+    serviceCategories: z.object({
+      eyebrow: z.string().optional(),       // e.g., "Our Services"
+      headline: z.string(),                 // H2 for section
+      subtext: z.string().optional(),
+      serviceCategoryOrder: z.array(z.string()).optional(), // Custom order
+    }).optional(),
+
+    // EXPERT CONSULTATION SECTION
+    expertConsultation: z.object({
+      eyebrow: z.string().optional(),       // e.g., "Free Consultation"
+      headline: z.string(),                 // e.g., "Not Sure What You Need?"
+      subtext: z.string().optional(),
+      bullets: z.array(z.string()).max(6).optional(),
+      image: z.object({
+        src: z.string(),
+        alt: z.string(),
+      }).optional(),
+    }).optional(),
+
+    // WHY CHOOSE SECTION - Bento Grid Layout
+    // NOTE: Stats (reviewCount, googleRating) come from profile.yaml
+    whyChoose: z.object({
+      eyebrow: z.string().optional(),       // e.g., "Why Choose Us"
+      headline: z.string(),
+      subtext: z.string().optional(),
+      fullServiceBullets: z.array(z.string()).optional(),
+      warrantyCard: z.object({
+        headline: z.string(),               // e.g., "10-Year Warranty"
+        copy: z.string(),
+      }).optional(),
+    }).optional(),
+
+    // TESTIMONIALS SECTION
+    testimonials: z.object({
+      eyebrow: z.string().optional(),       // e.g., "Customer Stories"
+      headline: z.string(),
+      subtext: z.string().optional(),
+    }).optional(),
+
+    // PROJECT GALLERY SECTION
+    projectGallery: z.object({
+      eyebrow: z.string().optional(),       // e.g., "Our Work"
+      headline: z.string(),
+      subtext: z.string().optional(),
+      filterByLocation: z.boolean().optional().default(false),
+    }).optional(),
+
+    // FINANCING SECTION
+    financing: z.object({
+      eyebrow: z.string().optional(),       // e.g., "Flexible Financing"
+      headline: z.string(),
+      subtext: z.string().optional(),
+      rebateCard: z.object({
+        utilityProvider: z.string(),        // Must match utility-providers.md
+        rebateAmount: z.string(),           // e.g., "Up to $7,100"
+        emphasis: z.string(),               // e.g., "WE HANDLE THE PAPERWORK"
+      }).optional(),
+    }).optional(),
+
+    // SERVICE AREA SECTION
+    // NOTE: Map embed comes from business.yaml mapEmbed field
+    serviceArea: z.object({
+      eyebrow: z.string().optional(),       // e.g., "Service Area"
+      headline: z.string(),
+      subtext: z.string().optional(),
+      showAllRegions: z.boolean().optional().default(true),
+      currentCityHighlight: z.string().optional(), // Empty for homepage
+    }).optional(),
+
+    // FAQ SECTION - Inline Items Only (NO itemRefs pattern)
+    faq: z.object({
+      eyebrow: z.string().optional(),       // e.g., "Common Questions"
+      headline: z.string(),
+      subtext: z.string().optional(),
+      items: z.array(z.object({
+        question: z.string(),
+        answer: z.string(),
+      })).optional(),
+      showViewAllLink: z.boolean().optional().default(true),
+    }).optional(),
+
+    // BLOG PREVIEW SECTION
+    blogPreview: z.object({
+      eyebrow: z.string().optional(),       // e.g., "From Our Blog"
+      headline: z.string(),
+      subtext: z.string().optional(),
+      filterByLocation: z.boolean().optional().default(false),
+    }).optional(),
+
+    // FINAL CTA SECTION
+    // Uses SectionHeader with variant="dark" for white text on primary bg
+    finalCta: z.object({
+      eyebrow: z.string().optional(),       // e.g., "Get Started"
+      headline: z.string(),
+      subtext: z.string().optional(),
+      bullets: z.array(z.string()).optional(),
+    }).optional(),
+
+    // SCROLL BANNER - Persistent Element
+    // Triggers at 75% scroll depth, once per session (sessionStorage)
+    scrollBanner: z.object({
+      text: z.string(),                     // Banner message
+      ctaText: z.string(),                  // Button text
+      enabled: z.boolean().optional().default(true),
+    }).optional(),
+
+    // EXPERIENCE STATS - E-E-A-T Credibility
+    experienceStats: z.object({
+      installationsInCity: z.number().optional(),
+    }).optional(),
+
     // Workflow fields
     workflowStatus: z.enum(['published', 'draft', 'review']),
     reviewedBy: z.string().optional(),
