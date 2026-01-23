@@ -1466,7 +1466,7 @@ EMPHASIS STYLING: <Badge variant="secondary">{financing.rebateCard.emphasis}</Ba
 
 **Data Sources:**
 - Content: `serviceArea` schema from ontario.md (or location override)
-- Map: `businessProfile.mapEmbed` from `src/content/business/profile.yaml` — Google Maps iframe embed
+- Map: `businessProfile.mapEmbed` from `src/content/business/profile.yaml` — URL only, component builds iframe
 - Regions: Auto-fetch from regions collection
 
 **Include:**
@@ -1562,7 +1562,7 @@ COMPONENTS:
 ├── SectionHeader (eyebrow, headline, subtext from serviceArea schema)
 ├── Map area
 │   └── div (rounded-xl, overflow-hidden)
-│       └── {businessProfile.mapEmbed} — dangerouslySetInnerHTML for iframe
+│       └── iframe (src={businessProfile.mapEmbed}) — component constructs iframe from URL
 ├── Regions grid (grid-cols-2 md:grid-cols-3 lg:grid-cols-6, gap-6)
 │   └── Region block × 6 (from regions collection)
 │       ├── Badge (variant="outline") — Region name
@@ -2511,6 +2511,7 @@ const locations = defineCollection({
       eyebrow: z.string(),              // "Our Services"
       headline: z.string(),             // H2: "Complete HVAC Services"
       subtext: z.string(),              // "From installation to maintenance..."
+      serviceCategoryOrder: z.array(z.string()).optional(),  // Override display order
     }).optional(),
 
     // ═══════════════════════════════════════════════════════════════
@@ -2568,6 +2569,7 @@ const locations = defineCollection({
       eyebrow: z.string(),              // "Our Work"
       headline: z.string(),             // H2: "Recent Installations"
       subtext: z.string(),              // "Quality projects across Southern Ontario"
+      filterByLocation: z.boolean().default(false),  // Filter gallery by current location
     }).optional(),
 
     // ═══════════════════════════════════════════════════════════════
@@ -2908,19 +2910,10 @@ brands:
 
 # ═══════════════════════════════════════════════════════════════
 # GOOGLE MAPS EMBED (for Service Area Section)
-# Store the full iframe HTML — component uses dangerouslySetInnerHTML
-# Get from Google Maps → Share → Embed a map
+# Store URL only — component constructs the iframe with proper attributes
+# Get from Google Maps → Share → Embed a map → copy src URL
 # ═══════════════════════════════════════════════════════════════
-mapEmbed: |
-  <iframe
-    src="https://www.google.com/maps/embed?pb=YOUR_EMBED_CODE_HERE"
-    width="100%"
-    height="400"
-    style="border:0;"
-    allowfullscreen=""
-    loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade">
-  </iframe>
+mapEmbed: "https://www.google.com/maps/embed?pb=YOUR_EMBED_CODE_HERE"
 ```
 
 **Badge SVG Files Required:**

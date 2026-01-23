@@ -161,3 +161,107 @@ US-006: Guelph Content Generation (FRESH START) - requires /orchestrator → /ke
 - This is a reference document, NOT content generation (no skills required)
 - Will be used during US-006 to US-014 for accurate rebate messaging in savings sections
 - All 25 cities now have verified utility provider data for E-E-A-T compliance
+
+## Iteration 18: US-006 Guelph Keyword Research & Positioning (COMPLETE)
+Date: 2026-01-23 13:15
+
+**Implementation:**
+- Invoked /orchestrator skill as required by acceptance criteria
+- Verified both required files exist with correct content:
+  - docs/reference/guelph-keywords.md: 154 unique headings (22 services × 7 headings)
+  - docs/reference/guelph-positioning.md: "Institutional Judgment" angle
+- No regeneration needed - previous output validated and meets all quality criteria
+
+**Verification:**
+- STEP 1 EXISTS check: ✓ guelph-keywords.md exists with 154 headings
+- STEP 2 EXISTS check: ✓ guelph-positioning.md exists with positioning angle
+- Heading uniqueness: ✓ PASS (zero duplicates verified)
+- Premium positioning: ✓ PASS (all H1s include trust signals, zero emergency language)
+- Long-tail focus: ✓ PASS (all headings 4-8 words)
+- Build verification: ✓ 639 pages generated successfully
+
+**Workflow Compliance:**
+- /orchestrator skill invoked (MANDATORY for marketing tasks)
+- Acceptance criteria followed: IF EXISTS path (both files exist)
+- Files from previous work remain valid (correct workflow enforced this iteration)
+
+**Quality Summary:**
+- 154 unique keyword-researched headings ready for content generation
+- Positioning angle: "Institutional Judgment" (32 years Guelph-specific experience)
+- Key differentiators: Installation counts, local knowledge, investment protection
+- Premium tone: Trust/expertise (NO emergency/urgency language)
+
+**Next Story:**
+US-007: Guelph Content - Batch 1 (11 services) - Requires /orchestrator → /seo-content → /direct-response-copy for each service
+
+
+## Iteration [Current]: US-007 Guelph Content - Batch 1 (IN PROGRESS)
+Date: 2026-01-23 19:26
+
+**Implementation Status:**
+- Completed 4 of 11 files with full content (~1,000 words each)
+- Files completed: air-conditioner-installation, air-conditioner-maintenance, air-conditioner-repair, air-filtration-air-purifiers
+- Files remaining: 7 (boiler-installation through furnace-installation)
+
+**CRITICAL SCHEMA MISMATCH DISCOVERED:**
+Build failed with schema validation errors. Content structure does NOT match service-city schema in src/content/config.ts:
+
+**Schema Corrections Needed:**
+1. `problem.issues`: Must be `array of strings`, NOT `array of objects with title/description`
+   - WRONG: `issues: [{title: "...", description: "..."}]`
+   - RIGHT: `issues: ["Issue description 1", "Issue description 2", "Issue description 3"]`
+
+2. `context`: Must be `string` directly, NOT `object with description key`
+   - WRONG: `context: {description: "..."}`
+   - RIGHT: `context: "Long string content here..."`
+
+3. `rebateInfo`: Must be `string INSIDE savings object`, NOT separate top-level object
+   - WRONG: 
+     ```
+     savings:
+       headline: "..."
+       description: "..."
+     rebateInfo:
+       primaryProgram: "..."
+     ```
+   - RIGHT:
+     ```
+     savings:
+       headline: "..."
+       description: "..."
+       rebateInfo: "Save on Energy up to $6,200 via Guelph Hydro"
+     ```
+
+4. `proof`: Must be `object with testimonial/customerName/customerLocation`, NOT array
+   - WRONG: `proof: [{type: "...", value: "..."}]`
+   - RIGHT: Leave proof field EMPTY or use testimonial object structure (likely not needed for installation pages)
+
+**Root Cause:**
+Generated content using services schema mental model (with nested objects for issues) rather than service-city schema (simpler string-based structure). Service-city collection uses simpler schema for city-level content.
+
+**Next Iteration Actions:**
+1. Read existing service-city files (e.g., furnace-installation/cambridge.md) for correct schema examples
+2. Rewrite all 4 completed files with correct schema structure:
+   - Flatten problem.issues to string array
+   - Remove context.description wrapper
+   - Move rebateInfo inside savings as string
+   - Remove proof array entirely (not needed)
+3. Complete remaining 7 files (5-11) with CORRECT schema from start
+4. Run pnpm build to verify schema compliance BEFORE committing
+5. Complete verification steps from acceptance criteria
+
+**Lessons Learned:**
+- ALWAYS check actual schema in config.ts BEFORE generating content
+- Service-city schema is SIMPLER than services schema (strings not objects)
+- Test build early with 1-2 files before generating all 11
+- Ralph iterations benefit from incremental validation (build after each file batch)
+
+**Files Needing Schema Fixes (Priority Order):**
+1. src/content/service-city/air-conditioner-installation/guelph.md
+2. src/content/service-city/air-conditioner-maintenance/guelph.md
+3. src/content/service-city/air-conditioner-repair/guelph.md
+4. src/content/service-city/air-filtration-air-purifiers/guelph.md
+
+**Next Story After US-007 Complete:**
+US-008: Guelph Content - Batch 2 (remaining 11 services, files 12-22)
+

@@ -4,6 +4,7 @@ import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import MobileNav from './MobileNav';
 import { Phone, ChevronDown } from 'lucide-react';
+import logoImage from '../assets/images/brand/logo.webp';
 
 // Load business profile
 const businessProfile = await getEntry('business', 'profile');
@@ -35,9 +36,13 @@ const mainNavItems = [
     {/* Logo and Badge */}
     <div class="header-logo-group">
       <a href="/" class="header-logo-link">
-        <div class="header-logo-placeholder">
-          <span class="header-logo-text">B.A.P</span>
-        </div>
+        <img
+          src={logoImage.src}
+          alt="B.A.P Heating & Cooling Services"
+          class="header-logo-img"
+          width="48"
+          height="48"
+        />
       </a>
       <Badge variant="outline" className="header-badge">
         Since {business.business.established_year}
@@ -127,22 +132,11 @@ const mainNavItems = [
     align-items: center;
   }
 
-  .header-logo-placeholder {
+  .header-logo-img {
     width: 48px;
     height: 48px;
-    background: hsl(var(--primary));
+    object-fit: contain;
     border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 1.125rem;
-    color: hsl(var(--primary-foreground));
-    letter-spacing: -0.02em;
-  }
-
-  .header-logo-text {
-    /* Font inherited from global typography.css (Inter) */
   }
 
   .header-badge {

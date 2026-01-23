@@ -1,8 +1,12 @@
 ---
 serviceSlug: 'rooftop-units'
 locationSlug: 'guelph'
-title: 'Rooftop Unit Services in Guelph, ON'
-seoTitle: 'Rooftop Units Guelph ON | RTU Installation & Repair | B.A.P'
-seoDescription: 'Commercial rooftop unit installation and service in Guelph, ON. All major RTU brands. Serving Guelph businesses since 1992.'
+title: 'Rooftop Units in Guelph, ON'
+seoTitle: 'Rooftop Units Guelph ON | B.A.P Heating & Cooling'
+seoDescription: 'Professional rooftop units in Guelph, ON. TSSA-certified technicians. Serving Guelph since 1992.'
 workflowStatus: 'draft'
 ---
+
+# Rooftop Units in Guelph, ON
+
+Content to be generated.

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none">
+  <!-- Star/Badge Background -->
+  <polygon points="70,5 85,45 130,50 95,80 105,125 70,105 35,125 45,80 10,50 55,45" fill="#2D6A4F" stroke="#FFD700" stroke-width="3"/>
+  <!-- Inner Circle -->
+  <circle cx="70" cy="65" r="35" fill="#1B4332"/>
+  <!-- Heat Pump Icon -->
+  <rect x="55" y="50" width="30" height="25" rx="3" fill="#40916C" stroke="#95D5B2" stroke-width="2"/>
+  <path d="M60 55 L60 70 M65 55 L65 70 M70 55 L70 70 M75 55 L75 70 M80 55 L80 70" stroke="#95D5B2" stroke-width="1"/>
+  <!-- Arrows showing heat transfer -->
+  <path d="M50 62 L55 62 M85 62 L90 62" stroke="#FFD700" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- Champion Text Banner -->
+  <rect x="30" y="95" width="80" height="20" rx="3" fill="#FFD700"/>
+  <text x="70" y="109" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#1B4332" text-anchor="middle">HEATPUMP</text>
+  <text x="70" y="130" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#FFD700" text-anchor="middle">CHAMPION</text>
+</svg>

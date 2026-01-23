@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 120" fill="none">
+  <!-- Background Rectangle -->
+  <rect x="5" y="10" width="130" height="100" rx="10" fill="#0066B3" stroke="#004080" stroke-width="3"/>
+  <!-- Inner Border -->
+  <rect x="15" y="20" width="110" height="80" rx="6" fill="none" stroke="#66B3FF" stroke-width="2"/>
+  <!-- WSIB Text -->
+  <text x="70" y="52" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#FFFFFF" text-anchor="middle">WSIB</text>
+  <!-- Insured Text -->
+  <text x="70" y="72" font-family="Arial, sans-serif" font-size="12" font-weight="600" fill="#66B3FF" text-anchor="middle">INSURED</text>
+  <!-- Checkmark Shield -->
+  <circle cx="70" cy="90" r="12" fill="#4CAF50"/>
+  <path d="M63 90 L68 95 L78 85" stroke="#FFFFFF" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -3,6 +3,7 @@ import { getEntry } from 'astro:content';
 import { Separator } from './ui/separator';
 import { Button } from './ui/button';
 import { Phone, Mail, MapPin } from 'lucide-react';
+import logoImage from '../assets/images/brand/logo.webp';
 
 // Load business profile
 const businessProfile = await getEntry('business', 'profile');
@@ -184,10 +185,20 @@ const resourceLinks = [
 
     <Separator className="my-8 bg-gray-800" />
 
-    <!-- Bottom Section: Social + Copyright -->
+    <!-- Bottom Section: Logo, Social + Copyright -->
     <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-      <!-- Social Links -->
-      <div class="flex items-center gap-4">
+      <!-- Logo and Social Links -->
+      <div class="flex items-center gap-6">
+        <a href="/" class="flex-shrink-0">
+          <img
+            src={logoImage.src}
+            alt="B.A.P Heating & Cooling Services"
+            class="h-10 w-10 object-contain"
+            width="40"
+            height="40"
+          />
+        </a>
+        <div class="flex items-center gap-4">
         {business.social?.instagram && (
           <a
             href={business.social.instagram}
@@ -214,6 +225,7 @@ const resourceLinks = [
             </svg>
           </a>
         )}
+        </div>
       </div>
 
       <!-- Copyright -->

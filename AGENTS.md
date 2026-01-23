@@ -429,6 +429,39 @@ const schema = {
 **Problem:** Zod schema errors if YAML frontmatter invalid
 **Solution:** Test script on 1-2 files first, verify build passes, then run batch
 
+### 5. Service-City Schema Structure (CRITICAL)
+**Problem:** service-city schema is SIMPLER than services schema, easy to use wrong structure
+**Solution:** ALWAYS reference `src/content/config.ts` lines 556-680 BEFORE generating content
+**Key Differences:**
+- `problem.issues`: array of STRINGS, NOT objects with title/description
+- `context`: STRING directly, NOT object with description key
+- `savings.rebateInfo`: STRING inside savings object, NOT separate top-level object
+- `proof`: object with testimonial fields OR omit entirely (NOT array)
+
+**Correct Schema Pattern:**
+```yaml
+problem:
+  headline: "..."
+  issues:
+    - "Issue description one"
+    - "Issue description two"
+    - "Issue description three"
+
+context: "Long markdown content string here without object wrapper..."
+
+savings:
+  headline: "..."
+  description: "..."
+  rebateInfo: "Save on Energy up to $6,200 via Guelph Hydro"
+
+# proof: OMIT unless using testimonial (most service-city pages don't need this)
+```
+
+**Why This Matters:**
+- Build will FAIL with Zod schema errors if structure wrong
+- Components expect schema-compliant data structure
+- Service-city pages use simpler schema than service pages (strings not nested objects)
+
 ---
 
 ## Phase 8A: Verification Scripts (US-015)

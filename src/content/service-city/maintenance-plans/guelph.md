@@ -1,8 +1,12 @@
 ---
 serviceSlug: 'maintenance-plans'
 locationSlug: 'guelph'
-title: 'HVAC Maintenance Plans in Guelph, ON'
-seoTitle: 'HVAC Maintenance Plans Guelph ON | Priority Service | B.A.P'
-seoDescription: 'HVAC maintenance plans in Guelph, ON. Priority service, repair discounts, scheduled care. Serving Guelph since 1992.'
+title: 'Maintenance Plans in Guelph, ON'
+seoTitle: 'Maintenance Plans Guelph ON | B.A.P Heating & Cooling'
+seoDescription: 'Professional maintenance plans in Guelph, ON. TSSA-certified technicians. Serving Guelph since 1992.'
 workflowStatus: 'draft'
 ---
+
+# Maintenance Plans in Guelph, ON
+
+Content to be generated.

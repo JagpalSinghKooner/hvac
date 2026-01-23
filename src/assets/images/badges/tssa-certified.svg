@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Background Circle -->
+  <circle cx="60" cy="60" r="58" fill="#003366" stroke="#FFD700" stroke-width="4"/>
+  <!-- Inner Ring -->
+  <circle cx="60" cy="60" r="48" fill="none" stroke="#FFD700" stroke-width="2"/>
+  <!-- TSSA Text -->
+  <text x="60" y="50" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#FFFFFF" text-anchor="middle">TSSA</text>
+  <!-- Certified Text -->
+  <text x="60" y="70" font-family="Arial, sans-serif" font-size="10" font-weight="600" fill="#FFD700" text-anchor="middle">CERTIFIED</text>
+  <!-- License Text -->
+  <text x="60" y="85" font-family="Arial, sans-serif" font-size="8" fill="#FFFFFF" text-anchor="middle">Lic #000076639116</text>
+  <!-- Checkmark -->
+  <path d="M45 95 L52 102 L75 80" stroke="#4CAF50" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

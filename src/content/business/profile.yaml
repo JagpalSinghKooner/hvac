@@ -45,7 +45,7 @@ locations:
     country: "Canada"
     phone_e164: "+15198354858"
     email: "info@bapheating.ca"
-    google_maps_embed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2891.316800049599!2d-80.22174742382819!3d43.558281471106866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b9a44d6b82ced%3A0x50e4c57c452cca9!2sB.A.P%20Heating%20%26%20Cooling%20Services%20Ltd!5e0!3m2!1sen!2suk!4v1768393510835!5m2!1sen!2suk"
+    google_maps_embed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2891.316800049599!2d-80.22174742382819!3d43.558281471106866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b9a44d6b82ced%3A0x50e4c57c452cca9!2sB.A.P%20Heating%20%26%20Cooling%20Services%20Ltd!5e0!3m2!1sen!2suk!4v1769195443388!5m2!1sen!2suk"
   secondary:
     name: "B.A.P Heating & Cooling Services Ltd Elora"
     address_full: "6512 Wellington Rd 7, Centre Wellington, ON N0B 1S0, Canada"
@@ -55,6 +55,7 @@ locations:
     country: "Canada"
     phone_e164: "+15198354858"
     email: "info@bapheating.ca"
+    google_maps_embed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2885.5049640105535!2d-80.43775391347594!3d43.67926437624316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b95426ecb6e8b%3A0x92e59a2f32cc3400!2sB.A.P%20Heating%20%26%20Cooling%20Services%20Ltd%20Elora!5e0!3m2!1sen!2suk!4v1769195579717!5m2!1sen!2suk"
 
 coverage:
   service_model: "Residential and commercial"
@@ -151,6 +152,24 @@ brands_and_capability:
   certifications_statement: "Certified across major brands and recognised on the Better Business Bureau."
   rooftop_units_industries: "All industries"
   project_types: "New builds and renovations (HVAC-related work only)"
+
+brands:
+  - { name: "Lennox", logo: "/src/assets/images/brand/lennox-hvac-logo.svg" }
+  - { name: "Carrier", logo: "/src/assets/images/brand/carrier-hvac-logo.svg" }
+  - { name: "Trane", logo: "/src/assets/images/brand/trane-hvac-logo.svg" }
+  - { name: "Goodman", logo: "/src/assets/images/brand/goodman-hvac-logo.svg" }
+  - { name: "Daikin", logo: "/src/assets/images/brand/daikin-hvac-logo.svg" }
+  - { name: "Rheem", logo: "/src/assets/images/brand/rheem-hvac-logo.svg" }
+  - { name: "Bryant", logo: "/src/assets/images/brand/bryant-hvac-logo.svg" }
+  - { name: "American Standard", logo: "/src/assets/images/brand/american-standard-hvac-logo.svg" }
+
+badges:
+  - { name: "TSSA Certified", key: "tssa", logo: "/src/assets/images/badges/tssa-certified.svg" }
+  - { name: "HRAI Member", key: "hrai", logo: "/src/assets/images/badges/hrai-member.svg" }
+  - { name: "HRAI Heatpump Champion", key: "hrai-heatpump", logo: "/src/assets/images/badges/hrai-heatpump-champion.svg" }
+  - { name: "BBB Accredited", key: "bbb", logo: "/src/assets/images/badges/bbb-accredited.svg" }
+  - { name: "WSIB Insured", key: "wsib", logo: "/src/assets/images/badges/wsib-insured.svg" }
+  - { name: "Google Reviews", key: "google-reviews", logo: "/src/assets/images/badges/google-reviews.svg" }
 
 trust_and_compliance:
   licenses:

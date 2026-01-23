@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 120" fill="none">
+  <!-- Background Shield -->
+  <path d="M70 10 L130 30 L130 70 C130 95 100 115 70 120 C40 115 10 95 10 70 L10 30 Z" fill="#1E3A5F" stroke="#C0C0C0" stroke-width="3"/>
+  <!-- Inner Shield -->
+  <path d="M70 20 L120 37 L120 68 C120 88 95 105 70 110 C45 105 20 88 20 68 L20 37 Z" fill="#2C5282"/>
+  <!-- HRAI Text -->
+  <text x="70" y="55" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#FFFFFF" text-anchor="middle">HRAI</text>
+  <!-- Member Text -->
+  <text x="70" y="75" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#90CDF4" text-anchor="middle">MEMBER</text>
+  <!-- Maple Leaf Accent -->
+  <path d="M70 85 L73 92 L80 92 L75 97 L77 105 L70 100 L63 105 L65 97 L60 92 L67 92 Z" fill="#FF0000"/>
+</svg>

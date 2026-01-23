@@ -1,8 +1,12 @@
 ---
 serviceSlug: 'tank-water-heaters'
 locationSlug: 'guelph'
-title: 'Tank Water Heater Installation in Guelph, ON'
-seoTitle: 'Tank Water Heater Guelph ON | Same-Day Service | B.A.P'
-seoDescription: 'Tank water heater installation in Guelph, ON. Same-day replacement available. Serving Guelph since 1992.'
+title: 'Tank Water Heaters in Guelph, ON'
+seoTitle: 'Tank Water Heaters Guelph ON | B.A.P Heating & Cooling'
+seoDescription: 'Professional tank water heaters in Guelph, ON. TSSA-certified technicians. Serving Guelph since 1992.'
 workflowStatus: 'draft'
 ---
+
+# Tank Water Heaters in Guelph, ON
+
+Content to be generated.
