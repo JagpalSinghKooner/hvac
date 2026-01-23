@@ -1,6 +1,7 @@
 ---
 import { getEntry, getCollection, type CollectionEntry } from 'astro:content';
 import ServicePageLayout from '@/layouts/ServicePageLayout.astro';
+import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema.astro';
 import { getServiceCityLinks } from '@/utils/getInternalLinks';
 
 export async function getStaticPaths() {
@@ -184,4 +185,11 @@ const contextHeadline = serviceCityData.contextHeadline;
   finalCtaCopy={finalCtaCopy}
   benefitsHeadline={benefitsHeadline}
   contextHeadline={contextHeadline}
-/>
+>
+  <LocalBusinessSchema
+    slot="head"
+    serviceName={serviceData.title}
+    serviceDescription={serviceCityData.seoDescription}
+    cityName={locationData.title}
+  />
+</ServicePageLayout>

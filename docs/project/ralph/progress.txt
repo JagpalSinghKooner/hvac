@@ -51,3 +51,64 @@ Date: 2026-01-23 11:40
 
 **Next Story:**
 US-003: Fix LocationServicesGrid Bug (requires /frontend-design skill)
+
+## Iteration 8: US-003 Fix LocationServicesGrid Bug (COMPLETE)
+Date: 2026-01-23 11:43
+
+**Implementation:**
+- Changed query from `getCollection('services')` to `getCollection('service-city', (entry) => entry.data.locationSlug === locationSlug)`
+- Removed `.slice(0, 8)` limit to show all available services in city (not just top 8)
+- Updated sorting logic to work with service-city entries using `entry.data.serviceSlug` instead of `service.slug`
+- Fixed shortDescription to use `seoDescription` field (service-city schema doesn't have `description` field)
+- Preserved priority sorting (furnace, AC, heat pump first, then alphabetical)
+
+**Code Changes:**
+- src/components/sections/LocationServicesGrid.astro lines 33-88
+  - Query changed to filter by locationSlug
+  - Display logic updated for service-city schema structure
+  - totalServicesCount now reflects actual services in city
+
+**Verification:**
+- pnpm build: 639 pages generated successfully ✓
+- Component now shows city-specific services only (e.g., Guelph shows only Guelph services)
+- Different cities will show different service counts based on available service-city entries
+
+**Next Story:**
+US-004: Add LocalBusiness Structured Data (requires /frontend-design skill)
+
+## Iteration 16: US-004 Add LocalBusiness Structured Data (COMPLETE)
+Date: 2026-01-23 11:57
+
+**Implementation:**
+- LocalBusinessSchema.astro component ALREADY existed at src/components/seo/LocalBusinessSchema.astro
+- Component already integrated in src/pages/services/[serviceLocation].astro at lines 189-194
+- No code changes required - component was created in previous work
+
+**Verification:**
+1. /frontend-design skill: Created design spec confirming technical approach and implementation complete
+2. /web-design-guidelines review: PASS - no issues (pure JSON-LD component, no UI/accessibility concerns)
+3. /agent-browser testing: Tested 3 Guelph service-city pages
+   - furnace-installation-guelph-on: ✓ JSON-LD present, serviceName="Furnace Installation", cityName="Guelph"
+   - heat-pump-installation-guelph-on: ✓ JSON-LD present, serviceName="Heat Pump Installation", cityName="Guelph"
+   - air-conditioner-installation-guelph-on: ✓ JSON-LD present, serviceName="Air Conditioner Installation", cityName="Guelph"
+4. pnpm build: 639 pages generated successfully ✓
+
+**Schema Validation:**
+- ✓ @context: "https://schema.org"
+- ✓ @type: "LocalBusiness"
+- ✓ Business data sourced from profile.yaml (NAP consistency)
+- ✓ Dynamic props working: serviceName, serviceDescription, cityName
+- ✓ areaServed: {type: City, name: cityName}
+- ✓ makesOffer: {type: Offer, itemOffered: {type: Service}}
+- ✓ aggregateRating: 4.8/407 (from profile.yaml reputation data)
+- ✓ foundingDate: "1994"
+- ✓ openingHours: "Mo-Su 00:00-23:59"
+
+**Key Findings:**
+- Component uses `getEntry('business', 'profile')` for single source of truth
+- Renders in <head> via slot in ServicePageLayout
+- JSON-LD correctly escaped with `set:html={JSON.stringify(schema)}`
+- All service-city pages now have LocalBusiness structured data for local SEO
+
+**Next Story:**
+US-005: Create Utility Provider Reference Document (research documentation, NO skills required)

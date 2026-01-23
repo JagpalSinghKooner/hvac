@@ -102,8 +102,8 @@
         "pnpm build passes"
       ],
       "priority": 4,
-      "passes": false,
-      "notes": "Requires /frontend-design, /web-design-guidelines, /agent-browser skills. Creates new LocalBusinessSchema.astro component with schema.org JSON-LD."
+      "passes": true,
+      "notes": "COMPLETE - LocalBusinessSchema.astro component already existed and was integrated. Verified via /frontend-design (design spec confirmed), /web-design-guidelines (PASS - no issues), /agent-browser (tested 3 Guelph pages: furnace, heat pump, AC - all render correct JSON-LD with serviceName, cityName, business data from profile.yaml). pnpm build passes (639 pages)."
     },
     {
       "id": "US-005",

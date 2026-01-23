@@ -1,0 +1,73 @@
+---
+/**
+ * LocalBusinessSchema Component
+ *
+ * Generates schema.org JSON-LD structured data for service-city pages.
+ * Outputs LocalBusiness entity with service offering, location, and ratings.
+ * Invisible to users, readable by search engines for local SEO.
+ *
+ * @prop serviceName - Service being offered (e.g., "Furnace Installation")
+ * @prop serviceDescription - Brief description of the service
+ * @prop cityName - City where service is offered (e.g., "Guelph")
+ */
+
+import { getEntry } from 'astro:content';
+
+interface Props {
+  serviceName: string;
+  serviceDescription: string;
+  cityName: string;
+}
+
+const { serviceName, serviceDescription, cityName } = Astro.props;
+
+// Get business profile data (single source of truth)
+const businessProfile = await getEntry('business', 'profile');
+if (!businessProfile || !businessProfile.data.locations) {
+  throw new Error('Business profile or locations not found');
+}
+const business = businessProfile.data.business;
+const contact = businessProfile.data.contact;
+const location = businessProfile.data.locations.primary;
+const reputation = businessProfile.data.reputation;
+
+// Generate LocalBusiness structured data
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": business.legal_name,
+  "telephone": contact.phone_e164,
+  "email": contact.email,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "25 Clearview St Unit 6",
+    "addressLocality": location.city,
+    "addressRegion": location.province,
+    "postalCode": location.postal_code,
+    "addressCountry": location.country
+  },
+  "url": "https://bapheating.ca",
+  "areaServed": {
+    "@type": "City",
+    "name": cityName
+  },
+  "makesOffer": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": serviceName,
+      "description": serviceDescription
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": reputation.google_rating.toString(),
+    "reviewCount": reputation.google_review_count.toString()
+  },
+  "foundingDate": business.established_year.toString(),
+  "priceRange": "$$$$",
+  "openingHours": "Mo-Su 00:00-23:59"
+};
+---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />

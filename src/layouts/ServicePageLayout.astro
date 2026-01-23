@@ -235,6 +235,9 @@ const {
 ---
 
 <BaseLayout title={title} description={description}>
+  <!-- Pass through head slot for page-specific schemas -->
+  <slot name="head" slot="head" />
+
   <!-- 1. Hero Section -->
   <!-- Background: default (white) -->
   <ServiceHeroSection
