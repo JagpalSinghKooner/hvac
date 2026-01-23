@@ -1185,10 +1185,10 @@ IMAGE PLACEHOLDER:
 - Credentials bar shows actual logos/badges
 
 **Content Skill Instructions:**
-- Tab 1 copy should emphasize WHAT makes B.A.P different (process, not credentials)
-- Tab 2 is visual badges only — minimal copy
-- Tab 3 is brief narrative (NOT full company history) — max 75 words
-- Each tab should be scannable in under 5 seconds
+- Card 1 copy should emphasize WHAT makes B.A.P different (process, not credentials)
+- Card 2 is visual badges only — minimal copy
+- Card 3 is brief narrative (NOT full company history) — max 75 words
+- Each card should be scannable in under 5 seconds
 
 **Component Specification:**
 ```
@@ -2699,7 +2699,6 @@ interface Props {
   headline?: string;
   fullServiceBullets?: string[];
   warrantyMessage?: string;
-  yearsServing?: number;
   cityName?: string;
 }
 
@@ -2707,7 +2706,6 @@ const {
   headline = "Why Homeowners Choose B.A.P",  // Default
   fullServiceBullets = [...defaultBullets],
   warrantyMessage = "...",
-  yearsServing = 30,
   cityName = "Southern Ontario",
 } = Astro.props;
 ---
