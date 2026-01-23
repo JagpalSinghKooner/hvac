@@ -125,8 +125,8 @@
         "pnpm build passes (documentation only, no schema impact)"
       ],
       "priority": 5,
-      "passes": false,
-      "notes": "Research documentation only. NO skills required. Independent of other stories."
+      "passes": true,
+      "notes": "COMPLETE - Created comprehensive utility provider reference document mapping all 25 cities to electricity (LDC) and gas providers. Includes rebate program details (Enbridge Home Efficiency Rebate Plus, Save on Energy, Canada Greener Homes Grant), content templates for larger cities vs smaller towns, and usage guidelines for US-006 to US-014 content generation. Build passes (639 pages)."
     },
     {
       "id": "US-006",
