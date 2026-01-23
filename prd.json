@@ -402,7 +402,7 @@
       ],
       "priority": 10,
       "passes": false,
-      "notes": "IN PROGRESS - Elmira 22/22 COMPLETE. St. Jacobs 1/22 started (furnace-installation). New Hamburg 0/22 pending. BLOCKER RESOLVED (iteration 1): All 9 missing location entries created (st-jacobs, new-hamburg, arthur, mount-forest, hillsburgh, palmerston, listowel, drayton, harriston). Build passes with 640 pages. REMAINING: St. Jacobs (21 files) + New Hamburg (22 files) = 43 files. Keyword research and positioning angles complete for both cities."
+      "notes": "IN PROGRESS - Elmira 22/22 COMPLETE. St. Jacobs 9/22 IN PROGRESS (furnace services, heat pump services, AC services complete). New Hamburg 0/22 pending. BLOCKER RESOLVED: All 9 missing location entries created. Build passes with 657 pages. REMAINING: St. Jacobs (13 files: air-filtration through rooftop-units) + New Hamburg (22 files) = 35 files. Keyword research and positioning angles complete for both cities."
     },
     {
       "id": "US-011",
