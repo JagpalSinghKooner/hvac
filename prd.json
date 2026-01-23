@@ -402,7 +402,7 @@
       ],
       "priority": 10,
       "passes": false,
-      "notes": "PARTIAL - Elmira 22/22 complete. St. Jacobs and New Hamburg PENDING content generation (location entries NOW EXIST as of 2026-01-23). BLOCKER RESOLVED: All 9 missing location entries created (st-jacobs, new-hamburg, arthur, mount-forest, hillsburgh, palmerston, listowel, drayton, harriston). Build now passes with 648 pages. REMAINING WORK: Generate content for St. Jacobs (22 files) and New Hamburg (22 files) using existing keyword research and positioning angles."
+      "notes": "IN PROGRESS - Elmira 22/22 COMPLETE. St. Jacobs 1/22 started (furnace-installation). New Hamburg 0/22 pending. BLOCKER RESOLVED (iteration 1): All 9 missing location entries created (st-jacobs, new-hamburg, arthur, mount-forest, hillsburgh, palmerston, listowel, drayton, harriston). Build passes with 640 pages. REMAINING: St. Jacobs (21 files) + New Hamburg (22 files) = 43 files. Keyword research and positioning angles complete for both cities."
     },
     {
       "id": "US-011",
