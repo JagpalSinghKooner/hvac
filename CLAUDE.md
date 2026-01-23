@@ -402,6 +402,30 @@ pnpm ralph:5    # 5 iterations
 pnpm ralph:20   # 20 iterations
 ```
 
+### Anti-Loop Pattern (CRITICAL)
+
+**The Problem:** Ralph re-runs `/orchestrator` → `/keyword-research` every iteration instead of progressing. Infinite loops burn context without progress.
+
+**The Solution:** ALL keyword/positioning/content stories MUST use IF EXISTS pattern:
+
+```markdown
+STEP 1: Check if docs/reference/[city]-keywords.md exists
+  - IF FILE EXISTS: Read file, verify content, SKIP to next step
+  - IF FILE NOT EXISTS: Run skill, save output
+
+STEP 2: Check if target content file has required fields populated
+  - IF POPULATED: SKIP to VERIFICATION
+  - IF EMPTY/PLACEHOLDER: Run skill, update file
+
+VERIFICATION: All required files exist with content
+```
+
+**Why It Works:**
+- First iteration: Files don't exist → skills run → files created
+- Second iteration: Files exist → skills SKIPPED → proceeds to next story
+
+**Apply to ALL stories involving:** content generation, keyword research, positioning, brand voice.
+
 ---
 
 ## Build Phases

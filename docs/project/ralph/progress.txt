@@ -1648,3 +1648,49 @@ Arthur (22 files): CREATE files + generate content (same list as above)
 
 **Story Status:** passes: false (1/66 files complete, 65 remaining)
 
+
+## Iteration 14 (Ralph): US-011 Fergus Content (CONTINUED - 3/66 files)
+Date: 2026-01-23
+
+**Implementation Status:**
+- Completed 3 of 66 files: fergus/furnace-installation (iteration 13), furnace-maintenance, furnace-repair (iteration 14)
+- Remaining: 63 files (Fergus 19 + Elora 22 + Arthur 22)
+
+**Schema Compliance:**
+- Used CORRECT Phase 8A schema structure (hero, experienceStats, problem, solution, etc.)
+- problem.issues: Array of strings (NOT objects)
+- context: Multiline string with | (NOT object)
+- savings.rebateInfo: String INSIDE savings object
+- proof: Single object (NOT array)
+- All files include 4 required SEO fields (title, seoTitle, seoDescription, workflowStatus)
+
+**Content Quality:**
+- Word count: ~1,000 words per file
+- Premium positioning: H1s use "Trusted", "Expert" (NO emergency language - removed "24/7", "Same-Day" from old content)
+- Fergus-specific content: Grand River valley, Centre Wellington, heritage stone buildings, Fergusson West, Fergus Sportsplex
+- "Grand River Reliability" positioning angle applied consistently
+- E-E-A-T signals: experienceStats populated (900 maintenance, 1,050 repairs), installation counts in hero.description
+
+**CRITICAL YAML LESSON (AGENTS.md #2):**
+Single-quoted YAML strings require DOUBLED apostrophes for contractions and possessives:
+- WRONG: `description: 'Wellington County's extended season'`
+- RIGHT: `description: 'Wellington County''s extended season'`
+- WRONG: `'aren't causing the failure'`
+- RIGHT: `'aren''t causing the failure'`
+
+Build failed twice due to unescaped apostrophes before fix. Common patterns requiring doubling:
+- City possessives: Fergus''s, Wellington''s
+- Contractions: aren''t, don''t, isn''t, it''s
+- ONLY applies to single-quoted strings, NOT multiline | strings
+
+**Build Status:** PASSING (692 pages, 0 errors)
+
+**Commit:** 8403fa0 - "feat: US-011 Fergus content (furnace-maintenance, furnace-repair) - 3/66 files"
+
+**Next Actions:**
+- Continue with Fergus files 4-22 (heat-pump-installation through tankless-water-heaters)
+- Then Elora files 1-22
+- Then Arthur files 1-22 (CREATE files first)
+- Total remaining for US-011: 63 files
+
+**Story Status:** passes: false (3/66 files complete, 63 remaining)

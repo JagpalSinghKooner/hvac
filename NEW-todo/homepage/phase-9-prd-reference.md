@@ -22,7 +22,9 @@
 
 ### Overview
 
-Rebuild all 12 homepage section components using shadcn MCP and `/frontend-design` skill. Components read from `ontario.md` (where `isLandingPage: true`).
+Rebuild **12 homepage content sections** + **3 global components** (Header, Footer, AnnouncementBar) + **1 utility** (ScrollBanner) using shadcn MCP and `/frontend-design` skill. Content sections read from `ontario.md` (where `isLandingPage: true`).
+
+**Total: 16 components** to build/modify.
 
 ### Required Skills Per Story
 
@@ -38,7 +40,13 @@ Rebuild all 12 homepage section components using shadcn MCP and `/frontend-desig
 
 Explored existing homepage components to prepare for Phase 9 component build.
 
-### Current Homepage Structure (14 sections)
+### Current Homepage Structure (Before Phase 9)
+
+> **Note:** This shows the CURRENT structure. Phase 9 restructures to:
+> - **3 Global:** Header, Footer, AnnouncementBar (NEW)
+> - **12 Sections:** Hero → BrandLogoTicker → ServiceCategories → ExpertConsultation → WhyChoose → Testimonials → ProjectGallery → Financing → ServiceArea → FAQ → BlogPreview → FinalCta
+> - **1 Utility:** ScrollBanner (replaces StickyPhoneDrawer)
+> - **REMOVED:** ValuePropsGrid (merged into WhyChoose), FamilyStorySection, CertificationsSection, StickyPhoneDrawer
 
 | # | Component | Data Source | Notes |
 |---|-----------|-------------|-------|
@@ -491,7 +499,19 @@ const homepageEntry = allLocations.find(loc => loc.data.isLandingPage);
 - H1 MUST contain "HVAC Contractor" (GBP category match)
 - Phone number ALWAYS from `businessProfile.contact.phone_display`
 
-### 2. HomepageServiceCategories.astro
+### 2. HomepageBrandLogoTicker.astro
+
+| Aspect | Details |
+|--------|---------|
+| **Schema** | `profile.yaml → brands` |
+| **Props** | `brands` (array from profile.yaml) |
+| **shadcn** | None (custom infinite scroll) |
+| **Layout** | Horizontal infinite scroll ticker |
+| **Data** | profile.yaml brands array |
+
+**Note:** Does NOT use ontario.md schema — reads directly from profile.yaml. See [BrandLogoTicker Data Structure](#brandlogoticker-data-structure) section for implementation details.
+
+### 3. HomepageServiceCategories.astro
 
 | Aspect | Details |
 |--------|---------|
@@ -501,7 +521,7 @@ const homepageEntry = allLocations.find(loc => loc.data.isLandingPage);
 | **Layout** | 5-column responsive grid |
 | **Data** | Frontmatter + services collection |
 
-### 3. HomepageExpertConsultation.astro
+### 4. HomepageExpertConsultation.astro
 
 | Aspect | Details |
 |--------|---------|
@@ -511,7 +531,7 @@ const homepageEntry = allLocations.find(loc => loc.data.isLandingPage);
 | **Layout** | 2-column flex (text left, image right) |
 | **Data** | Frontmatter only |
 
-### 4. HomepageWhyChoose.astro (Bento)
+### 5. HomepageWhyChoose.astro (Bento)
 
 | Aspect | Details |
 |--------|---------|
@@ -543,18 +563,22 @@ TIER 3 — Social Proof (TERTIARY)
 │  [EYEBROW] Why Choose Us                                       │
 │  [HEADLINE] Why Homeowners Choose B.A.P                        │
 │  [SUBTEXT] Full-service HVAC — one call handles everything     │
-├────────────────────────────────┬───────────────────────────────┤
-│  FULL-SERVICE CARD (spans 2)   │  WARRANTY CARD                │
-│  • Permits & inspections       │  "10-Year Warranty"           │
-│  • Rebate paperwork            │  Parts AND labor.             │
-│  • Financing coordination      │  Our name is on every job.    │
-│  • Professional installation   │                               │
-│  • 10-year warranty            │                               │
-├────────────────────────────────┼───────────────────────────────┤
-│  GOOGLE RATING CARD            │  INSTALLATIONS CARD           │
-│  4.8★ from 407 reviews         │  2,500+ installations         │
-└────────────────────────────────┴───────────────────────────────┘
+├───────────────────────────────┬────────────────────────────────┤
+│  WARRANTY CARD                │  FULL-SERVICE CARD (spans 2)   │
+│  "10-Year Warranty"           │  • Permits & inspections       │
+│  Parts AND labor.             │  • Rebate paperwork            │
+│  Our name is on every job.    │  • Financing coordination      │
+│                               │  • Professional installation   │
+├───────────────────────────────┤  • 10-year warranty            │
+│  GOOGLE RATING CARD           │                                │
+│  4.8★ from 407 reviews        │                                │
+├───────────────────────────────┤                                │
+│  INSTALLATIONS CARD           │                                │
+│  2,500+ installations         │                                │
+└───────────────────────────────┴────────────────────────────────┘
 ```
+
+**Note:** Full-service card on RIGHT (matches SPEC 9). Small cards stack on LEFT.
 
 **Tablet Grid (768px-1023px):**
 - 2 columns maintained
@@ -583,7 +607,7 @@ TIER 3 — Social Proof (TERTIARY)
 }
 ```
 
-### 5. HomepageTestimonials.astro
+### 6. HomepageTestimonials.astro
 
 | Aspect | Details |
 |--------|---------|
@@ -593,7 +617,7 @@ TIER 3 — Social Proof (TERTIARY)
 | **Layout** | Horizontal carousel |
 | **Data** | Frontmatter + reviews collection |
 
-### 6. HomepageProjectGallery.astro
+### 7. HomepageProjectGallery.astro
 
 | Aspect | Details |
 |--------|---------|
@@ -603,7 +627,7 @@ TIER 3 — Social Proof (TERTIARY)
 | **Layout** | Masonry grid (3-4 columns) |
 | **Data** | Frontmatter + case-studies collection |
 
-### 7. HomepageFinancing.astro
+### 8. HomepageFinancing.astro
 
 | Aspect | Details |
 |--------|---------|
@@ -613,7 +637,7 @@ TIER 3 — Social Proof (TERTIARY)
 | **Layout** | 2-column flex (text left, card right) |
 | **Data** | Frontmatter only |
 
-### 8. HomepageServiceArea.astro
+### 9. HomepageServiceArea.astro
 
 | Aspect | Details |
 |--------|---------|
@@ -623,7 +647,7 @@ TIER 3 — Social Proof (TERTIARY)
 | **Layout** | 2-column (map left, regions right) |
 | **Data** | Frontmatter + profile.yaml (map) + regions collection |
 
-### 9. HomepageFAQ.astro
+### 10. HomepageFAQ.astro
 
 | Aspect | Details |
 |--------|---------|
@@ -633,7 +657,7 @@ TIER 3 — Social Proof (TERTIARY)
 | **Layout** | Single column accordion |
 | **Data** | Frontmatter inline items (generates FAQPage JSON-LD) |
 
-### 10. HomepageBlogPreview.astro
+### 11. HomepageBlogPreview.astro
 
 | Aspect | Details |
 |--------|---------|
@@ -643,7 +667,7 @@ TIER 3 — Social Proof (TERTIARY)
 | **Layout** | 3-column grid |
 | **Data** | Frontmatter + blog collection |
 
-### 11. HomepageFinalCta.astro
+### 12. HomepageFinalCta.astro
 
 | Aspect | Details |
 |--------|---------|
@@ -653,7 +677,7 @@ TIER 3 — Social Proof (TERTIARY)
 | **Layout** | Full-width dark section, centered |
 | **Data** | Frontmatter + profile.yaml (phone) |
 
-### 12. ScrollBanner.tsx
+### 13. ScrollBanner.tsx (Utility)
 
 | Aspect | Details |
 |--------|---------|
@@ -762,6 +786,7 @@ const handleDismiss = () => {
 
 | # | Section | Background Token | Notes |
 |---|---------|-----------------|-------|
+| 0 | AnnouncementBar | `bg-primary` | Dismissible promo, above header |
 | 1 | Header | `bg-background` | Sticky, white |
 | 2 | Hero | `bg-muted` | Light gray |
 | 3 | Brand Logo Ticker | `bg-background` | White |
@@ -835,8 +860,10 @@ const handleDismiss = () => {
 
 ```
 index.astro
-├── Header.astro
+├── AnnouncementBar.astro (GLOBAL - dismissible promo bar)
+├── Header.astro (GLOBAL)
 ├── HomepageHero.astro
+├── HomepageBrandLogoTicker.astro
 ├── HomepageServiceCategories.astro
 ├── HomepageExpertConsultation.astro
 ├── HomepageWhyChoose.astro
@@ -847,9 +874,14 @@ index.astro
 ├── HomepageFAQ.astro
 ├── HomepageBlogPreview.astro
 ├── HomepageFinalCta.astro
-├── ScrollBanner.tsx
-└── Footer.astro
+├── ScrollBanner.tsx (UTILITY - 75% scroll trigger)
+└── Footer.astro (GLOBAL)
 ```
+
+**Component Types:**
+- **GLOBAL (3):** AnnouncementBar, Header, Footer — persistent on all pages
+- **SECTIONS (12):** Hero through FinalCta — homepage content sections
+- **UTILITY (1):** ScrollBanner — scroll-triggered CTA
 
 ---
 
@@ -1047,7 +1079,7 @@ VERIFICATION: Both files exist in docs/reference/
 
 | Story | Components | Skills |
 |-------|------------|--------|
-| **Story 0** | Header restructure (nav + mobile) | /frontend-design, /agent-browser |
+| **Story 0** | Header + AnnouncementBar (nav + mobile + promo bar) | /frontend-design, /agent-browser |
 | **Story 1** | SectionHeader + HomepageHero | /frontend-design, /agent-browser |
 | **Story 2** | BrandLogoTicker (infinite scroll) | /frontend-design, /agent-browser |
 | **Story 3** | ServiceCategories + ExpertConsultation | /frontend-design, /agent-browser |
@@ -1701,7 +1733,7 @@ No phone icon — ScrollBanner handles mobile CTA at 75% scroll.
 |--------|-------|
 | **Visible cards - Mobile** | 1 |
 | **Visible cards - Tablet** | 2 |
-| **Visible cards - Desktop** | 2 |
+| **Visible cards - Desktop** | 3 |
 | **Auto-play** | Yes, 5-second intervals |
 | **Pause on hover** | Yes |
 | **Navigation** | Dots only (count SLIDES, not reviews) |
@@ -1931,7 +1963,7 @@ locations: z.array(z.string()).optional(),  // City slugs: ["guelph", "kitchener
 | Announcement bar | Combined message, dismissible, all pages |
 | Logo ticker speed | Medium (30s), pause on hover |
 | Logo ticker reduced motion | Static grid |
-| Testimonials visible (desktop) | 2 cards |
+| Testimonials visible (desktop) | 3 cards |
 | Testimonials navigation | Dots counting SLIDES |
 | Project gallery layout | Uniform grid, 3 cols desktop |
 | Project gallery mobile | Horizontal scroll with dots |

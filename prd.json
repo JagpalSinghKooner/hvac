@@ -433,7 +433,7 @@
       ],
       "priority": 11,
       "passes": false,
-      "notes": "ITERATION 13 PROGRESS: Generated 1/66 files (fergus furnace-installation with full Phase 8A schema). Build passes 692 pages. Keyword research + positioning COMPLETE for 3 cities (fergus-keywords.md, elora-keywords.md, arthur-keywords.md + positioning files). REMAINING: 65 files (Fergus 21 + Elora 22 + Arthur 22 need creation). This story requires multiple iterations due to scope (66K words E-E-A-T content). Next iteration: Continue Fergus files 2-22, then Elora, then Arthur. Quality verified on iteration 13 file: schema compliance, ~1,000 words, premium positioning, city-specific content."
+      "notes": "ITERATION 14 PROGRESS: Generated 3/66 files (fergus furnace-installation, furnace-maintenance, furnace-repair with full Phase 8A schema). Build passes 692 pages. Keyword research + positioning COMPLETE for 3 cities (fergus-keywords.md, elora-keywords.md, arthur-keywords.md + positioning files). REMAINING: 63 files (Fergus 19 + Elora 22 + Arthur 22). CRITICAL LESSON: Single-quoted YAML strings require doubled apostrophes for contractions (aren''t, don''t, Wellington''s). This story requires multiple iterations due to scope (66K words E-E-A-T content). Next iteration: Continue Fergus files 4-22, then Elora, then Arthur."
     },
     {
       "id": "US-012",

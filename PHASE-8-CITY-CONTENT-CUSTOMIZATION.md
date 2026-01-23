@@ -392,6 +392,34 @@ Step 6: /direct-response-copy (hero, trustOpener, benefits, finalCta, savings)
 - LIGHT CONTEXT: Positioning summary to /seo-content (avoid over-contexted output)
 - LIGHT CONTEXT: Keyword highlights to /direct-response-copy (main terms only)
 
+### Anti-Loop Pattern (CRITICAL — Prevents Infinite Loops)
+
+**The Problem:** Ralph re-runs `/orchestrator` → `/keyword-research` every iteration instead of progressing. Infinite loops burn context without progress.
+
+**The Solution:** ALL content generation stories MUST use IF EXISTS pattern in acceptance criteria:
+
+```markdown
+STEP 1: Check if docs/reference/[city]-keywords.md exists
+  - IF FILE EXISTS: Read file, verify 154 headings present (22 services × 7 headings), SKIP to STEP 2
+  - IF FILE NOT EXISTS: Run /orchestrator → /keyword-research, save output
+
+STEP 2: Check if docs/reference/[city]-positioning.md exists
+  - IF FILE EXISTS: Read file, verify positioning angles present, SKIP to STEP 3
+  - IF FILE NOT EXISTS: Run /orchestrator → /positioning-angles, save output
+
+STEP 3: Check if city's service-city files have required frontmatter populated
+  - IF POPULATED (hero, problem, solution, benefits, context, savings, finalCta): SKIP to VERIFICATION
+  - IF EMPTY/PLACEHOLDER: Run /orchestrator → /seo-content → /direct-response-copy, update files
+
+VERIFICATION: All 22 service-city files for [city] have complete E-E-A-T frontmatter
+```
+
+**Why It Works:**
+- First iteration: Files don't exist → skills run → files created
+- Second iteration: Files exist → skills SKIPPED → proceeds to next story
+
+**Apply to ALL US-006 to US-014 stories.**
+
 ### Example Acceptance Criteria for Content Story
 
 ```json
