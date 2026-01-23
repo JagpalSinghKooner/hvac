@@ -369,6 +369,44 @@ const showInternalLinks = serviceSlug && locationSlug && cityName && serviceName
 
 **Why:** Internal links only appear on service-city pages where all data is available, NOT on service-level pages.
 
+### SEO Schema Components (JSON-LD)
+**Pattern:** Schema.org structured data components render JSON-LD in `<head>` via slot.
+
+**Example (LocalBusinessSchema.astro):**
+```typescript
+// 1. Import business data from profile.yaml
+const businessProfile = await getEntry('business', 'profile');
+const business = businessProfile.data.business;
+
+// 2. Build schema object
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": business.legal_name,
+  // ... other fields
+};
+
+// 3. Render with set:html to prevent JS processing
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+```
+
+**Usage in page template:**
+```astro
+<ServicePageLayout ...props>
+  <LocalBusinessSchema
+    slot="head"
+    serviceName={serviceData.title}
+    cityName={locationData.title}
+  />
+</ServicePageLayout>
+```
+
+**Why:**
+- `is:inline` prevents Astro from processing as JavaScript
+- `set:html` safely injects JSON string
+- Data sourced from profile.yaml ensures NAP consistency
+- Slot="head" renders in document head for search engines
+
 ---
 
 ## Phase 8A: Common Gotchas
