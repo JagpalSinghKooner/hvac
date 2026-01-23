@@ -358,6 +358,12 @@ pnpm ralph:20  # 20 iterations for 18 stories + buffer
 
 **CRITICAL:** All stories MUST include required skills in acceptance criteria per CLAUDE.md rules.
 
+> **PROJECT-WIDE RULES (Not Phase 8-Specific):**
+> - **E-E-A-T Content Rules:** ALL copy must go through full marketing skill chain
+> - **Development Skill Chain:** ALL code must go through `/prd` → `/ralph` → `/frontend-design` → write code (using shadcn MCP) → review skills → `/agent-browser`
+> - **No Hardcoded Copy:** Everything is schema-driven with three-tier fallback
+> - See CLAUDE.md and AGENTS.md for complete rules
+
 ### Story Type Matrix
 
 | Story Type | Stories | Required Skills | Acceptance Criteria MUST Include |

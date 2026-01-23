@@ -151,6 +151,8 @@ Contains: company name, phone numbers, service areas, hours, certifications.
 
 **ALL copy on this site MUST be E-E-A-T compliant. NO EXCEPTIONS.**
 
+> **SCOPE:** This applies to ALL phases, ALL page types (homepage, service, location, service-city, blog), and ALL content generation tasks. Not phase-specific — EVERY piece of copy on the entire site.
+
 ### Pattern 1: No Hardcoded Copy
 - **NEVER hardcode text in components** — everything is schema-driven
 - All content from content collections (frontmatter) or profile.yaml
@@ -191,16 +193,29 @@ TIER 3: Business profile (profile.yaml)
 
 ## Mandatory Skill Usage
 
+> **SCOPE:** This applies to ALL phases, ALL page types, ALL code. Not phase-specific — EVERY piece of code on the entire project. NO CODE IS EVER WRITTEN WITHOUT THIS WORKFLOW.
+
 ### Development Skill Chain (ALWAYS follow this order)
 
 1. `/prd` → Create PRD with user stories (INCLUDES skill requirements in acceptance criteria)
 2. `/ralph` → Convert to prd.json (VALIDATES skill requirements exist)
 3. `/frontend-design` → Design BEFORE coding (creates design spec)
-4. Write code (following design spec)
+4. Write code (following design spec, **using shadcn MCP**)
 5. `/vercel-react-best-practices` → Review .tsx files
 6. `/web-design-guidelines` → Review .astro pages
 7. `/agent-browser` → Visual testing (375px, 768px, 1024px viewports)
 8. Commit only after all required skills pass
+
+### shadcn MCP Server (REQUIRED for Components)
+
+**ALL component development MUST use the shadcn MCP server.**
+
+- `mcp__shadcn__search_items_in_registries` — Find components
+- `mcp__shadcn__view_items_in_registries` — View component details
+- `mcp__shadcn__get_add_command_for_items` — Install components
+- `mcp__shadcn__get_item_examples_from_registries` — View usage examples
+
+**NEVER build components from scratch if shadcn has them. Check MCP first.**
 
 ### Marketing Skill Chain (ORCHESTRATOR FIRST, ALWAYS)
 

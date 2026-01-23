@@ -906,6 +906,8 @@ interface Props {
 
 ## Mandatory Skill Usage (CRITICAL)
 
+> **SCOPE:** These rules apply to ALL phases, ALL page types, ALL content/code. Not Phase 9-specific — EVERY piece of work on the entire project.
+
 ### The Orchestrator Rule (NEVER SKIP)
 
 **ALL marketing/content tasks MUST go through `/orchestrator` first.**
@@ -979,16 +981,31 @@ interface Props {
 
 ### Development Skill Chain (ALWAYS follow this order)
 
+> **SCOPE:** This applies to ALL phases, ALL page types, ALL code. Not Phase 9-specific — EVERY piece of code on the entire project. **NO CODE IS EVER WRITTEN WITHOUT THIS WORKFLOW.**
+
 | Step | Skill | Purpose |
 |------|-------|---------|
 | 1 | `/prd` | Create PRD with user stories (INCLUDES skill requirements) |
 | 2 | `/ralph` | Convert to prd.json (VALIDATES skill requirements exist) |
 | 3 | `/frontend-design` | Design BEFORE coding (creates design spec) |
-| 4 | Write code | Following design spec |
+| 4 | Write code | Following design spec, **using shadcn MCP** |
 | 5 | `/vercel-react-best-practices` | Review .tsx files |
 | 6 | `/web-design-guidelines` | Review .astro pages |
 | 7 | `/agent-browser` | Visual testing (375px, 768px, 1024px viewports) |
 | 8 | Commit | Only after all required skills pass |
+
+### shadcn MCP Server (REQUIRED for Components)
+
+**ALL component development MUST use the shadcn MCP server.**
+
+| Tool | Purpose |
+|------|---------|
+| `mcp__shadcn__search_items_in_registries` | Find components |
+| `mcp__shadcn__view_items_in_registries` | View component details |
+| `mcp__shadcn__get_add_command_for_items` | Install components |
+| `mcp__shadcn__get_item_examples_from_registries` | View usage examples |
+
+**NEVER build components from scratch if shadcn has them. Check MCP first.**
 
 ### Anti-Loop Pattern (CRITICAL — Phase 8 Bug Fix)
 

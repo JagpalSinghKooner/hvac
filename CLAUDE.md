@@ -77,6 +77,33 @@
 
 **CRITICAL**: Every task MUST use the appropriate skill. NO task is done "freestyle."
 
+> **SCOPE:** This applies to ALL phases, ALL page types, ALL code. Not phase-specific — EVERY piece of code on the entire project.
+
+### Development Skill Chain (ALWAYS follow this order)
+
+```
+1. /prd → Create PRD with user stories
+2. /ralph → Convert to prd.json
+3. /frontend-design → Design BEFORE writing any component code
+4. Write code (following design spec, using shadcn MCP)
+5. /vercel-react-best-practices → Review .tsx files
+6. /web-design-guidelines → Review .astro pages
+7. /agent-browser → Visual testing BEFORE marking complete
+```
+
+**NO CODE IS EVER WRITTEN WITHOUT THIS WORKFLOW.**
+
+### shadcn MCP Server (REQUIRED for Components)
+
+**ALL component development MUST use the shadcn MCP server.**
+
+- `mcp__shadcn__search_items_in_registries` — Find components
+- `mcp__shadcn__view_items_in_registries` — View component details
+- `mcp__shadcn__get_add_command_for_items` — Install components
+- `mcp__shadcn__get_item_examples_from_registries` — View usage examples
+
+**NEVER build components from scratch if shadcn has them. Check MCP first.**
+
 ### Development Tasks — REQUIRED Skills
 
 | Task Type | REQUIRED Skill | Run BEFORE |
@@ -114,6 +141,8 @@
 ## ⚠️ E-E-A-T CONTENT RULES (STRICT)
 
 **ALL copy on this site MUST be E-E-A-T compliant. NO EXCEPTIONS.**
+
+> **SCOPE:** This applies to ALL phases, ALL page types (homepage, service, location, service-city, blog), and ALL content generation tasks. Not just Phase 9 or homepage — EVERY piece of copy.
 
 ### Rule 1: No Hardcoded Copy
 
