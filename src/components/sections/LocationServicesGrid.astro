@@ -30,8 +30,10 @@ const variantClasses = {
   primary: 'bg-primary/5'
 };
 
-// Fetch all services from content collection
-const allServices = await getCollection('services');
+// Fetch services available in this specific city
+const allServiceCityEntries = await getCollection('service-city', (entry) => {
+  return entry.data.locationSlug === locationSlug;
+});
 
 // Icon mapping for services (using Lucide icons)
 const iconMap: Record<string, any> = {
@@ -61,11 +63,11 @@ const prioritySlugs = [
   'hvac-maintenance',
 ];
 
-// Sort services by priority, then filter to top 6-8
-const sortedServices = allServices
-  .map(service => ({
-    ...service,
-    priority: prioritySlugs.indexOf(service.slug)
+// Sort services by priority, show all available in city
+const sortedServices = allServiceCityEntries
+  .map(entry => ({
+    ...entry,
+    priority: prioritySlugs.indexOf(entry.data.serviceSlug)
   }))
   .sort((a, b) => {
     // Priority services first (lower index = higher priority)
@@ -75,17 +77,16 @@ const sortedServices = allServices
     // Then alphabetically
     return a.data.title.localeCompare(b.data.title);
   })
-  .slice(0, 8); // Take top 8 services
 
-const displayServices = sortedServices.map(service => ({
-  slug: service.slug,
-  title: service.data.title,
-  shortDescription: service.data.description.substring(0, 120) + '...',
-  href: `/services/${service.slug}-${locationSlug}-on`,
-  Icon: iconMap[service.slug] || Settings,
+const displayServices = sortedServices.map(entry => ({
+  slug: entry.data.serviceSlug,
+  title: entry.data.title,
+  shortDescription: entry.data.seoDescription.substring(0, 120) + '...',
+  href: `/services/${entry.data.serviceSlug}-${locationSlug}-on`,
+  Icon: iconMap[entry.data.serviceSlug] || Settings,
 }));
 
-const totalServicesCount = allServices.length;
+const totalServicesCount = allServiceCityEntries.length;
 const defaultHeadline = `More Services We Offer in ${cityName}`;
 const defaultSubheadline = 'Comprehensive HVAC solutions for your home';
 ---

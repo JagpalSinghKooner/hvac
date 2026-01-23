@@ -80,8 +80,8 @@
         "pnpm build passes"
       ],
       "priority": 3,
-      "passes": false,
-      "notes": "Requires /frontend-design, /web-design-guidelines, /agent-browser skills. Bug fix: LocationServicesGrid currently shows global services, must filter by city."
+      "passes": true,
+      "notes": "COMPLETE - Changed query from getCollection('services') to getCollection('service-city') with locationSlug filter. Removed .slice(0, 8) limit to show all available services in city. Updated sorting and display logic to work with service-city entries. Build passes (639 pages)."
     },
     {
       "id": "US-004",

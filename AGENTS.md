@@ -340,6 +340,37 @@ Step 6: /direct-response-copy (hero, trustOpener, benefits, finalCta with conver
 
 ---
 
+## Phase 8A: Component Prop Patterns
+
+### Optional City-Specific Props with Fallback
+**Pattern:** All service-city components accept optional city-specific props that override service-level content.
+
+**Example (ServiceHeroSection):**
+```typescript
+const displayTitle = cityHero?.title || title;  // City-specific OR fallback
+```
+
+**Components with this pattern:**
+- ServiceHeroSection: `cityHero?: {title, description}`
+- FinalCTASection: `headline?: string, copy?: string, cityName?: string`
+- ServiceBenefitsSection: `benefitsHeadline?: string`
+- ContextSection: `contextHeadline?: string`
+
+**Why:** Graceful degradation - pages work with OR without city-specific content.
+
+### Internal Linking Pattern
+**Pattern:** Conditional rendering based on ALL required props present.
+
+**Example:**
+```typescript
+const showInternalLinks = serviceSlug && locationSlug && cityName && serviceName;
+{showInternalLinks && (<div>...internal links...</div>)}
+```
+
+**Why:** Internal links only appear on service-city pages where all data is available, NOT on service-level pages.
+
+---
+
 ## Phase 8A: Common Gotchas
 
 ### 1. Em Dashes (--)
