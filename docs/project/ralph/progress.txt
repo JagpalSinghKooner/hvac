@@ -730,3 +730,56 @@ Date: 2026-01-23 21:22
 - Experience stats scaled appropriately: tank 280 (common replacement), tankless 150 (emerging technology)
 - Elmira establishes quality baseline for remaining rural communities (St. Jacobs, New Hamburg)
 
+
+## Iteration 10 (Ralph): US-010 BLOCKER - Location Entries Missing
+Date: 2026-01-23 21:30
+
+**CRITICAL BLOCKER DISCOVERED:**
+St. Jacobs and New Hamburg do NOT exist in src/content/locations/ collection.
+
+**Attempted Implementation:**
+- Generated st-jacobs-keywords.md and st-jacobs-positioning.md (154 headings, "Comfort Without Compromise" angle)
+- Created 4 St. Jacobs service-city files (furnace-installation, furnace-maintenance, furnace-repair, heat-pump-installation)
+- Build FAILED: "Entry locations → st-jacobs was not found. Parent location not found: st-jacobs"
+
+**Root Cause:**
+Service-city pages require matching locationSlug in locations collection. Service-city template validation fails at build time when location entry missing.
+
+**Existing Location Entries (26 total):**
+acton, bolton, brantford, breslau, burlington, caledon, cambridge, eden-mills, elmira, elora, erin, fergus, georgetown, grand-valley, guelph, halton-hills, hamilton, jerseyville, kitchener, milton, oakville, ontario, orangeville, rockwood, shelburne, waterloo
+
+**Missing Location Entries (needed for US-010 through US-014):**
+- St. Jacobs (village in Woolwich Township)
+- New Hamburg (town in Wilmot Township)
+- Arthur (town in Wellington North)
+- Mount Forest (town in Wellington North)
+- Hillsburgh (village in Erin Township)
+- Palmerston (village in Mapleton Township)
+- Listowel (town in Perth County)
+- Drayton (village in Mapleton Township)
+- Harriston (village in Minto Township)
+
+**Impact on PRD Stories:**
+- US-010: Elmira COMPLETE (22/22), St. Jacobs BLOCKED, New Hamburg BLOCKED
+- US-011: Fergus EXISTS, Elora EXISTS, Arthur BLOCKED
+- US-012: Mount Forest BLOCKED, Orangeville EXISTS, Shelburne EXISTS
+- US-013: Erin EXISTS, Hillsburgh BLOCKED, Harriston BLOCKED
+- US-014: Palmerston BLOCKED, Listowel BLOCKED, Drayton BLOCKED
+
+**Resolution Options:**
+1. CREATE location entries for all 9 missing cities (requires location page content, SEO, schema)
+2. REVISE PRD to use only existing 26 cities (rework US-010 through US-014 city groupings)
+3. PAUSE Phase 8A until location entries created
+
+**Immediate Actions (iteration 10):**
+- Deleted 4 St. Jacobs service-city files (cannot build without location entry)
+- Updated prd.json US-010 notes with blocker status
+- Documented blocker in progress.txt (this entry)
+- Recommend PAUSE on US-010 completion until user decision on resolution approach
+
+**Lesson Learned:**
+PRD should have verified location entry existence BEFORE defining city groupings in US-006 through US-014. Phase 8A assumes 25 cities but locations collection has 26 entries (includes "ontario" which is not a city). Mismatch between utility provider reference document (25 cities) and actual location entries (26 files, different cities).
+
+**Next Action:**
+STOP autonomous execution. OUTPUT user message explaining blocker and requesting decision on resolution approach.
+
