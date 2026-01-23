@@ -9,9 +9,10 @@
 ## Project Overview
 
 **Stack:** Astro 5.0 + React 19 + TypeScript + Tailwind CSS + shadcn/ui
-**Content:** 639 pages (23 services + 550 service-city + supporting pages)
+**Content:** 648 pages (22 services + 550 service-city + 35 locations + supporting pages)
 **Build command:** `pnpm build` (runs astro check + astro build)
 **Content Depth:** ~1,000 words per service-city page with E-E-A-T compliance
+**Locations:** 35 cities (26 original + 9 added 2026-01-23: st-jacobs, new-hamburg, arthur, mount-forest, hillsburgh, palmerston, listowel, drayton, harriston)
 
 ---
 
@@ -647,17 +648,17 @@ Before marking story complete:
 
 ### 10. Location Entry Prerequisite for Service-City Pages (CRITICAL - Iteration 10 Discovery)
 **Problem:** Service-city pages CANNOT be created without matching location entry in locations collection
-**What Happened:** US-010 specified St. Jacobs and New Hamburg content generation, but neither city exists in src/content/locations/
+**What Happened:** US-010 specified St. Jacobs and New Hamburg content generation, but neither city existed in src/content/locations/
 **Build Error:** "Entry locations → st-jacobs was not found. Parent location not found: st-jacobs"
 **Solution:** ALWAYS verify location entry exists BEFORE generating service-city content
+**RESOLVED (2026-01-23):** 9 missing location entries added: st-jacobs, new-hamburg, arthur, mount-forest, hillsburgh, palmerston, listowel, drayton, harriston. All 35 cities now have location entries.
 **Verification Command:**
 ```bash
 # Check if location entry exists
 ls src/content/locations/[city-slug].md
 
-# List all available cities
+# List all available cities (should show 35 entries)
 ls src/content/locations/ | sed 's/.md$//' | sort
 ```
 **Apply to:** ALL city content generation stories (US-006 through US-014)
-**PRD Impact:** Stories listing cities without location entries are BLOCKED until entries created
 

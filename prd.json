@@ -401,8 +401,8 @@
         "Run /agent-browser on 3 sample pages (1 per city)"
       ],
       "priority": 10,
-      "passes": true,
-      "notes": "COMPLETE (with constraints) - Elmira 22/22 services complete. St. Jacobs and New Hamburg BLOCKED due to missing location entries (see AGENTS.md #10). Location prerequisite: service-city pages require matching src/content/locations/[city].md or build fails. Available cities verified: 26 total (acton, bolton, brantford, breslau, burlington, caledon, cambridge, eden-mills, elmira, elora, erin, fergus, georgetown, grand-valley, guelph, halton-hills, hamilton, jerseyville, kitchener, milton, oakville, ontario, orangeville, rockwood, shelburne, waterloo). Cities WITHOUT location entries (cannot create service-city pages): st-jacobs, new-hamburg, arthur, mount-forest, hillsburgh, palmerston, listowel, drayton, harriston. STEPS COMPLETED: (1) Keyword research for 3 cities (elmira, st-jacobs, new-hamburg) - 462 headings generated, (2) Positioning angles for 3 cities (Quality Without the Rush, Comfort Without Compromise, Built to Last the Mortgage), (3) Content generation for Elmira only (22/22 services, ~22,000 words, 154 unique headings, premium positioning 100%, schema compliance 100%, build passes 639 pages). Commits: 2d222b7 (final Elmira file), 9ea088f, dc3657a, c069841, 3268b7f (Elmira batches). RECOMMENDATION for US-011 through US-014: Use only cities with existing location entries (Fergus/Elora exist, Arthur blocked | Orangeville/Shelburne exist, Mount Forest blocked | Erin exists, Hillsburgh/Harriston blocked | Palmerston/Listowel/Drayton all blocked)."
+      "passes": false,
+      "notes": "PARTIAL - Elmira 22/22 complete. St. Jacobs and New Hamburg PENDING content generation (location entries NOW EXIST as of 2026-01-23). BLOCKER RESOLVED: All 9 missing location entries created (st-jacobs, new-hamburg, arthur, mount-forest, hillsburgh, palmerston, listowel, drayton, harriston). Build now passes with 648 pages. REMAINING WORK: Generate content for St. Jacobs (22 files) and New Hamburg (22 files) using existing keyword research and positioning angles."
     },
     {
       "id": "US-011",
@@ -432,8 +432,8 @@
         "Run /agent-browser on 3 sample pages"
       ],
       "priority": 11,
-      "passes": true,
-      "notes": "COMPLETE (keyword research + positioning for 3 cities). STEPS COMPLETED: (1) Keyword research: fergus-keywords.md (154 headings, Grand River Reliability positioning), elora-keywords.md (154 headings, Heritage Without Compromise positioning), arthur-keywords.md (154 headings, Rural Expertise positioning). (2) Positioning angles: fergus-positioning.md (Grand River valley climate, heritage + growth balance), elora-positioning.md (Victorian-era heritage, Elora Gorge microclimate, stone construction), arthur-positioning.md (Agricultural community, rural property expertise, family focus). TOTAL: 462 unique headings generated (zero duplicates vs Guelph/Elmira). BLOCKER IDENTIFIED: Arthur does NOT have location entry (ls src/content/locations/ shows fergus.md and elora.md exist, arthur.md missing). Per AGENTS.md #10, service-city pages require matching location entry or build fails. RECOMMENDATION: US-011 content generation (STEP 3) should proceed with Fergus (22 files) + Elora (22 files) = 44 files only. Arthur blocked (22 files cannot be created). Build passes with 639 pages. Files created: docs/reference/fergus-keywords.md, fergus-positioning.md, elora-keywords.md, elora-positioning.md, arthur-keywords.md, arthur-positioning.md (6 files total)."
+      "passes": false,
+      "notes": "PARTIAL - Keyword research + positioning COMPLETE for 3 cities. BLOCKER RESOLVED: arthur.md location entry NOW EXISTS as of 2026-01-23. Build passes with 648 pages. REMAINING WORK: Content generation for all 66 files (Fergus 22 + Elora 22 + Arthur 22). Files ready: fergus-keywords.md, fergus-positioning.md, elora-keywords.md, elora-positioning.md, arthur-keywords.md, arthur-positioning.md."
     },
     {
       "id": "US-012",
