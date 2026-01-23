@@ -19,13 +19,13 @@ isLandingPage: true
 # Uses 'title' for H1 (not 'headline' like other sections)
 # ═══════════════════════════════════════════════════════════════
 hero:
-  title: "Southern Ontario's Full-Service HVAC Contractor"
-  subtitle: "One call handles everything — permits, rebates, installation, warranty."
-  trustBadgeText: "Google A+ Rated"
+  title: "One Call Handles Everything"
+  subtitle: "Permits. Rebates. Installation. Warranty. We manage the details so you don't have to."
+  trustBadgeText: "Serving Southern Ontario Since 1994"
   rebateBadge:
     text: "Up to $7,500 in rebates available"
     deadline: "November 2026"  # Verified from docs/reference/rebate-deadlines.md (HRS program)
-  answeringTeamText: "Call anytime — we have a live answering team"
+  answeringTeamText: "Call anytime — real people answer"
 
 # ═══════════════════════════════════════════════════════════════
 # SERVICE CATEGORIES SECTION
@@ -33,26 +33,26 @@ hero:
 # Order customizable via serviceCategoryOrder array
 # ═══════════════════════════════════════════════════════════════
 serviceCategories:
-  eyebrow: "Our Services"
-  headline: "Complete HVAC Services for Your Home"
-  subtext: "From installation to maintenance — we handle it all."
+  eyebrow: "Full-Service HVAC"
+  headline: "Heating. Cooling. Water. Air Quality."
+  subtext: "Every system. One contractor. One warranty."
   # serviceCategoryOrder: ["heating", "cooling", "air-quality", "water-heating", "commercial", "maintenance"]
 
 # ═══════════════════════════════════════════════════════════════
 # EXPERT CONSULTATION SECTION
 # ═══════════════════════════════════════════════════════════════
 expertConsultation:
-  eyebrow: "Free Consultation"
-  headline: "Not Sure What You Need?"
-  subtext: "Talk to our experts for guidance — no pressure, no obligation."
+  eyebrow: "Before You Decide"
+  headline: "Talk to Someone Who Knows"
+  subtext: "No scripts. No pressure. Just straight answers from licensed technicians."
   bullets:
-    - "Free Phone Estimates"
-    - "No Obligation — No Pressure"
-    - "Licensed & Certified Technicians"
-    - "Expert Guidance on Options"
+    - "Honest assessment of what you actually need"
+    - "Clear explanation of your options"
+    - "Accurate phone estimates (no bait-and-switch)"
+    - "We'll tell you if repair makes more sense"
   image:
     src: "/images/consultation-placeholder.jpg"
-    alt: "Friendly HVAC technician providing phone consultation"
+    alt: "HVAC technician explaining options to homeowner"
 
 # ═══════════════════════════════════════════════════════════════
 # WHY CHOOSE B.A.P SECTION — Bento Grid Layout
@@ -60,27 +60,27 @@ expertConsultation:
 # Component reads profile.yaml directly — DO NOT duplicate here
 # ═══════════════════════════════════════════════════════════════
 whyChoose:
-  eyebrow: "Why Choose Us"
-  headline: "Why Homeowners Choose B.A.P"
-  subtext: "Full-service HVAC — one call handles everything"
+  eyebrow: "The Difference"
+  headline: "Your Name Isn't on the Truck. Ours Is."
+  subtext: "When something goes wrong, there's no finger-pointing. We own it."
   fullServiceBullets:
-    - "Permits & inspections handled"
-    - "Government rebate paperwork completed"
-    - "Financing coordination included"
-    - "Professional installation by certified technicians"
-    - "10-year parts & labor warranty"
+    - "Permits pulled and inspections scheduled"
+    - "Rebate paperwork completed for you"
+    - "Financing arranged if needed"
+    - "Installation by our own certified team"
+    - "10-year warranty on parts and labor"
   warrantyCard:
-    headline: "10-Year Warranty"
-    copy: "Parts AND labor. Our name is on every job — we stand behind our work."
+    headline: "10-Year Parts AND Labor"
+    copy: "Most warranties cover parts only. Ours covers the work too. Because our name is on every job."
 
 # ═══════════════════════════════════════════════════════════════
 # TESTIMONIALS SECTION
 # Uses existing filter logic (installation keyword filter)
 # ═══════════════════════════════════════════════════════════════
 testimonials:
-  eyebrow: "Customer Stories"
-  headline: "What Our Customers Say"
-  subtext: "Real experiences from homeowners across Southern Ontario"
+  eyebrow: "From Our Customers"
+  headline: "We Let Our Work Speak"
+  subtext: "Real installations. Real homeowners. Real results."
 
 # ═══════════════════════════════════════════════════════════════
 # PROJECT GALLERY SECTION
@@ -88,9 +88,9 @@ testimonials:
 # filterByLocation: true for location pages (filters by city)
 # ═══════════════════════════════════════════════════════════════
 projectGallery:
-  eyebrow: "Our Work"
-  headline: "Recent Projects"
-  subtext: "Quality installations across Southern Ontario"
+  eyebrow: "Recent Work"
+  headline: "Installations Across Southern Ontario"
+  subtext: "From downtown Hamilton to rural Wellington County"
   filterByLocation: false
 
 # ═══════════════════════════════════════════════════════════════
@@ -99,13 +99,13 @@ projectGallery:
 # utilityProvider should match entry in docs/reference/utility-providers.md
 # ═══════════════════════════════════════════════════════════════
 financing:
-  eyebrow: "Flexible Financing"
-  headline: "Make Premium Comfort Affordable"
-  subtext: "Multiple financing options to fit your budget."
+  eyebrow: "Making It Work"
+  headline: "Premium Equipment. Manageable Payments."
+  subtext: "We'll help you access every rebate you qualify for — and handle the paperwork."
   rebateCard:
     utilityProvider: "Enbridge Gas & Save on Energy"
     rebateAmount: "Up to $7,500"
-    emphasis: "WE HANDLE THE PAPERWORK"
+    emphasis: "WE FILE THE PAPERWORK"
 
 # ═══════════════════════════════════════════════════════════════
 # SERVICE AREA SECTION
@@ -113,9 +113,9 @@ financing:
 # Homepage: showAllRegions=true | Location pages: showAllRegions=false
 # ═══════════════════════════════════════════════════════════════
 serviceArea:
-  eyebrow: "Service Area"
-  headline: "Proudly Serving Southern Ontario"
-  subtext: "25 cities across 6 regions"
+  eyebrow: "Where We Work"
+  headline: "25 Cities. 6 Regions. One Standard."
+  subtext: "The same quality whether you're in Burlington or Brantford."
   showAllRegions: true
   currentCityHighlight: ""
 
@@ -126,17 +126,19 @@ serviceArea:
 # ═══════════════════════════════════════════════════════════════
 faq:
   eyebrow: "Common Questions"
-  headline: "Frequently Asked Questions"
-  subtext: "Quick answers to help you make an informed decision"
+  headline: "Straight Answers"
+  subtext: "What homeowners ask us most"
   items:
-    - question: "How long does a furnace installation take?"
-      answer: "Most furnace installations are completed in one day. Our team arrives in the morning and you'll have heat by evening."
-    - question: "Do you handle permit applications?"
-      answer: "Yes — we handle all permits and inspections. It's part of our full-service approach."
-    - question: "What rebates are currently available?"
-      answer: "Ontario homeowners can access significant rebates through the Home Renovation Savings program. Heat pump rebates range from $2,000 (gas-heated homes) to $7,500 (electric-heated homes). We help you apply for all eligible programs and handle the paperwork."
-    - question: "Do you offer financing?"
-      answer: "Yes — we offer flexible financing options with competitive rates. Ask about our monthly payment plans."
+    - question: "How long does installation take?"
+      answer: "Most installations are completed in one day. Our crew arrives in the morning, and you'll have heat or cooling by evening. Complex jobs might take two days — we'll tell you upfront."
+    - question: "Do you handle permits?"
+      answer: "Yes. We pull all permits, schedule inspections, and handle the paperwork. You don't need to visit city hall or coordinate with inspectors."
+    - question: "What rebates are available right now?"
+      answer: "The Home Renovation Savings program offers $2,000 to $7,500 for heat pumps, depending on your current heating system. We identify every rebate you qualify for and file the applications."
+    - question: "What does your warranty actually cover?"
+      answer: "10 years on parts AND labor. Most warranties only cover parts — if something fails, you still pay for the service call. Ours covers everything. Our name is on the work."
+    - question: "Can I get an estimate over the phone?"
+      answer: "For most jobs, yes. We'll ask about your home, your current system, and what you're looking for. If we need to see the space, we'll tell you — but we don't use 'free estimates' as a sales tactic."
   showViewAllLink: true
 
 # ═══════════════════════════════════════════════════════════════
@@ -144,9 +146,9 @@ faq:
 # filterByLocation: false = show latest from all locations
 # ═══════════════════════════════════════════════════════════════
 blogPreview:
-  eyebrow: "From Our Blog"
-  headline: "HVAC Tips & Advice from the Experts"
-  subtext: "Expert guidance to help you make informed decisions"
+  eyebrow: "From the Blog"
+  headline: "Make Informed Decisions"
+  subtext: "Practical advice from our installation team"
   filterByLocation: false
 
 # ═══════════════════════════════════════════════════════════════
@@ -154,21 +156,21 @@ blogPreview:
 # Uses SectionHeader with variant="dark" for white text on primary bg
 # ═══════════════════════════════════════════════════════════════
 finalCta:
-  eyebrow: "Get Started"
-  headline: "Get Your Free Installation Estimate"
-  subtext: "No obligation • Same-day response • 10-year warranty"
+  eyebrow: "Ready to Talk?"
+  headline: "One Call Starts the Process"
+  subtext: "No obligation. No high-pressure sales. Just a conversation about what you need."
   bullets:
-    - "Free in-home consultation"
-    - "No-pressure estimate"
-    - "Licensed & insured technicians"
-    - "Financing options available"
+    - "Speak with a real person"
+    - "Get a clear phone estimate"
+    - "Ask anything — we'll give you straight answers"
+    - "Schedule at your convenience"
 
 # ═══════════════════════════════════════════════════════════════
 # SCROLL BANNER — Persistent Element
 # Triggers at 75% scroll depth, once per session (sessionStorage)
 # ═══════════════════════════════════════════════════════════════
 scrollBanner:
-  text: "Questions? Call anytime — we have a live answering team"
+  text: "Questions? Call anytime — real people answer"
   ctaText: "Call Now"
   enabled: true
 

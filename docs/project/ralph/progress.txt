@@ -470,3 +470,41 @@ READY to scale workflow to remaining 24 cities (528 service-city pages).
 
 **Commit:** (pending) - "feat: Guelph Content Quality Verification (US-009)"
 
+
+## Iteration 2 (Ralph): US-010 Elmira, St. Jacobs, New Hamburg - Keyword Research & Positioning (COMPLETE)
+Date: 2026-01-23 20:40
+
+**Implementation:**
+- Generated keyword research for 3 cities (Elmira, St. Jacobs, New Hamburg)
+- Generated positioning angles for 3 cities
+- Created 6 reference documents total (keywords + positioning per city)
+
+**Files Created:**
+1. docs/reference/elmira-keywords.md (154 headings, 7 per service × 22 services)
+2. docs/reference/elmira-positioning.md ("Quality Without the Rush" - rural craftsmanship)
+3. docs/reference/st-jacobs-keywords.md (154 headings, unique from Guelph/Elmira)
+4. docs/reference/st-jacobs-positioning.md ("Comfort Without Compromise" - heritage preservation)
+5. docs/reference/new-hamburg-keywords.md (154 headings, unique from all previous)
+6. docs/reference/new-hamburg-positioning.md ("Built to Last the Mortgage" - family investment)
+
+**Keyword Research Quality:**
+- ALL 462 headings (154 × 3 cities) are UNIQUE
+- Zero duplicates within each city
+- Zero duplicates across cities (Guelph, Elmira, St. Jacobs, New Hamburg)
+- H1s use premium positioning (Trusted/Expert/Professional/Since 1994)
+- H1s vary structure to avoid repetition
+- Long-tail H2s (4-8 words) for problem/solution/benefits/context/savings/CTA
+
+**Positioning Differentiation:**
+- Elmira: Rural community, Mennonite heritage, quality craftsmanship values
+- St. Jacobs: Historic village, heritage architecture, character preservation
+- New Hamburg: Growing community, family-oriented, modern homes, long-term investment
+
+**Verification:**
+- All 6 files exist in docs/reference/
+- pnpm build passes (639 pages, 0 errors, 2 warnings)
+- Files ready for content generation in next iteration
+
+**Next Steps:**
+US-010 content generation requires these files as input. Story not yet complete (still need to generate actual content for 66 files).
+

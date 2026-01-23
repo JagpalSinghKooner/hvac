@@ -50,6 +50,90 @@ const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
 
 // Serialize stories for JavaScript
 const storiesJson = JSON.stringify(stories);
+
+// ===========================================
+// CONTENT PROGRESS - Check actual file contents
+// ===========================================
+const serviceCityDir = path.join(process.cwd(), 'src/content/service-city');
+const locationsDir = path.join(process.cwd(), 'src/content/locations');
+
+// Get all services (subdirectories of service-city)
+let services: string[] = [];
+try {
+  services = fs.readdirSync(serviceCityDir).filter(f =>
+    fs.statSync(path.join(serviceCityDir, f)).isDirectory()
+  ).sort();
+} catch (e) {
+  // Directory might not exist
+}
+
+// Get all cities from locations collection
+let cities: string[] = [];
+try {
+  cities = fs.readdirSync(locationsDir)
+    .filter(f => f.endsWith('.md'))
+    .map(f => f.replace('.md', ''))
+    .filter(c => c !== 'ontario') // Exclude generic ontario
+    .sort();
+} catch (e) {
+  // Directory might not exist
+}
+
+// Check each city's content completion
+interface CityProgress {
+  city: string;
+  total: number;
+  completed: number;
+  percentage: number;
+}
+
+const cityProgress: CityProgress[] = [];
+
+for (const city of cities) {
+  let total = 0;
+  let completed = 0;
+
+  for (const service of services) {
+    const filePath = path.join(serviceCityDir, service, `${city}.md`);
+    if (fs.existsSync(filePath)) {
+      total++;
+      try {
+        const content = fs.readFileSync(filePath, 'utf-8');
+        // Check if hero.description has real content (not empty)
+        const hasContent = /hero:\s*\n\s*title:[^\n]+\n\s*description:\s*'[^']{50,}/.test(content) ||
+                          /hero:\s*\n\s*title:[^\n]+\n\s*description:\s*"[^"]{50,}/.test(content);
+        if (hasContent) {
+          completed++;
+        }
+      } catch (e) {
+        // File read error, count as not complete
+      }
+    }
+  }
+
+  if (total > 0) {
+    cityProgress.push({
+      city,
+      total,
+      completed,
+      percentage: Math.round((completed / total) * 100)
+    });
+  }
+}
+
+// Sort: completed first, then by name
+cityProgress.sort((a, b) => {
+  if (a.percentage === 100 && b.percentage !== 100) return -1;
+  if (b.percentage === 100 && a.percentage !== 100) return 1;
+  if (a.percentage > 0 && b.percentage === 0) return -1;
+  if (b.percentage > 0 && a.percentage === 0) return 1;
+  return a.city.localeCompare(b.city);
+});
+
+// Calculate totals
+const totalFiles = cityProgress.reduce((sum, c) => sum + c.total, 0);
+const totalCompleted = cityProgress.reduce((sum, c) => sum + c.completed, 0);
+const overallPercentage = totalFiles > 0 ? Math.round((totalCompleted / totalFiles) * 100) : 0;
 ---
 
 <!DOCTYPE html>
@@ -72,7 +156,7 @@ const storiesJson = JSON.stringify(stories);
     .app {
       display: flex;
       flex-direction: column;
-      height: 100vh;
+      min-height: 100vh;
       padding: 24px;
       gap: 24px;
     }
@@ -654,6 +738,176 @@ const storiesJson = JSON.stringify(stories);
         max-height: 400px;
       }
     }
+
+    /* Content Progress Section */
+    .content-progress {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .content-progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid #334155;
+      background: #1e293b;
+    }
+
+    .content-progress-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #f1f5f9;
+    }
+
+    .content-progress-title svg {
+      color: #60a5fa;
+    }
+
+    .content-progress-stats {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .content-stat {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      color: #94a3b8;
+    }
+
+    .content-stat-value {
+      font-weight: 600;
+      color: #f1f5f9;
+    }
+
+    .content-stat-value.green { color: #4ade80; }
+
+    .content-table-wrapper {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .content-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8125rem;
+    }
+
+    .content-table th {
+      text-align: left;
+      padding: 10px 16px;
+      background: #0f172a;
+      color: #64748b;
+      font-weight: 500;
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .content-table td {
+      padding: 10px 16px;
+      border-top: 1px solid #334155;
+      color: #e2e8f0;
+    }
+
+    .content-table tr:hover td {
+      background: #0f172a50;
+    }
+
+    .city-name {
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+
+    .city-name.complete {
+      color: #4ade80;
+    }
+
+    .progress-cell {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mini-progress-bar {
+      flex: 1;
+      max-width: 120px;
+      height: 6px;
+      background: #0f172a;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .mini-progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+
+    .mini-progress-fill.complete { background: #22c55e; }
+    .mini-progress-fill.partial { background: #f59e0b; }
+    .mini-progress-fill.empty { background: #334155; }
+
+    .progress-pct {
+      font-size: 0.75rem;
+      font-weight: 500;
+      min-width: 36px;
+      text-align: right;
+    }
+
+    .progress-pct.complete { color: #4ade80; }
+    .progress-pct.partial { color: #fbbf24; }
+    .progress-pct.empty { color: #64748b; }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.6875rem;
+      font-weight: 500;
+    }
+
+    .status-badge.complete {
+      background: #22c55e20;
+      color: #4ade80;
+    }
+
+    .status-badge.partial {
+      background: #f59e0b20;
+      color: #fbbf24;
+    }
+
+    .status-badge.pending {
+      background: #64748b20;
+      color: #94a3b8;
+    }
+
+    .content-table-wrapper::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .content-table-wrapper::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .content-table-wrapper::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 999px;
+    }
   </style>
 </head>
 <body>
@@ -812,6 +1066,84 @@ const storiesJson = JSON.stringify(stories);
                 ))
               )}
             </div>
+          </div>
+        </div>
+
+        <!-- Content Progress Section -->
+        <div class="content-progress">
+          <div class="content-progress-header">
+            <div class="content-progress-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+              </svg>
+              Content Files Progress
+            </div>
+            <div class="content-progress-stats">
+              <div class="content-stat">
+                <span>Files:</span>
+                <span class="content-stat-value green">{totalCompleted}</span>
+                <span>/</span>
+                <span class="content-stat-value">{totalFiles}</span>
+              </div>
+              <div class="content-stat">
+                <span>Overall:</span>
+                <span class="content-stat-value green">{overallPercentage}%</span>
+              </div>
+            </div>
+          </div>
+          <div class="content-table-wrapper">
+            <table class="content-table">
+              <thead>
+                <tr>
+                  <th>City</th>
+                  <th>Files</th>
+                  <th>Progress</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cityProgress.map((city) => (
+                  <tr>
+                    <td>
+                      <span class={`city-name ${city.percentage === 100 ? 'complete' : ''}`}>
+                        {city.city.replace(/-/g, ' ')}
+                      </span>
+                    </td>
+                    <td>{city.completed} / {city.total}</td>
+                    <td>
+                      <div class="progress-cell">
+                        <div class="mini-progress-bar">
+                          <div
+                            class={`mini-progress-fill ${city.percentage === 100 ? 'complete' : city.percentage > 0 ? 'partial' : 'empty'}`}
+                            style={`width: ${city.percentage}%`}
+                          ></div>
+                        </div>
+                        <span class={`progress-pct ${city.percentage === 100 ? 'complete' : city.percentage > 0 ? 'partial' : 'empty'}`}>
+                          {city.percentage}%
+                        </span>
+                      </div>
+                    </td>
+                    <td>
+                      {city.percentage === 100 ? (
+                        <span class="status-badge complete">
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                          Complete
+                        </span>
+                      ) : city.percentage > 0 ? (
+                        <span class="status-badge partial">In Progress</span>
+                      ) : (
+                        <span class="status-badge pending">Pending</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
 
