@@ -111,6 +111,67 @@
 
 ---
 
+## ⚠️ E-E-A-T CONTENT RULES (STRICT)
+
+**ALL copy on this site MUST be E-E-A-T compliant. NO EXCEPTIONS.**
+
+### Rule 1: No Hardcoded Copy
+
+- **NEVER hardcode text in components** — everything is schema-driven
+- All content comes from content collections (frontmatter) or profile.yaml
+- Components receive data via props or `getEntry()`/`getCollection()`
+
+### Rule 2: Three-Tier Fallback Architecture
+
+```
+TIER 1: Location-specific (e.g., guelph.md frontmatter)
+   ↓ (if missing)
+TIER 2: Homepage defaults (ontario.md where isLandingPage: true)
+   ↓ (if missing)
+TIER 3: Business profile (profile.yaml — immutable business data)
+```
+
+### Rule 3: Schema-First Content Flow
+
+**When content is needed, follow this EXACT sequence:**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  STEP 1: Check if schema exists in src/content/config.ts       │
+│          ↓                                                      │
+│  STEP 2: IF NO SCHEMA → Create schema with:                     │
+│          • Localization support (city-specific fields)          │
+│          • Fallback pattern (optional fields with defaults)     │
+│          ↓                                                      │
+│  STEP 3: Create frontmatter structure in .md file               │
+│          ↓                                                      │
+│  STEP 4: Run FULL marketing skill flow for content:             │
+│          /orchestrator → /positioning-angles → /keyword-research│
+│          → /brand-voice → /seo-content → /direct-response-copy  │
+│          ↓                                                      │
+│  STEP 5: Populate frontmatter with E-E-A-T compliant copy       │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Rule 4: Full Marketing Skill Flow (MANDATORY)
+
+**ALL content must go through the COMPLETE chain:**
+
+```
+/orchestrator → /positioning-angles → /keyword-research → /brand-voice → /seo-content → /direct-response-copy
+```
+
+**Why every step is required:**
+- **No positioning** = generic content that doesn't differentiate
+- **No keywords** = content that doesn't rank (zero organic traffic)
+- **No brand voice** = inconsistent tone that erodes trust
+- **No SEO structure** = fails E-E-A-T signals (Google won't trust it)
+- **No direct-response** = content that doesn't convert
+
+**E-E-A-T compliance requires the FULL chain. NEVER skip steps.**
+
+---
+
 ## Technical Stack
 
 | Layer | Technology |

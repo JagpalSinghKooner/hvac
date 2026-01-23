@@ -68,7 +68,7 @@ All sections follow: `[Feature]Section.astro` in `src/components/sections/`
 
 ### Desktop Structure
 ```
-[Logo] | Heating | Cooling | Air Quality | Water Heating | More▼ | Locations | [📞 Phone]
+[Logo] | Heating | Cooling | Air Quality | Water Heating | More▼ | [📞 Phone]
                                                           │
                                                           └── Commercial
                                                               Maintenance Plans
@@ -76,7 +76,7 @@ All sections follow: `[Feature]Section.astro` in `src/components/sections/`
 
 ### Mobile Structure
 ```
-[Logo] [☰ Menu] [📞 Phone]
+[Logo] [☰ Menu]
          │
          └── Heating
              Cooling
@@ -85,22 +85,24 @@ All sections follow: `[Feature]Section.astro` in `src/components/sections/`
              Commercial
              Maintenance Plans
              ───────────────
-             Locations
              About
              Contact
 ```
 
+**Note:** No phone icon in mobile header — ScrollBanner (appears at 75% scroll) handles mobile CTA.
+
 ### Key Changes from Current
 - 4 main service categories as **direct links** (not dropdown)
 - "More" dropdown for Commercial + Maintenance
-- "Locations" as single link → /locations page
-- Phone CTA always visible — number from `profile.yaml`
+- Phone CTA visible on **desktop only** — number from `profile.yaml`
 - **REMOVED:** "Since 1994" badge — No longevity messaging
-- **MOVED TO FOOTER:** About, Financing, Blog
+- **REMOVED:** Locations link from header (available in footer)
+- **REMOVED:** Mobile phone icon — ScrollBanner handles mobile CTA
+- **MOVED TO FOOTER:** About, Financing, Blog, Locations
 
 ### Phone CTA Specification
 - **Desktop:** Shows phone from `{businessProfile.contact.phone_display}` — e.g., "📞 (519) 835-4858"
-- **Mobile:** Phone icon only (24×24), taps to `tel:{businessProfile.contact.phone}`
+- **Mobile:** No phone icon in header — ScrollBanner appears at 75% scroll with phone CTA
 - **NEVER hardcode phone number** — always from profile.yaml
 
 ### shadcn Components
@@ -113,13 +115,15 @@ All sections follow: `[Feature]Section.astro` in `src/components/sections/`
 ### Visual Structure
 ```
 ┌─[DESKTOP 1024px+]───────────────────────────────────────────────────┐
-│ [Logo]  Heating  Cooling  Air Quality  Water Heating  More▼  Locations  [📞 Call] │
+│ [Logo]  Heating  Cooling  Air Quality  Water Heating  More▼  [📞 Call] │
 └─────────────────────────────────────────────────────────────────────┘
 
 ┌─[MOBILE <1024px]────────────────────────────────────────────────────┐
-│ [Logo]                                            [☰]  [📞]         │
+│ [Logo]                                                    [☰]       │
 └─────────────────────────────────────────────────────────────────────┘
 ```
+
+**Mobile CTA:** Handled by ScrollBanner (fixed bottom, appears at 75% scroll depth)
 
 ### Component Specification
 ```
@@ -130,13 +134,11 @@ COMPONENTS:
 ├── Nav Links (custom or NavigationMenu)
 │   ├── Direct links: Heating, Cooling, Air Quality, Water Heating
 │   └── Dropdown (More): Commercial, Maintenance
-├── Locations link
-└── Button (variant="default") — Phone CTA
+└── Button (variant="default") — Phone CTA (desktop only)
 
 MOBILE:
 ├── Logo
-├── Sheet (hamburger menu)
-└── Button (icon only) — Phone CTA
+└── Sheet (hamburger menu) — No phone button, ScrollBanner handles CTA
 ```
 
 ---
@@ -798,7 +800,7 @@ const handleDismiss = () => {
 
 | Component | Mobile (<768px) | Tablet (768-1023px) | Desktop (≥1024px) |
 |-----------|-----------------|---------------------|-------------------|
-| Header | Logo + hamburger + phone icon | Same as mobile | Full nav bar with all links |
+| Header | Logo + hamburger only | Same as mobile | Full nav bar + phone CTA |
 | Hero | Stacked, full-width CTA in thumb zone | 2-column text/image | Side-by-side layout |
 | Service Categories | 2×3 grid | 3×2 grid | 5 columns single row |
 | Expert Consultation | Stacked (image below text) | 2-column | 2-column (text left, image right) |
@@ -915,26 +917,65 @@ interface Props {
 │  "Write landing page copy" → directly writes copy              │
 │  "Create headlines" → directly runs /keyword-research           │
 │                                                                 │
-│  RIGHT: Orchestrator routes to correct skill sequence           │
+│  RIGHT: Orchestrator routes through FULL skill chain            │
 │  ───────────────────────────────────────────────────────────── │
 │  "Write landing page copy" →                                    │
 │    /orchestrator →                                              │
 │    /positioning-angles →                                        │
-│    /brand-voice →                                              │
+│    /keyword-research →                                          │
+│    /brand-voice →                                               │
+│    /seo-content →                                               │
 │    /direct-response-copy                                        │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-**Marketing Skill Flow (STRICT ORDER):**
+**Marketing Skill Flow (MANDATORY — ALL steps required for E-E-A-T):**
 ```
 /orchestrator → /positioning-angles → /keyword-research → /brand-voice → /seo-content → /direct-response-copy
 ```
 
-**Why This Matters:**
-- Orchestrator diagnoses the actual need (not what user thinks they need)
-- Routes to correct skill sequence (skips unnecessary skills)
-- Ensures brand voice consistency across all content
-- Prevents "orphan content" that doesn't fit the positioning
+**Why ALL Steps Are REQUIRED (No Shortcuts):**
+- **No positioning** = generic content that doesn't differentiate
+- **No keywords** = content that doesn't rank (zero organic traffic)
+- **No brand voice** = inconsistent tone that erodes trust
+- **No SEO structure** = fails E-E-A-T signals (Google won't trust it)
+- **No direct-response** = content that doesn't convert
+
+**E-E-A-T compliance requires the FULL chain. NEVER skip steps.**
+
+### No Hardcoded Copy (STRICT)
+
+- **NEVER hardcode text in components** — everything is schema-driven
+- All content comes from content collections (frontmatter) or profile.yaml
+- Components receive data via props or `getEntry()`/`getCollection()`
+
+### Schema-First Content Flow (MANDATORY)
+
+**When content is needed, follow this EXACT sequence:**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  STEP 1: Check if schema exists in src/content/config.ts       │
+│          ↓                                                      │
+│  STEP 2: IF NO SCHEMA → Create schema with:                     │
+│          • Localization support (city-specific fields)          │
+│          • Fallback pattern (optional fields with defaults)     │
+│          ↓                                                      │
+│  STEP 3: Create frontmatter structure in .md file               │
+│          ↓                                                      │
+│  STEP 4: Run FULL marketing skill flow for content:             │
+│          /orchestrator → /positioning-angles → /keyword-research│
+│          → /brand-voice → /seo-content → /direct-response-copy  │
+│          ↓                                                      │
+│  STEP 5: Populate frontmatter with E-E-A-T compliant copy       │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Key Points:**
+- Schema FIRST, then content
+- Three-tier fallback: Location → ontario.md → profile.yaml
+- FULL marketing skill chain (no shortcuts)
+- All copy must pass E-E-A-T standards
 
 ### Development Skill Chain (ALWAYS follow this order)
 
@@ -1537,11 +1578,17 @@ interface Props {
 
 **Desktop (≥1024px):**
 ```
-[Logo] Heating Cooling Air Quality Water Heating More▼ Locations [📞 Phone]
+[Logo] Heating Cooling Air Quality Water Heating More▼ [📞 Phone]
                                                  │
                                                  └── Commercial
                                                      Maintenance Plans
 ```
+
+**Mobile (<1024px):**
+```
+[Logo] [☰ Menu]
+```
+No phone icon — ScrollBanner handles mobile CTA at 75% scroll.
 
 **Main categories (direct links):**
 1. Heating → /services/category/heating
@@ -1553,10 +1600,10 @@ interface Props {
 1. Commercial → /services/category/commercial
 2. Maintenance Plans → /services/category/maintenance
 
-**Locations:** Direct link → /locations
-
 **REMOVE from header:**
 - "Since 1994" badge
+- Locations link (not a decision maker — available in footer)
+- Mobile phone icon (ScrollBanner handles this)
 - About, Financing, Blog (moved to footer)
 
 ---
@@ -1861,6 +1908,8 @@ locations: z.array(z.string()).optional(),  // City slugs: ["guelph", "kitchener
 | Information-rich content | Optional bodyText + optional bullets |
 | Header main categories | Heating, Cooling, Air Quality, Water Heating |
 | Header "More" dropdown | Commercial, Maintenance Plans |
+| Header Locations link | REMOVED — not a decision maker (in footer only) |
+| Mobile phone icon | REMOVED — ScrollBanner handles mobile CTA |
 | Financing/Rebates visibility | Announcement Bar at top |
 | Announcement bar | Combined message, dismissible, all pages |
 | Logo ticker speed | Medium (30s), pause on hover |
@@ -1889,9 +1938,9 @@ locations: z.array(z.string()).optional(),  // City slugs: ["guelph", "kitchener
 |------|--------|
 | `src/components/AnnouncementBar.astro` | **NEW** — Rebate/financing announcement |
 | `src/components/ui/SectionHeader.astro` | **NEW** — Reusable section header |
-| `src/components/Header.astro` | **MODIFY** — Remove badge, restructure nav |
+| `src/components/Header.astro` | **MODIFY** — Remove badge, remove Locations link, restructure nav |
 | `src/components/Footer.astro` | **MODIFY** — Region accordions, update links |
-| `src/components/MobileNav.tsx` | **MODIFY** — Update nav items |
+| `src/components/MobileNav.tsx` | **MODIFY** — Update nav items, remove phone icon |
 | `src/layouts/BaseLayout.astro` | **MODIFY** — Add skip link, announcement bar |
 | `src/content/config.ts` | **MODIFY** — Add `locations` to blog schema |
 | `src/pages/careers.astro` | **DELETE** — If exists |

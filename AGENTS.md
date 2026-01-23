@@ -147,6 +147,48 @@ Contains: company name, phone numbers, service areas, hours, certifications.
 
 ---
 
+## E-E-A-T Content Rules (STRICT — NEVER SKIP)
+
+**ALL copy on this site MUST be E-E-A-T compliant. NO EXCEPTIONS.**
+
+### Pattern 1: No Hardcoded Copy
+- **NEVER hardcode text in components** — everything is schema-driven
+- All content from content collections (frontmatter) or profile.yaml
+- Components receive data via props or `getEntry()`/`getCollection()`
+
+### Pattern 2: Three-Tier Fallback Architecture
+```
+TIER 1: Location-specific (e.g., guelph.md)
+   ↓ (if missing)
+TIER 2: Homepage defaults (ontario.md)
+   ↓ (if missing)
+TIER 3: Business profile (profile.yaml)
+```
+
+### Pattern 3: Schema-First Content Flow
+**When content is needed:**
+1. Check if schema exists in `src/content/config.ts`
+2. IF NO SCHEMA → Create schema with localization + fallback pattern
+3. Create frontmatter structure in .md file
+4. Run FULL marketing skill flow (see below)
+5. Populate frontmatter with E-E-A-T compliant copy
+
+### Pattern 4: Full Marketing Skill Flow (MANDATORY)
+```
+/orchestrator → /positioning-angles → /keyword-research → /brand-voice → /seo-content → /direct-response-copy
+```
+
+**Why every step is required:**
+- No positioning = generic content
+- No keywords = zero organic traffic
+- No brand voice = inconsistent tone
+- No SEO structure = fails E-E-A-T
+- No direct-response = doesn't convert
+
+**NEVER skip steps. E-E-A-T requires the FULL chain.**
+
+---
+
 ## Mandatory Skill Usage
 
 ### Development Skill Chain (ALWAYS follow this order)

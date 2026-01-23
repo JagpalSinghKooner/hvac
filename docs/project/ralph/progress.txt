@@ -1436,3 +1436,52 @@ Single-quoted strings would BREAK with these characters even with apostrophe esc
 **Next Iteration:**
 Continue New Hamburg content generation (next 4-5 files: boiler-repair, commercial-hvac, dehumidifiers, ductless-mini-split, hrv-erv-ventilation)
 
+
+## Iteration 11 (Ralph Loop - Autonomous): US-010 New Hamburg Batch 4 (IN PROGRESS)
+Date: 2026-01-23 22:54
+
+**Status Update:**
+Continuing New Hamburg content generation. Generated 4 more files (boiler-repair, commercial-hvac, dehumidifiers, ductless-mini-split).
+
+**Implementation (Iteration 11):**
+- Generated 4 New Hamburg files with Phase 8A structure
+- Files: boiler-repair, commercial-hvac, dehumidifiers, ductless-mini-split
+- Used CORRECT multiline YAML format: `description: |` for problem, solution, context fields (prevents Unicode character breakage)
+- Word count: ~1,000 words per file
+- Premium positioning: All H1s use "Professional", "Expert" (NO emergency language)
+- Family positioning: "Built to Last the Mortgage" angle applied consistently
+- E-E-A-T signals: experienceStats populated (710 boiler-repair, 78 commercial, 195 dehumidifiers, 190 ductless)
+- YAML apostrophe escaping: New Hamburg''s, won''t (double apostrophes in single-quoted strings)
+- Markdown content present after frontmatter (H1 + 2-3 sentences verified)
+
+**Content Quality:**
+- All files reference New Hamburg-specific context: growing community, family-oriented, Wilmot Township, Kitchener-Wilmot Hydro, modern subdivisions, commuter lifestyle
+- Positioning emphasizes long-term thinking, family investment, predictable costs, 20-year outlook
+- Technical accuracy: commercial HVAC load calculations, basement dehumidification, ductless zone control
+- Rebate info: Kitchener-Wilmot Hydro (NOT Waterloo North Hydro like Elmira/St. Jacobs)
+
+**YAML Format Success:**
+Multiline format (`description: |`) continues to WORK correctly for all long text fields containing:
+- Degree symbols (°C)
+- Em dashes (—)
+- Any Unicode characters beyond basic ASCII
+Single-quoted strings would BREAK with these characters even with apostrophe escaping.
+
+**Verification:**
+- Build passes: 686 pages (up from 682, +4 new pages)
+- Zero Zod schema errors
+- All 4 files have populated hero.title fields
+- Markdown content verified via tail -5 (shows H1 + description, NOT ---)
+
+**Commit:** 6250f79 - "feat: US-010 New Hamburg content (boiler-repair, commercial-hvac, dehumidifiers, ductless) - 16/66 files"
+
+**Progress:**
+- Elmira: 22/22 COMPLETE (iteration 9)
+- St. Jacobs: 22/22 COMPLETE (iteration 6)
+- New Hamburg: 16/22 IN PROGRESS (furnace services, heat pump services, AC services, air filtration, boilers, commercial, dehumidifiers, ductless)
+- New Hamburg remaining: 6 files (hrv-erv-ventilation, humidifiers, maintenance-plans, rooftop-units, tank-water-heaters, tankless-water-heaters)
+- Total remaining for US-010: 6 files
+
+**Next Iteration:**
+Complete final 6 New Hamburg files to finish US-010
+
