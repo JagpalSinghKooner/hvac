@@ -112,3 +112,52 @@ Date: 2026-01-23 11:57
 
 **Next Story:**
 US-005: Create Utility Provider Reference Document (research documentation, NO skills required)
+
+## Iteration 17: US-005 Create Utility Provider Reference Document (COMPLETE)
+Date: 2026-01-23 12:00
+
+**Implementation:**
+- Created docs/reference/utility-providers.md with comprehensive utility provider mapping
+- Researched and documented all 25 cities across 5 regions:
+  - Halton Region: Burlington, Oakville, Milton, Georgetown, Acton, Rockwood
+  - Waterloo Region: Guelph, Cambridge, Kitchener, Waterloo, Elmira, St. Jacobs, New Hamburg
+  - Wellington County: Fergus, Elora, Arthur, Mount Forest, Erin, Hillsburgh
+  - Dufferin County: Orangeville, Shelburne, Grand Valley
+  - Perth County: Listowel, Palmerston
+  - Mapleton Township: Drayton, Harriston
+- Documented 3 key rebate programs:
+  - Enbridge Home Efficiency Rebate Plus (up to $2,500 for gas heating)
+  - Save on Energy (up to $6,200 for heat pumps/AC)
+  - Canada Greener Homes Grant (up to $5,000 federal)
+
+**Structure:**
+- Regional organization (Halton, Waterloo, Wellington, Dufferin, Perth)
+- City-by-city tables: City | Electricity Provider (LDC) | Gas Provider | Notes
+- Key findings:
+  - Enbridge Gas is universal gas provider across all 25 cities
+  - Electricity LDCs vary significantly by region (10+ different utilities)
+  - Notable LDCs: Guelph Hydro, Alectra Utilities, Kitchener-Wilmot Hydro, Waterloo North Hydro, Wellington North Power, COLLUS PowerStream
+
+**Content Templates:**
+- Template A: Larger cities (Burlington, Cambridge, Guelph, Kitchener) - mentions all 3 programs
+- Template B: Smaller towns (Elmira, Fergus, Orangeville) - focuses on Enbridge + federal
+- Premium positioning: "Smart investment" not "deals" (aligns with affluent target audience)
+
+**Usage Guidelines:**
+- City-specific accuracy: Always reference correct LDC name when mentioning Save on Energy
+- Rebate amounts: Listed maximums vary by equipment AFUE/SEER ratings
+- Program availability: All cities have access to Enbridge (gas) and Save on Energy (electricity)
+- E-E-A-T signal: Demonstrates local knowledge (different utilities per city)
+
+**Verification:**
+- Build passes: 639 pages ✓
+- Documentation only (no schema impact)
+- Ready for US-006 to US-014 content generation (savings section accuracy)
+
+**Next Story:**
+US-006: Guelph Content Generation (FRESH START) - requires /orchestrator → /keyword-research → /positioning-angles → /seo-content → /direct-response-copy → /agent-browser skills
+
+**Notes:**
+- This is a reference document, NOT content generation (no skills required)
+- Will be used during US-006 to US-014 for accurate rebate messaging in savings sections
+- All 25 cities now have verified utility provider data for E-E-A-T compliance

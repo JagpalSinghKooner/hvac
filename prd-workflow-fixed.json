@@ -4,131 +4,6 @@
   "description": "Transform 550 service-city pages with 3,850 unique keyword-researched headings and E-E-A-T compliance",
   "userStories": [
     {
-      "id": "US-000",
-      "title": "Cleanup & Reset (COMPLETE)",
-      "description": "As a developer, I need the codebase reset from Phase 7B to prepare for Phase 8A fresh start.",
-      "acceptanceCriteria": [
-        "All Phase 7B scripts deleted",
-        "All guelph-*.md docs deleted",
-        "22 Guelph files reset to minimal frontmatter",
-        "scripts/phase8/ directory created",
-        "Documentation updated",
-        "pnpm build passes (639 pages)"
-      ],
-      "priority": 0,
-      "passes": true,
-      "notes": "COMPLETE - Reference only. Deleted 4 Phase 7B scripts, 5 guelph-*.md docs, reset 22 Guelph files, created scripts/phase8/ directory, updated AGENTS.md/CLAUDE.md/HOMEPAGE-REDESIGN docs."
-    },
-    {
-      "id": "US-001",
-      "title": "Add Schema Fields",
-      "description": "As a developer, I need to add 6 new fields to the service-city schema so city-specific content can be stored and rendered.",
-      "acceptanceCriteria": [
-        "Open src/content/config.ts (service-city collection, lines 556-659)",
-        "Add `hero` object with fields: title (string), description (string), both optional",
-        "Add `finalCta` object with fields: headline (string), copy (string), both optional",
-        "Add `benefitsHeadline` field (string, optional)",
-        "Add `contextHeadline` field (string, optional)",
-        "Add `experienceStats` object with fields: installationsInCity (number, optional), yearsSinceCityStart (number, optional)",
-        "Remove `processSteps` field from schema (inherit from parent service)",
-        "Verify schema.org definitions match lines 248-278 of PHASE-8-CITY-CONTENT-CUSTOMIZATION.md",
-        "pnpm build passes (639 pages expected, 0 errors)",
-        "No TypeScript errors in VSCode"
-      ],
-      "priority": 1,
-      "passes": true,
-      "notes": "COMPLETE - Added 6 new schema fields (hero, finalCta, benefitsHeadline, contextHeadline, experienceStats). Removed processSteps field. Updated [serviceLocation].astro to inherit processSteps from parent service only. Build passes with 639 pages."
-    },
-    {
-      "id": "US-002",
-      "title": "Update Components for City-Specific Content",
-      "description": "As a developer, I need to update 4 Astro components to accept and render city-specific props so pages can display unique content per city.",
-      "acceptanceCriteria": [
-        "Run /frontend-design skill before modifying components (output: design spec for prop changes)",
-        "Update ServiceHeroSection.astro: Add optional `cityHero` prop {title: string, description: string}, use cityHero.title as H1 when available, use cityHero.description when available, fallback to service-level title/description",
-        "Update FinalCTASection.astro: Add optional props {headline: string, copy: string, cityName: string}, use city-specific content when available, fallback to generic business profile copy",
-        "Update ServiceBenefitsSection.astro: Add optional `benefitsHeadline` prop (string), render as H2 when available",
-        "Update ContextSection.astro: Add optional `contextHeadline` prop (string), render as H2 when available",
-        "Verify ONLY ONE H1 per page (ServiceHeroSection only, audit all components)",
-        "Add internal linking: Parent service link (Learn more about [Service] → /services/[service-slug]), Location hub link (See all services in [City] → /locations/[city-slug])",
-        "Run /web-design-guidelines review for all 4 modified .astro files",
-        "Run /agent-browser test on 3 sample Guelph pages (furnace-installation-guelph-on, heat-pump-installation-guelph-on, air-conditioner-installation-guelph-on)",
-        "Verify H1 renders from cityHero.title when present",
-        "Verify internal links navigate correctly",
-        "pnpm build passes"
-      ],
-      "priority": 2,
-      "passes": true,
-      "notes": "COMPLETE - All 4 components already had Phase 8A props integrated. Verified: /frontend-design spec confirms implementation complete, /web-design-guidelines review passed (proper H1 hierarchy, semantic HTML), /agent-browser tested 3 Guelph pages (furnace, heat pump, AC) - internal links navigate correctly, only ONE H1 per page confirmed, pnpm build passes (639 pages)."
-    },
-    {
-      "id": "US-003",
-      "title": "Fix LocationServicesGrid Bug",
-      "description": "As a developer, I need to fix LocationServicesGrid to show only services available in the current city so users see relevant cross-links instead of a global service list.",
-      "acceptanceCriteria": [
-        "Run /frontend-design skill before modifying component (output: design spec for query logic)",
-        "Open src/components/sections/LocationServicesGrid.astro",
-        "Replace line 33 query from `getCollection('services')` to `getCollection('service-city')`",
-        "Add filter: `filter((entry) => entry.data.locationSlug === locationSlug)`",
-        "Remove `.slice(0, 8)` limit (show all available services)",
-        "Update sorting logic to work with service-city entries",
-        "Run /web-design-guidelines review",
-        "Run /agent-browser test on 3 cities (Guelph, Toronto, Cambridge)",
-        "Verify Guelph shows only Guelph services",
-        "Verify Toronto shows only Toronto services",
-        "Verify different cities show different service counts",
-        "pnpm build passes"
-      ],
-      "priority": 3,
-      "passes": true,
-      "notes": "COMPLETE - Changed query from getCollection('services') to getCollection('service-city') with locationSlug filter. Removed .slice(0, 8) limit to show all available services in city. Updated sorting and display logic to work with service-city entries. Build passes (639 pages)."
-    },
-    {
-      "id": "US-004",
-      "title": "Add LocalBusiness Structured Data",
-      "description": "As a developer, I need to create a LocalBusinessSchema component so each service-city page has schema.org structured data for local SEO.",
-      "acceptanceCriteria": [
-        "Run /frontend-design skill before creating component (output: design spec for schema structure)",
-        "Create src/components/seo/LocalBusinessSchema.astro",
-        "Accept props: serviceName (string), serviceDescription (string), cityName (string)",
-        "Include schema.org JSON-LD with @type LocalBusiness",
-        "Include areaServed field: {type: City, name: cityName}",
-        "Include makesOffer field: {type: Offer, itemOffered: {type: Service, name: serviceName, description: serviceDescription}}",
-        "Include aggregateRating field: {type: AggregateRating, ratingValue: 4.9, reviewCount: 200}",
-        "Add component to service-city page template (src/pages/services/[...slug].astro)",
-        "Run /web-design-guidelines review",
-        "Run /agent-browser to verify schema renders in page source (view-source or browser dev tools)",
-        "Test on 3 sample Guelph pages",
-        "pnpm build passes"
-      ],
-      "priority": 4,
-      "passes": true,
-      "notes": "COMPLETE - LocalBusinessSchema.astro component already existed and was integrated. Verified via /frontend-design (design spec confirmed), /web-design-guidelines (PASS - no issues), /agent-browser (tested 3 Guelph pages: furnace, heat pump, AC - all render correct JSON-LD with serviceName, cityName, business data from profile.yaml). pnpm build passes (639 pages)."
-    },
-    {
-      "id": "US-005",
-      "title": "Create Utility Provider Reference Document",
-      "description": "As a content writer, I need a reference document mapping all 25 cities to their utility providers so rebate information is accurate in city-specific content.",
-      "acceptanceCriteria": [
-        "Create docs/reference/utility-providers.md",
-        "Research electricity provider for all 25 cities in src/content/locations/",
-        "Research gas provider for all 25 cities",
-        "Document rebate programs per provider (Enbridge Save on Energy, utility-specific programs)",
-        "Create markdown table with columns: City | Electricity Provider | Gas Provider | Notes",
-        "Include Guelph (Guelph Hydro, Enbridge, municipal utility note)",
-        "Include Burlington (Burlington Hydro, Enbridge)",
-        "Include Oakville (Oakville Hydro, Enbridge)",
-        "Include Cambridge (Energy+ Inc., Enbridge, unique LDC note)",
-        "Include Kitchener (Kitchener-Wilmot Hydro, Enbridge)",
-        "Include Waterloo (Waterloo North Hydro, Enbridge)",
-        "Complete all 25 cities from locations collection",
-        "pnpm build passes (documentation only, no schema impact)"
-      ],
-      "priority": 5,
-      "passes": true,
-      "notes": "COMPLETE - Created comprehensive utility provider reference document mapping all 25 cities to electricity (LDC) and gas providers. Includes rebate program details (Enbridge Home Efficiency Rebate Plus, Save on Energy, Canada Greener Homes Grant), content templates for larger cities vs smaller towns, and usage guidelines for US-006 to US-014 content generation. Build passes (639 pages)."
-    },
-    {
       "id": "US-006",
       "title": "Guelph Keyword Research & Positioning",
       "description": "As a content writer, I need keyword research and positioning angles for Guelph so I can write city-specific content.",
@@ -145,8 +20,8 @@
         "pnpm build passes (639 pages)"
       ],
       "priority": 6,
-      "passes": true,
-      "notes": "COMPLETE - Created docs/reference/guelph-keywords.md (154 unique headings, 22 services × 7 headings) and docs/reference/guelph-positioning.md (winning angle: Institutional Judgment). Used /orchestrator → /keyword-research → /positioning-angles skill chain. All headings verified unique, premium positioning language, zero emergency terms. Ready for US-007 content generation."
+      "passes": false,
+      "notes": "Creates research foundation files. Next story (US-007) uses these files as input for content generation."
     },
     {
       "id": "US-007",
@@ -274,7 +149,7 @@
       ],
       "priority": 9,
       "passes": false,
-      "notes": "QUALITY GATE for Guelph before scaling to other cities. If this fails, fix Guelph before continuing. Next: Apply same workflow pattern to remaining 24 cities."
+      "notes": "QUALITY GATE for Guelph before scaling to other cities. If this fails, fix Guelph before continuing. Next: US-010 (Burlington, Oakville, Milton research)."
     }
   ]
 }
