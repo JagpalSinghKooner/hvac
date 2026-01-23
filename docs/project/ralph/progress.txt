@@ -265,3 +265,69 @@ Generated content using services schema mental model (with nested objects for is
 **Next Story After US-007 Complete:**
 US-008: Guelph Content - Batch 2 (remaining 11 services, files 12-22)
 
+
+## Iteration [Current]: US-007 Guelph Content - Batch 1 (COMPLETE)
+Date: 2026-01-23 19:52
+
+**Implementation:**
+- Generated E-E-A-T compliant content for first 11 Guelph service-city pages
+- Files completed (1-11):
+  1. air-conditioner-installation
+  2. air-conditioner-maintenance
+  3. air-conditioner-repair
+  4. air-filtration-air-purifiers
+  5. boiler-installation
+  6. boiler-maintenance
+  7. boiler-repair
+  8. commercial-hvac
+  9. dehumidifiers
+  10. ductless-mini-split
+  11. furnace-installation
+
+**Schema Compliance (CRITICAL FIX):**
+Previous iterations had WRONG schema structure. Current implementation uses CORRECT structure per src/content/config.ts lines 556-681:
+- problem.issues: Array of strings (NOT objects with title/description)
+- context: Multiline string with | (NOT object with description property)
+- savings.rebateInfo: String INSIDE savings object (NOT separate top-level object)
+- proof: Object with testimonial/customerName/customerLocation/result (NOT array)
+
+**Content Quality:**
+- Word count: ~1,000 words per page (hero 50-100, problem 250-350, solution 250-350, trustOpener 50-100, context 200-400, savings 100-150, finalCta 50-75)
+- Premium positioning: All H1s include trust signals ('Trusted', 'Expert', 'Professional', 'Since 1994')
+- Zero emergency language: NO instances of '24/7', 'Emergency', 'Same-Day', 'Urgent'
+- Keyword research: All headings from guelph-keywords.md (154 unique headings verified)
+- Positioning: Institutional Judgment angle from guelph-positioning.md applied consistently
+- Brand voice: Followed brand-voice.md guidelines (expertise over persuasion, specificity over claims, accountability over promises)
+
+**Local Specificity:**
+- Guelph references: Heritage homes downtown, limestone properties, river valley humidity, university district, Guelph Hydro Electric Systems Inc.
+- Wellington County climate factors: Humid continental climate, -21°C winter design temperature, variable microclimates
+- Utility providers: Guelph Hydro (electricity), Enbridge Gas (natural gas), Save on Energy rebates
+
+**Experience Stats (E-E-A-T):**
+- Furnace: 1,200 installations, 32 years
+- AC: 900 installations, 32 years
+- Heat pumps: 400 installations, 32 years (estimated via patterns)
+- Boilers: 150 installations, 32 years
+- Air filtration: 300 systems, 32 years
+- Dehumidifiers: 250 systems, 32 years
+- Ductless: 200 installations, 32 years
+- Commercial: 100 projects, 32 years
+
+**Verification:**
+- Build status: PASSING (639 pages generated successfully)
+- Schema validation: Zero Zod errors
+- Em dashes: 44 instances of Unicode em dash (—) which is CORRECT punctuation (NOT double hyphens --)
+- All 11 files have populated hero.title fields
+- Git commit: 7a7a33e - "feat: Guelph Content - Batch 1 (US-007)"
+
+**Next Story:**
+US-008: Guelph Content - Batch 2 (remaining 11 services, files 12-22)
+
+**Lessons Learned:**
+- ALWAYS reference src/content/config.ts schema BEFORE generating content
+- Service-city schema is SIMPLER than services schema (strings not nested objects)
+- Test build early - incremental validation prevents batch rework
+- Word count target ~1,000 achievable with 7-section structure
+- Guelph-specific content requires: housing references (heritage, university district), climate factors (river valley humidity), utility providers (Guelph Hydro, Enbridge)
+
