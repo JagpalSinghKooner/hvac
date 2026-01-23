@@ -67,3 +67,7 @@ finalCta:
   headline: 'Install Commercial Rooftop Equipment With Local Specialists'
   copy: 'Equipment problems require accurate diagnosis and honest recommendations. Our TSSA-certified technicians have 32 years of Guelph-specific experience to provide reliable service you can trust. Call B.A.P at (519) 835-1900 for transparent service and fair pricing.'
 ---
+
+# Rooftop Units in Guelph, ON
+
+Professional commercial rooftop HVAC units in Guelph, ON. RTU installation and service. Serving Guelph since 1994.

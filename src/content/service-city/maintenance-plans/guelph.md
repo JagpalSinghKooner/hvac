@@ -67,3 +67,7 @@ finalCta:
   headline: 'Enroll in Guelph Most Trusted HVAC Maintenance Program'
   copy: 'Equipment problems require accurate diagnosis and honest recommendations. Our TSSA-certified technicians have 32 years of Guelph-specific experience to provide reliable service you can trust. Call B.A.P at (519) 835-1900 for transparent service and fair pricing.'
 ---
+
+# HVAC Maintenance Plans in Guelph, ON
+
+Professional HVAC maintenance plans in Guelph, ON. Annual service agreements. Serving Guelph since 1994.

@@ -67,3 +67,7 @@ finalCta:
   headline: 'Book Your Furnace Tune-Up With Local Heating Professionals'
   copy: 'Annual maintenance prevents 85% of furnace breakdowns and preserves efficiency that saves money every month. Our TSSA-certified technicians perform thorough 18-point inspections, not quick visual checks. Call B.A.P at (519) 835-1900 to schedule your pre-winter tune-up and protect your heating investment.'
 ---
+
+# Furnace Maintenance in Guelph, ON
+
+Professional furnace maintenance for Guelph homes. Annual tune-ups preserve efficiency, prevent breakdowns, and ensure safe operation throughout Ontario winters. TSSA-certified technicians serving Guelph since 1994.

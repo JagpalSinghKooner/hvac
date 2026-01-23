@@ -67,3 +67,7 @@ finalCta:
   headline: 'Add Humidification to Your Home With Trusted Professionals'
   copy: 'Equipment problems require accurate diagnosis and honest recommendations. Our TSSA-certified technicians have 32 years of Guelph-specific experience to provide reliable service you can trust. Call B.A.P at (519) 835-1900 for transparent service and fair pricing.'
 ---
+
+# Humidifiers in Guelph, ON
+
+Professional whole-home humidifier installation in Guelph, ON. Winter comfort solutions. Serving Guelph since 1994.

@@ -67,3 +67,7 @@ finalCta:
   headline: 'Upgrade Your Home Ventilation With Local Experts'
   copy: 'Equipment problems require accurate diagnosis and honest recommendations. Our TSSA-certified technicians have 32 years of Guelph-specific experience to provide reliable service you can trust. Call B.A.P at (519) 835-1900 for transparent service and fair pricing.'
 ---
+
+# HRV/ERV Ventilation in Guelph, ON
+
+Professional HRV/ERV ventilation systems in Guelph, ON. Heat recovery ventilation. Serving Guelph since 1994.

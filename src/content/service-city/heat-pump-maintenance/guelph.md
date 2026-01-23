@@ -67,3 +67,7 @@ finalCta:
   headline: 'Maintain Your Heat Pump With Local HVAC Professionals'
   copy: 'Equipment problems require accurate diagnosis and honest recommendations. Our TSSA-certified technicians have 32 years of Guelph-specific experience to provide reliable service you can trust. Call B.A.P at (519) 835-1900 for transparent service and fair pricing.'
 ---
+
+# Heat Pump Maintenance in Guelph, ON
+
+Professional heat pump maintenance in Guelph, ON. Year-round service and tune-ups. Serving Guelph since 1994.

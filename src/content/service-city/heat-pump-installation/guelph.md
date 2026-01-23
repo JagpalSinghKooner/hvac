@@ -67,3 +67,7 @@ finalCta:
   headline: 'Install Your Heat Pump With Guelph Trusted Specialists'
   copy: 'Equipment problems require accurate diagnosis and honest recommendations. Our TSSA-certified technicians have 32 years of Guelph-specific experience to provide reliable service you can trust. Call B.A.P at (519) 835-1900 for transparent service and fair pricing.'
 ---
+
+# Heat Pump Installation in Guelph, ON
+
+Professional heat pump installation in Guelph, ON. Cold-climate systems and rebates. Serving Guelph since 1994.
