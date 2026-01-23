@@ -433,7 +433,7 @@
       ],
       "priority": 11,
       "passes": false,
-      "notes": "ITERATION 14 PROGRESS: Generated 3/66 files (fergus furnace-installation, furnace-maintenance, furnace-repair with full Phase 8A schema). Build passes 692 pages. Keyword research + positioning COMPLETE for 3 cities (fergus-keywords.md, elora-keywords.md, arthur-keywords.md + positioning files). REMAINING: 63 files (Fergus 19 + Elora 22 + Arthur 22). CRITICAL LESSON: Single-quoted YAML strings require doubled apostrophes for contractions (aren''t, don''t, Wellington''s). This story requires multiple iterations due to scope (66K words E-E-A-T content). Next iteration: Continue Fergus files 4-22, then Elora, then Arthur."
+      "notes": "ITERATION 15 PROGRESS: Generated 6/66 files (fergus furnace-installation, furnace-maintenance, furnace-repair, heat-pump-installation, heat-pump-maintenance, heat-pump-repair with full Phase 8A schema). Build passes 692 pages. Keyword research + positioning COMPLETE for 3 cities (fergus-keywords.md, elora-keywords.md, arthur-keywords.md + positioning files). REMAINING: 60 files (Fergus 16 + Elora 22 + Arthur 22). Schema compliance verified (issues=strings, context=multiline |, rebateInfo inside savings, proof=object). Word count ~1,000 per page. Premium positioning H1s (NO emergency language). E-E-A-T signals (experienceStats populated, installation counts in hero.description). YAML apostrophes doubled correctly (Fergus''s, Wellington''s, We''ve). Markdown body present after ---. Next iteration: Continue Fergus files 7-22 (air-conditioner-installation through tankless-water-heaters), then Elora, then Arthur."
     },
     {
       "id": "US-012",

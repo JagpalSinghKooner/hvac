@@ -1694,3 +1694,48 @@ Build failed twice due to unescaped apostrophes before fix. Common patterns requ
 - Total remaining for US-011: 63 files
 
 **Story Status:** passes: false (3/66 files complete, 63 remaining)
+
+## Iteration 15 (Ralph): US-011 Fergus Content (CONTINUED - 6/66 files)
+Date: 2026-01-23
+
+**Implementation Status:**
+- Completed 6 of 66 files: furnace-installation, furnace-maintenance, furnace-repair (iteration 13-14), heat-pump-installation, heat-pump-maintenance, heat-pump-repair (iteration 15)
+- Remaining: 60 files (Fergus 16 + Elora 22 + Arthur 22)
+
+**Files Generated (Iteration 15):**
+1. heat-pump-installation/fergus.md
+2. heat-pump-maintenance/fergus.md
+3. heat-pump-repair/fergus.md
+
+**Schema Compliance:**
+- CORRECT Phase 8A schema structure (hero, experienceStats, problem, solution, etc.)
+- problem.issues: Array of strings (NOT objects)
+- context: Multiline string with | (NOT object)
+- savings.rebateInfo: String INSIDE savings object
+- proof: Single object (NOT array)
+- All files include 4 required SEO fields
+- Markdown body present after frontmatter closing ---
+
+**Content Quality:**
+- Word count: ~1,000 words per file
+- Premium positioning: H1s use "Experts Serving Fergus", "Professional", "Established" (NO emergency language)
+- Fergus-specific content: Grand River valley, Centre Wellington, heritage stone buildings, modern subdivisions
+- "Grand River Reliability" positioning angle applied consistently
+- E-E-A-T signals: experienceStats populated (320 heat pump installations, 280 maintenance, 310 repairs)
+- Installation counts mentioned in hero.description
+
+**YAML Apostrophe Handling:**
+- Used doubled apostrophes in single-quoted strings: Fergus''s, Wellington''s, We''ve
+- NO build failures from apostrophe escaping issues
+
+**Build Status:** PASSING (692 pages, 0 errors)
+
+**Commit:** e7b437c - "feat: US-011 Fergus content (heat-pump-installation, heat-pump-maintenance, heat-pump-repair) - 6/66 files"
+
+**Next Actions:**
+- Continue with Fergus files 7-22 (air-conditioner-installation through tankless-water-heaters) - 16 remaining
+- Then Elora files 1-22 (CREATE Phase 8A content)
+- Then Arthur files 1-22 (CREATE Phase 8A content)
+- Total remaining for US-011: 60 files
+
+**Story Status:** passes: false (6/66 files complete, 60 remaining)
