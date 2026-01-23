@@ -644,3 +644,20 @@ Before marking story complete:
 - [ ] Zero em dashes in content (only frontmatter delimiters)
 - [ ] Experience stats visible in hero.description
 - [ ] Premium positioning in all H1s (NO emergency language)
+
+### 10. Location Entry Prerequisite for Service-City Pages (CRITICAL - Iteration 10 Discovery)
+**Problem:** Service-city pages CANNOT be created without matching location entry in locations collection
+**What Happened:** US-010 specified St. Jacobs and New Hamburg content generation, but neither city exists in src/content/locations/
+**Build Error:** "Entry locations → st-jacobs was not found. Parent location not found: st-jacobs"
+**Solution:** ALWAYS verify location entry exists BEFORE generating service-city content
+**Verification Command:**
+```bash
+# Check if location entry exists
+ls src/content/locations/[city-slug].md
+
+# List all available cities
+ls src/content/locations/ | sed 's/.md$//' | sort
+```
+**Apply to:** ALL city content generation stories (US-006 through US-014)
+**PRD Impact:** Stories listing cities without location entries are BLOCKED until entries created
+
