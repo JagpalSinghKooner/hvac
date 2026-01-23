@@ -216,7 +216,7 @@ Build failed with schema validation errors. Content structure does NOT match ser
    - RIGHT: `context: "Long string content here..."`
 
 3. `rebateInfo`: Must be `string INSIDE savings object`, NOT separate top-level object
-   - WRONG: 
+   - WRONG:
      ```
      savings:
        headline: "..."
@@ -988,3 +988,42 @@ Continue St. Jacobs content generation (4-5 files per iteration to stay within c
 
 **Build Status:** PASSING (640 pages, 0 errors)
 
+
+## Iteration 2 (Ralph Loop - Autonomous): US-010 St. Jacobs Batch 2 (IN PROGRESS)
+Date: 2026-01-23 21:53
+
+**Status Update:**
+Continuing St. Jacobs content generation. Generated 4 more files (furnace-maintenance, furnace-repair, heat-pump-installation, heat-pump-maintenance).
+
+**Implementation (Iteration 2):**
+- Generated 4 St. Jacobs files with Phase 8A structure
+- Files: furnace-maintenance, furnace-repair, heat-pump-installation, heat-pump-maintenance
+- Used CORRECT schema structure (issues=strings, context=multiline string, rebateInfo inside savings)
+- Word count: ~1,000 words per file
+- Premium positioning: All H1s use "Three Decades", "Professional", "Heat Pump Specialists", "Trusted"
+- Heritage positioning: "Comfort Without Compromise" angle applied consistently
+- E-E-A-T signals: experienceStats populated (750 maintenance, 820 repair, 280 heat pump install, 320 heat pump maintenance)
+- YAML apostrophe escaping: St. Jacobs''s, Woolwich''s (double apostrophes in single-quoted strings)
+- Markdown content present after frontmatter (H1 + 2-3 sentences)
+
+**Content Quality:**
+- All files reference St. Jacobs-specific context: historic village, heritage architecture, century-old buildings, Main Street tourist area, Conestogo River valley, artisan community
+- Waterloo North Hydro Electric mentioned (correct LDC per utility-providers.md)
+- Thoughtful installation approach emphasized (respecting plaster walls, original beams, exterior aesthetics)
+
+**Verification:**
+- Build passes: 653 pages (up from 640)
+- Zero Zod schema errors
+- All 4 files have populated hero.title fields
+- Markdown content verified via tail -5 (shows H1 + description, NOT ---)
+
+**Commit:** 47b072a - "feat: US-010 St. Jacobs content (furnace services + heat pump) - 5/66 files"
+
+**Progress:**
+- St. Jacobs: 5/22 files complete (furnace-installation, furnace-maintenance, furnace-repair, heat-pump-installation, heat-pump-maintenance)
+- St. Jacobs remaining: 17 files (heat-pump-repair through rooftop-units)
+- New Hamburg: 22 files (all services)
+- Total remaining: 39 files for US-010 completion
+
+**Next Iteration:**
+Continue St. Jacobs content generation (next 4-5 files: heat-pump-repair, AC services)

@@ -328,6 +328,30 @@ const globalPosts = allPosts.filter(p => !localPosts.includes(p));
 const displayPosts = [...localPosts, ...globalPosts].slice(0, 3);
 ```
 
+#### Blog Collection Schema Extension (Required)
+
+**Add to `src/content/config.ts` — blog collection:**
+```typescript
+// Extend blog schema to support location tagging
+locations: z.array(z.string()).optional(),  // e.g., ["guelph", "kitchener"]
+```
+
+**Usage:**
+- Allows blog posts to be tagged with location slugs
+- BlogPreviewSection filters by location for location pages
+- Homepage shows all posts (no location filter)
+
+**Example blog frontmatter:**
+```yaml
+---
+title: "Heat Pump Rebates in Guelph"
+locations:
+  - guelph
+  - kitchener
+  - waterloo
+---
+```
+
 ### FAQs (Inline Items Only — NO itemRefs pattern)
 ```typescript
 // FAQs are ALWAYS inline in location frontmatter
@@ -495,6 +519,68 @@ const homepageEntry = allLocations.find(loc => loc.data.isLandingPage);
 | **Layout** | Bento grid (large left, 2 stacked right, full-width bottom) |
 | **Data** | Frontmatter + profile.yaml (rating, reviews) |
 
+#### Why Choose Bento Grid Layout (CRITICAL)
+
+**Information Hierarchy:**
+```
+TIER 1 — Full-Service Convenience (PRIMARY)
+├─ 5 bullets: Permits, Rebates, Financing, Installation, Warranty
+
+TIER 2 — Accountability (SECONDARY)
+├─ 10-Year Warranty Card (parts AND labor)
+
+TIER 3 — Social Proof (TERTIARY)
+├─ Google Rating (4.8★) — from profile.yaml
+├─ Review Count (407) — from profile.yaml
+├─ Installation Count (2,500+ for homepage)
+```
+
+**Desktop Grid (1024px+):**
+```
+┌────────────────────────────────────────────────────────────────┐
+│  [EYEBROW] Why Choose Us                                       │
+│  [HEADLINE] Why Homeowners Choose B.A.P                        │
+│  [SUBTEXT] Full-service HVAC — one call handles everything     │
+├────────────────────────────────┬───────────────────────────────┤
+│  FULL-SERVICE CARD (spans 2)   │  WARRANTY CARD                │
+│  • Permits & inspections       │  "10-Year Warranty"           │
+│  • Rebate paperwork            │  Parts AND labor.             │
+│  • Financing coordination      │  Our name is on every job.    │
+│  • Professional installation   │                               │
+│  • 10-year warranty            │                               │
+├────────────────────────────────┼───────────────────────────────┤
+│  GOOGLE RATING CARD            │  INSTALLATIONS CARD           │
+│  4.8★ from 407 reviews         │  2,500+ installations         │
+└────────────────────────────────┴───────────────────────────────┘
+```
+
+**Tablet Grid (768px-1023px):**
+- 2 columns maintained
+- Cards stack vertically within columns
+- Full-service card spans full width
+
+**Mobile Grid (<768px):**
+- Single column
+- Stack order: Header → Full-Service → Warranty → Rating → Installations
+
+**Grid CSS:**
+```css
+/* Desktop */
+.why-choose-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1.5rem;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .why-choose-grid {
+    grid-template-columns: 1fr;
+  }
+}
+```
+
 ### 5. HomepageTestimonials.astro
 
 | Aspect | Details |
@@ -647,6 +733,27 @@ const handleDismiss = () => {
 
 ---
 
+## Trust Badge SVG Assets
+
+**Location:** `/src/assets/images/badges/`
+
+| Badge | Path | ViewBox | Notes |
+|-------|------|---------|-------|
+| TSSA | `/src/assets/images/badges/tssa-certified.svg` | 120×120 | Dynamic license # |
+| BBB | `/src/assets/images/badges/bbb-accredited.svg` | 120×140 | Animated torch |
+| Google | `/src/assets/images/badges/google-reviews.svg` | 160×120 | Dynamic rating/count |
+| HRAI | `/src/assets/images/badges/hrai-member.svg` | 140×120 | Optional |
+| HRAI Champion | `/src/assets/images/badges/hrai-heatpump-champion.svg` | 140×140 | Optional |
+| WSIB | `/src/assets/images/badges/wsib-insured.svg` | 140×120 | Optional |
+
+**Usage by Component:**
+- **Footer:** TSSA, BBB, Google (required)
+- **CertificationsSection:** All 6 (optional based on data)
+
+**Implementation Note:** CertificationsSection.astro currently uses placeholder divs. Must import actual SVGs and render with proper alt text for accessibility.
+
+---
+
 ## Background Colors Per Section
 
 **Visual rhythm:** Alternating backgrounds create section separation without heavy borders.
@@ -677,6 +784,51 @@ const handleDismiss = () => {
 
 ---
 
+## Responsive Breakpoints
+
+**Breakpoint Definitions:**
+
+| Breakpoint | Width | Grid Behavior |
+|------------|-------|---------------|
+| Mobile | <768px | 1 column, full-width sections |
+| Tablet | 768px-1023px | 2 columns where applicable |
+| Desktop | ≥1024px | Full grid layouts (3-5 columns) |
+
+**Per-Component Responsive Behavior:**
+
+| Component | Mobile (<768px) | Tablet (768-1023px) | Desktop (≥1024px) |
+|-----------|-----------------|---------------------|-------------------|
+| Header | Logo + hamburger + phone icon | Same as mobile | Full nav bar with all links |
+| Hero | Stacked, full-width CTA in thumb zone | 2-column text/image | Side-by-side layout |
+| Service Categories | 2×3 grid | 3×2 grid | 5 columns single row |
+| Expert Consultation | Stacked (image below text) | 2-column | 2-column (text left, image right) |
+| Why Choose | 1 column stack | 2 columns | 2×2 bento grid |
+| Testimonials | 1 card visible, swipe | 2 cards visible | 3 cards visible |
+| Project Gallery | 1 column | 2 columns | 3-4 column masonry |
+| Financing | Stacked | 2-column | 2-column |
+| Service Area | Map above, regions below | Side-by-side | Side-by-side with accordion |
+| FAQ | Full-width accordion | Same | Same |
+| Blog Preview | 1 column | 2 columns | 3 columns |
+| Final CTA | Stacked, centered | Same | Same |
+| Footer | 2 columns | 2 columns | 4 columns |
+| Scroll Banner | Stacked, full-width button | Inline text + button | Inline text + button |
+
+**Tailwind Breakpoint Classes:**
+```css
+/* Mobile first approach */
+.component { /* mobile styles */ }
+
+@screen md { /* 768px+ */ }
+@screen lg { /* 1024px+ */ }
+```
+
+**Testing Viewports (Required for /agent-browser):**
+- 375px (iPhone SE)
+- 768px (iPad portrait)
+- 1024px (Desktop minimum)
+
+---
+
 ## Component Hierarchy
 
 ```
@@ -696,6 +848,39 @@ index.astro
 ├── ScrollBanner.tsx
 └── Footer.astro
 ```
+
+---
+
+## BrandLogoTicker Data Structure
+
+**Source:** `profile.yaml` brands array
+
+```yaml
+# From src/content/business/profile.yaml
+brands:
+  - { name: "Lennox", logo: "/src/assets/images/brand/lennox-hvac-logo.svg" }
+  - { name: "Carrier", logo: "/src/assets/images/brand/carrier-hvac-logo.svg" }
+  - { name: "Trane", logo: "/src/assets/images/brand/trane-hvac-logo.svg" }
+  - { name: "Goodman", logo: "/src/assets/images/brand/goodman-hvac-logo.svg" }
+  - { name: "Daikin", logo: "/src/assets/images/brand/daikin-hvac-logo.svg" }
+  - { name: "Rheem", logo: "/src/assets/images/brand/rheem-hvac-logo.svg" }
+  - { name: "Bryant", logo: "/src/assets/images/brand/bryant-hvac-logo.svg" }
+  - { name: "American Standard", logo: "/src/assets/images/brand/american-standard-hvac-logo.svg" }
+```
+
+**Implementation Pattern:**
+```typescript
+// BrandLogoTicker.astro
+import { getEntry } from 'astro:content';
+
+const businessProfile = await getEntry('business', 'profile');
+const brands = businessProfile.data.brands;
+```
+
+**Implementation Note:** Current BrandLogoTicker.astro is HARDCODED. Must refactor to:
+1. Import brands from profile.yaml via `getEntry`
+2. Render actual SVG logos (not text labels)
+3. Implement infinite scroll animation with `prefers-reduced-motion` support
 
 ---
 
@@ -830,6 +1015,87 @@ Story 9 (Footer) ─────┘
 ```
 
 **Note:** Stories 0-9 can run in parallel (no code dependencies). Story 10 requires all sections complete.
+
+---
+
+## WCAG Accessibility Specifications
+
+**Compliance Level:** WCAG 2.1 AA (Required)
+
+### Core Requirements
+
+| Category | Requirement | Implementation |
+|----------|-------------|----------------|
+| **Focus States** | Visible focus ring on all interactive elements | `focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2` |
+| **Touch Targets** | Minimum 44×44px (48px recommended) | `min-h-11` or `h-14` for CTAs |
+| **Color Contrast** | 4.5:1 for normal text, 3:1 for large text | Use shadcn theme tokens |
+| **Keyboard Navigation** | Full site navigable via Tab/Enter/Escape | Test with `/agent-browser` |
+| **Screen Readers** | Semantic HTML + aria labels | `<nav aria-label="Main">`, `<section aria-labelledby="...">` |
+| **Skip Links** | "Skip to main content" link | First focusable element in Header |
+| **Image Alt Text** | Descriptive alt for all images | Required for brand logos, badges |
+| **Reduced Motion** | Respect `prefers-reduced-motion` | Disable animations for ticker, carousel |
+
+### Required Aria Labels
+
+```html
+<!-- Landmarks -->
+<header role="banner" aria-label="Site header">
+<nav aria-label="Main navigation">
+<main role="main" aria-label="Page content">
+<footer role="contentinfo" aria-label="Site footer">
+
+<!-- Interactive Elements -->
+<button aria-label="Open menu">
+<button aria-label="Close menu">
+<a aria-label="Call (519) 835-4858">
+<button aria-label="Dismiss banner">
+
+<!-- Sections -->
+<section aria-labelledby="hero-heading">
+<section aria-labelledby="services-heading">
+```
+
+### Reduced Motion Pattern
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  /* Disable ticker animation */
+  .animate-scroll {
+    animation: none;
+  }
+
+  /* Disable transitions */
+  .transition-all {
+    transition: none;
+  }
+
+  /* Disable carousel auto-play */
+  .carousel-autoplay {
+    animation-play-state: paused;
+  }
+}
+```
+
+### Focus Trap for Modals/Sheets
+
+```typescript
+// For mobile menu Sheet component
+const handleKeyDown = (e: KeyboardEvent) => {
+  if (e.key === 'Escape') {
+    closeMenu();
+  }
+  // Trap focus within sheet when open
+};
+```
+
+### Testing Checklist (for /agent-browser)
+
+- [ ] Tab through entire page — all interactive elements reachable
+- [ ] Escape closes all modals/sheets
+- [ ] Skip link visible on focus, works correctly
+- [ ] All images have alt text
+- [ ] Color contrast passes (use browser dev tools)
+- [ ] Touch targets ≥44px on mobile viewport
 
 ---
 
